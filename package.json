@@ -30,6 +30,7 @@
     "pf-perlin": "^2.0.0",
     "prompts": "^2.3.2",
     "simplex-noise": "^2.4.0",
-    "svcorelib": "^1.11.1"
+    "svcorelib": "^1.11.1",
+    "worley-noise": "^2.0.1"
   }
 }
