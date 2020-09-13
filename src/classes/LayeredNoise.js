@@ -12,43 +12,50 @@ scl.unused("typedefs:", Cell);
 
 class LayeredNoise
 {
-    constructor()
+    /**
+     * Constructs a new object of type LayeredNoise
+     * @param {Number} width 
+     * @param {Number} height 
+     */
+    constructor(width, height)
     {
         this.layers = [];
         this.seeds = [];
 
-        this.layerImportanceBaseMultiplier = 1.0; // base multiplier for layer importance
-        this.importanceDecrementMultiplier = 0.5; // when iterating over each layer, how much the importance should be decreased by on each iteration
+        if(typeof width != "number" && typeof height != "number")
+            throw new TypeError("width and/or height are not numbers");
+
+        this.width = parseInt(width);
+        this.height = parseInt(height);
+
+        this.baseLayerResolution = 30;             // base resolution for the first layer
+        this.resolutionDecrementMultiplier = 0.75; // when iterating over each layer, how much the importance should be decreased by on each iteration
     }
 
     /**
      * Adds a new layer to the layered noise calculation
      * @param {NoiseAlgorithm} algorithm 
-     * @param {Number} width 
-     * @param {Number} height 
      * @param {Number} [seed]
      * @param {Number} [resolutionModifier] Floating point number - smaller == more detailed / dense noise - defaults to 1.0
+     * @returns {Boolean}
      */
-    addLayer(algorithm, width, height, seed, resolutionModifier)
+    addLayer(algorithm, seed, resolutionModifier)
     {
         let newLayer = [];
 
         if(typeof resolutionModifier != "number")
             resolutionModifier = 1.0;
         
-        if(typeof width != "number" && typeof height != "number")
-            throw new TypeError("width and/or height are not numbers");
-        
-        width = width.toFixed(0);
-        height = height.toFixed(0);
+        let width = this.width.toFixed(0);
+        let height = this.height.toFixed(0);
 
         if(!seed || typeof seed != "number")
             seed = scl.seededRNG.generateRandomSeed(16);
 
-        let layerCount = 0;
+        // let layerCount = 0;
 
-        if(this.layers && Array.isArray(this.layers))
-            layerCount = this.layers.length;
+        // if(this.layers && Array.isArray(this.layers))
+        //     layerCount = this.layers.length;
 
 
         switch(algorithm)
@@ -66,13 +73,12 @@ class LayeredNoise
 
                     for(let y = 0; y < width; y++)
                     {
-                        let resolution = this.getLayerImportance(layerCount);
+                        let resolution = this.getLayerResolution();
 
-                        resolution = 20; // TODO:
+                        let genX = x / (resolution * resolutionModifier);
+                        let genY = y / (resolution * resolutionModifier);
 
-                        // console.log(`${x} ${y} - res: ${resolution}`);
-
-                        let val = parseFloat(gen.get([x / (resolution * resolutionModifier), y / (resolution * resolutionModifier)]).toFixed(1));
+                        let val = parseFloat(gen.get([genX, genY]).toFixed(1));
 
                         newLayer[x].push(val);
                     }
@@ -94,6 +100,8 @@ class LayeredNoise
             default:
                 throw new Error("Invalid algorithm");
         }
+
+        return true;
     }
 
     // for noise layering multiplier:
@@ -104,20 +112,20 @@ class LayeredNoise
     // x = input number on horizontal axis
 
     /**
-     * Gets the importance of a layer as a multiplier
-     * @returns {Number} Floating-point multiplier (0.0 - 1.0)
+     * Gets the resolution of a layer used in the noise algorithm
+     * @returns {Number} Integer or single decimal float
      */
-    getLayerImportance()
+    getLayerResolution()
     {
-        let importance = this.layerImportanceBaseMultiplier;
+        let resolution = this.baseLayerResolution;
 
         if(this.layers && Array.isArray(this.layers))
         {
             for(let i = 0; i < this.layers.length; i++)
-                importance *= this.importanceDecrementMultiplier;
+                resolution *= this.resolutionDecrementMultiplier;
         }
 
-        return importance.toFixed(3);
+        return parseFloat(resolution.toFixed(1));
     }
 
     /**

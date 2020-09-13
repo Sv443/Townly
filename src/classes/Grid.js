@@ -39,7 +39,7 @@ class Grid
         
         this.seed = seed;
 
-        let resolutionModifier = 1.0;
+        let resolutionModifier = 4.5;
         let ln = new LayeredNoise();
         
         for(let i = 0; i < layerAmount; i++)
