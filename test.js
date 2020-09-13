@@ -21,9 +21,10 @@ ln.layers[0].forEach(x => {
             process.stdout.write(`${scl.colors.fg.blue}▒${scl.colors.rst}`);
         else if(y < 0.6)
             process.stdout.write(`${scl.colors.fg.green}█${scl.colors.rst}`);
-        else
+        else if(y < 0.7)
             process.stdout.write(`${scl.colors.fg.green}▒${scl.colors.rst}`);
-
+        else
+            process.stdout.write(`${scl.colors.fg.green}░${scl.colors.rst}`);
     })
     process.stdout.write("\n");
 })
