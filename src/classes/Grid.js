@@ -3,7 +3,7 @@ const scl = require("svcorelib");
 const LayeredNoise = require("./LayeredNoise");
 
 
-/** @typedef {"LakesAndRivers"|"Rivers"|"Lakes"} MapType */
+/** @typedef {"Lakes"|"LakesAndRivers"|"Islands"|"Superflat"} MapType */
 
 class Grid
 {
@@ -30,21 +30,66 @@ class Grid
      * @param {Array<Number>} dimensions [W, H]  /  [X, Y]
      * @param {MapType} type 
      * @param {Number} [seed] Leave empty to generate a random seed (the prop `seed` will be set on the object with the generated seed)
-     * @param {Number} [layerAmount=4] Amount of layers of noise that should be added on top of each other
      */
-    generateMap(dimensions, type, seed, layerAmount)
+    generateMap(dimensions, type, seed)
     {
         if(!seed)
             seed = scl.seededRNG.generateRandomSeed(16);
         
         this.seed = seed;
 
-        let resolutionModifier = 4.5;
-        let ln = new LayeredNoise();
-        
-        for(let i = 0; i < layerAmount; i++)
+        let ln = new LayeredNoise(dimensions[0], dimensions[1]);
+
+        switch(type)
         {
-            ln.addLayer("perlin", dimensions[0], dimensions[1], seed, resolutionModifier);
+            case "Lakes":
+            {
+                let resolutionModifier = 4.5;
+                let layerAmount = 2;
+                
+                for(let i = 0; i < layerAmount; i++)
+                {
+                    ln.addLayer("perlin", seed, resolutionModifier);
+                }
+
+                break;
+            }
+            case "LakesAndRivers":
+            {
+                let perlinResolutionModifier = 4.5;
+                let perlinLayerAmount = 1;
+                
+                for(let i = 0; i < perlinLayerAmount; i++)
+                {
+                    ln.addLayer("perlin", seed, perlinResolutionModifier);
+                }
+
+                let simplexResolutionModifier = 3.0;
+                let simplexLayerAmount = 1;
+                
+                for(let i = 0; i < simplexLayerAmount; i++)
+                {
+                    ln.addLayer("simplex2", seed, simplexResolutionModifier);
+                }
+
+                break;
+            }
+            case "Islands":
+            {
+                let resolutionModifier = 0.1;
+                let layerAmount = 2;
+                
+                for(let i = 0; i < layerAmount; i++)
+                {
+                    ln.addLayer("simplex", seed, resolutionModifier);
+                }
+
+                break;
+            }
+            case "Superflat":
+            {
+                break;
+            }
         }
     }
 }

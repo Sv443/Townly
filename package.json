@@ -31,6 +31,6 @@
     "prompts": "^2.3.2",
     "simplex-noise": "^2.4.0",
     "svcorelib": "^1.11.1",
-    "worley-noise": "^2.0.1"
+    "tumult": "^3.0.14"
   }
 }

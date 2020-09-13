@@ -1,14 +1,14 @@
 const scl = require("svcorelib");
 const Perlin = require("pf-perlin");
-// const Worley = require("worley-noise"); // for a future update
-// const Simplex = require("simplex-noise");
+const Simplex = require("simplex-noise");
+const { Simplex2 } = require("tumult");
 
 const Cell = require("./Cell");
 
 
 scl.unused("typedefs:", Cell);
 
-/** @typedef {"perlin"|"simplex"} NoiseAlgorithm */
+/** @typedef {"perlin"|"simplex"|"simplex2"} NoiseAlgorithm */
 
 class LayeredNoise
 {
@@ -91,12 +91,58 @@ class LayeredNoise
             }
             case "simplex":
             {
+                let gen = new Simplex(seed);
+                
+                for(let x = 0; x < height; x++)
+                {
+                    newLayer.push([]);
+
+                    for(let y = 0; y < width; y++)
+                    {
+                        let resolution = this.getLayerResolution();
+
+                        let genX = x / (resolution * resolutionModifier);
+                        let genY = y / (resolution * resolutionModifier);
+
+                        let val = gen.noise2D(genX, genY);
+
+                        newLayer[x].push(val);
+                    }
+                }
+
+                this.layers.push(newLayer);
+                this.seeds.push(seed);
+
                 break;
             }
-            // case "worley":
-            // {
-            //     break;
-            // }
+            case "simplex2":
+            {
+                let gen = new Simplex2(seed);
+                
+                for(let x = 0; x < height; x++)
+                {
+                    newLayer.push([]);
+
+                    for(let y = 0; y < width; y++)
+                    {
+                        let resolution = this.getLayerResolution();
+
+                        let genX = x / (resolution * resolutionModifier);
+                        let genY = y / (resolution * resolutionModifier);
+
+                        let contrast = 9;
+
+                        let val = Math.abs(gen.gen(genX, genY) * contrast);
+
+                        newLayer[x].push(val);
+                    }
+                }
+
+                this.layers.push(newLayer);
+                this.seeds.push(seed);
+
+                break;
+            }
             default:
                 throw new Error("Invalid algorithm");
         }

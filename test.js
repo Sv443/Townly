@@ -1,59 +1,78 @@
 const LayeredNoise = require("./src/classes/LayeredNoise");
 
 const scl = require("svcorelib");
+const col = scl.colors.fg;
 
 
 
 
 // let ln = new LayeredNoise(180, 8);
-let ln = new LayeredNoise(220, 30);
-// let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
+// let ln = new LayeredNoise(220, 30);
+let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
 
-ln.addLayer("perlin", null, 4.5); // 5644216182900167
+ln.addLayer("test", null, 3.0); // 5644216182900167
 
 process.stdout.write("\n");
 ln.layers[0].forEach(x => {
     process.stdout.write("  ");
     x.forEach(y => {
         if(y < 0.3)
-            process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
-        else if(y < 0.4)
-            process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
+            process.stdout.write(`${col.blue}░${col.rst}`);
         else if(y < 0.5)
-            process.stdout.write(`${scl.colors.fg.blue}▒${scl.colors.rst}`);
-        else if(y < 0.6)
-            process.stdout.write(`${scl.colors.fg.green}█${scl.colors.rst}`);
-        else if(y < 0.7)
-            process.stdout.write(`${scl.colors.fg.green}▒${scl.colors.rst}`);
+            process.stdout.write(`${col.blue}▒${col.rst}`);
         else
-            process.stdout.write(`${scl.colors.fg.green}░${scl.colors.rst}`);
+            process.stdout.write(` `);
     })
     process.stdout.write("\n");
 })
 
-setTimeout(() => {
-    ln.addLayer("simplex", null, 4.5);
+process.exit();
 
-    process.stdout.write("\n");
-    ln.layers[1].forEach(x => {
-        process.stdout.write("  ");
-        x.forEach(y => {
-            if(y < 0.3)
-                process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
-            else if(y < 0.4)
-                process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
-            else if(y < 0.5)
-                process.stdout.write(`${scl.colors.fg.blue}▒${scl.colors.rst}`);
-            else if(y < 0.6)
-                process.stdout.write(`${scl.colors.fg.green}█${scl.colors.rst}`);
-            else if(y < 0.7)
-                process.stdout.write(`${scl.colors.fg.green}▒${scl.colors.rst}`);
-            else
-                process.stdout.write(`${scl.colors.fg.green}░${scl.colors.rst}`);
-        })
-        process.stdout.write("\n");
-    })
-}, 5000);
+
+// ln.addLayer("simplex", null, 3.0); // 5644216182900167
+
+// process.stdout.write("\n");
+// ln.layers[0].forEach(x => {
+//     process.stdout.write("  ");
+//     x.forEach(y => {
+//         if(y < 0.3)
+//             process.stdout.write(`${col.blue}░${col.rst}`);
+//         else if(y < 0.4)
+//             process.stdout.write(`${col.blue}░${col.rst}`);
+//         else if(y < 0.5)
+//             process.stdout.write(`${col.blue}▒${col.rst}`);
+//         else if(y < 0.6)
+//             process.stdout.write(`${col.green}█${col.rst}`);
+//         else if(y < 0.7)
+//             process.stdout.write(`${col.green}▒${col.rst}`);
+//         else
+//             process.stdout.write(`${col.green}░${col.rst}`);
+//     })
+//     process.stdout.write("\n");
+// })
+
+
+// ln.addLayer("simplex", null, 4.5);
+
+// process.stdout.write("\n");
+// ln.layers[1].forEach(x => {
+//     process.stdout.write("  ");
+//     x.forEach(y => {
+//         if(y < 0.3)
+//             process.stdout.write(`${col.blue}░${col.rst}`);
+//         else if(y < 0.4)
+//             process.stdout.write(`${col.blue}░${col.rst}`);
+//         else if(y < 0.5)
+//             process.stdout.write(`${col.blue}▒${col.rst}`);
+//         else if(y < 0.6)
+//             process.stdout.write(`${col.green}█${col.rst}`);
+//         else if(y < 0.7)
+//             process.stdout.write(`${col.green}▒${col.rst}`);
+//         else
+//             process.stdout.write(`${col.green}░${col.rst}`);
+//     })
+//     process.stdout.write("\n");
+// })
 
 // console.log("\n" + ln.seeds[0]);
 
