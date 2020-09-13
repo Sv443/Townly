@@ -1,13 +1,26 @@
 const LayeredNoise = require("./src/classes/LayeredNoise");
 
+const scl = require("svcorelib");
+
 
 
 
 let ln = new LayeredNoise();
 
-ln.addLayer("perlin", 3, 5, 132, 1.0);
-ln.addLayer("perlin", 3, 5, 132, 1.0);
-ln.addLayer("perlin", 3, 5, 132, 1.0);
+ln.addLayer("perlin", 150, 20, 123, 0.5);
+
+ln.layers[0].forEach(x => {
+    x.forEach(y => {
+        if(y < 0.5)
+            process.stdout.write(`${scl.colors.fg.blue}~${scl.colors.rst}`);
+        else
+            process.stdout.write(`${scl.colors.fg.green}#${scl.colors.rst}`);
+    })
+    process.stdout.write("\n");
+})
+
+// ln.addLayer("perlin", 3, 5, 132, 1.0);
+// ln.addLayer("perlin", 3, 5, 132, 1.0);
 
 
 

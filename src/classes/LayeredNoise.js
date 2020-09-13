@@ -1,32 +1,27 @@
 const scl = require("svcorelib");
 const Perlin = require("pf-perlin");
-const Worley = require("worley-noise");
-const Simplex = require("simplex-noise");
+// const Worley = require("worley-noise"); // for a future update
+// const Simplex = require("simplex-noise");
+
+const Cell = require("./Cell");
 
 
-const lowestImportantness = 5;
+scl.unused("typedefs:", Cell);
 
-/**
- * @typedef {"perlin"|"simplex"|"worley"} CoherentNoiseAlgorithm
- */
+/** @typedef {"perlin"|"simplex"} NoiseAlgorithm */
 
 class LayeredNoise
 {
-    // for noise layering multiplier:
-    // log(a - x) + c
-    //
-    // c = vertical offset from 0
-    // a = "falloff point"
-    // x = input number on horizontal axis
-    
     constructor()
     {
         this.layers = [];
+        this.layerImportanceBaseMultiplier = 1.0; // base multiplier for layer importance
+        this.importanceDecrementMultiplier = 0.5; // when iterating over each layer, how much the importance should be decreased by on each iteration
     }
 
     /**
-     * 
-     * @param {CoherentNoiseAlgorithm} algorithm 
+     * Adds a new layer to the layered noise calculation
+     * @param {NoiseAlgorithm} algorithm 
      * @param {Number} width 
      * @param {Number} height 
      * @param {Number} [seed]
@@ -38,8 +33,6 @@ class LayeredNoise
 
         if(typeof resolutionModifier != "number")
             resolutionModifier = 1.0;
-        else
-            resolutionModifier = parseFloat(resolutionModifier);
         
         if(typeof width != "number" && typeof height != "number")
             throw new TypeError("width and/or height are not numbers");
@@ -71,17 +64,17 @@ class LayeredNoise
 
                     for(let y = 0; y < width; y++)
                     {
-                        let resolution = this.getLayerImportantness(layerCount);
+                        let resolution = this.getLayerImportance(layerCount);
+
+                        resolution = 20; // TODO:
 
                         // console.log(`${x} ${y} - res: ${resolution}`);
 
-                        let val = gen.get([x / resolution, y / resolution]).toFixed(1);
+                        let val = parseFloat(gen.get([x / (resolution * resolutionModifier), y / (resolution * resolutionModifier)]).toFixed(1));
 
                         newLayer[x].push(val);
                     }
                 }
-
-                console.log(newLayer);
 
                 this.layers.push(newLayer);
 
@@ -91,40 +84,46 @@ class LayeredNoise
             {
                 break;
             }
-            case "worley":
-            {
-                break;
-            }
+            // case "worley":
+            // {
+            //     break;
+            // }
             default:
                 throw new Error("Invalid algorithm");
         }
     }
 
+    // for noise layering multiplier:
+    // log(a - x) + c
+    //
+    // c = vertical offset from 0
+    // a = "falloff point"
+    // x = input number on horizontal axis
+
     /**
-     * Gets the logarithmic importantness of a layer
-     * @param {Number} index 
+     * Gets the importance of a layer as a multiplier
      * @returns {Number} Floating-point multiplier (0.0 - 1.0)
      */
-    getLayerImportantness(index)
+    getLayerImportance()
     {
-        // https://www.desmos.com/calculator/gjmpiyqvow
-        let a = -1.5;
-        let b = 0.16 + 0.09;
-        let c = 51.0;
-        
-        let bPowed = Math.pow(b, index);
+        let importance = this.layerImportanceBaseMultiplier;
 
-        let importantness = (a * bPowed) + c;
+        if(this.layers && Array.isArray(this.layers))
+        {
+            for(let i = 0; i < this.layers.length; i++)
+                importance *= this.importanceDecrementMultiplier;
+        }
 
-        console.log(`getimp ${index} - ${importantness}`);
+        return importance.toFixed(3);
+    }
 
-        if(importantness > 50)
-            importantness = 50;
+    /**
+     * Adds all previously added layers together
+     * @returns {Array<Array<Cell.CellObject>>}
+     */
+    generateNoiseMap()
+    {
 
-        if(importantness < 0.0)
-            importantness = lowestImportantness;
-
-        return importantness;
     }
 }
 

@@ -1,5 +1,8 @@
+/** @typedef {"empty"|"water"|"residential"|"commercial"|"industrial"|"road"|"special"} CellType */
+
 /**
- * @typedef {"empty"|"residential"|"commercial"|"industrial"|"road"|"special"} CellType
+ * @typedef {Object} CellObject
+ * @prop {CellType} type
  */
 
 class Cell
