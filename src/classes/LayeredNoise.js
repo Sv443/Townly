@@ -15,6 +15,8 @@ class LayeredNoise
     constructor()
     {
         this.layers = [];
+        this.seeds = [];
+
         this.layerImportanceBaseMultiplier = 1.0; // base multiplier for layer importance
         this.importanceDecrementMultiplier = 0.5; // when iterating over each layer, how much the importance should be decreased by on each iteration
     }
@@ -77,6 +79,7 @@ class LayeredNoise
                 }
 
                 this.layers.push(newLayer);
+                this.seeds.push(seed);
 
                 break;
             }

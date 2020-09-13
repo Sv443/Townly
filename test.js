@@ -7,17 +7,28 @@ const scl = require("svcorelib");
 
 let ln = new LayeredNoise();
 
-ln.addLayer("perlin", 150, 20, 123, 0.5);
+ln.addLayer("perlin", 230, 68, null, 4.5); // 5644216182900167
 
+process.stdout.write("\n");
 ln.layers[0].forEach(x => {
+    process.stdout.write("  ");
     x.forEach(y => {
-        if(y < 0.5)
-            process.stdout.write(`${scl.colors.fg.blue}~${scl.colors.rst}`);
+        if(y < 0.3)
+            process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
+        else if(y < 0.4)
+            process.stdout.write(`${scl.colors.fg.blue}░${scl.colors.rst}`);
+        else if(y < 0.5)
+            process.stdout.write(`${scl.colors.fg.blue}▒${scl.colors.rst}`);
+        else if(y < 0.6)
+            process.stdout.write(`${scl.colors.fg.green}█${scl.colors.rst}`);
         else
-            process.stdout.write(`${scl.colors.fg.green}#${scl.colors.rst}`);
+            process.stdout.write(`${scl.colors.fg.green}▒${scl.colors.rst}`);
+
     })
     process.stdout.write("\n");
 })
+
+// console.log("\n" + ln.seeds[0]);
 
 // ln.addLayer("perlin", 3, 5, 132, 1.0);
 // ln.addLayer("perlin", 3, 5, 132, 1.0);
