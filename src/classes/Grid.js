@@ -3,7 +3,7 @@ const scl = require("svcorelib");
 const LayeredNoise = require("./LayeredNoise");
 
 
-/** @typedef {"Lakes"|"LakesAndRivers"|"Islands"|"Superflat"} MapType */
+/** @typedef {"Lakes"|"LakesAndRivers"|"Archipelago"|"Superflat"} MapType */
 
 class Grid
 {
@@ -74,7 +74,7 @@ class Grid
 
                 break;
             }
-            case "Islands":
+            case "Archipelago":
             {
                 let resolutionModifier = 0.1;
                 let layerAmount = 2;

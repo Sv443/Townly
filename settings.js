@@ -6,6 +6,10 @@ const settings = {
         desc: pkg.description,
         version: pkg.version,
         versionArr: pkg.version.split(".").map(n => parseInt(n))
+    },
+    chunks: {
+        width: 50,
+        height: 20
     }
 };
 

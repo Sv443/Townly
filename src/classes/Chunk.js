@@ -1,0 +1,37 @@
+const scl = require("svcorelib");
+
+const settings = require("../../settings");
+const Cell = require("./Cell");
+
+
+scl.unused("typedefs:", Cell);
+
+class Chunk
+{
+    /**
+     * Constructs a new object of type Chunk
+     * Size is set in the settings file
+     */
+    constructor()
+    {
+        this.cells = [];
+
+        this.width = settings.chunks.width;
+        this.height = settings.chunks.height;
+    }
+
+    /**
+     * Sets the cell at a specific coordinate
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Cell} cell An instance of the class `Cell`
+     * @returns {Boolean|String} true or string containing error
+     */
+    setCell(x, y, cell)
+    {
+        scl.unused(x, y, cell);
+        return true;
+    }
+}
+
+module.exports = Chunk;

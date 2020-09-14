@@ -8,71 +8,88 @@ const col = scl.colors.fg;
 
 // let ln = new LayeredNoise(180, 8);
 // let ln = new LayeredNoise(220, 30);
-let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
+// let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
+// let ln = new LayeredNoise(426, 100); // 4k
+let ln = new LayeredNoise(230, 62); // Mac Pro 15"
 
-ln.addLayer("test", null, 3.0); // 5644216182900167
+let addT = 0, renderT = 0;
 
-process.stdout.write("\n");
-ln.layers[0].forEach(x => {
-    process.stdout.write("  ");
-    x.forEach(y => {
-        if(y < 0.3)
-            process.stdout.write(`${col.blue}░${col.rst}`);
-        else if(y < 0.5)
-            process.stdout.write(`${col.blue}▒${col.rst}`);
-        else
-            process.stdout.write(` `);
-    })
+
+function perlin()
+{
+    addT = new Date().getTime();
+    ln.addLayer("perlin", null, 4.5);
+
+    renderT = new Date().getTime();
+
     process.stdout.write("\n");
-})
+    ln.layers[0].forEach(x => {
+        process.stdout.write("  ");
+        x.forEach(y => {
+            if(y < 0.4)
+                process.stdout.write(`${col.blue}░${col.rst}`);
+            else if(y < 0.5)
+                process.stdout.write(`${col.blue}▒${col.rst}`);
+            else if(y < 0.6)
+                process.stdout.write(`${col.green}█${col.rst}`);
+            else
+                process.stdout.write(`${col.green}▒${col.rst}`);
+        });
+        process.stdout.write("\n");
+    });
+}
 
-process.exit();
+function simplex()
+{
+    addT = new Date().getTime();
+    ln.addLayer("simplex", null, 5.0);
+
+    renderT = new Date().getTime();
+
+    process.stdout.write("\n");
+    ln.layers[0].forEach(x => {
+        process.stdout.write("  ");
+        x.forEach(y => {
+            if(y < 0.2)
+                process.stdout.write(`${col.blue}░${col.rst}`);
+            else if(y < 0.45)
+                process.stdout.write(`${col.blue}▒${col.rst}`);
+            else if(y < 0.65)
+                process.stdout.write(`${col.green}█${col.rst}`);
+            else
+                process.stdout.write(`${col.green}▒${col.rst}`);
+        });
+        process.stdout.write("\n");
+    });
+}
 
 
-// ln.addLayer("simplex", null, 3.0); // 5644216182900167
+function simplex2()
+{
+    addT = new Date().getTime();
+    ln.addLayer("simplex2", null, 5.5);
 
-// process.stdout.write("\n");
-// ln.layers[0].forEach(x => {
-//     process.stdout.write("  ");
-//     x.forEach(y => {
-//         if(y < 0.3)
-//             process.stdout.write(`${col.blue}░${col.rst}`);
-//         else if(y < 0.4)
-//             process.stdout.write(`${col.blue}░${col.rst}`);
-//         else if(y < 0.5)
-//             process.stdout.write(`${col.blue}▒${col.rst}`);
-//         else if(y < 0.6)
-//             process.stdout.write(`${col.green}█${col.rst}`);
-//         else if(y < 0.7)
-//             process.stdout.write(`${col.green}▒${col.rst}`);
-//         else
-//             process.stdout.write(`${col.green}░${col.rst}`);
-//     })
-//     process.stdout.write("\n");
-// })
+    renderT = new Date().getTime();
+
+    process.stdout.write("\n");
+    ln.layers[0].forEach(x => {
+        process.stdout.write("  ");
+        x.forEach(y => {
+            if(y < 0.35)
+                process.stdout.write(`${col.blue}░${col.rst}`);
+            else if(y < 0.6)
+                process.stdout.write(`${col.blue}▒${col.rst}`);
+            else
+                process.stdout.write(` `);
+        });
+        process.stdout.write("\n");
+    });
+}
 
 
-// ln.addLayer("simplex", null, 4.5);
+simplex();
 
-// process.stdout.write("\n");
-// ln.layers[1].forEach(x => {
-//     process.stdout.write("  ");
-//     x.forEach(y => {
-//         if(y < 0.3)
-//             process.stdout.write(`${col.blue}░${col.rst}`);
-//         else if(y < 0.4)
-//             process.stdout.write(`${col.blue}░${col.rst}`);
-//         else if(y < 0.5)
-//             process.stdout.write(`${col.blue}▒${col.rst}`);
-//         else if(y < 0.6)
-//             process.stdout.write(`${col.green}█${col.rst}`);
-//         else if(y < 0.7)
-//             process.stdout.write(`${col.green}▒${col.rst}`);
-//         else
-//             process.stdout.write(`${col.green}░${col.rst}`);
-//     })
-//     process.stdout.write("\n");
-// })
+console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
 
 // console.log("\n" + ln.seeds[0]);
 
