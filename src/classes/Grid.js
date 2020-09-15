@@ -131,10 +131,14 @@ class Grid
      * Uses cellular automata to smooth a passed grid, removing jarring anomalies like out-of-place cells.  
      * ! Modifies the parameter instead of returning a separate reference !
      * @param {Cell[][]} grid
+     * @param {Number} passes How many times to run this algorithm
      * @returns {void}
      */
-    static smoothGrid(grid)
+    static smoothGrid(grid, passes)
     {
+        if(typeof passes != "number" || passes <= 0)
+            passes = 1;
+
         let allCellTypes = Cell.getAvailableTypes();
 
         let getAdjacentTypes = (x, y) => {
@@ -166,38 +170,42 @@ class Grid
             return adj;
         };
 
-        let newGrid = [];
-
-        for(let x = 0; x < grid.length; x++)
-        {
-            newGrid.push([]);
-            for(let y = 0; y < grid[0].length; y++)
+        let runSmoothing = () => {
+            for(let x = 0; x < grid.length; x++)
             {
-                let adjacentTypes = getAdjacentTypes(x, y);
-                let cellTypesAmount = {};
+                for(let y = 0; y < grid[0].length; y++)
+                {
+                    let adjacentTypes = getAdjacentTypes(x, y);
+                    let cellTypesAmount = {};
 
-                allCellTypes.forEach(ct => {
-                    cellTypesAmount[ct] = 0;
-                });
+                    allCellTypes.forEach(ct => {
+                        cellTypesAmount[ct] = 0;
+                    });
 
-                adjacentTypes.forEach(t => {
-                    cellTypesAmount[t]++;
-                });
+                    adjacentTypes.forEach(t => {
+                        cellTypesAmount[t]++;
+                    });
 
 
-                let mostOccuringType = null;
-                Object.values(cellTypesAmount).forEach((amt, i) => {
-                    let ctKeys = Object.keys(cellTypesAmount);
+                    let mostOccuringType = null;
+                    Object.values(cellTypesAmount).forEach((amt, i) => {
+                        let ctKeys = Object.keys(cellTypesAmount);
 
-                    if(!mostOccuringType)
-                        mostOccuringType = ctKeys[i];
-                    
-                    if(amt > cellTypesAmount[mostOccuringType])
-                        mostOccuringType = ctKeys[i];
-                });
+                        if(!mostOccuringType)
+                            mostOccuringType = ctKeys[i];
+                        
+                        if(amt > cellTypesAmount[mostOccuringType])
+                            mostOccuringType = ctKeys[i];
+                    });
 
-                grid[x][y].setType(mostOccuringType);
+                    grid[x][y].setType(mostOccuringType);
+                }
             }
+        };
+
+        for(let p = 0; p < passes; p++)
+        {
+            runSmoothing();
         }
     }
 

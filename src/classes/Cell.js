@@ -1,6 +1,6 @@
 const scl = require("svcorelib");
 
-/** @typedef {"empty"|"water"|"residential"|"commercial"|"industrial"|"road"|"special"} CellType */
+/** @typedef {"land"|"forest"|"water"|"deepwater"|"residential"|"commercial"|"industrial"|"road"|"special"} CellType */
 /** @typedef {"black"|"red"|"green"|"yellow"|"blue"|"magenta"|"cyan"|"white"} Color */
 
 /**
@@ -9,7 +9,7 @@ const scl = require("svcorelib");
  */
 
 /** @type {Array<CellType>} */
-const availableTypes = [ "empty", "water", "residential", "commercial", "industrial", "road", "special" ];
+const availableTypes = [ "land", "forest", "water", "deepwater", "residential", "commercial", "industrial", "road", "special" ];
 
 class Cell
 {
@@ -21,6 +21,7 @@ class Cell
     {
         this.type = type;
         this.cursorActive = false;
+        this.char = "█";
     }
 
     /**

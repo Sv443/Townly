@@ -1,9 +1,9 @@
 // const scl = require("svcorelib");
 
-const PopulatedCell = require("./PopulatedCell");
+const InhabitedCell = require("./InhabitedCell");
 
 
-class Residential extends PopulatedCell
+class Residential extends InhabitedCell
 {
     constructor()
     {

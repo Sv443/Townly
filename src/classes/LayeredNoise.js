@@ -197,7 +197,7 @@ class LayeredNoise
     noiseValueToCell(val)
     {
         scl.unused(val);
-        return new Cell("empty");
+        return new Cell("land");
     }
 }
 
