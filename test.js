@@ -101,6 +101,7 @@ function ZenGen()
     smoothPerlin(null, 5);
 
     // console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+    scl.unused(addT, renderT);
 }
 
 console.clear();

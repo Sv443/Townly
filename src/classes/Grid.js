@@ -3,6 +3,8 @@ const scl = require("svcorelib");
 const LayeredNoise = require("./LayeredNoise");
 const Cell = require("./Cell");
 const Chunk = require("./Chunk");
+const dbg = require("../dbg");
+
 const settings = require("../../settings");
 
 
@@ -263,6 +265,7 @@ class Grid
      */
     update()
     {
+        dbg("Grid", `Updating grid...`);
         this.chunks.forEach(chunk => {
             chunk.update();
         });

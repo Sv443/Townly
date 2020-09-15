@@ -4,6 +4,7 @@ const Simplex = require("simplex-noise");
 const { Simplex2 } = require("tumult");
 
 const Cell = require("./Cell");
+const dbg = require("../dbg");
 
 
 scl.unused("typedefs:", Cell);
@@ -142,15 +143,13 @@ class LayeredNoise
                 throw new Error("Invalid algorithm");
         }
 
+        dbg("LayeredNoise", `Added a layer - algorithm: ${algorithm} - seed: ${seed} - resolution modifier: ${resolutionModifier}`);
+
         return true;
     }
 
-    // for noise layering multiplier:
-    // log(a - x) + c
-    //
-    // c = vertical offset from 0
-    // a = "falloff point"
-    // x = input number on horizontal axis
+    // optimal noise layering formula:
+    // log10(a - x) + c
 
     /**
      * Gets the resolution of a layer used in the noise algorithm
@@ -176,7 +175,7 @@ class LayeredNoise
     generateNoiseMap()
     {
         let map = [];
-        // DEBUG:
+        // DEBUG: TODO: iterate over all layers and add them together
         this.layers[0].forEach((layerX, x) => {
             map.push([]);
             layerX.forEach((layerY, y) => {
@@ -196,6 +195,7 @@ class LayeredNoise
      */
     noiseValueToCell(val)
     {
+        // TODO:
         scl.unused(val);
         return new Cell("land");
     }
