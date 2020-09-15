@@ -62,6 +62,8 @@ class Grid
 
         let ln = new LayeredNoise(this.size[0], this.size[1]);
 
+        //#SECTION add layers
+
         switch(type)
         {
             case "Lakes":
@@ -114,6 +116,8 @@ class Grid
             }
         }
 
+        //#SECTION calc noise map and convert to chunks
+
         let generatedGrid = ln.generateNoiseMap();
 
         this.setChunksFromGrid(generatedGrid);
@@ -122,13 +126,75 @@ class Grid
     }
 
     /**
-     * Uses cellular automata to smoothen out a passed grid, removing jarring anomalies like out-of-place cells
-     * @param {Array<Array<Cell>>}
-     * @returns {Array<Array<Cell>>}
+     * Uses cellular automata to smooth a passed grid, removing jarring anomalies like out-of-place cells
+     * @param {Cell[][]} grid
      */
-    smoothGrid(grid)
+    static smoothGrid(grid)
     {
+        let allCellTypes = Cell.getAvailableTypes();
 
+        let getAdjacentTypes = (x, y) => {
+            let adj = [];
+            let maxX = grid.length;
+            let maxY = grid[0].length;
+
+            let checkIdxs = [];
+
+            // I hate myself but idk how else to do this
+            checkIdxs.push([ x - 1, y - 1 ]);
+            checkIdxs.push([ x - 1, y ]);
+            checkIdxs.push([ x - 1, y + 1 ]);
+            checkIdxs.push([ x, y - 1 ]);
+            checkIdxs.push([ x, y ]);
+            checkIdxs.push([ x, y + 1 ]);
+            checkIdxs.push([ x + 1, y - 1 ]);
+            checkIdxs.push([ x + 1, y ]);
+            checkIdxs.push([ x + 1, y + 1 ]);
+
+            checkIdxs.forEach(idx => {
+                if(idx[0] >= 0 && idx[1] >= 0
+                    && idx[0] < maxX && idx[1] < maxY)
+                {
+                    adj.push(grid[idx[0]][idx[1]].type);
+                }
+            });
+
+            return adj;
+        };
+
+        let newGrid = [];
+
+        for(let x = 0; x < grid.length; x++)
+        {
+            newGrid.push([]);
+            for(let y = 0; y < grid[0].length; y++)
+            {
+                let adjacentTypes = getAdjacentTypes(x, y);
+                let cellTypesAmount = {};
+
+                allCellTypes.forEach(ct => {
+                    cellTypesAmount[ct] = 0;
+                });
+
+                adjacentTypes.forEach(t => {
+                    cellTypesAmount[t]++;
+                });
+
+
+                let mostOccuringType = null;
+                Object.values(cellTypesAmount).forEach((amt, i) => {
+                    let ctKeys = Object.keys(cellTypesAmount);
+
+                    if(!mostOccuringType)
+                        mostOccuringType = ctKeys[i];
+                    
+                    if(amt > cellTypesAmount[mostOccuringType])
+                        mostOccuringType = ctKeys[i];
+                });
+
+                grid[x][y].setType(mostOccuringType);
+            }
+        }
     }
 
     /**

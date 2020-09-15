@@ -1,7 +1,7 @@
 const Grid = require("./src/classes/Grid");
 
-
 let g = new Grid(100, 40);
+
 
 g.generateMap("Lakes", 1234);
 

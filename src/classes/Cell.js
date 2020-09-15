@@ -8,6 +8,9 @@ const scl = require("svcorelib");
  * @prop {CellType} type
  */
 
+/** @type {Array<CellType>} */
+const availableTypes = [ "empty", "water", "residential", "commercial", "industrial", "road", "special" ];
+
 class Cell
 {
     /**
@@ -52,7 +55,7 @@ class Cell
      * @param {Boolean} [isBackground=false] 
      * @returns {String}
      */
-    colorToEscapeCode(colorName, isBackground)
+    static colorToEscapeCode(colorName, isBackground)
     {
         let col = (isBackground !== true ? scl.colors.fg : scl.colors.bg);
 
@@ -86,6 +89,15 @@ class Cell
     setType(type)
     {
         this.type = type;
+    }
+
+    /**
+     * Returns all available cell types
+     * @returns {Array<CellType>}
+     */
+    static getAvailableTypes()
+    {
+        return availableTypes;
     }
 }
 
