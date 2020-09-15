@@ -19,6 +19,9 @@ class LayeredNoise
      */
     constructor(width, height)
     {
+        this.baseLayerResolution = 30;             // base resolution for the first layer
+        this.resolutionDecrementMultiplier = 0.75; // when iterating over each layer, how much the importance should be decreased by on each iteration
+
         this.layers = [];
         this.seeds = [];
 
@@ -27,16 +30,13 @@ class LayeredNoise
 
         this.width = parseInt(width);
         this.height = parseInt(height);
-
-        this.baseLayerResolution = 30;             // base resolution for the first layer
-        this.resolutionDecrementMultiplier = 0.75; // when iterating over each layer, how much the importance should be decreased by on each iteration
     }
 
     /**
      * Adds a new layer to the layered noise calculation
      * @param {NoiseAlgorithm} algorithm 
      * @param {Number} [seed]
-     * @param {Number} [resolutionModifier] Floating point number - smaller == more detailed / dense noise - defaults to 1.0
+     * @param {Number} [resolutionModifier] Floating point number - smaller == more zoomed out / more noisy noise - defaults to 1.0
      * @returns {Boolean}
      */
     addLayer(algorithm, seed, resolutionModifier)
@@ -51,11 +51,6 @@ class LayeredNoise
 
         if(!seed || typeof seed != "number")
             seed = scl.seededRNG.generateRandomSeed(16);
-
-        // let layerCount = 0;
-
-        // if(this.layers && Array.isArray(this.layers))
-        //     layerCount = this.layers.length;
 
 
         switch(algorithm)

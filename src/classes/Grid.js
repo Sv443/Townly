@@ -116,9 +116,11 @@ class Grid
             }
         }
 
-        //#SECTION calc noise map and convert to chunks
+        //#SECTION calc noise map, smooth it and convert to chunks
 
         let generatedGrid = ln.generateNoiseMap();
+
+        Grid.smoothGrid(generatedGrid); // smooth the grid
 
         this.setChunksFromGrid(generatedGrid);
 
@@ -126,8 +128,10 @@ class Grid
     }
 
     /**
-     * Uses cellular automata to smooth a passed grid, removing jarring anomalies like out-of-place cells
+     * Uses cellular automata to smooth a passed grid, removing jarring anomalies like out-of-place cells.  
+     * ! Modifies the parameter instead of returning a separate reference !
      * @param {Cell[][]} grid
+     * @returns {void}
      */
     static smoothGrid(grid)
     {
@@ -201,8 +205,10 @@ class Grid
      * Sets this grid's chunks from a grid of cells
      * @param {Array<Array<Cell>>} generatedGrid 
      */
-    setChunksFromGrid(dimensions, generatedGrid)
+    setChunksFromGrid(generatedGrid)
     {
+        // TODO: fix everything
+
         let chunks = [];
         let currentChunkPos = [0, 0];
 
@@ -241,6 +247,17 @@ class Grid
         }
 
         this.chunks = chunks;
+    }
+
+    /**
+     * Calls each chunk's and thus cell's update() method.  
+     * Is to be called in advance for each frame to be ready to be drawn.
+     */
+    update()
+    {
+        this.chunks.forEach(chunk => {
+            chunk.update();
+        });
     }
 }
 

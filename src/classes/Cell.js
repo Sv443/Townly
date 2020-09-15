@@ -99,6 +99,15 @@ class Cell
     {
         return availableTypes;
     }
+
+    /**
+     * Updates this cell.  
+     * Will be called each frame to calculate the next frame.
+     */
+    update()
+    {
+        // to be overwritten by the subclasses
+    }
 }
 
 module.exports = Cell;
