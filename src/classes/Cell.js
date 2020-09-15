@@ -78,6 +78,15 @@ class Cell
                 return col.rst;
         }
     }
+
+    /**
+     * Sets the type of the cell
+     * @param {CellType} type 
+     */
+    setType(type)
+    {
+        this.type = type;
+    }
 }
 
 module.exports = Cell;

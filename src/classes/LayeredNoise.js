@@ -176,11 +176,33 @@ class LayeredNoise
 
     /**
      * Adds all previously added layers together
-     * @returns {Array<Array<Cell.CellObject>>}
+     * @returns {Array<Array<Cell>>}
      */
     generateNoiseMap()
     {
+        let map = [];
+        // DEBUG:
+        this.layers[0].forEach((layerX, x) => {
+            map.push([]);
+            layerX.forEach((layerY, y) => {
+                let cell = this.noiseValueToCell(y);
+                map[x][y] = cell;
+                scl.unused();
+            });
+        });
 
+        return map;
+    }
+
+    /**
+     * Creates a cell out of the passed noise value
+     * @param {Number} val Floating-point
+     * @returns {Cell}
+     */
+    noiseValueToCell(val)
+    {
+        scl.unused(val);
+        return new Cell("empty");
     }
 }
 

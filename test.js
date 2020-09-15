@@ -1,95 +1,110 @@
-const LayeredNoise = require("./src/classes/LayeredNoise");
-
-const scl = require("svcorelib");
-const col = scl.colors.fg;
+const Grid = require("./src/classes/Grid");
 
 
+let g = new Grid(100, 40);
+
+g.generateMap("Lakes", 1234);
 
 
-// let ln = new LayeredNoise(180, 8);
-// let ln = new LayeredNoise(220, 30);
-// let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
-// let ln = new LayeredNoise(426, 100); // 4k
-let ln = new LayeredNoise(230, 62); // Mac Pro 15"
 
-let addT = 0, renderT = 0;
+// const LayeredNoise = require("./src/classes/LayeredNoise");
+
+// const scl = require("svcorelib");
+// const col = scl.colors.fg;
 
 
-function perlin()
-{
-    addT = new Date().getTime();
-    ln.addLayer("perlin", null, 4.5);
-
-    renderT = new Date().getTime();
-
-    process.stdout.write("\n");
-    ln.layers[0].forEach(x => {
-        process.stdout.write("  ");
-        x.forEach(y => {
-            if(y < 0.4)
-                process.stdout.write(`${col.blue}░${col.rst}`);
-            else if(y < 0.5)
-                process.stdout.write(`${col.blue}▒${col.rst}`);
-            else if(y < 0.6)
-                process.stdout.write(`${col.green}█${col.rst}`);
-            else
-                process.stdout.write(`${col.green}▒${col.rst}`);
-        });
-        process.stdout.write("\n");
-    });
-}
-
-function simplex()
-{
-    addT = new Date().getTime();
-    ln.addLayer("simplex", null, 5.0);
-
-    renderT = new Date().getTime();
-
-    process.stdout.write("\n");
-    ln.layers[0].forEach(x => {
-        process.stdout.write("  ");
-        x.forEach(y => {
-            if(y < 0.2)
-                process.stdout.write(`${col.blue}░${col.rst}`);
-            else if(y < 0.45)
-                process.stdout.write(`${col.blue}▒${col.rst}`);
-            else if(y < 0.65)
-                process.stdout.write(`${col.green}█${col.rst}`);
-            else
-                process.stdout.write(`${col.green}▒${col.rst}`);
-        });
-        process.stdout.write("\n");
-    });
-}
 
 
-function simplex2()
-{
-    addT = new Date().getTime();
-    ln.addLayer("simplex2", null, 5.5);
+// let ln = new LayeredNoise(150, 50);
+// // let ln = new LayeredNoise(220, 30);
+// // let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
+// // let ln = new LayeredNoise(426, 100); // 4k
+// // let ln = new LayeredNoise(230, 62); // Mac Pro 15"
 
-    renderT = new Date().getTime();
-
-    process.stdout.write("\n");
-    ln.layers[0].forEach(x => {
-        process.stdout.write("  ");
-        x.forEach(y => {
-            if(y < 0.35)
-                process.stdout.write(`${col.blue}░${col.rst}`);
-            else if(y < 0.6)
-                process.stdout.write(`${col.blue}▒${col.rst}`);
-            else
-                process.stdout.write(` `);
-        });
-        process.stdout.write("\n");
-    });
-}
+// let addT = 0, renderT = 0;
 
 
-simplex();
+// function perlin()
+// {
+//     addT = new Date().getTime();
+//     ln.addLayer("perlin", null, 4.5);
 
-console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+//     renderT = new Date().getTime();
+
+//     process.stdout.write("\n");
+//     ln.layers[0].forEach(x => {
+//         process.stdout.write("  ");
+//         x.forEach(y => {
+//             if(y < 0.4)
+//                 process.stdout.write(`${col.blue}░${col.rst}`);
+//             else if(y < 0.5)
+//                 process.stdout.write(`${col.blue}▒${col.rst}`);
+//             else if(y < 0.6)
+//                 process.stdout.write(`${col.green}█${col.rst}`);
+//             else
+//                 process.stdout.write(`${col.green}▒${col.rst}`);
+//         });
+//         process.stdout.write("\n");
+//     });
+// }
+
+// function simplex()
+// {
+//     addT = new Date().getTime();
+//     ln.addLayer("simplex", null, 3.0);
+
+//     renderT = new Date().getTime();
+
+//     process.stdout.write("\n");
+//     ln.layers[0].forEach(x => {
+//         process.stdout.write("  ");
+//         x.forEach(y => {
+//             if(y < 0.2)
+//                 process.stdout.write(`${col.blue}░${col.rst}`);
+//             else if(y < 0.45)
+//                 process.stdout.write(`${col.blue}▒${col.rst}`);
+//             else if(y < 0.65)
+//                 process.stdout.write(`${col.green}█${col.rst}`);
+//             else
+//                 process.stdout.write(`${col.green}▒${col.rst}`);
+//         });
+//         process.stdout.write("\n");
+//     });
+// }
+
+
+// function simplex2()
+// {
+//     addT = new Date().getTime();
+//     ln.addLayer("simplex2", null, 5.5);
+
+//     renderT = new Date().getTime();
+
+//     process.stdout.write("\n");
+//     ln.layers[0].forEach(x => {
+//         process.stdout.write("  ");
+//         x.forEach(y => {
+//             if(y < 0.35)
+//                 process.stdout.write(`${col.blue}░${col.rst}`);
+//             else if(y < 0.6)
+//                 process.stdout.write(`${col.blue}▒${col.rst}`);
+//             else
+//                 process.stdout.write(` `);
+//         });
+//         process.stdout.write("\n");
+//     });
+// }
+
+
+// simplex();
+
+// console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+
+
+
+
+
+
 
 // console.log("\n" + ln.seeds[0]);
 

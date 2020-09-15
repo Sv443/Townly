@@ -9,7 +9,7 @@ scl.unused("typedefs:", Cell);
 class Chunk
 {
     /**
-     * Constructs a new object of type Chunk
+     * Constructs a new object of type Chunk.  
      * Size is set in the settings file
      */
     constructor()
