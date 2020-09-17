@@ -3,6 +3,11 @@
 # Townly
 ## A CLI city building game
 
+<br><br>
+
+![map generation](./dev/map_gen.gif)  
+[GIF]
+
 </div><br>
 
 
