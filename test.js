@@ -8,19 +8,21 @@ const Cell = require("./src/classes/Cell");
 const col = scl.colors.fg;
 
 let addT = 0, renderT = 0;
+let lastSeed = 0;
 
 function smoothPerlin(seed, passes)
 {
     // let ln = new LayeredNoise(150, 50);
     // let ln = new LayeredNoise(220, 30);
     // let ln = new LayeredNoise(233, 69); // 16:9 Fullscreen
-    // let ln = new LayeredNoise(426, 100); // 4k
-    let ln = new LayeredNoise(230, 65); // Mac Pro 15"
+    let ln = new LayeredNoise(424, 114); // 4k
+    // let ln = new LayeredNoise(230, 65); // Mac Pro 15"
 
     addT = new Date().getTime();
     ln.addLayer("perlin", seed, 3.5);
 
     // console.log(ln.seeds[0]);
+    lastSeed = ln.seeds[0];
 
     renderT = new Date().getTime();
 
@@ -63,12 +65,12 @@ function smoothPerlin(seed, passes)
     cells.forEach(x => {
         process.stdout.write("  ");
         x.forEach(cell => {
-            if(cell.type == "water")
+            if(cell.type == "deepwater")
             {
                 cell.char = "░";
-                cell.setColors("blue", "black");
+                cell.setColors("blue", "blue");
             }
-            else if(cell.type == "deepwater")
+            else if(cell.type == "water")
             {
                 cell.char = "▒";
                 cell.setColors("blue", "black");
@@ -81,12 +83,10 @@ function smoothPerlin(seed, passes)
             else
             {
                 cell.char = "█";
-                cell.setColors("green", "black");
+                cell.setColors("green", "green");
             }
 
-            let color = Cell.colorToEscapeCode(cell.fgcolor);
-
-            process.stdout.write(`${color}${cell.char}${col.rst}`);
+            process.stdout.write(`${cell.getColors(true).bg}${cell.getColors(true).fg}${cell.char}${col.rst}`);
         });
         process.stdout.write("\n");
     });
@@ -98,9 +98,9 @@ function ZenGen()
     addT = 0;
     renderT = 0;
 
-    smoothPerlin(null, 5);
+    smoothPerlin(null, 4);
 
-    // console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+    console.log(`Seed: ${lastSeed} - Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
     scl.unused(addT, renderT);
 }
 

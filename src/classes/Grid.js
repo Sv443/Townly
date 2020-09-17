@@ -21,6 +21,8 @@ class Grid
     {
         this.size = [ width, height ];
         this.mapSeed = null;
+
+        /** @type {Chunk[][]} */
         this.chunks = [];
     }
 
@@ -266,9 +268,28 @@ class Grid
     update()
     {
         dbg("Grid", `Updating grid...`);
-        this.chunks.forEach(chunk => {
-            chunk.update();
+
+        let promises = [];
+        let beginT = new Date().getTime();
+
+        this.chunks.forEach((row) => {
+            row.forEach((chunk) => {
+                promises.push(new Promise((chunkPRes, chunkPRej) => {
+                    chunk.update().then(() => chunkPRes((beginT - new Date().getTime()))).catch(err => chunkPRej(err));
+                }));
+            });
         });
+
+        Promise.all(promises).then((res) => {
+            // calc average chunk update time
+            let avgTimePerChunk = 0;
+            res.forEach(t => { avgTimePerChunk += t; });
+            avgTimePerChunk /= res.length;
+
+            dbg("Grid", `Average chunk update time: ${avgTimePerChunk}ms`);
+        }).catch(err => {
+            console.error(`Error(s) while updating chunks: ${Array.isArray(err) ? `\n- ${err.join("\n- ")}` : err}`);
+        })
     }
 }
 

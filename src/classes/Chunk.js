@@ -14,6 +14,7 @@ class Chunk
      */
     constructor()
     {
+        /** @type {Cell[][]} */
         this.cells = [];
 
         this.width = settings.chunks.width;
@@ -36,11 +37,23 @@ class Chunk
     /**
      * Updates this chunk and all of its cells.  
      * Will be called on each frame to calculate the next frame.
+     * @returns {Promise}
      */
     update()
     {
-        this.cells.forEach(cell => {
-            cell.update();
+        return new Promise((pRes, pRej) => {
+            let promises = [];
+
+            this.cells.forEach((valX, x) => {
+                valX.forEach((valY, y) => {
+                    let cell = this.cells[x][y];
+                    promises.push(new Promise((cellPRes) => {
+                        cell.update().then(() => cellPRes());
+                    }));
+                });
+            });
+
+            Promise.all(promises).then(() => pRes()).catch(err => pRej(err));
         });
     }
 }

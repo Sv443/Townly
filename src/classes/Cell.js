@@ -1,5 +1,7 @@
 const scl = require("svcorelib");
 
+// const dbg = require("../dbg");
+
 
 //#MARKER typedefs
 
@@ -39,18 +41,6 @@ class Cell
         this.type = type;
         this.cursorActive = false;
         this.char = "?";
-    }
-
-    /**
-     * Enables or disables a cursor on this cell
-     * @param {Boolean} active 
-     */
-    setCursorActive(active)
-    {
-        if(typeof active != "boolean")
-            active = false;
-
-        this.cursorActive = active;
     }
 
     //#MARKER Getters and Setters
@@ -98,9 +88,19 @@ class Cell
         if(escapeCode !== false)
             escapeCode = true;
 
+        let fgcolor = this.fgcolor;
+        let bgcolor = this.bgcolor;
+
+        if(this.getCursorActive())
+        {
+            // set colors for the cursor
+            fgcolor = "black";
+            bgcolor = "magenta";
+        }
+
         return {
-            fg: escapeCode ? this.colorToEscapeCode(this.fgcolor) : this.fgcolor,
-            bg: escapeCode ? this.colorToEscapeCode(this.bgcolor) : this.bgcolor
+            fg: escapeCode ? Cell.colorToEscapeCode(fgcolor) : fgcolor,
+            bg: escapeCode ? Cell.colorToEscapeCode(bgcolor, true) : bgcolor
         }
     }
 
@@ -126,6 +126,28 @@ class Cell
     {
         if(typeof this.char != "string" || this.char.length != 1)
             throw new Error(`Cell's character is not a string or the length is larger or smaller than 1`);
+    }
+
+    //#SECTION Cursor
+    /**
+     * Enables or disables a cursor on this cell
+     * @param {Boolean} active 
+     */
+    setCursorActive(active)
+    {
+        if(typeof active != "boolean")
+            active = false;
+
+        this.cursorActive = active;
+    }
+
+    /**
+     * Whether or not the cursor is currently activated on this cell
+     * @returns {Boolean}
+     */
+    getCursorActive()
+    {
+        return this.cursorActive;
     }
 
     //#MARKER Static Methods
@@ -171,7 +193,7 @@ class Cell
         return availableTypes;
     }
 
-    //#MARKER Update
+    //#MARKER Externally called
 
     /**
      * Updates this cell.  
@@ -179,7 +201,19 @@ class Cell
      */
     update()
     {
-        // to be overwritten by the subclasses
+        return new Promise((pRes) => {
+            // to be overwritten by the subclasses
+            return pRes();
+        });
+    }
+
+    /**
+     * A method that gets called when this cell is bulldozed
+     * @returns {Boolean} Should return `true` to allow this cell to be bulldozed or `false` to disable bulldozing for this cell
+     */
+    bulldoze()
+    {
+        return false;
     }
 }
 

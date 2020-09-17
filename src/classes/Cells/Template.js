@@ -7,8 +7,14 @@ class Template extends Cell
 {
     constructor()
     {
-        super("land");
+        super("TYPE");
         this.setColors("white", "black");
+        this.setChar("?");
+    }
+
+    bulldoze()
+    {
+        return true;
     }
 }
 

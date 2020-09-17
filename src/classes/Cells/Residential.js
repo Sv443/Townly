@@ -17,12 +17,16 @@ class Residential extends InhabitedCell
      */
     update()
     {
-        if(new Date().getTime() >= (this.constructionTimestamp + (3 * 60 * 1000)))
-        {
-            // can upgrade to level 2
-            this.levelUp();
-            this.char = "R";
-        }
+        return new Promise((pRes) => {
+            if(new Date().getTime() >= (this.constructionTimestamp + (3 * 60 * 1000)))
+            {
+                // can upgrade to level 2
+                this.levelUp();
+                this.char = "R";
+            }
+
+            return pRes();
+        });
     }
 }
 

@@ -23,6 +23,15 @@ class Water extends Cell
         else
             throw new TypeError(`Param "deep" of Water.setDeepWater() is not a boolean`);
     }
+
+    /**
+     * Gets called when this cell is bulldozed
+     * @returns {Boolean} Should return `true` to allow this cell to be bulldozed or `false` to disable bulldozing for this cell
+     */
+    bulldoze()
+    {
+        return false; // water can't be bulldozed
+    }
 }
 
 module.exports = Water;
