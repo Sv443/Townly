@@ -7,7 +7,7 @@ class Template extends Cell
 {
     constructor()
     {
-        super("empty");
+        super("land");
         this.setColor("white", "black");
     }
 }

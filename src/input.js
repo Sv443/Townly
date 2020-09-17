@@ -4,7 +4,7 @@ const scl = require("svcorelib");
 
 
 /**
- * Initializes the Input module
+ * Initializes the input module
  * @returns {Promise<undefined, String>}
  */
 function init()
@@ -25,6 +25,10 @@ function init()
     });
 }
 
+/**
+ * Sets up an event listener that waits for a key press
+ * @returns {Promise<String>} Promise containing the pressed key
+ */
 function awaitKeypress()
 {
     return new Promise(pRes => {

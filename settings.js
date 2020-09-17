@@ -1,6 +1,7 @@
 const pkg = require("./package.json");
 
 const settings = {
+    verboseLogging: true,
     info: {
         name: "Townly",
         desc: pkg.description,
