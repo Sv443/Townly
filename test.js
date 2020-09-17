@@ -123,10 +123,10 @@ ZenGen();
 
 
 // //#SECTION LayeredNoise Test
-// const LayeredNoise = require("./src/classes/LayeredNoise");
+// // const LayeredNoise = require("./src/classes/LayeredNoise");
 
-// const scl = require("svcorelib");
-// const col = scl.colors.fg;
+// // const scl = require("svcorelib");
+// // const col = scl.colors.fg;
 
 // // let ln = new LayeredNoise(150, 50);
 // // let ln = new LayeredNoise(220, 30);
@@ -134,7 +134,7 @@ ZenGen();
 // // let ln = new LayeredNoise(426, 100); // 4k
 // // let ln = new LayeredNoise(230, 62); // Mac Pro 15"
 
-// let addT = 0, renderT = 0;
+// // let addT = 0, renderT = 0;
 
 
 // function perlin(seed)
@@ -209,7 +209,7 @@ ZenGen();
 // }
 
 
-// perlin(31311);
+// simplex2(null);
 // scl.unused(perlin, simplex, simplex2);
 
 // console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
