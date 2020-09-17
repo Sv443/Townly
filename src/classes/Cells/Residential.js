@@ -8,7 +8,7 @@ class Residential extends InhabitedCell
     constructor()
     {
         super("residential");
-        this.setColor("white", "red");
+        this.setColors("white", "red");
         this.char = "⌂";
     }
 

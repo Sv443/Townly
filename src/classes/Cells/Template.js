@@ -8,7 +8,7 @@ class Template extends Cell
     constructor()
     {
         super("land");
-        this.setColor("white", "black");
+        this.setColors("white", "black");
     }
 }
 

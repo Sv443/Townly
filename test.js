@@ -66,22 +66,22 @@ function smoothPerlin(seed, passes)
             if(cell.type == "water")
             {
                 cell.char = "░";
-                cell.setColor("blue", "black");
+                cell.setColors("blue", "black");
             }
             else if(cell.type == "deepwater")
             {
                 cell.char = "▒";
-                cell.setColor("blue", "black");
+                cell.setColors("blue", "black");
             }
             else if(cell.type == "forest")
             {
                 cell.char = "▒";
-                cell.setColor("green", "black");
+                cell.setColors("green", "black");
             }
             else
             {
                 cell.char = "█";
-                cell.setColor("green", "black");
+                cell.setColors("green", "black");
             }
 
             let color = Cell.colorToEscapeCode(cell.fgcolor);
