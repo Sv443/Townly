@@ -136,12 +136,16 @@ class Grid
      * ! Modifies the parameter instead of returning a separate reference !
      * @param {Cell[][]} grid
      * @param {Number} passes How many times to run this algorithm
+     * @param {Boolean} [extraSmooth] Set to `true` to optimize the sampling function to make the final grid even smoother
      * @returns {void}
      */
-    static smoothGrid(grid, passes)
+    static smoothGrid(grid, passes, extraSmooth)
     {
         if(typeof passes != "number" || passes <= 0)
             passes = 1;
+
+        if(extraSmooth !== true)
+            extraSmooth = false;
 
         let allCellTypes = Cell.getAvailableTypes();
 
@@ -152,16 +156,55 @@ class Grid
 
             let checkIdxs = [];
 
-            // I hate myself but idk how else to do this
-            checkIdxs.push([ x - 1, y - 1 ]);
-            checkIdxs.push([ x - 1, y ]);
-            checkIdxs.push([ x - 1, y + 1 ]);
-            checkIdxs.push([ x, y - 1 ]);
-            checkIdxs.push([ x, y ]);
-            checkIdxs.push([ x, y + 1 ]);
-            checkIdxs.push([ x + 1, y - 1 ]);
-            checkIdxs.push([ x + 1, y ]);
-            checkIdxs.push([ x + 1, y + 1 ]);
+            // I hate myself but idk how else to do this:
+
+            //  ░ ░ ░ ░ ░
+            //  ░ ░ ░ ░ ░
+            //  ░ ░ ■ ░ ░
+            //  ░ ░ ░ ░ ░
+            //  ░ ░ ░ ░ ░
+
+            checkIdxs.push([ x, y ]); // M
+            
+
+            //  ░ ░ ░ ░ ░
+            //  ░ ■ ■ ■ ░
+            //  ░ ■ ░ ■ ░
+            //  ░ ■ ■ ■ ░
+            //  ░ ░ ░ ░ ░
+
+            checkIdxs.push([ x - 1, y - 1 ]); // NW
+            checkIdxs.push([ x - 1, y ]);     // N
+            checkIdxs.push([ x - 1, y + 1 ]); // NE
+            checkIdxs.push([ x, y - 1 ]);     // W
+            checkIdxs.push([ x, y + 1 ]);     // E
+            checkIdxs.push([ x + 1, y - 1 ]); // SW
+            checkIdxs.push([ x + 1, y ]);     // S
+            checkIdxs.push([ x + 1, y + 1 ]); // SE
+
+
+            if(extraSmooth)
+            {
+                //  ░ ■ ■ ■ ░
+                //  ■ ░ ░ ░ ■
+                //  ■ ░ ░ ░ ■
+                //  ■ ░ ░ ░ ■
+                //  ░ ■ ■ ■ ░
+
+                checkIdxs.push([ x - 2, y ]);     // NN
+                checkIdxs.push([ x - 2, y - 1 ]); // NNW
+                checkIdxs.push([ x - 2, y + 1 ]); // NNE
+                checkIdxs.push([ x, y - 2 ]);     // WW
+                checkIdxs.push([ x - 1, y - 2 ]); // NWW
+                checkIdxs.push([ x + 1, y - 2 ]); // SWW
+                checkIdxs.push([ x + 2, y ]);     // SS
+                checkIdxs.push([ x + 2, y - 1 ]); // SSW
+                checkIdxs.push([ x + 2, y + 1 ]); // SSE
+                checkIdxs.push([ x, y + 2 ]);     // EE
+                checkIdxs.push([ x - 1, y + 2 ]); // NEE
+                checkIdxs.push([ x + 1, y + 2 ]); // SEE
+            }
+
 
             checkIdxs.forEach(idx => {
                 if(idx[0] >= 0 && idx[1] >= 0

@@ -10,7 +10,7 @@ const col = scl.colors.fg;
 let addT = 0, renderT = 0;
 let lastSeed = 0;
 
-function smoothPerlin(seed, passes)
+function smoothPerlin(seed, passes, extraSmooth)
 {
     // let ln = new LayeredNoise(150, 50);
     // let ln = new LayeredNoise(220, 30);
@@ -65,7 +65,7 @@ function smoothPerlin(seed, passes)
     });
 
     if(passes > 0)
-        Grid.smoothGrid(cells, passes);
+        Grid.smoothGrid(cells, passes, extraSmooth);
 
     cells.forEach(x => {
         process.stdout.write("  ");
@@ -98,23 +98,27 @@ function smoothPerlin(seed, passes)
 }
 
 
+const extraSmooth = true;
+
 function ZenGen()
 {
     addT = 0;
     renderT = 0;
 
-    smoothPerlin(null, 4);
+    smoothPerlin(null, 8, extraSmooth);
 
     console.log(`Seed: ${lastSeed} - Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
-    scl.unused(addT, renderT);
 }
 
 console.clear();
 
 // smoothPerlin(2486795908441090, 250);
+// smoothPerlin(1234, 4);
 
 setInterval(() => ZenGen(), 5000);
 ZenGen();
+
+scl.unused(addT, renderT);
 
 
 
