@@ -13,14 +13,14 @@ function smoothPerlin(seed, passes)
 {
     // let ln = new LayeredNoise(150, 50);
     // let ln = new LayeredNoise(220, 30);
-    let ln = new LayeredNoise(233, 69); // 16:9 Fullscreen
+    // let ln = new LayeredNoise(233, 69); // 16:9 Fullscreen
     // let ln = new LayeredNoise(426, 100); // 4k
-    // let ln = new LayeredNoise(230, 62); // Mac Pro 15"
+    let ln = new LayeredNoise(230, 65); // Mac Pro 15"
 
     addT = new Date().getTime();
     ln.addLayer("perlin", seed, 3.5);
 
-    console.log(ln.seeds[0]);
+    // console.log(ln.seeds[0]);
 
     renderT = new Date().getTime();
 
