@@ -1,7 +1,7 @@
 const pkg = require("./package.json");
 
 const settings = {
-    verboseLogging: false,
+    verboseLogging: false,  // set to true to enable debug logging
     info: {
         name: "Townly",
         desc: pkg.description,
@@ -9,8 +9,11 @@ const settings = {
         versionArr: pkg.version.split(".").map(n => parseInt(n))
     },
     chunks: {
-        width: 50,
-        height: 20
+        width: 50,  // how many columns wide a chunk should be
+        height: 20  // how many rows tall a chunk should be
+    },
+    game: {
+        tps: 2,  // how many ticks per second (and FPS) the game should run at
     }
 };
 

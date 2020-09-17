@@ -35,6 +35,8 @@ function awaitKeypress()
         process.stdin.on("keypress", (char, key) => {
             scl.unused(char);
 
+            // TODO:
+
             process.stdin.removeAllListeners(["keypress"]);
 
             return pRes(key);
