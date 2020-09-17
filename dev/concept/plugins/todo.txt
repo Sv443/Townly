@@ -1,0 +1,1 @@
+Statically link node modules of plugins so the node_modules folder doesn't need to be included in the final plugin (https://www.npmjs.com/package/static-link)
