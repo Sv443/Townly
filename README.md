@@ -5,7 +5,7 @@
 
 <br><br>
 
-![map generation](./dev/map_gen.gif)  
+![map generation](./dev/map_gen/map_gen.gif)  
 [GIF]
 
 </div><br>
