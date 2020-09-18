@@ -1,14 +1,17 @@
 // Base class for inhabited cells like residential, commercial and industrial
 
-// const scl = require("svcorelib");
+const scl = require("svcorelib");
 
 const Cell = require("../Cell");
+const Constructable = require("./Constructable");
 
+
+scl.unused("typedefs:", Cell);
 
 /**
  * Base class for inhabited cells like residential, commercial and industrial
  */
-class InhabitedCell extends Cell
+class InhabitedCell extends Constructable
 {
     /**
      * Don't construct an object of this type!

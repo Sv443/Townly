@@ -1,9 +1,12 @@
-// const scl = require("svcorelib");
+const scl = require("svcorelib");
 
 const Cell = require("../Cell");
+const Constructable = require("./Constructable");
 
 
-class Template extends Cell
+scl.unused("typedefs:", Cell);
+
+class Template extends Constructable
 {
     constructor()
     {
@@ -12,6 +15,10 @@ class Template extends Cell
         this.setChar("?");
     }
 
+    /**
+     * A method that gets called when this cell is bulldozed
+     * @returns {Boolean} Should return `true` to allow this cell to be bulldozed or `false` to disable bulldozing for this cell
+     */
     bulldoze()
     {
         return true;
