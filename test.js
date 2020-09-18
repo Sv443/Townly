@@ -10,6 +10,11 @@ const col = scl.colors.fg;
 let addT = 0, renderT = 0;
 let lastSeed = 0;
 
+
+const cursorPreview = true;
+const extraSmooth = false;
+
+
 function smoothPerlin(seed, passes, extraSmooth)
 {
     // let ln = new LayeredNoise(150, 50);
@@ -18,8 +23,8 @@ function smoothPerlin(seed, passes, extraSmooth)
     // let ln = new LayeredNoise(424, 114); // 4k
     // let ln = new LayeredNoise(230, 65); // Mac Pro 15"
 
-    let verPadding = 2;
-    let horPadding = 2;
+    let verPadding = 0;
+    let horPadding = 0;
 
     let ln = new LayeredNoise((process.stdout.columns - (2 * horPadding)), (process.stdout.rows - (2 * verPadding)));
 
@@ -30,12 +35,12 @@ function smoothPerlin(seed, passes, extraSmooth)
     lastSeed = ln.seeds[0];
 
     renderT = new Date().getTime();
-
+    
     /** @type {Cell[][]} */
     let cells = [];
-
-    process.stdout.write("\n\n");
-
+    
+    process.stdout.write("\n\n\n");
+    
     ln.layers[0].forEach((valX, x) => {
         scl.unused(valX);
         cells.push([]);
@@ -43,15 +48,15 @@ function smoothPerlin(seed, passes, extraSmooth)
         valX.forEach((valY, y) => {
             let cell = new Cell("land");
 
-            if(valY < 0.4)
-            {
-                cell.setType("water");
-            }
-            else if(valY < 0.5)
+            if(valY < 0.425)
             {
                 cell.setType("deepwater");
             }
-            else if(valY < 0.6)
+            else if(valY < 0.5)
+            {
+                cell.setType("water");
+            }
+            else if(valY < 0.575)
             {
                 cell.setType("land");
             }
@@ -66,16 +71,19 @@ function smoothPerlin(seed, passes, extraSmooth)
 
     if(passes > 0)
         Grid.smoothGrid(cells, passes, extraSmooth);
+    
+    const cursorPos = [scl.randRange(0, 200), scl.randRange(0, 50)];
+    console.log(cursorPos);
 
-    cells.forEach(x => {
-        process.stdout.write("  ");
-        x.forEach(cell => {
-            if(cell.type == "deepwater")
+    cells.forEach((row, x) => {
+        // process.stdout.write("  ");
+        row.forEach((cell, y) => {
+            if(cell.type == "water")
             {
                 cell.char = "░";
                 cell.setColors("blue", "blue");
             }
-            else if(cell.type == "water")
+            else if(cell.type == "deepwater")
             {
                 cell.char = "▒";
                 cell.setColors("blue", "black");
@@ -91,14 +99,14 @@ function smoothPerlin(seed, passes, extraSmooth)
                 cell.setColors("green", "green");
             }
 
+            if(cursorPreview && x == cursorPos[1] && y == cursorPos[0])
+                cell.setColors("magenta", "magenta");
+
             process.stdout.write(`${cell.getColors(true).bg}${cell.getColors(true).fg}${cell.char}${col.rst}`);
         });
-        process.stdout.write("\n");
     });
 }
 
-
-const extraSmooth = true;
 
 function ZenGen()
 {
@@ -107,7 +115,7 @@ function ZenGen()
 
     smoothPerlin(null, 8, extraSmooth);
 
-    console.log(`Seed: ${lastSeed} - Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+    // console.log(`Seed: ${lastSeed} - Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
 }
 
 console.clear();

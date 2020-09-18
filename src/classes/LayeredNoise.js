@@ -77,7 +77,7 @@ class LayeredNoise
                         let genX = x / (resolution * resolutionModifier);
                         let genY = y / (resolution * resolutionModifier);
 
-                        let val = parseFloat(gen.get([genX, genY]).toFixed(1));
+                        let val = parseFloat(gen.get([genX, genY]).toFixed(3));
 
                         newLayer[x].push(val);
                     }
