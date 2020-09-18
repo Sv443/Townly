@@ -16,10 +16,11 @@ class SpecialBuilding extends InhabitedCell
 {
     /**
      * Don't construct an object of this type!
+     * @param {Cell.CellType} type
      */
-    constructor()
+    constructor(type)
     {
-        super("special");
+        super(type);
 
         this.canLevelUp = false;
         this.influenceRadius = 0;

@@ -12,6 +12,16 @@ class Residential extends InhabitedCell
         this.char = "⌂";
     }
 
+    static getName()
+    {
+        return "Residential Zone";
+    }
+
+    static getBaseCost()
+    {
+        return 100;
+    }
+
     /**
      * Is called each frame
      */

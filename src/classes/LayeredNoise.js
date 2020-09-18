@@ -21,9 +21,12 @@ class LayeredNoise
     constructor(width, height)
     {
         this.baseLayerResolution = 30;             // base resolution for the first layer
-        this.resolutionDecrementMultiplier = 0.75; // when iterating over each layer, how much the importance should be decreased by on each iteration
+        this.resolutionDecrementMultiplier = 0.7;  // when iterating over each layer, how much the importance should be decreased by on each iteration
+        this.layerMultiplierDecrement = 0.5;       // when adding layers together, by how much the weight / importance should decrease
 
+        /** @type {Number[][][]} */
         this.layers = [];
+        /** @type {Number[]} */
         this.seeds = [];
 
         if(typeof width != "number" && typeof height != "number")
@@ -169,12 +172,38 @@ class LayeredNoise
     }
 
     /**
+     * Returns the logarithmic, floating-point multiplier for adding noise layers together
+     * @param {Number} idx The 0-based index of the current layer
+     * @return {Number} Will not be bigger than 1.0
+     */
+    getLayerMultiplier(idx)
+    {
+        const steepness = 5; // how "steep" the logarithmic curve should be
+        const xOffset = 0;   // horizontal offset on the x axis - negative = to the left, positive = to the right
+        const yOffset = 5;   // how far up the y axis the curve should start
+        const base = 10;     // the base of the number - set to 1 to start the curve at 10
+
+        let mult = (-Math.log10(idx - xOffset) * steepness + yOffset) / base;
+
+        if(mult > 1.0)
+            return 1.0;
+
+        return mult;
+    }
+
+    /**
      * Adds all previously added layers together
      * @returns {Array<Array<Cell>>}
      */
     generateNoiseMap()
     {
+        let addMap = [];
         let map = [];
+
+        this.layers.forEach((layer, layerIdx) => {
+            let mult = this.getLayerMultiplier(layerIdx);
+        });
+
         // TODO: iterate over all layers and add them together
         this.layers[0].forEach((layerX, x) => {
             map.push([]);
@@ -201,3 +230,61 @@ class LayeredNoise
 }
 
 module.exports = LayeredNoise;
+
+
+
+
+
+let x = [ // x
+    [     // y
+        [ // 0, 0
+            0.5, 0.6
+        ]
+    ]
+]
+
+
+/*
+For each cell:
+
+l1  1.0  * 0.5  = 0.5
+     +             +
+l2  0.5  * 0.3  = 0.15
+     +             +
+l3  0.25 * 0.45 = 0.11
+     =             =
+    1.75          0.76  /  1.75  =  0.43
+     |                      ^
+      \---------------------/
+*/
+
+/*
+
+l1  1.0 * 0.5 = 0.5
+     +           +
+l2  0.5 * 0.6 = 0.3
+     +           =
+    1.5         0.8
+
+
+0.8 / 1.5 = 0.53
+
+
+l1  1.0 * 0.3 = 0.3
+     +           +
+l2  0.9 * 0.7 = 0.21
+     =           =
+    1.3         0.51
+
+
+0.51 / 1.3 = 0.39
+
+
+
+
+
+    ---------------------
+    |    |    |    |    |
+   0.3  0.4  0.5  0.6  0.7
+
+*/

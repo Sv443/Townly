@@ -5,7 +5,7 @@ const scl = require("svcorelib");
 
 //#MARKER typedefs
 
-/** @typedef {"land"|"forest"|"water"|"deepwater"|"residential"|"commercial"|"industrial"|"road"|"special"} CellType */
+/** @typedef {"land"|"forest"|"water"|"deepwater"|"residential"|"commercial"|"industrial"|"road"|"special"|"multicellpart"} CellType */
 /** @typedef {"black"|"red"|"green"|"yellow"|"blue"|"magenta"|"cyan"|"white"} Color */
 
 /**
