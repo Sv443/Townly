@@ -30,7 +30,11 @@ scl.unused("typedefs:", Constructable);
 function init()
 {
     return new Promise((pRes, pRej) => {
-        
+        scl.unused(pRej);
+
+        //TODO:
+
+        return pRes();
     });
 }
 

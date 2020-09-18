@@ -1,7 +1,7 @@
 const pkg = require("./package.json");
 
 const settings = {
-    verboseLogging: false,  // set to true to enable debug logging
+    verboseLogging: true,  // set to true to enable debug logging
     info: {
         name: "Townly",
         desc: pkg.description,

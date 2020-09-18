@@ -12,7 +12,7 @@ let lastSeed = 0;
 
 
 const cursorPreview = true;
-const extraSmooth = false;
+const extraSmooth = true;
 
 
 function smoothPerlin(seed, passes, extraSmooth)
@@ -29,17 +29,14 @@ function smoothPerlin(seed, passes, extraSmooth)
     let ln = new LayeredNoise((process.stdout.columns - (2 * horPadding)), (process.stdout.rows - (2 * verPadding)));
 
     addT = new Date().getTime();
-    ln.addLayer("perlin", seed, 3.5);
+    ln.addLayer("perlin", seed, 2.5);
 
-    // console.log(ln.seeds[0]);
-    lastSeed = ln.seeds[0];
+    console.log(`\n\n${ln.seeds[0]}`);
 
     renderT = new Date().getTime();
     
     /** @type {Cell[][]} */
     let cells = [];
-    
-    process.stdout.write("\n\n\n");
     
     ln.layers[0].forEach((valX, x) => {
         scl.unused(valX);
@@ -48,22 +45,14 @@ function smoothPerlin(seed, passes, extraSmooth)
         valX.forEach((valY, y) => {
             let cell = new Cell("land");
 
-            if(valY < 0.425)
-            {
+            if(valY < 0.4)
                 cell.setType("deepwater");
-            }
             else if(valY < 0.5)
-            {
                 cell.setType("water");
-            }
             else if(valY < 0.575)
-            {
                 cell.setType("land");
-            }
             else
-            {
                 cell.setType("forest");
-            }
 
             cells[x][y] = cell;
         });
@@ -73,38 +62,68 @@ function smoothPerlin(seed, passes, extraSmooth)
         Grid.smoothGrid(cells, passes, extraSmooth);
     
     const cursorPos = [scl.randRange(0, 200), scl.randRange(0, 50)];
-    console.log(cursorPos);
+
+    let lastCellType = null;
+    let drawCursor = 0;
+    let colChanges = 0;
 
     cells.forEach((row, x) => {
         // process.stdout.write("  ");
         row.forEach((cell, y) => {
-            if(cell.type == "water")
+            switch(cell.type)
             {
-                cell.char = "░";
-                cell.setColors("blue", "blue");
-            }
-            else if(cell.type == "deepwater")
-            {
-                cell.char = "▒";
-                cell.setColors("blue", "black");
-            }
-            else if(cell.type == "forest")
-            {
-                cell.char = "▒";
-                cell.setColors("green", "black");
-            }
-            else
-            {
-                cell.char = "█";
-                cell.setColors("green", "green");
+                case "water":
+                    cell.char = "░";
+                    cell.setColors("blue", "blue");
+                break;
+                case "deepwater":
+                    cell.char = "░";
+                    cell.setColors("blue", "black");
+                break;
+                case "forest":
+                    cell.char = "▒";
+                    cell.setColors("green", "black");
+                break;
+                case "land":
+                    cell.char = "█";
+                    cell.setColors("green", "green");
+                break;
             }
 
             if(cursorPreview && x == cursorPos[1] && y == cursorPos[0])
+            {
                 cell.setColors("magenta", "magenta");
+                drawCursor = 1;
+            }
 
-            process.stdout.write(`${cell.getColors(true).bg}${cell.getColors(true).fg}${cell.char}${col.rst}`);
+            if(cell.type != lastCellType || drawCursor == 1 || drawCursor == 3)
+            {
+                lastCellType = cell.type;
+
+                if(drawCursor == 1)
+                    drawCursor = 2;
+                
+                colChanges++;
+                process.stdout.write(`${col.rst}${cell.getColors(true).bg}${cell.getColors(true).fg}${cell.char}`);
+
+                if(drawCursor == 3)
+                    drawCursor = 0;
+            }
+            else
+            {
+                process.stdout.write(cell.char);
+            }
+
+            if(drawCursor == 2)
+            {
+                drawCursor = 3;
+                process.stdout.write(col.rst);
+            }
         });
     });
+
+    process.stdout.write(col.rst + "\n");
+    console.log(colChanges);
 }
 
 

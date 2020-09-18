@@ -1,9 +1,16 @@
 const scl = require("svcorelib");
 
 const MultiCellPart = require("./MultiCellPart");
+const Cell = require("../Cell");
 
 
-scl.unused("typedefs:", MultiCellPart);
+scl.unused("typedefs:", MultiCellPart, Cell);
+
+/**
+ * @typedef {Object} ColorObj
+ * @prop {Cell.Color} [fgcol=rst]
+ * @prop {Cell.Color} [bgcol=rst]
+ */
 
 /**
  * Handles structures that are larger than a single cell
