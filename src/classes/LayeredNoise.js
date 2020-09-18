@@ -175,13 +175,12 @@ class LayeredNoise
     generateNoiseMap()
     {
         let map = [];
-        // DEBUG: TODO: iterate over all layers and add them together
+        // TODO: iterate over all layers and add them together
         this.layers[0].forEach((layerX, x) => {
             map.push([]);
             layerX.forEach((layerY, y) => {
                 let cell = this.noiseValueToCell(y);
                 map[x][y] = cell;
-                scl.unused();
             });
         });
 

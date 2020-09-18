@@ -34,6 +34,7 @@ class Grid
      */
     setCell(x, y, cellData)
     {
+        // TODO:
         scl.unused(x, y, cellData);
     }
 
@@ -45,7 +46,32 @@ class Grid
      */
     setChunk(x, y, chunkData)
     {
+        // TODO:
         scl.unused(x, y, chunkData);
+    }
+
+    /**
+     * Returns all of the grid's chunks as a two-dimensional array
+     * @returns {Chunk[][]}
+     */
+    getAllChunks()
+    {
+        if(this.chunks.length == 0)
+            throw new Error(`Can't read chunks in grid since no chunks were set yet`);
+
+        return this.chunks;
+    }
+
+    /**
+     * Returns all of the grid's chunks that intersect with a specified bounding box as a two-dimensional array
+     * @param {Number[]} tlCorner Top left corner [X, Y]
+     * @param {Number[]} brCorner Bottom right corner [X, Y]
+     * @returns {Chunk[][]}
+     */
+    getActiveChunks(tlCorner, brCorner)
+    {
+        // TODO:
+        scl.unused(tlCorner, brCorner);
     }
 
     /**
@@ -307,32 +333,36 @@ class Grid
     /**
      * Calls each chunk's and thus cell's update() method.  
      * Is to be called in advance for each frame to be ready to be drawn.
+     * @returns {Promise}
      */
     update()
     {
-        dbg("Grid", `Updating grid...`);
+        return new Promise((updPRes, updPRej) => {
+            dbg("Grid", `Updating grid...`);
 
-        let promises = [];
-        let beginT = new Date().getTime();
+            let promises = [];
+            let beginT = new Date().getTime();
 
-        this.chunks.forEach((row) => {
-            row.forEach((chunk) => {
-                promises.push(new Promise((chunkPRes, chunkPRej) => {
-                    chunk.update().then(() => chunkPRes((beginT - new Date().getTime()))).catch(err => chunkPRej(err));
-                }));
+            this.chunks.forEach((row) => {
+                row.forEach((chunk) => {
+                    promises.push(new Promise((chunkPRes, chunkPRej) => {
+                        chunk.update().then(() => chunkPRes((beginT - new Date().getTime()))).catch(err => chunkPRej(err));
+                    }));
+                });
+            });
+
+            Promise.all(promises).then((res) => {
+                // calc average chunk update time
+                let avgTimePerChunk = 0;
+                res.forEach(t => { avgTimePerChunk += t; });
+                avgTimePerChunk /= res.length;
+
+                dbg("Grid", `Average chunk update time: ${avgTimePerChunk}ms`);
+                return updPRes(avgTimePerChunk);
+            }).catch(err => {
+                return updPRej(`Error(s) while updating chunks: ${Array.isArray(err) ? `\n- ${err.join("\n- ")}` : err}`);
             });
         });
-
-        Promise.all(promises).then((res) => {
-            // calc average chunk update time
-            let avgTimePerChunk = 0;
-            res.forEach(t => { avgTimePerChunk += t; });
-            avgTimePerChunk /= res.length;
-
-            dbg("Grid", `Average chunk update time: ${avgTimePerChunk}ms`);
-        }).catch(err => {
-            console.error(`Error(s) while updating chunks: ${Array.isArray(err) ? `\n- ${err.join("\n- ")}` : err}`);
-        })
     }
 }
 
