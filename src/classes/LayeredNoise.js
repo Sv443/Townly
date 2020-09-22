@@ -41,114 +41,126 @@ class LayeredNoise
      * @param {NoiseAlgorithm} algorithm 
      * @param {Number} [seed]
      * @param {Number} [resolutionModifier] Floating point number - smaller == more zoomed out / more noisy noise - defaults to 1.0
+     * @param {Function} [progressCallback] Gets passed two parameters: (err, [ currentIter, totalIter ])
      * @returns {Boolean}
      */
-    addLayer(algorithm, seed, resolutionModifier)
+    addLayer(algorithm, seed, resolutionModifier, progressCallback)
     {
-        let newLayer = [];
+        return new Promise((pRes, pRej) => {
+            let newLayer = [];
 
-        if(typeof resolutionModifier != "number")
-            resolutionModifier = 1.0;
-        
-        let width = this.width.toFixed(0);
-        let height = this.height.toFixed(0);
+            if(typeof progressCallback != "function")
+                progressCallback = () => {};
 
-        if(!seed || typeof seed != "number")
-            seed = scl.seededRNG.generateRandomSeed(16);
+            if(typeof resolutionModifier != "number")
+                resolutionModifier = 1.0;
+            
+            let width = parseInt(this.width);
+            let height = parseInt(this.height);
+
+            if(!seed || typeof seed != "number")
+                seed = scl.seededRNG.generateRandomSeed(16);
 
 
-        switch(algorithm)
-        {
-            case "perlin":
+            switch(algorithm)
             {
-                let gen = new Perlin({
-                    dimensions: 2,
-                    seed: seed
-                });
-
-                for(let x = 0; x < height; x++)
+                case "perlin":
                 {
-                    newLayer.push([]);
+                    let gen = new Perlin({
+                        dimensions: 2,
+                        seed: seed
+                    });
 
-                    for(let y = 0; y < width; y++)
+                    for(let x = 0; x < height; x++)
                     {
-                        let resolution = this.getLayerResolution();
+                        newLayer.push([]);
 
-                        let genX = x / (resolution * resolutionModifier);
-                        let genY = y / (resolution * resolutionModifier);
+                        progressCallback(false, [x, height]);
 
-                        let val = parseFloat(gen.get([genX, genY]).toFixed(3));
+                        for(let y = 0; y < width; y++)
+                        {
+                            let resolution = this.getLayerResolution();
 
-                        newLayer[x].push(val);
+                            let genX = x / (resolution * resolutionModifier);
+                            let genY = y / (resolution * resolutionModifier);
+
+                            let val = parseFloat(gen.get([genX, genY]).toFixed(3));
+
+                            newLayer[x].push(val);
+                        }
                     }
+
+                    this.layers.push(newLayer);
+                    this.seeds.push(seed);
+
+                    break;
                 }
-
-                this.layers.push(newLayer);
-                this.seeds.push(seed);
-
-                break;
-            }
-            case "simplex":
-            {
-                let gen = new Simplex(seed);
-                
-                for(let x = 0; x < height; x++)
+                case "simplex":
                 {
-                    newLayer.push([]);
-
-                    for(let y = 0; y < width; y++)
+                    let gen = new Simplex(seed);
+                    
+                    for(let x = 0; x < height; x++)
                     {
-                        let resolution = this.getLayerResolution();
+                        newLayer.push([]);
 
-                        let genX = x / (resolution * resolutionModifier);
-                        let genY = y / (resolution * resolutionModifier);
+                        progressCallback(false, [x, height]);
 
-                        let val = gen.noise2D(genX, genY);
+                        for(let y = 0; y < width; y++)
+                        {
+                            let resolution = this.getLayerResolution();
 
-                        newLayer[x].push(val);
+                            let genX = x / (resolution * resolutionModifier);
+                            let genY = y / (resolution * resolutionModifier);
+
+                            let val = gen.noise2D(genX, genY);
+
+                            newLayer[x].push(val);
+                        }
                     }
+
+                    this.layers.push(newLayer);
+                    this.seeds.push(seed);
+
+                    break;
                 }
-
-                this.layers.push(newLayer);
-                this.seeds.push(seed);
-
-                break;
-            }
-            case "simplex2":
-            {
-                let gen = new Simplex2(seed);
-                
-                for(let x = 0; x < height; x++)
+                case "simplex2":
                 {
-                    newLayer.push([]);
-
-                    for(let y = 0; y < width; y++)
+                    let gen = new Simplex2(seed);
+                    
+                    for(let x = 0; x < height; x++)
                     {
-                        let resolution = this.getLayerResolution();
+                        newLayer.push([]);
 
-                        let genX = x / (resolution * resolutionModifier);
-                        let genY = y / (resolution * resolutionModifier);
+                        progressCallback(false, [x, height]);
 
-                        let contrast = 9;
+                        for(let y = 0; y < width; y++)
+                        {
+                            let resolution = this.getLayerResolution();
 
-                        let val = Math.abs(gen.gen(genX, genY) * contrast);
+                            let genX = x / (resolution * resolutionModifier);
+                            let genY = y / (resolution * resolutionModifier);
 
-                        newLayer[x].push(val);
+                            let contrast = 9;
+
+                            let val = Math.abs(gen.gen(genX, genY) * contrast);
+
+                            newLayer[x].push(val);
+                        }
                     }
+
+                    this.layers.push(newLayer);
+                    this.seeds.push(seed);
+
+                    break;
                 }
-
-                this.layers.push(newLayer);
-                this.seeds.push(seed);
-
-                break;
+                default:
+                    return pRej("Invalid algorithm");
             }
-            default:
-                throw new Error("Invalid algorithm");
-        }
 
-        dbg("LayeredNoise", `Added a layer - algorithm: ${algorithm} - seed: ${seed} - resolution modifier: ${resolutionModifier}`);
+            dbg("LayeredNoise", `Added a layer - algorithm: ${algorithm} - seed: ${seed} - resolution modifier: ${resolutionModifier}`);
 
-        return true;
+            return pRes(true);
+        });
     }
 
     // optimal noise layering formula:

@@ -95,8 +95,7 @@ function mainMenu()
 
             break;
             case 1: // New Game
-
-            break;
+                return startNewGamePrompt();
             case 2: // Settings
                 return settingsMenu();
             case 3: // Exit
@@ -108,6 +107,34 @@ function mainMenu()
 
     redraw();
     mm.open();
+}
+
+async function startNewGamePrompt()
+{
+    //#SECTION map preset
+    let mapTypesMenu = new scl.SelectionMenu("Select Map Preset:", { cancelable: false });
+                
+    Grid.getMapTypes().forEach(mt => {
+        mapTypesMenu.addOption(mt);
+    });
+
+    mapTypesMenu.open();
+    let selectedPreset = (await mapTypesMenu.onSubmit()).option.description;
+
+
+    //#SECTION map size
+    let mapSizeMenu = new scl.SelectionMenu("Select Map Size:", { cancelable: false });
+    let allMapSizes = Grid.getMapSizes();
+
+    allMapSizes.forEach(ms => {
+        mapSizeMenu.addOption(`${ms[0]}x${ms[1]}`);
+    });
+
+    mapSizeMenu.open();
+    let selectedSize = allMapSizes[(await mapSizeMenu.onSubmit()).option.index];
+
+
+    controller.startNewGame(selectedSize, selectedPreset);
 }
 
 function settingsMenu()

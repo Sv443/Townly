@@ -3,7 +3,6 @@
 const scl = require("svcorelib");
 
 const display = require("./display");
-const input = require("./input");
 const dbg = require("./dbg");
 
 const Grid = require("./classes/Grid");
@@ -40,17 +39,17 @@ function init()
 
 /**
  * To be called to start the game.  
- * Starts the tick and frame interval.
- * @param {Grid} grid 
+ * Starts the tick and frame interval.  
+ * Make sure to set the `grid` beforehand!
  */
-function startGame(grid)
+function startGame()
 {
     //#SECTION register constructables
     constructables.forEach(constr => {
         if(constr instanceof MultiCellStructure)
-            constr = constr.CellPart;
-
-        registerConstructable(constr);
+            registerConstructable(constr.CellPart);
+        else
+            registerConstructable(constr);
     });
     
     //#SECTION tick interval
@@ -58,7 +57,10 @@ function startGame(grid)
     const update = async () => {
         await display.draw(grid);
 
-        let avgChunkUpdateDelta = await grid.update();
+        let avgCUD = await grid.update();
+        dbg.setDebugInfo("avgChunkUpdateDelta", avgCUD);
+
+        dbg("CTRL", `Average chunk update delta time: ${dbg.getDebugInfo("avgChunkUpdateDelta")}ms`);
     };
 
     let tickInterval = (1000 / settings.game.tps);
@@ -73,21 +75,56 @@ function startGame(grid)
  */
 function continueGame(saveFile)
 {
-
+    grid = loadGridFromSaveFile(saveFile);
 }
 
 /**
  * Starts a new game by generating a new map
  * @param {Number[]} size [W, H]
  * @param {Grid.MapType} preset
+ * @param {Number} [seed]
  */
-function startNewGame(size, preset)
+function startNewGame(size, preset, seed)
 {
+    const pbSteps = 100;
+
+    let pb = new scl.ProgressBar(pbSteps, "Generating Map");
+
+    if(!seed)
+        seed = scl.seededRNG.generateRandomSeed();
+
     const gr = new Grid(size[0], size[1]);
 
-    gr.generateMap(preset);
+    gr.generateMap(preset, seed, (err, progress) => {
+        if(!err)
+        {
+            let curLayer = progress[0];
+            let totLayers = progress[1];
+            let curProgress = progress[2];
+            let totProgress = progress[3];
+
+            let totalPbProg = (totLayers * totProgress);
+            let curPbProg = ((curLayer - 1) + curProgress + 1);
+
+            if(curPbProg % Math.floor(totalPbProg / pbSteps) == 0)
+                pb.next(`Generating Map (Stage ${curLayer} of ${totLayers})`);
+        }
+    });
+
+    dbg("CTRL", `Map created, calling startGame()...`);
 
     startGame(gr);
+}
+
+function loadGridFromSaveFile(saveFile)
+{
+    // TODO:
+    scl.unused(saveFile);
+
+    let g = new Grid(1, 1);
+    g.generateMap("Lakes", null);
+
+    return g;
 }
 
 /**

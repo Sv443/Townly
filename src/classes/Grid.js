@@ -9,6 +9,8 @@ const settings = require("../../settings");
 
 
 /** @typedef {"Lakes"|"LakesAndRivers"|"Archipelago"|"Superflat"} MapType */
+const mapTypes = [ "Lakes", "LakesAndRivers", "Archipelago", "Superflat" ];
+const mapSizes = [ [ 1000, 500 ], [ 3000, 1500 ], [ 10000, 5000 ] ];
 
 class Grid
 {
@@ -78,10 +80,18 @@ class Grid
      * Generates a map using coherent noise algorithms and noise layering
      * @param {MapType} type 
      * @param {Number} [seed] Leave empty to generate a random seed (the prop `seed` will be set on the object with the generated seed)
+     * @param {Function} [progressCallback] Gets passed two params: (err, [ layerNbr, totLayers, curIter, totIter ])
      * @throws Throws an error if the dimensions are not multiples of the chunk size defined in the settings
      */
-    generateMap(type, seed)
+    generateMap(type, seed, progressCallback)
     {
+        if(typeof progressCallback != "function")
+            progressCallback = () => {};
+        
+        let progCb = (err, prog, layerNbr, totLayers) => {
+            return progressCallback(err, [layerNbr, totLayers, prog[0], prog[1]]);
+        };
+
         if(!seed)
             seed = scl.seededRNG.generateRandomSeed(16);
         
@@ -103,7 +113,7 @@ class Grid
                 
                 for(let i = 0; i < layerAmount; i++)
                 {
-                    ln.addLayer("perlin", seed, resolutionModifier);
+                    ln.addLayer("perlin", seed, resolutionModifier, ((err, prog) => progCb(err, prog, (i + 1), layerAmount)) );
                 }
 
                 break;
@@ -115,7 +125,7 @@ class Grid
                 
                 for(let i = 0; i < perlinLayerAmount; i++)
                 {
-                    ln.addLayer("perlin", seed, perlinResolutionModifier);
+                    ln.addLayer("perlin", seed, perlinResolutionModifier, ((err, prog) => progCb(err, prog, (i + 1), perlinLayerAmount)) );
                 }
 
                 let simplexResolutionModifier = 3.0;
@@ -123,7 +133,7 @@ class Grid
                 
                 for(let i = 0; i < simplexLayerAmount; i++)
                 {
-                    ln.addLayer("simplex2", seed, simplexResolutionModifier);
+                    ln.addLayer("simplex2", seed, simplexResolutionModifier, ((err, prog) => progCb(err, prog, (i + 1), simplexLayerAmount)) );
                 }
 
                 break;
@@ -135,7 +145,7 @@ class Grid
                 
                 for(let i = 0; i < layerAmount; i++)
                 {
-                    ln.addLayer("simplex", seed, resolutionModifier);
+                    ln.addLayer("simplex", seed, resolutionModifier, ((err, prog) => progCb(err, prog, (i + 1), layerAmount)) );
                 }
 
                 break;
@@ -164,6 +174,7 @@ class Grid
      * @param {Number} passes How many times to run this algorithm
      * @param {Boolean} [extraSmooth] Set to `true` to optimize the sampling function to make the final grid even smoother
      * @returns {void}
+     * @static
      */
     static smoothGrid(grid, passes, extraSmooth)
     {
@@ -280,6 +291,26 @@ class Grid
         {
             runSmoothing();
         }
+    }
+
+    /**
+     * Returns all available map generation preset types
+     * @returns {MapType[]}
+     * @static
+     */
+    static getMapTypes()
+    {
+        return mapTypes;
+    }
+
+    /**
+     * Returns all available map generation size presets
+     * @returns {Number[][]} [ [ W, H ], [ W, H ], ... ]
+     * @static
+     */
+    static getMapSizes()
+    {
+        return mapSizes;
     }
 
     /**
