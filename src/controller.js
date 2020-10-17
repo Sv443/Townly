@@ -109,6 +109,8 @@ function startNewGame(size, preset, seed)
             if(curPbProg % Math.floor(totalPbProg / pbSteps) == 0)
                 pb.next(`Generating Map (Stage ${curLayer} of ${totLayers})`);
         }
+        else
+            console.error(`ERROR: ${err}`);
     });
 
     dbg("CTRL", `Map created, calling startGame()...`);

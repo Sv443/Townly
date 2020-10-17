@@ -7,6 +7,19 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "DBG - Launch New Game",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\Townly.js",
+            "console": "integratedTerminal",
+            "args": [
+                "--dbg-start"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"

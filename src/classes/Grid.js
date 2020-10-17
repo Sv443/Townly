@@ -10,7 +10,7 @@ const settings = require("../../settings");
 
 /** @typedef {"Lakes"|"LakesAndRivers"|"Archipelago"|"Superflat"} MapType */
 const mapTypes = [ "Lakes", "LakesAndRivers", "Archipelago", "Superflat" ];
-const mapSizes = [ [ 1000, 500 ], [ 3000, 1500 ], [ 10000, 5000 ] ];
+const mapSizes = [ [ 100, 40 ], [ 500, 200 ], [ 1000, 500 ], [ 3000, 1500 ] ];
 
 class Grid
 {
@@ -21,7 +21,9 @@ class Grid
      */
     constructor(width, height)
     {
+        /** @type {Number[]} The width of the grid - [ width, height ] */
         this.size = [ width, height ];
+        /** @type {Number} */
         this.mapSeed = null;
 
         /** @type {Chunk[][]} */
@@ -321,42 +323,70 @@ class Grid
     {
         // TODO: fix everything
 
+        /** @type {Number[][]} two dimensional array containing all chunks */
         let chunks = [];
-        let currentChunkPos = [0, 0];
 
         let maxChunksPerRow = (this.size[0] / settings.chunks.width);
-        let chunksToGenerate = maxChunksPerRow * (this.size[1] / settings.chunks.height);
-        
-        for(let c = 0; c < chunksToGenerate; c++)
+        let maxChunksPerCol = (this.size[1] / settings.chunks.height);
+
+        if(maxChunksPerRow % 1 != 0)
         {
-            if(c % maxChunksPerRow == 0)
-                chunks.push([]);
-
-            chunks[currentChunkPos[0]][currentChunkPos[1]] = new Chunk();
-
-            for(let x = 0; x < settings.chunks.height; x++)
-            {
-                for(let y = 0; y < settings.chunks.width; y++)
-                {
-                    let xOffset = currentChunkPos[0] * settings.chunks.height || 0;
-                    let yOffset = currentChunkPos[1] * settings.chunks.width || 0;
-
-                    xOffset = xOffset != 0 ? xOffset - 1 : xOffset;
-                    yOffset = yOffset != 0 ? yOffset - 1 : yOffset;
-
-                    let cell = generatedGrid[x + xOffset][y + yOffset];
-                    chunks[currentChunkPos[0]][currentChunkPos[1]].setCell(x, y, cell);
-                }
-            }
-
-            currentChunkPos = [ currentChunkPos[0], (currentChunkPos[1] + 1) ];
-
-            if(currentChunkPos[1] == maxChunksPerRow)
-            {
-                currentChunkPos = [ (currentChunkPos[0] + 1), currentChunkPos[1] ];
-                chunks.push([]);
-            }
+            console.error(`Internal Error: Grid's width is not a multiple of ${settings.chunks.width}`);
+            process.exit(1);
         }
+
+        if(maxChunksPerCol % 1 != 0)
+        {
+            console.error(`Internal Error: Grid's height is not a multiple of ${settings.chunks.height}`);
+            process.exit(1);
+        }
+
+        /** Which chunk is currently getting its cells assigned */
+        let chunkOffset = [0, 0];
+
+        let assignedCellsCount = 0;
+        let assignedChunksCount = 0;
+
+        // iterate over chunks in the x axis
+        for(let chx = 0; chx < maxChunksPerRow; chx++) // chx = chunks axis x
+        {
+            chunks.push([]);
+            // iterate over chunks in the y axis
+            for(let chy = 0; chy < maxChunksPerCol; chy++) // chy = chunks axis y
+            {
+                /** @type {Number[]} two-dimensional array of cells in the current chunk */
+                let cells = [];
+
+                // iterate over cells in the current chunk in the x axis
+                for(let clx = 0; clx < settings.chunks.height; clx++) // clx = cells axis x in current chunk
+                {
+                    cells.push([]);
+                    // iterate over cells in the current chunk in the y axis
+                    for(let cly = 0; cly < settings.chunks.width; cly++) // cly = cells axis y in current chunk
+                    {
+                        /** Index of the current cell from the generated grid */
+                        let cellIndex = [((chunkOffset[0] * settings.chunks.height) + clx), ((chunkOffset[1] * settings.chunks.width) + cly)];
+
+                        /** Current cell from the generated grid */
+                        let currentGeneratedCell = generatedGrid[cellIndex[0]][cellIndex[1]];
+
+                        cells[clx].push(currentGeneratedCell);
+                        assignedCellsCount++;
+                    }
+                }
+
+                chunkOffset[0]++;
+
+                chunks[chx][chy] = cells; // assign cells to chunk
+
+                assignedChunksCount++;
+            }
+            chunkOffset[1]++;
+            chunkOffset[0] = 0;
+        }
+        chunkOffset = [0, 0];
+
+        dbg("Grid/SetChunks", `Assigned ${assignedCellsCount} cells to ${assignedChunksCount} chunks`);
 
         this.chunks = chunks;
     }

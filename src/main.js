@@ -55,7 +55,10 @@ async function initAll()
 
     // TODO:
 
-    mainMenu();
+    if(process.argv.includes("--dbg-start"))
+        return controller.startNewGame(Grid.getMapSizes()[0], Grid.getMapTypes()[0]);
+
+    return mainMenu();
 }
 
 /**
@@ -70,10 +73,15 @@ function mainMenu()
     });
 
     const redraw = () => {
-        let bannerChars = bannerSmoothPerlin(30, townlyBannerSeed, 5, false);
+        if(settings.menus.main.bannerEnabled)
+        {
+            let bannerChars = bannerSmoothPerlin(30, townlyBannerSeed, 5, false);
 
-        console.clear();
-        console.log(`${bannerChars}\n`);
+            console.clear();
+            console.log(`${bannerChars}\n`);
+        }
+        else
+            console.clear();
     };
 
     mm.onCursorMove(() => redraw());
@@ -82,6 +90,7 @@ function mainMenu()
         "Continue",
         "New Game",
         "Settings",
+        "About",
         // "Plugins",
         "Exit"
     ]);
@@ -98,7 +107,9 @@ function mainMenu()
                 return startNewGamePrompt();
             case 2: // Settings
                 return settingsMenu();
-            case 3: // Exit
+            case 3: // About
+                return aboutMenu();
+            case 4: // Exit
                 console.log("Goodbye.");
                 setTimeout(() => process.exit(0), 200);
             break;
@@ -112,18 +123,21 @@ function mainMenu()
 async function startNewGamePrompt()
 {
     //#SECTION map preset
-    let mapTypesMenu = new scl.SelectionMenu("Select Map Preset:", { cancelable: false });
+    let mapTypesMenu = new scl.SelectionMenu("Select Map Preset:", { cancelable: true });
                 
     Grid.getMapTypes().forEach(mt => {
         mapTypesMenu.addOption(mt);
     });
 
     mapTypesMenu.open();
-    let selectedPreset = (await mapTypesMenu.onSubmit()).option.description;
+    let mapTypesResult = await mapTypesMenu.onSubmit();
+    if(mapTypesResult.canceled)
+        return mainMenu();
+    let selectedPreset = mapTypesResult.option.description;
 
 
     //#SECTION map size
-    let mapSizeMenu = new scl.SelectionMenu("Select Map Size:", { cancelable: false });
+    let mapSizeMenu = new scl.SelectionMenu("Select Map Size:", { cancelable: true });
     let allMapSizes = Grid.getMapSizes();
 
     allMapSizes.forEach(ms => {
@@ -131,7 +145,10 @@ async function startNewGamePrompt()
     });
 
     mapSizeMenu.open();
-    let selectedSize = allMapSizes[(await mapSizeMenu.onSubmit()).option.index];
+    let mapSizeResult = await mapSizeMenu.onSubmit();
+    if(mapSizeResult.canceled)
+        return mainMenu();
+    let selectedSize = allMapSizes[mapSizeResult.option.index];
 
 
     controller.startNewGame(selectedSize, selectedPreset);
@@ -169,6 +186,18 @@ function settingsMenu()
     });
 
     sm.open();
+}
+
+async function aboutMenu()
+{
+    console.log(`${settings.info.name} - v${settings.info.version}\n`);
+    console.log(`Made by ${settings.info.author.name} - ${settings.info.author.url}`);
+
+    console.log("\n\n");
+
+    await scl.pause("Press any key to return to the main menu...");
+
+    return mainMenu();
 }
 
 function bannerSmoothPerlin(height, seed, passes, extraSmooth)

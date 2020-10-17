@@ -1,6 +1,7 @@
 const scl = require("svcorelib");
 const Perlin = require("pf-perlin");
 const Simplex = require("simplex-noise");
+const { makeNoise2D } = require("open-simplex-noise");
 const { Simplex2 } = require("tumult");
 
 const Cell = require("./Cell");
@@ -9,7 +10,7 @@ const dbg = require("../dbg");
 
 scl.unused("typedefs:", Cell);
 
-/** @typedef {"perlin"|"simplex"|"simplex2"} NoiseAlgorithm */
+/** @typedef {"perlin"|"simplex"|"simplex2"|"opensimplex"} NoiseAlgorithm */
 
 class LayeredNoise
 {
@@ -20,8 +21,8 @@ class LayeredNoise
      */
     constructor(width, height)
     {
-        this.baseLayerResolution = 30;             // base resolution for the first layer
-        this.resolutionDecrementMultiplier = 0.7;  // when iterating over each layer, how much the importance should be decreased by on each iteration
+        this.baseLayerResolution = 40;             // base resolution for the first layer
+        this.resolutionDecrementMultiplier = 0.7;  // when iterating over each layer, how much the resolution should be decreased by on each iteration
         this.layerMultiplierDecrement = 0.5;       // when adding layers together, by how much the weight / importance should decrease
 
         /** @type {Number[][][]} */
@@ -153,6 +154,41 @@ class LayeredNoise
 
                     break;
                 }
+                case "opensimplex":
+                {
+                    let noise2d = makeNoise2D(seed);
+
+                    for(let x = 0; x < height; x++)
+                    {
+                        newLayer.push([]);
+
+                        progressCallback(false, [x, height]);
+
+                        for(let y = 0; y < width; y++)
+                        {
+                            let resolution = this.getLayerResolution();
+
+                            let genX = x / (resolution * resolutionModifier) + 1;
+                            let genY = y / (resolution * resolutionModifier) + 1;
+
+                            // let contrast = 9;
+
+                            let val = Math.abs(noise2d(genX, genY));
+
+                            if(val < 0)
+                                val = 0;
+                            
+                            if(val > 1)
+                                val = 1;
+
+                            newLayer[x].push(val);
+                        }
+                    }
+
+                    this.layers.push(newLayer);
+                    this.seeds.push(seed);
+                }
+                break;
                 default:
                     return pRej("Invalid algorithm");
             }
@@ -205,25 +241,51 @@ class LayeredNoise
 
     /**
      * Adds all previously added layers together
-     * @returns {Array<Array<Cell>>}
+     * @returns {Cell[][]}
      */
     generateNoiseMap()
     {
-        let addMap = [];
+        // let addMap = [];
         let map = [];
 
-        this.layers.forEach((layer, layerIdx) => {
-            let mult = this.getLayerMultiplier(layerIdx);
-        });
-
         // TODO: iterate over all layers and add them together
-        this.layers[0].forEach((layerX, x) => {
-            map.push([]);
-            layerX.forEach((layerY, y) => {
-                let cell = this.noiseValueToCell(y);
-                map[x][y] = cell;
+        let amplitude = 1.0;
+
+        this.layers.forEach((layer, layerIdx) => {
+            // let mult = this.getLayerMultiplier(layerIdx);
+            layer.forEach((layerX, x) => {
+                if(layerIdx == 0)
+                    map.push([]);
+                layerX.forEach((val, y) => {
+                    if(layerIdx == 0)
+                        map[x][y] = parseFloat(val.toFixed(3));
+                    else
+                    {
+                        map[x][y] = (map[x][y] + (parseFloat(val.toFixed(3)) * amplitude));
+                        // map[x][y] = (map[x][y] + (parseFloat(val.toFixed(3)) * mult));
+                        amplitude *= this.layerMultiplierDecrement;
+                    }
+                });
             });
         });
+
+        // TODO: convert values to cells
+
+        map.forEach((row, x) => {
+            row.forEach((val, y) => {
+                map[x][y] = this.noiseValueToCell(val);
+            });
+        });
+
+        // map[x][y] = this.noiseValueToCell(map[x][y]);
+
+        // this.layers[0].forEach((layerX, x) => {
+        //     map.push([]);
+        //     layerX.forEach((layerY, y) => {
+        //         let cell = this.noiseValueToCell(layerY);
+        //         map[x][y] = cell;
+        //     });
+        // });
 
         return map;
     }
@@ -236,24 +298,15 @@ class LayeredNoise
     noiseValueToCell(val)
     {
         // TODO:
-        scl.unused(val);
-        return new Cell("land");
+        let cell = new Cell("land");
+        cell.value = val;
+        return cell;
     }
 }
 
 module.exports = LayeredNoise;
 
 
-
-
-
-let x = [ // x
-    [     // y
-        [ // 0, 0
-            0.5, 0.6
-        ]
-    ]
-]
 
 
 /*

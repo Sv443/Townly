@@ -14,7 +14,14 @@ let lastSeed = 0;
 const cursorPreview = true;
 const extraSmooth = true;
 
+const verPadding = 1;
+const horPadding = 0;
 
+const lnWidth = (process.stdout.columns - (2 * horPadding));
+const lnHeight = (process.stdout.rows - (2 * verPadding));
+
+
+//#SECTION ZenGen
 function smoothPerlin(seed, passes, extraSmooth)
 {
     // let ln = new LayeredNoise(150, 50);
@@ -23,10 +30,7 @@ function smoothPerlin(seed, passes, extraSmooth)
     // let ln = new LayeredNoise(424, 114); // 4k
     // let ln = new LayeredNoise(230, 65); // Mac Pro 15"
 
-    let verPadding = 0;
-    let horPadding = 0;
-
-    let ln = new LayeredNoise((process.stdout.columns - (2 * horPadding)), (process.stdout.rows - (2 * verPadding)));
+    let ln = new LayeredNoise(lnWidth, lnHeight);
 
     addT = new Date().getTime();
     ln.addLayer("perlin", seed, 2.5);
@@ -120,10 +124,18 @@ function smoothPerlin(seed, passes, extraSmooth)
                 process.stdout.write(col.rst);
             }
         });
+
+        if(x != (cells.length - 1))
+        {
+            process.stdout.write(`${col.rst}\n`);
+            drawCursor = 3;
+        }
     });
 
     process.stdout.write(col.rst + "\n");
-    console.log(colChanges);
+
+    scl.unused(colChanges);
+    // console.log(`${colChanges} color changes`);
 }
 
 
@@ -132,7 +144,7 @@ function ZenGen()
     addT = 0;
     renderT = 0;
 
-    smoothPerlin(null, 8, extraSmooth);
+    smoothPerlin(null, 10, extraSmooth);
 
     // console.log(`Seed: ${lastSeed} - Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
 }
@@ -166,7 +178,7 @@ scl.unused(addT, renderT);
 
 // // let ln = new LayeredNoise(150, 50);
 // // let ln = new LayeredNoise(220, 30);
-// let ln = new LayeredNoise(230, 68); // 16:9 Fullscreen
+// let ln = new LayeredNoise(lnWidth, lnHeight); // 16:9 Fullscreen
 // // let ln = new LayeredNoise(426, 100); // 4k
 // // let ln = new LayeredNoise(230, 62); // Mac Pro 15"
 
@@ -244,8 +256,69 @@ scl.unused(addT, renderT);
 //     });
 // }
 
+// function opensimplex(seed)
+// {
+//     addT = new Date().getTime();
+//     ln.addLayer("opensimplex", seed, 1);
+//     ln.addLayer("opensimplex", seed * 2, 4);
+//     ln.addLayer("opensimplex", seed * 3, 8);
+//     ln.addLayer("opensimplex", seed * 4, 10);
 
-// simplex2(null);
+//     renderT = new Date().getTime();
+
+//     process.stdout.write("\n");
+//     // ln.layers[0].forEach(x => {
+//     ln.generateNoiseMap().forEach(x => {
+//         process.stdout.write("  ");
+//         x.forEach(y => {
+//             if(y.value < 0.135)
+//                 process.stdout.write(`${col.green}░${col.rst}`);
+//             else if(y.value < 0.45)
+//                 process.stdout.write(`${col.green}▒${col.rst}`);
+//             else if(y.value < 0.65)
+//                 process.stdout.write(`${col.blue}█${col.rst}`);
+//             else
+//                 process.stdout.write(`${col.blue}▒${col.rst}`);
+//         });
+//         process.stdout.write("\n");
+//     });
+// }
+
+
+// opensimplex(123);
 // scl.unused(perlin, simplex, simplex2);
 
 // console.log(`Generated in ${renderT - addT}ms - Rendered in ${new Date().getTime() - renderT}ms`);
+
+
+//#SECTION open-simplex-noise
+
+// const { makeNoise2D } = require("open-simplex-noise");
+
+
+// let noise2d = makeNoise2D(Date.now());
+// let res = 10;
+
+// for(let x = 0; x < lnHeight; x++)
+// {
+//     for(let y = 0; y < lnWidth; y++)
+//     {
+//         let val = noise2d(x / res, y / res);
+        
+//         if(val > 0.7)
+//             process.stdout.write(`${col.red}x${col.rst}`);
+//         else if(val > 0.6)
+//             process.stdout.write(`${col.yellow}x${col.rst}`);
+//         else if(val > 0.5)
+//             process.stdout.write(`${col.blue}x${col.rst}`);
+//         else if(val > 0.4)
+//             process.stdout.write(`${col.green}x${col.rst}`);
+//         else if(val > 0.3)
+//             process.stdout.write(`${col.cyan}x${col.rst}`);
+//         else if(val > 0.2)
+//             process.stdout.write(`${col.magenta}x${col.rst}`);
+//         else
+//             process.stdout.write(`${col.white}x${col.rst}`);
+//     }
+//     process.stdout.write("\n");
+// }
