@@ -8,8 +8,10 @@ class Water extends Cell
     constructor()
     {
         super("water");
+
         this.setColors("blue", "black");
         this.deep = false;
+        this.canBeBuiltOn = false;
     }
 
     /**

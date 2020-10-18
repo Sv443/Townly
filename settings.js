@@ -34,7 +34,7 @@ const settings = {
     /** Settings that affect the actual game */
     game: {
         /** How many ticks per second (and FPS) the game should run at */
-        tps: 2,
+        tps: 0.5,
     }
 };
 

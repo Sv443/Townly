@@ -6,12 +6,14 @@ const display = require("./display");
 const dbg = require("./dbg");
 
 const Grid = require("./classes/Grid");
+const MultiCellStructure = require("./classes/Cells/MultiCellStructure");
+
 const Constructable = require("./classes/Cells/Constructable");
 const TownHall = require("./classes/Cells/Special/TownHall");
+const PowerPlant = require("./classes/Cells/Special/PowerPlant");
+const WaterPump = require("./classes/Cells/Special/WaterPump");
 
 const settings = require("../settings");
-const PowerPlant = require("./classes/Cells/Special/PowerPlant");
-const MultiCellStructure = require("./classes/Cells/MultiCellStructure");
 
 
 /** @type {Grid} */
@@ -20,11 +22,12 @@ var grid;
 /** @type {Constructable[]|MultiCellStructure[]} Stuff the user can build */
 const constructables = [
     TownHall,
-    PowerPlant
+    PowerPlant,
+    WaterPump
 ];
 
 
-scl.unused("typedefs:", Constructable);
+scl.unused("typedefs:", Constructable, MultiCellStructure);
 
 function init()
 {
@@ -71,7 +74,7 @@ function startGame()
 
 /**
  * Continues a game by loading a save file
- * @param {String} saveFile 
+ * @param {String} saveFile Path to the save file
  */
 function continueGame(saveFile)
 {

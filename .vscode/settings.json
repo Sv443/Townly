@@ -14,7 +14,7 @@
                 "overviewRulerColor": "#f41"
             }
         ],
-        "(#SECTION ([^\\S\\r\\n]*\\w+)*[:]*)": [ // #SECTION test
+        "(#SECTION ([^\\S\\r\\n]*[\\w,.\\-_]+)*[:]*)": [ // #SECTION test, 123
             {
                 "backgroundColor": "#44f",
                 "color": "white",

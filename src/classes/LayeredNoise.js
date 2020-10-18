@@ -288,7 +288,14 @@ class LayeredNoise
     noiseValueToCell(val)
     {
         // TODO:
-        let cell = new Cell("land");
+        /** @type {Cell} */
+        let cell = null;
+
+        if(val < 0.4)
+            cell = new Cell("water");
+        else
+            cell = new Cell("land");
+            
         cell.value = val;
         return cell;
     }

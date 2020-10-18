@@ -21,7 +21,7 @@ class Grid
      */
     constructor(width, height)
     {
-        /** @type {Number[]} The width of the grid - [ width, height ] */
+        /** @type {Number[]} The size of the grid - [ width, height ] */
         this.size = [ width, height ];
         /** @type {Number} */
         this.mapSeed = null;
@@ -32,14 +32,25 @@ class Grid
 
     /**
      * Replaces a certain cell with one with the provided data
-     * @param {Number} x 
-     * @param {Number} y 
+     * @param {Number} x width
+     * @param {Number} y height
      * @param {Cell.CellData} cellData 
      */
     setCell(x, y, cellData)
     {
         // TODO:
         scl.unused(x, y, cellData);
+    }
+
+    /**
+     * Returns the cell at the passed coordinates
+     * @param {Number} x width
+     * @param {Number} y height
+     * @returns {Cell}
+     */
+    getCell(x, y)
+    {
+        return this.chunks[0][0].getCell(0, 0);
     }
 
     /**
@@ -107,12 +118,15 @@ class Grid
 
         //#SECTION add layers
 
+        /** @type {Cell[][]} */
+        let generatedGrid = [];
+
         switch(type)
         {
             case "Lakes":
             {
                 let resolutionModifier = 4.5;
-                let layerAmount = 2;
+                let layerAmount = 1;
                 
                 for(let i = 0; i < layerAmount; i++)
                 {
@@ -144,7 +158,7 @@ class Grid
             case "Archipelago":
             {
                 let resolutionModifier = 0.1;
-                let layerAmount = 2;
+                let layerAmount = 1;
                 
                 for(let i = 0; i < layerAmount; i++)
                 {
@@ -155,15 +169,27 @@ class Grid
             }
             case "Superflat":
             {
+                for(let h = 0; h < this.size[1]; h++)
+                {
+                    generatedGrid.push([]);
+                    for(let w = 0; w < this.size[0]; w++)
+                    {
+                        let cell = new Cell("land");
+                        generatedGrid[h][w] = cell;
+                    }
+                }
                 break;
             }
         }
 
         //#SECTION calc noise map, smooth it and convert to chunks
 
-        let generatedGrid = ln.generateNoiseMap();
+        if(type != "Superflat")
+        {
+            generatedGrid = ln.generateNoiseMap();
 
-        Grid.smoothGrid(generatedGrid); // smooth the grid
+            Grid.smoothGrid(generatedGrid); // smooth the grid
+        }
 
         this.setChunksFromGrid(generatedGrid);
     }

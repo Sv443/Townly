@@ -41,6 +41,7 @@ class Cell
         this.type = type;
         this.cursorActive = false;
         this.char = "?";
+        this.canBeBuiltOn = true;
     }
 
     //#MARKER Getters and Setters
@@ -126,6 +127,8 @@ class Cell
     {
         if(typeof this.char != "string" || this.char.length != 1)
             throw new Error(`Cell's character is not a string or the length is larger or smaller than 1`);
+    
+        return this.char;
     }
 
     //#SECTION Cursor
@@ -197,7 +200,7 @@ class Cell
 
     /**
      * Updates this cell.  
-     * Will be called each frame to calculate the next frame.
+     * This method Should update this cell's properties so it reflects the state in the next frame
      */
     update()
     {

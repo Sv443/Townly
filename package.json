@@ -4,7 +4,8 @@
   "description": "A CLI city building game",
   "main": "Townly.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dep-graph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependency_graph.svg"
   },
   "keywords": [
     "game",
@@ -20,6 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "dependency-cruiser": "^9.15.0",
     "eslint": "^7.8.1",
     "madge": "^3.10.0",
     "pkg": "^4.4.9"

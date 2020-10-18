@@ -16,7 +16,7 @@ class Chunk
     constructor(cells)
     {
         /** @type {Cell[][]} */
-        this.cells = [];
+        this.cells = null;
 
         if(Array.isArray(cells))
             this.setCells(cells);
@@ -62,6 +62,26 @@ class Chunk
         });
 
         this.cells = cells;
+    }
+
+    /**
+     * Returns this chunk's cells as a 2D array
+     * @returns {Cell[][]|null[][]}
+     */
+    getCells()
+    {
+        return this.cells;
+    }
+
+    /**
+     * Returns a cell from this chunk at the specified coordinate
+     * @param {Number} x width
+     * @param {Number} y height
+     * @returns {Cell|null}
+     */
+    getCell(x, y)
+    {
+        return this.cells[y][x] || null;
     }
 
     /**

@@ -36,14 +36,18 @@ function getWindowSize(padding)
  */
 function draw(grid)
 {
+    // TODO: do this properly
     let chunks = grid.getActiveChunks();
     
-    for(let x = 0; x < chunks.length; x++)
+    for(let h = 0; h < grid.size[1]; h++)
     {
-        for(let y = 0; y < chunks.length; y++)
+        for(let w = 0; w < grid.size[0]; w++)
         {
-            let chunk = chunks[x][y];
+            let cell = grid.getCell(0, 0);
+
+            process.stdout.write(`${cell.getChar()}`);
         }
+        process.stdout.write("\n");
     }
 }
 
