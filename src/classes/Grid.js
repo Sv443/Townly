@@ -76,6 +76,7 @@ class Grid
     {
         // TODO:
         scl.unused(tlCorner, brCorner);
+        return this.chunks;
     }
 
     /**
@@ -165,8 +166,6 @@ class Grid
         Grid.smoothGrid(generatedGrid); // smooth the grid
 
         this.setChunksFromGrid(generatedGrid);
-
-        console.log(this.chunks);
     }
 
     /**
@@ -323,7 +322,7 @@ class Grid
     {
         // TODO: fix everything
 
-        /** @type {Number[][]} two dimensional array containing all chunks */
+        /** @type {Chunk[][]} two dimensional array containing all chunks */
         let chunks = [];
 
         let maxChunksPerRow = (this.size[0] / settings.chunks.width);
@@ -377,7 +376,7 @@ class Grid
 
                 chunkOffset[0]++;
 
-                chunks[chx][chy] = cells; // assign cells to chunk
+                chunks[chx][chy] = new Chunk(cells); // assign cells to chunk
 
                 assignedChunksCount++;
             }
@@ -407,19 +406,21 @@ class Grid
             this.chunks.forEach((row) => {
                 row.forEach((chunk) => {
                     promises.push(new Promise((chunkPRes, chunkPRej) => {
-                        chunk.update().then(() => chunkPRes((beginT - new Date().getTime()))).catch(err => chunkPRej(err));
+                        chunk.update()
+                            .then(() => chunkPRes((beginT - new Date().getTime())))
+                            .catch(err => chunkPRej(err));
                     }));
                 });
             });
 
             Promise.all(promises).then((res) => {
                 // calc average chunk update time
+                // TODO: seems to be incorrect
                 let avgTimePerChunk = 0;
                 res.forEach(t => { avgTimePerChunk += t; });
                 avgTimePerChunk /= res.length;
 
-                dbg("Grid", `Average chunk update time: ${avgTimePerChunk}ms`);
-                return updPRes(avgTimePerChunk);
+                return updPRes(Math.abs(avgTimePerChunk));
             }).catch(err => {
                 return updPRej(`Error(s) while updating chunks: ${Array.isArray(err) ? `\n- ${err.join("\n- ")}` : err}`);
             });

@@ -11,11 +11,15 @@ class Chunk
     /**
      * Constructs a new object of type Chunk.  
      * Size is set in the settings file
+     * @param {Cell[][]} [cells] A 2D array of cells to assign to this chunk - size needs to be equal to the chunk size settings
      */
-    constructor()
+    constructor(cells)
     {
         /** @type {Cell[][]} */
         this.cells = [];
+
+        if(Array.isArray(cells))
+            this.setCells(cells);
 
         this.width = settings.chunks.width;
         this.height = settings.chunks.height;
@@ -35,6 +39,29 @@ class Chunk
         // TODO:
 
         return true;
+    }
+
+    /**
+     * Sets all of the chunk's cells at the same time
+     * @param {Cell[][]} cells A 2D array of cells to assign to this chunk - size needs to be equal to the chunk size settings
+     * @throws Throws errors if the width or height are invalid or if an item is not an instance of the class Cell
+     */
+    setCells(cells)
+    {
+        if(cells.length != settings.chunks.height)
+            throw new Error(`Error while setting the cells of a Chunk object - parameter "cells" is ${this.cells.length} tall (expected ${settings.chunks.height})`);
+
+        cells.forEach((row, x) => {
+            if(row.length != settings.chunks.width)
+                throw new Error(`Error while setting the cells of a Chunk object - row ${x} of parameter "cells" is ${row.length} wide (expected ${settings.chunks.width})`);
+            
+            row.forEach((cell, y) => {
+                if(!(cell instanceof Cell))
+                    throw new Error(`Error while setting the cells of a Chunk object - item at position (${x}, ${y}) is not an instance of the class Cell`);
+            });
+        });
+
+        this.cells = cells;
     }
 
     /**

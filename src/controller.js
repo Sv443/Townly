@@ -46,7 +46,7 @@ function startGame()
 {
     //#SECTION register constructables
     constructables.forEach(constr => {
-        if(constr instanceof MultiCellStructure)
+        if(constr.CellPart != null) // if constructable is a multi cell structure
             registerConstructable(constr.CellPart);
         else
             registerConstructable(constr);
@@ -115,7 +115,8 @@ function startNewGame(size, preset, seed)
 
     dbg("CTRL", `Map created, calling startGame()...`);
 
-    startGame(gr);
+    grid = gr;
+    startGame();
 }
 
 function loadGridFromSaveFile(saveFile)
@@ -135,7 +136,7 @@ function loadGridFromSaveFile(saveFile)
  */
 function registerConstructable(constructable)
 {
-    dbg("CTRL-RegisterConstr", `Registering constructable ${constructable.getName()}`);
+    dbg("CTRL-RegisterConstr", `Registering constructable "${constructable.getName()}"`);
 }
 
 module.exports = { init, continueGame, startNewGame, registerConstructable };

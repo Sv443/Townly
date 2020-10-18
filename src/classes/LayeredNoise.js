@@ -277,16 +277,6 @@ class LayeredNoise
             });
         });
 
-        // map[x][y] = this.noiseValueToCell(map[x][y]);
-
-        // this.layers[0].forEach((layerX, x) => {
-        //     map.push([]);
-        //     layerX.forEach((layerY, y) => {
-        //         let cell = this.noiseValueToCell(layerY);
-        //         map[x][y] = cell;
-        //     });
-        // });
-
         return map;
     }
 
