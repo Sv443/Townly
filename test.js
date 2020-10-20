@@ -11,7 +11,7 @@ const col = scl.colors.fg;
 let addT = 0, renderT = 0;
 let lastSeed = 0;
 
-
+const zenGenInterval = 10; // in seconds
 const cursorPreview = true;
 const extraSmooth = true;
 
@@ -155,7 +155,7 @@ console.clear();
 // smoothPerlin(2486795908441090, 250);
 // smoothPerlin(1234, 4);
 
-setInterval(() => ZenGen(), 5000);
+setInterval(() => ZenGen(), zenGenInterval * 1000);
 ZenGen();
 
 scl.unused(addT, renderT);
