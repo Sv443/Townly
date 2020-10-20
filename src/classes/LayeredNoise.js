@@ -310,7 +310,6 @@ module.exports = LayeredNoise;
 
 
 
-
 /*
 For each cell:
 
