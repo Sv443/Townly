@@ -5,7 +5,7 @@
   "main": "Townly.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dep-graph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependency_graph.svg"
+    "dep-graph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependency_graph.svg && echo Created the file ./dependency_graph.svg"
   },
   "keywords": [
     "game",

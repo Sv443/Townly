@@ -1,7 +1,11 @@
 const scl = require("svcorelib");
 
 const Grid = require("./classes/Grid");
+const Camera = require("./classes/Camera");
 
+
+/** @type {Camera} */
+var cam = null;
 
 scl.unused("typedefs:", Grid);
 
@@ -16,18 +20,10 @@ function init()
 
         // TODO:
 
+        cam = new Camera(Camera.getWindowSize());
+
         return pRes();
     });
-}
-
-/**
- * Returns the window size in columns and rows
- * @prop {Number[]} padding [ver, hor]
- * @returns {Number[]} [H, W]  /  [Rows, Cols]
- */
-function getWindowSize(padding)
-{
-    return [ (process.stdout.rows - padding[0]), (process.stdout.columns - padding[1]) ] || [ 0, 0 ];
 }
 
 /**
@@ -51,8 +47,29 @@ function draw(grid)
     }
 }
 
+/**
+ * Sets the camera's position
+ * @param {Number} x width
+ * @param {Number} y height
+ */
+function setCameraPos(x, y)
+{
+    return cam.setPosition(x, y);
+}
+
+/**
+ * Moves the camera in a certain direction
+ * @param {Camera.Direction} direction 
+ * @param {Number} amount 
+ */
+function moveCamera(direction, amount)
+{
+    return cam.move(direction, amount);
+}
+
 module.exports = {
     init,
-    getWindowSize,
-    draw
+    draw,
+    setCameraPos,
+    moveCamera
 };
