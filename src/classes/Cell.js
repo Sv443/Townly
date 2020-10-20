@@ -1,5 +1,7 @@
 const scl = require("svcorelib");
 
+const Position = require("./Position");
+
 // const dbg = require("../dbg");
 
 
@@ -35,13 +37,21 @@ class Cell
     /**
      * Constructs a new object of the class Cell
      * @param {CellType} type 
+     * @param {Position} position 
      */
-    constructor(type)
+    constructor(type, position)
     {
+        if(typeof type != "string" || !Cell.getAvailableTypes().includes(type))
+            throw new TypeError(`Error while constructing a new Cell: Parameter "type" is not of type string or not a valid cell type`);
+
+        if(!(position instanceof Position))
+            throw new TypeError(`Error while constructing a new Cell: Parameter "position" is not present or not an instance of the class Position`);
+
         this.type = type;
         this.cursorActive = false;
         this.char = "?";
         this.canBeBuiltOn = true;
+        this.pos = position;
     }
 
     //#MARKER Getters and Setters

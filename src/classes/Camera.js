@@ -1,4 +1,4 @@
-const Pos = require("./Position");
+const Position = require("./Position");
 
 
 /** @typedef {"up"|"down"|"left"|"right"} Direction */
@@ -12,8 +12,8 @@ class Camera
     constructor(windowSize)
     {
         this.windowSize = windowSize;
-        /** @type {Pos} */
-        this.pos = new Pos(0, 0);
+        /** @type {Position} Position relative to the viewport / window */
+        this.pos = new Position(0, 0);
 
         process.stdout.on("resize", () => {
             this.onWindowSizeChange(Camera.getWindowSize());
@@ -22,18 +22,21 @@ class Camera
 
     /**
      * Returns the window size in columns and rows
-     * @prop {Number[]} [padding] [ver, hor]
+     * @prop {Number[]} [padding] [ver, hor] - defaults to [0, 0]
      * @returns {Number[]} [H, W]  /  [Rows, Cols]
      * @static
      */
     static getWindowSize(padding)
     {
+        if(!padding || !Array.isArray(padding))
+            padding = [0, 0];
+
         return [ (process.stdout.rows - padding[0]), (process.stdout.columns - padding[1]) ] || [ 0, 0 ];
     }
 
     /**
      * Sets the camera's position
-     * @param {Pos} position
+     * @param {Position} position
      */
     setCameraPos(position)
     {
@@ -42,7 +45,7 @@ class Camera
 
     /**
      * Returns the camera's current position
-     * @returns {Pos}
+     * @returns {Position}
      */
     getCameraPos()
     {

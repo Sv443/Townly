@@ -5,6 +5,7 @@ const LayeredNoise = require("./src/classes/LayeredNoise");
 const scl = require("svcorelib");
 const Grid = require("./src/classes/Grid");
 const Cell = require("./src/classes/Cell");
+const Position = require("./src/classes/Position");
 const col = scl.colors.fg;
 
 let addT = 0, renderT = 0;
@@ -47,7 +48,7 @@ function smoothPerlin(seed, passes, extraSmooth)
         cells.push([]);
 
         valX.forEach((valY, y) => {
-            let cell = new Cell("land");
+            let cell = new Cell("land", new Position(x, y));
 
             if(valY < 0.4)
                 cell.setType("deepwater");

@@ -6,6 +6,7 @@ const { Simplex2 } = require("tumult");
 
 const Cell = require("./Cell");
 const dbg = require("../dbg");
+const Position = require("./Position");
 
 
 scl.unused("typedefs:", Cell);
@@ -283,18 +284,22 @@ class LayeredNoise
     /**
      * Creates a cell out of the passed noise value
      * @param {Number} val Floating-point
+     * @param {Position} [pos] Position of the cell - defaults to [0, 0]
      * @returns {Cell}
      */
-    noiseValueToCell(val)
+    noiseValueToCell(val, pos)
     {
         // TODO:
         /** @type {Cell} */
         let cell = null;
 
+        if(!pos || !(pos instanceof Position))
+            pos = new Position(0, 0);
+
         if(val < 0.4)
-            cell = new Cell("water");
+            cell = new Cell("water", pos);
         else
-            cell = new Cell("land");
+            cell = new Cell("land", pos);
             
         cell.value = val;
         return cell;
