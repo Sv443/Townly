@@ -60,10 +60,12 @@ function startGame()
     const update = async () => {
         await display.draw(grid);
 
+        let updT = new Date().getTime();
         let avgCUD = await grid.update();
         dbg.setDebugInfo("avgChunkUpdateDelta", avgCUD);
 
         dbg("CTRL", `Average chunk update delta time: ${dbg.getDebugInfo("avgChunkUpdateDelta")}ms`);
+        dbg("CTRL", `Grid update delta time: ${(new Date().getTime() - updT)}ms (max available time per tick: ${1000 / settings.game.tps}ms)`);
     };
 
     let tickInterval = (1000 / settings.game.tps);

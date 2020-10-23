@@ -103,7 +103,9 @@ class Chunk
                 });
             });
 
-            Promise.all(promises).then(() => pRes()).catch(err => pRej(err));
+            Promise.all(promises)
+                .then(() => pRes())
+                .catch(err => pRej(err));
         });
     }
 }

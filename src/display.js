@@ -34,6 +34,8 @@ function draw(grid)
 {
     // TODO: do this properly
     let chunks = grid.getActiveChunks();
+
+    scl.unused(chunks);
     
     for(let h = 0; h < grid.size[1]; h++)
     {
