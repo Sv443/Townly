@@ -158,7 +158,7 @@ console.clear();
 setInterval(() => ZenGen(), zenGenInterval * 1000);
 ZenGen();
 
-scl.unused(addT, renderT);
+scl.unused(addT, renderT, lastSeed);
 
 
 

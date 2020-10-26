@@ -51,6 +51,7 @@ class Grid
     getCell(x, y)
     {
         // TODO:
+        scl.unused(x, y);
         return this.chunks[0][0].getCell(0, 0);
     }
 

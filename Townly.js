@@ -1,10 +1,11 @@
 /**
- * Townly
+ * @name Townly
+ * @description A CLI city building game
  * @version 0.1.0
  * @author Sv443
  */
 
-// Call or Require this file to run Townly
+// Execute or Require this file to run Townly
 
 
 const main = require("./src/main");
