@@ -9,6 +9,6 @@
 ### Stages:
 - ✅ Done
 - 🔶 Todo
-- ⚠️ Todo & important
+- ⚠️ Todo & high priority
 - 🔨 WIP
 - 🛑 Won't do

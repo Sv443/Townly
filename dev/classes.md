@@ -11,6 +11,11 @@ It is by no means a proper documentation yet but it can give you a general grasp
 ## Position
 The Position class contains information about coordinates / a position on a [Grid.](#grid)
 
+## Area
+Describes a two-dimensional area.  
+This class has two [positions](#position), for the top-left and bottom-right corners.  
+It also offers area calculation and other convenience methods.
+
 ## LayeredNoise
 This class is used to generate a map based on coherent noise algorithms and noise layering.
 
