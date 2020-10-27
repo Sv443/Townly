@@ -1,3 +1,4 @@
+const Grid = require("./Grid");
 const Position = require("./Position");
 
 
@@ -16,7 +17,7 @@ class Camera
         this.pos = new Position(0, 0);
 
         process.stdout.on("resize", () => {
-            this.onWindowSizeChange(Camera.getWindowSize());
+            this._onWindowSizeChange(Camera.getWindowSize());
         });
     }
 
@@ -103,11 +104,25 @@ class Camera
     }
 
     /**
+     * Renders a passed grid according to the set properties like position and window size, returning a two-dimensional array of cells
+     * @param {Grid} grid
+     * @returns {Cell[][]}
+     * @throws TypeError if grid is not an instance of class Grid
+     */
+    render(grid)
+    {
+        if(!(grid instanceof Grid))
+            throw new TypeError(`Error while rendering frame in Camera object: Parameter "grid" is not an instance of the class Grid`);
+        
+        grid.getActiveChunks()
+    }
+
+    /**
      * To be called each time the window size changes
      * @param {Number[]} newWindowSize [width, height]
      * @private
      */
-    onWindowSizeChange(newWindowSize)
+    _onWindowSizeChange(newWindowSize)
     {
         this.windowSize = newWindowSize;
     }

@@ -32,21 +32,10 @@ function init()
  */
 function draw(grid)
 {
-    // TODO: do this properly
-    let chunks = grid.getActiveChunks();
+    // TODO:
+    let renderGrid = cam.render(grid);
 
-    scl.unused(chunks);
-    
-    for(let h = 0; h < grid.size[1]; h++)
-    {
-        for(let w = 0; w < grid.size[0]; w++)
-        {
-            let cell = grid.getCell(0, 0);
-
-            process.stdout.write(`${cell.getChar()}`);
-        }
-        process.stdout.write("\n");
-    }
+    scl.unused(renderGrid);
 }
 
 /**

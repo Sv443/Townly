@@ -3,6 +3,7 @@ const scl = require("svcorelib");
 const LayeredNoise = require("./LayeredNoise");
 const Cell = require("./Cell");
 const Chunk = require("./Chunk");
+const Area = require("./Area");
 const dbg = require("../dbg");
 
 const settings = require("../../settings");
@@ -11,6 +12,10 @@ const settings = require("../../settings");
 /** @typedef {"Lakes"|"LakesAndRivers"|"Archipelago"|"Superflat"} MapType */
 const mapTypes = [ "Lakes", "LakesAndRivers", "Archipelago", "Superflat" ];
 const mapSizes = [ [ 100, 40 ], [ 500, 200 ], [ 1000, 500 ], [ 3000, 1500 ] ];
+
+
+scl.unused("typedefs:", Area);
+
 
 class Grid
 {
@@ -81,14 +86,13 @@ class Grid
 
     /**
      * Returns all of the grid's chunks that intersect with a specified bounding box as a two-dimensional array
-     * @param {Number[]} tlCorner Top left corner [X, Y]
-     * @param {Number[]} brCorner Bottom right corner [X, Y]
+     * @param {Area} area
      * @returns {Chunk[][]}
      */
-    getActiveChunks(tlCorner, brCorner)
+    getActiveChunks(area)
     {
         // TODO:
-        scl.unused(tlCorner, brCorner);
+        scl.unused(area);
         return this.chunks;
     }
 

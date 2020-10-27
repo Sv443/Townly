@@ -1,6 +1,7 @@
 // main game controller
 
 const scl = require("svcorelib");
+const ansi = require("ansi");
 
 const display = require("./display");
 const dbg = require("./dbg");
@@ -18,6 +19,8 @@ const settings = require("../settings");
 
 /** @type {Grid} */
 var grid;
+/** @type {ansi.Cursor} */
+var cursor;
 
 /** @type {Constructable[]|MultiCellStructure[]} Stuff the user can build */
 const constructables = [
@@ -33,6 +36,8 @@ function init()
 {
     return new Promise((pRes, pRej) => {
         scl.unused(pRej);
+
+        cursor = ansi(process.stdout);
 
         //TODO:
 
@@ -144,4 +149,37 @@ function registerConstructable(constructable)
     dbg("CTRL-RegisterConstr", `Registering constructable "${constructable.getName()}"`);
 }
 
-module.exports = { init, continueGame, startNewGame, registerConstructable };
+/**
+ * Sets the visibility of the cursor
+ * @param {Boolean} visible 
+ */
+function setCursorVisible(visible)
+{
+    if(typeof visible != "boolean")
+        visible = false;
+    
+    if(cursor)
+    {
+        if(visible === true)
+            cursor.show();
+        else
+            cursor.hide();
+    }
+}
+
+/**
+ * Sets the CLI window's title (supports Windows and *nix)
+ * @param {String} title
+ */
+function setWindowTitle(title)
+{
+    if(typeof title.toString == "function")
+        title = title.toString();
+
+    if(process.platform != "win32")
+        process.stdout.write(`\x1b]2;${title}\x1b\x5c`); // *nix doesn't have a nice way to set the window title but this escape sequence should be able to do it (search "OSC control sequences" on this page: https://man7.org/linux/man-pages/man4/console_codes.4.html)
+    else
+        process.title = title; // This should work only on Windows
+}
+
+module.exports = { init, continueGame, startNewGame, registerConstructable, setCursorVisible, setWindowTitle };
