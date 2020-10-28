@@ -96,6 +96,7 @@ class Chunk
 
             this.cells.forEach((valX, x) => {
                 valX.forEach((valY, y) => {
+                    scl.unused(valY);
                     let cell = this.cells[x][y];
                     promises.push(new Promise((cellPRes) => {
                         cell.update().then(() => cellPRes());
