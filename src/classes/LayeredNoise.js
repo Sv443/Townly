@@ -13,6 +13,9 @@ scl.unused("typedefs:", Cell);
 
 /** @typedef {"perlin"|"simplex"|"simplex2"|"opensimplex"} NoiseAlgorithm */
 
+/**
+ * Used to generate and layer together layers of coherent noise to make more detailed and unique noise
+ */
 class LayeredNoise
 {
     /**

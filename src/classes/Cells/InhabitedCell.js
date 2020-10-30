@@ -9,7 +9,8 @@ const Constructable = require("./Constructable");
 scl.unused("typedefs:", Cell);
 
 /**
- * Base class for inhabited cells like residential, commercial and industrial
+ * Base class for inhabited cells like residential, commercial and industrial  
+ * This class only contains information about the inhabitants of a cell
  */
 class InhabitedCell extends Constructable
 {

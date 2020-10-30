@@ -32,6 +32,10 @@ const availableTypes = [ "land", "forest", "water", "deepwater", "residential", 
 
 //#MARKER Class
 
+/**
+ * Base class of all cells  
+ * Keeps track of properties like type, position and rendering of the cell
+ */
 class Cell
 {
     /**

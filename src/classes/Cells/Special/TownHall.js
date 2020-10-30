@@ -2,6 +2,10 @@ const MultiCellPart = require("../MultiCellPart");
 const MultiCellStructure = require("../MultiCellStructure");
 
 
+/**
+ * This class describes the multi-cell town hall  
+ * It fulfills the need for "Freedom" (contrary to real world politics the government of Townly is actually doing a good job)  
+ */
 class TownHall extends MultiCellStructure
 {
     constructor()

@@ -8,6 +8,9 @@ const Pos = require("./Position");
  * @prop {Pos|null} br Position of the bottom-right corner - is null if not set yet
  */
 
+/**
+ * This holds the information about a two-dimensional, rectangular area, or the area between the provided top-left and bottom-right corners.
+ */
 class Area
 {
     /**

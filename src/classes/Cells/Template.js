@@ -6,6 +6,9 @@ const Constructable = require("./Constructable");
 
 scl.unused("typedefs:", Cell);
 
+/**
+ * This is a constructible cell
+ */
 class Template extends Constructable
 {
     constructor()

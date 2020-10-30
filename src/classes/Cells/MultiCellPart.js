@@ -7,7 +7,7 @@ const MultiCellStructure = require("./MultiCellStructure");
 scl.unused("typedefs:", MultiCellStructure);
 
 /**
- * One of the cells of a multi-cell-structure
+ * One of the cells of a parent object of class MultiCellStructure
  */
 class MultiCellPart extends SpecialBuilding
 {

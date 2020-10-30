@@ -3,6 +3,16 @@
 const InhabitedCell = require("./InhabitedCell");
 
 
+/**
+ * A special area that residents can build houses on and move into  
+ *   
+ * TODO: Cell has special needs that need to be fulfilled by a SpecialBuilding's influence radius  
+ * These are the needs:  
+ * - Healthcare (satisfied by: TODO: Hospital)  
+ * - Water (satisfied by: TODO: Water Pump)  
+ * - Electricity (satisfied by: TODO: Coal Power Plant, TODO: Solar Array)  
+ * - Freedom (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)
+ */
 class Residential extends InhabitedCell
 {
     constructor()

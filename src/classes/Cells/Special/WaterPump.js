@@ -3,6 +3,10 @@ const MultiCellPart = require("../MultiCellPart");
 const MultiCellStructure = require("../MultiCellStructure");
 
 
+/**
+ * This building needs to be placed so at least one of its child cells but not more than half of its child cells are on water.  
+ * It fulfills the need "Water" in an area around it
+ */
 class WaterPump extends MultiCellStructure
 {
     constructor()

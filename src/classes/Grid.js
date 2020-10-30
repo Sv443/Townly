@@ -17,6 +17,10 @@ const mapSizes = [ [ 100, 40 ], [ 500, 200 ], [ 1000, 500 ], [ 3000, 1500 ] ];
 scl.unused("typedefs:", Area);
 
 
+/**
+ * Holds information about the two-dimensional grid of chunks.  
+ * Also has methods to access singular cell's methods.
+ */
 class Grid
 {
     /**

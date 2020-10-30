@@ -2,7 +2,8 @@ const Cell = require("../Cell");
 
 
 /**
- * Base class for all cells that can be built by the player
+ * Base class for all cells that can be built by the player  
+ * Has properties like name, base cost, etc.
  */
 class Constructable extends Cell
 {

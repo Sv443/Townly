@@ -4,6 +4,9 @@ const Position = require("./Position");
 
 /** @typedef {"up"|"down"|"left"|"right"} Direction */
 
+/**
+ * This class interfaces with the Controller and the Grid(s) to render each cell to the CLI.
+ */
 class Camera
 {
     /**

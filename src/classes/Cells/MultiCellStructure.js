@@ -13,7 +13,8 @@ scl.unused("typedefs:", MultiCellPart, Cell);
  */
 
 /**
- * Handles structures that are larger than a single cell
+ * Handles structures that are larger than a single cell.  
+ * This class interfaces with its child objects of class MultiCellPart.
  */
 class MultiCellStructure
 {

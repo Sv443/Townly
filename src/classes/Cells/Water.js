@@ -3,6 +3,15 @@
 const Cell = require("../Cell");
 
 
+/**
+ * Water Cell  
+ * Can be shallow or deep  
+ * Is used to make the game more interesting by limiting building space and increasing realism  
+ *   
+ * - TODO: Only streets can be built on top of this cell  
+ * - Cell cannot be demolished  
+ * - TODO: Bridges over deep water should cost more than over shallow water  
+ */
 class Water extends Cell
 {
     constructor()

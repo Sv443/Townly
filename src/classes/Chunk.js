@@ -6,6 +6,10 @@ const Cell = require("./Cell");
 
 scl.unused("typedefs:", Cell);
 
+/**
+ * Holds a two-dimensional chunk of cells to improve game performance  
+ * To be used in a grid, also arranged in two dimensions
+ */
 class Chunk
 {
     /**
