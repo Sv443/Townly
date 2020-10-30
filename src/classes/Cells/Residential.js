@@ -1,7 +1,12 @@
-// const scl = require("svcorelib");
+const scl = require("svcorelib");
 
 const InhabitedCell = require("./InhabitedCell");
+const Need = require("../Need");
 
+const Healthcare = require("../Needs/Healthcare");
+
+
+scl.unused("typedefs:", Need);
 
 /**
  * A special area that residents can build houses on and move into  
@@ -11,7 +16,8 @@ const InhabitedCell = require("./InhabitedCell");
  * - Healthcare (satisfied by: TODO: Hospital)  
  * - Water (satisfied by: TODO: Water Pump)  
  * - Electricity (satisfied by: TODO: Coal Power Plant, TODO: Solar Array)  
- * - Freedom (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)
+ * - Freedom (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)  
+ * - Commerce (satisfied by: TODO: Commercial Area)
  */
 class Residential extends InhabitedCell
 {
@@ -20,6 +26,11 @@ class Residential extends InhabitedCell
         super("residential");
         this.setColors("white", "red");
         this.char = "⌂";
+
+        /** @type {Need[]} */
+        this.needs = [
+            new Healthcare()
+        ];
     }
 
     static getName()

@@ -10,7 +10,7 @@ scl.unused("typedefs:", Cell);
 
 /**
  * Base class for inhabited cells like residential, commercial and industrial  
- * This class only contains information about the inhabitants of a cell
+ * This class only contains information about the inhabitants of a cell but not its needs
  */
 class InhabitedCell extends Constructable
 {
