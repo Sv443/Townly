@@ -20,15 +20,15 @@
 - **[How to Play](#how-to-play)**
 -->
 
-Some resources:
+### Some resources:
 - [Classes overview](./dev/classes.md)
 - [Roadmap](./dev/roadmap.md)
 - [Class Inheritance Example Diagram](./dev/inheritance.md)
 
 <br><br>
 
-To generate a dependency graph, run these commands:
-- `npm i`
-- `npm run dep-graph`
+### Dependency Graph:  
   
-Then open the file [`./dependency_graph.svg`](./dependency_graph.svg) in a browser or SVG viewer / editor
+![./dependency_graph.svg](./dependency_graph.svg)  
+  
+(To update this file, run the command `npm run dep-graph`)

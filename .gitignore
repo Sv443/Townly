@@ -43,5 +43,4 @@ node_modules/
 .env.test
 
 # Dependency Graph
-dependency_graph.svg
 .dependency-cruiser.js
