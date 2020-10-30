@@ -11,7 +11,7 @@ const MultiCellStructure = require("./classes/Cells/MultiCellStructure");
 
 const Constructable = require("./classes/Cells/Constructable");
 const TownHall = require("./classes/Cells/Special/TownHall");
-const PowerPlant = require("./classes/Cells/Special/PowerPlant");
+const CoalPowerPlant = require("./classes/Cells/Special/CoalPowerPlant");
 const WaterPump = require("./classes/Cells/Special/WaterPump");
 
 const settings = require("../settings");
@@ -25,7 +25,7 @@ var cursor;
 /** @type {Constructable[]|MultiCellStructure[]} Stuff the user can build */
 const constructables = [
     TownHall,
-    PowerPlant,
+    CoalPowerPlant,
     WaterPump
 ];
 
