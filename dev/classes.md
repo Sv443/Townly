@@ -53,7 +53,17 @@ An example would be residential zoning or the town hall.
 ```Inheritance: Cell->Constructable```  
 An inhabited cell is a [cell](#cell) that people can live in (though they don't necessarily *need* to).  
 It also has a level, which increases after a certain amount of time, as long as the cell's needs are fulfilled.  
-Certain types of inhabited cells like Residential or Commercial will have different needs.  
+Certain types of inhabited cells like [Residential](#residential) or [Commercial](#commercial) will have different needs.  
+
+## NeedyCell 
+```Inheritance: Cell->Constructable->InhabitedCell```  
+A needy cell needs its needs to be fulfilled in order to be able to thrive, level up and give more taxes.  
+
+## Residential 
+```Inheritance: Cell->Constructable->InhabitedCell->NeedyCell```  
+These cells can be used by residents to construct houses and live in it.  
+Each of these cells increases the population by a certain amount.  
+The population has a unique set of needs that need to be fulfilled in order for them to be able to thrive, level up and give more taxes.
 
 ## SpecialBuilding 
 ```Inheritance: Cell->Constructable->InhabitedCell```  

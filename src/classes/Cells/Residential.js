@@ -1,9 +1,13 @@
 const scl = require("svcorelib");
 
-const InhabitedCell = require("./InhabitedCell");
+const NeedyCell = require("./NeedyCell");
 const Need = require("../Need");
 
+const Commerce = require("../Needs/Commerce");
+const Electricity = require("../Needs/Electricity");
 const Healthcare = require("../Needs/Healthcare");
+const Social = require("../Needs/Social");
+const Water = require("../Needs/Water");
 
 
 scl.unused("typedefs:", Need);
@@ -19,7 +23,7 @@ scl.unused("typedefs:", Need);
  * - Social (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)  
  * - Commerce (satisfied by: TODO: Commercial Area)
  */
-class Residential extends InhabitedCell
+class Residential extends NeedyCell
 {
     constructor()
     {
@@ -29,7 +33,11 @@ class Residential extends InhabitedCell
 
         /** @type {Need[]} */
         this.needs = [
-            new Healthcare()
+            new Commerce(),
+            new Electricity(),
+            new Healthcare(),
+            new Social(),
+            new Water()
         ];
     }
 
@@ -55,6 +63,8 @@ class Residential extends InhabitedCell
                 this.levelUp();
                 this.char = "R";
             }
+
+            this.checkNeeds
 
             return pRes();
         });
