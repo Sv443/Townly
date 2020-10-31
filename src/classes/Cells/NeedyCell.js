@@ -24,12 +24,39 @@ class NeedyCell extends InhabitedCell
     }
 
     /**
-     * To be called on each update tick
+     * To be called on each update tick  
+     * Make sure to call checkNeeds() in here!
      */
     update()
     {
         return new Promise((pRes) => {
             return pRes();
+        });
+    }
+
+    /**
+     * Checks all needs and updates them
+     * @param {Boolean} [updateInfluenceAreas=false] Whether or not to update influence areas too
+     */
+    checkNeeds(updateInfluenceAreas)
+    {
+        if(updateInfluenceAreas !== true)
+            updateInfluenceAreas = false;
+
+        this.needs.forEach(need => {
+            let needProps = {
+                name: need.name,
+                description: need.description,
+                importance: need.importance
+            };
+
+            if(updateInfluenceAreas)
+            {
+                scl.unused("TODO: re-fetch influence areas");
+            }
+            
+            // TODO: check if needs are fulfilled
+            scl.unused(needProps);
         });
     }
 }

@@ -52,7 +52,7 @@ class Residential extends NeedyCell
     }
 
     /**
-     * Is called each frame
+     * Is called each update tick
      */
     update()
     {
@@ -64,7 +64,7 @@ class Residential extends NeedyCell
                 this.char = "R";
             }
 
-            this.checkNeeds
+            this.checkNeeds();
 
             return pRes();
         });

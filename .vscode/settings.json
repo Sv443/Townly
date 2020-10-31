@@ -1,6 +1,6 @@
 {
     "highlight.regexes": { // REQUIRES EXTENSION: fabiospampinato.vscode-highlight
-        "(((jsl|scl)\\.)?unused\\([a-zA-Z_,\\[\\]\\s\":.]+\\);*)": [ // jsl.unused([some_var, some_other_var]); or scl.unused(xy);
+        "(((jsl|scl)\\.)?unused\\([a-zA-Z_,\\[\\]\\s\\-\":.]+\\);*)": [ // jsl.unused([some_var, some_other_var]); or scl.unused(xy);
             {
                 "backgroundColor": "rgba(0, 0, 0, 0.2)",
                 "color": "#f88"
