@@ -1,13 +1,13 @@
 const scl = require("svcorelib");
 
-const NeedyCell = require("./NeedyCell");
-const Need = require("../Need");
+const NeedyCell = require("../NeedyCell");
+const Need = require("../../Need");
 
-const Commerce = require("../Needs/Commerce");
-const Electricity = require("../Needs/Electricity");
-const Healthcare = require("../Needs/Healthcare");
-const Social = require("../Needs/Social");
-const Water = require("../Needs/Water");
+const Commerce = require("../../Needs/Commerce");
+const Electricity = require("../../Needs/Electricity");
+const Healthcare = require("../../Needs/Healthcare");
+const Social = require("../../Needs/Social");
+const Water = require("../../Needs/Water");
 
 
 scl.unused("typedefs:", Need);
