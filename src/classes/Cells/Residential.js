@@ -16,7 +16,7 @@ scl.unused("typedefs:", Need);
  * - Healthcare (satisfied by: TODO: Hospital)  
  * - Water (satisfied by: TODO: Water Pump)  
  * - Electricity (satisfied by: TODO: Coal Power Plant, TODO: Solar Array)  
- * - Freedom (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)  
+ * - Social (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)  
  * - Commerce (satisfied by: TODO: Commercial Area)
  */
 class Residential extends InhabitedCell

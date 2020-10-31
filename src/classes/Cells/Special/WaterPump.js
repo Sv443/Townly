@@ -5,7 +5,7 @@ const MultiCellStructure = require("../MultiCellStructure");
 
 /**
  * This building needs to be placed so at least one of its child cells but not more than half of its child cells are on water.  
- * It fulfills the need "Water" in an area around it
+ * It provides a set amount of Water for the entire map
  */
 class WaterPump extends MultiCellStructure
 {

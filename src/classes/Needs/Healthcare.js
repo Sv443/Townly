@@ -8,7 +8,7 @@ class Healthcare extends Need
 {
     constructor()
     {
-        super();
+        super("Healthcare", "Some of your residents need medical assistance", 0.9);
     }
 }
 
