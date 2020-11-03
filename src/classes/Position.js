@@ -14,7 +14,7 @@ class Position
         y = parseInt(y);
 
         if((typeof x != "undefined" && typeof y != "undefined") && (isNaN(x) || isNaN(y) || !Number.isSafeInteger(x) || !Number.isSafeInteger(y)))
-            throw new Error(`Error while constructing an object of class Position: Parameters are not empty / undefined, but are also not valid (safe) integers.`);
+            throw new TypeError(`Error while constructing an object of class Position: Parameters are not empty / undefined, but are also not valid safe integers.`);
 
         
         this.posX = isNaN(x) ? 0 : x;

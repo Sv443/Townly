@@ -83,7 +83,7 @@ class Grid
     getAllChunks()
     {
         if(this.chunks.length == 0)
-            throw new Error(`Can't read chunks in grid since no chunks were set yet`);
+            throw new ReferenceError(`Can't read chunks in grid since no chunks were set yet`);
 
         return this.chunks;
     }
@@ -122,7 +122,7 @@ class Grid
         this.seed = seed;
 
         if(this.size[0] % settings.chunks.width != 0 || this.size[1] % settings.chunks.height)
-            throw new Error(`Can't generate a map with the size ${this.size[0]}x${this.size[0]} - they need to be divisible by ${settings.chunks.width} (width) and ${settings.chunks.height} (height)`);
+            throw new TypeError(`Can't generate a map with the size ${this.size[0]}x${this.size[0]} - they need to be divisible by ${settings.chunks.width} (width) and ${settings.chunks.height} (height)`);
 
         let ln = new LayeredNoise(this.size[0], this.size[1]);
 

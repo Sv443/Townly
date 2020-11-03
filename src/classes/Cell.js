@@ -129,7 +129,7 @@ class Cell
     setChar(char)
     {
         if(typeof char != "string" || char.length != 1)
-            throw new Error(`Couldn't set Cell's character: parameter is not a string or the length is larger or smaller than 1`);
+            throw new TypeError(`Couldn't set Cell's character: parameter is not a string or the length is larger or smaller than 1`);
         
         this.char = char;
     }
@@ -141,7 +141,7 @@ class Cell
     getChar()
     {
         if(typeof this.char != "string" || this.char.length != 1)
-            throw new Error(`Cell's character is not a string or the length is larger or smaller than 1`);
+            throw new TypeError(`Cell's character is not a string or the length is larger or smaller than 1`);
     
         return this.char;
     }

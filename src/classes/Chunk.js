@@ -53,15 +53,15 @@ class Chunk
     setCells(cells)
     {
         if(cells.length != settings.chunks.height)
-            throw new Error(`Error while setting the cells of a Chunk object - parameter "cells" is ${this.cells.length} tall (expected ${settings.chunks.height})`);
+            throw new TypeError(`Error while setting the cells of a Chunk object - parameter "cells" is ${this.cells.length} tall (expected ${settings.chunks.height})`);
 
         cells.forEach((row, x) => {
             if(row.length != settings.chunks.width)
-                throw new Error(`Error while setting the cells of a Chunk object - row ${x} of parameter "cells" is ${row.length} wide (expected ${settings.chunks.width})`);
+                throw new TypeError(`Error while setting the cells of a Chunk object - row ${x} of parameter "cells" is ${row.length} wide (expected ${settings.chunks.width})`);
             
             row.forEach((cell, y) => {
                 if(!(cell instanceof Cell))
-                    throw new Error(`Error while setting the cells of a Chunk object - item at position (${x}, ${y}) is not an instance of the class Cell`);
+                    throw new TypeError(`Error while setting the cells of a Chunk object - item at position (${x}, ${y}) is not an instance of the class Cell`);
             });
         });
 

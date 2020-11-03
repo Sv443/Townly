@@ -3,7 +3,7 @@
 const scl = require("svcorelib");
 
 const Cell = require("../Cell");
-const Constructable = require("./Constructable");
+const NeedyCell = require("./NeedyCell");
 
 
 scl.unused("typedefs:", Cell);
@@ -12,7 +12,7 @@ scl.unused("typedefs:", Cell);
  * Base class for inhabited cells like residential, commercial and industrial  
  * This class only contains information about the inhabitants of a cell but not its needs
  */
-class InhabitedCell extends Constructable
+class InhabitedCell extends NeedyCell
 {
     /**
      * Don't construct an object of this type!

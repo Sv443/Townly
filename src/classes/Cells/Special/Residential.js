@@ -1,6 +1,6 @@
 const scl = require("svcorelib");
 
-const NeedyCell = require("../NeedyCell");
+const InhabitedCell = require("../InhabitedCell");
 const Need = require("../../Need");
 
 const Commerce = require("../../Needs/Commerce");
@@ -23,7 +23,7 @@ scl.unused("typedefs:", Need);
  * - Social (satisfied by: TODO: Small Park, TODO: Big Park, TODO: Town Hall)  
  * - Commerce (satisfied by: TODO: Commercial Area)
  */
-class Residential extends NeedyCell
+class Residential extends InhabitedCell
 {
     constructor()
     {

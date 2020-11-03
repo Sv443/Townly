@@ -2,14 +2,14 @@ const scl = require("svcorelib");
 
 const Cell = require("../Cell");
 const Need = require("../Need");
-const InhabitedCell = require("./InhabitedCell");
+const Constructable = require("./Constructable");
 
 scl.unused("typedefs:", Need, Cell);
 
 /**
  * The needy cell handles Needs of cells and their fulfillment
  */
-class NeedyCell extends InhabitedCell
+class NeedyCell extends Constructable
 {
     /**
      * Constructs a new object of class NeedyCell
