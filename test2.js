@@ -65,26 +65,34 @@ async function doShit()
         switch(key.name)
         {
             case "up":
-                if(key.ctrl)
+                if(!key.shift && key.ctrl)
                     setCursorPos(cpos[0], cpos[1] - 10);
+                else if(key.shift && key.ctrl)
+                    setCursorPos(cpos[0], cpos[1] - 25);
                 else
                     setCursorPos(cpos[0], cpos[1] - 1);
             break;
             case "down":
-                if(key.ctrl)
+                if(!key.shift && key.ctrl)
                     setCursorPos(cpos[0], cpos[1] + 10);
+                else if(key.shift && key.ctrl)
+                    setCursorPos(cpos[0], cpos[1] + 25);
                 else
                     setCursorPos(cpos[0], cpos[1] + 1);
             break;
             case "left":
-                if(key.ctrl)
+                if(!key.shift && key.ctrl)
                     setCursorPos(cpos[0] - 10, cpos[1]);
+                else if(key.shift && key.ctrl)
+                    setCursorPos(cpos[0] - 25, cpos[1]);
                 else
                     setCursorPos(cpos[0] - 1, cpos[1]);
             break;
             case "right":
-                if(key.ctrl)
+                if(!key.shift && key.ctrl)
                     setCursorPos(cpos[0] + 10, cpos[1]);
+                else if(key.shift && key.ctrl)
+                    setCursorPos(cpos[0] + 25, cpos[1]);
                 else
                     setCursorPos(cpos[0] + 1, cpos[1]);
             break;

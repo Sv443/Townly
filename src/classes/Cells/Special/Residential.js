@@ -28,8 +28,10 @@ class Residential extends NeedyCell
     constructor()
     {
         super("residential");
+
         this.setColors("white", "red");
-        this.char = "⌂";
+        this.setChar("r");
+        this.setInhabitants(10);
 
         /** @type {Need[]} */
         this.needs = [
@@ -57,14 +59,30 @@ class Residential extends NeedyCell
     update()
     {
         return new Promise((pRes) => {
-            if(new Date().getTime() >= (this.constructionTimestamp + (3 * 60 * 1000)))
-            {
-                // can upgrade to level 2
-                this.levelUp();
-                this.char = "R";
-            }
+            this.tickCounter++;
 
-            this.checkNeeds();
+            if(this.tickCounter % 4 == 0) // every 4 ticks, check if cell can level up
+            {
+                if(this.level == 1 && this.ageFulfilled(5 * 60) && this.needsFulfilled(Electricity, Water))
+                {
+                    // cell is on level 1, is older than 5 minutes, has electricity and water
+                    // that's why it can upgrade to level 2 now:
+
+                    this.levelUp();
+                    this.setChar("R");
+                    this.setInhabitants(40);
+                }
+
+                if(this.level == 2 && this.ageFulfilled(15 * 60) && this.needsFulfilled(Electricity, Water, Commerce, Healthcare, Social))
+                {
+                    // cell is on level 2, is older than 15 minutes, has electricity, water, commerce, healthcare and social
+                    // cell can upgrade to level 3:
+
+                    this.levelUp();
+                    this.setChar("ℝ");
+                    this.setInhabitants(150);
+                }
+            }
 
             return pRes();
         });

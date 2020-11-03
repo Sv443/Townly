@@ -24,7 +24,19 @@ class InhabitedCell extends Constructable
 
         this.canLevelUp = true;
         this.level = 1;
-        this.constructionTimestamp = new Date().getTime();
+        this.inhabitants = 0;
+    }
+
+    /**
+     * Sets this InhabitedCell's inhabitants count
+     * @param {Number} inhabitants 
+     */
+    setInhabitants(inhabitants)
+    {
+        if(typeof inhabitants != "number")
+            throw new TypeError(`Parameter "inhabitants" in InhabitedCell.setInhabitants() is not a number`);
+
+        this.inhabitants = inhabitants;
     }
 
     /**

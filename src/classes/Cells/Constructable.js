@@ -17,6 +17,24 @@ class Constructable extends Cell
             type = "special";
 
         super(type);
+
+        this.constructionTimestamp = new Date().getTime();
+    }
+
+    /**
+     * Checks if this Constructable has passed a certain age in seconds
+     * @param {Number} seconds 
+     * @returns {Boolean} Returns true if this Constructable is older than the provided amount of seconds, else returns false
+     */
+    ageFulfilled(seconds)
+    {
+        if(typeof seconds != "number")
+            seconds = parseInt(seconds);
+        
+        if(isNaN(seconds))
+            throw new TypeError(`Parameter "seconds" in Constructable.ageFulfilled() couldn't be resolved to a number.`);
+        
+        return (new Date().getTime() >= (this.constructionTimestamp + (seconds * 1000)));
     }
 
     //#MARKER static props

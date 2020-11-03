@@ -45,6 +45,8 @@ function init()
     });
 }
 
+//#MARKER start game
+
 /**
  * To be called to start the game.  
  * Starts the tick and frame interval.  
@@ -140,6 +142,8 @@ function loadGridFromSaveFile(saveFile)
     return g;
 }
 
+//#MARKER registers
+
 /**
  * Registers a constructable class so the user can build it
  * @param {Constructable} constructable The class that inherits from Constructable - NOT AN INSTANCE OF THE CLASS!
@@ -148,6 +152,8 @@ function registerConstructable(constructable)
 {
     dbg("CTRL-RegisterConstr", `Registering constructable "${constructable.getName()}"`);
 }
+
+//#MARKER globally accessible, affecting the whole game / window
 
 /**
  * Sets the visibility of the cursor
@@ -177,9 +183,10 @@ function setWindowTitle(title)
         title = title.toString();
 
     if(process.platform != "win32")
-        process.stdout.write(`\x1b]2;${title}\x1b\x5c`); // *nix doesn't have a nice way to set the window title but this escape sequence should be able to do it (search "OSC control sequences" on this page: https://man7.org/linux/man-pages/man4/console_codes.4.html)
+        process.stdout.write(`\x1b]2;${title}\x1b\x5c`); // *nix doesn't have a nice way to set the window title but this escape sequence should be able to do it (for reference search "OSC control sequences" on this page: https://man7.org/linux/man-pages/man4/console_codes.4.html)
     else
         process.title = title; // This should work only on Windows
 }
+
 
 module.exports = { init, continueGame, startNewGame, registerConstructable, setCursorVisible, setWindowTitle };

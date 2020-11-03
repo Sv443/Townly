@@ -56,6 +56,7 @@ class Cell
         this.char = "?";
         this.canBeBuiltOn = true;
         this.pos = position;
+        this.tickCounter = 0;
     }
 
     //#MARKER Getters and Setters
@@ -220,6 +221,8 @@ class Cell
     {
         return new Promise((pRes) => {
             // to be overwritten by the subclasses
+            this.tickCounter++;
+
             return pRes();
         });
     }

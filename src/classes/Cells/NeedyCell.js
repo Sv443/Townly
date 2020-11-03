@@ -35,29 +35,48 @@ class NeedyCell extends InhabitedCell
     }
 
     /**
-     * Checks all needs and updates them
-     * @param {Boolean} [updateInfluenceAreas=false] Whether or not to update influence areas too
+     * Checks if the specified need is fulfilled
+     * @param {Need} need_class Reference to a class derived from the Need base class
+     * @returns {Boolean}
      */
-    checkNeeds(updateInfluenceAreas)
+    needFulfilled(need_class)
     {
-        if(updateInfluenceAreas !== true)
-            updateInfluenceAreas = false;
+        let result = false;
+
+        if(!(need_class instanceof Need))
+            throw new TypeError(`Parameter "need_class" in NeedyCell.needFulfilled() is not an instance of the Need base class`);
 
         this.needs.forEach(need => {
-            let needProps = {
-                name: need.name,
-                description: need.description,
-                importance: need.importance
-            };
-
-            if(updateInfluenceAreas)
+            if(need instanceof need_class)
             {
-                scl.unused("TODO: re-fetch influence areas");
+                // TODO: check if fulfilled, set `result` accordingly
+                result = true;
             }
-            
-            // TODO: check if needs are fulfilled
-            scl.unused(needProps);
         });
+
+        return result;
+    }
+
+    /**
+     * Checks if all of the specified needs are fulfilled
+     * @param  {...Need} need_classes References to classes derived from the Need base class
+     * @returns {Boolean}
+     */
+    needsFulfilled(...need_classes)
+    {
+        let results = [];
+
+        need_classes.forEach((need, i) => {
+            if(!(need instanceof Need))
+                throw new TypeError(`Spread parameter "need_classes" at index ${i} in NeedyCell.needsFulfilled() is not an instance of the Need base class`);
+            
+            results.push(this.needFulfilled(need));
+        });
+
+        if(scl.allEqual(results))
+            return results[0];
+        else
+            return false;
     }
 }
 
