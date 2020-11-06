@@ -37,6 +37,8 @@ function init()
             });
         });
 
+        let translationCount = 0;
+
         // TODO: verify
         Object.keys(trFile.translations).forEach(section => {
             Object.keys(trFile.translations[section]).forEach(trKey => {
@@ -49,11 +51,12 @@ function init()
                         translations[trLangCode][section] = {};
                     
                     translations[trLangCode][section][trKey] = translation;
+                    translationCount++;
                 });
             });
         });
 
-        dbg("Translate", `Initialized translations from these languages: ${Object.keys(translations).join(", ")}`);
+        dbg("Translate", `Initialized ${translationCount / availableLangs.length} translations from each of these languages: ${Object.keys(translations).join(", ")}`);
 
         return pRes();
     });
@@ -65,6 +68,11 @@ function init()
  */
 function setLanguage(lang)
 {
+    if(!Object.keys(trFile.meta.languages).includes(lang))
+        throw new TypeError(`Parameter "lang" of translate.setLanguage() is not a valid language code (one of the keys in the meta.languages object of the file "./data/translations.json")`);
+    
+    dbg("Translate", `Setting global language to ${lang}`)
+    
     language = lang;
 }
 
