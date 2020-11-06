@@ -1,3 +1,4 @@
+const { resolve } = require("path");
 const pkg = require("./package.json");
 
 const settings = {
@@ -35,6 +36,10 @@ const settings = {
     game: {
         /** How many ticks per second (and FPS) the game should run at */
         tps: 0.5,
+        /** Settings for save files */
+        saveFiles: {
+            directory: resolve("./saves/")
+        }
     }
 };
 

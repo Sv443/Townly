@@ -1,3 +1,4 @@
+const tr = require("../../../translate");
 const Cell = require("../../Cell");
 const MultiCellPart = require("../MultiCellPart");
 const MultiCellStructure = require("../MultiCellStructure");
@@ -57,7 +58,7 @@ class WaterPumpCellPart extends MultiCellPart
 
     static getName()
     {
-        return "Water Pump";
+        return tr("cells", "waterpump-name");
     }
 
     static getBaseCost()

@@ -1,7 +1,10 @@
 // main game controller
 
 const scl = require("svcorelib");
+const fs = require("fs-extra");
+const crypto = require("crypto");
 const ansi = require("ansi");
+const { join } = require("path");
 
 const display = require("./display");
 const dbg = require("./dbg");
@@ -87,7 +90,7 @@ function startGame()
  */
 function continueGame(saveFile)
 {
-    grid = loadGridFromSaveFile(saveFile);
+    grid = loadSaveFile(saveFile);
 }
 
 /**
@@ -131,15 +134,81 @@ function startNewGame(size, preset, seed)
     startGame();
 }
 
-function loadGridFromSaveFile(saveFile)
+/**
+ * Loads a save file, returning its data in an object
+ * @param {String} saveFileName 
+ */
+function loadSaveFile(saveFileName)
 {
-    // TODO:
-    scl.unused(saveFile);
-
     let g = new Grid(1, 1);
     g.generateMap("Lakes", null);
 
+    let rawSaveFileContent = fs.readFileSync(join(settings.game.saveFiles.directory, `${saveFileName}.json`)).toString();
+    let saveData = {};
+
+    if(settings.game.saveFiles.encodingEnabled)
+        saveData = JSON.parse(decodeString(saveData));
+    else
+        saveData = JSON.parse(rawSaveFileContent);
+
+    scl.unused("TODO:", saveData);
+
     return g;
+}
+
+/**
+ * Saves the game to a save file
+ * @param {String} saveFileName
+ */
+function saveCurrentGame(saveFileName)
+{
+    if(typeof saveFileName != "string" || scl.isEmpty(saveFileName))
+        throw new TypeError(`Parameter "saveFileName" of controller.saveCurrentGame() is not a string or is empty`);
+
+    if(!fs.existsSync(settings.game.saveFiles.directory))
+        fs.mkdirSync(settings.game.saveFiles.directory);
+    
+    let saveData = {};
+
+    if(settings.game.saveFiles.encodingEnabled)
+        saveData = encodeString(JSON.stringify(saveData));
+    else
+        saveData = JSON.stringify(saveData, null, 4);
+
+    fs.writeFileSync(join(settings.game.saveFiles.directory, `${saveFileName}.json`), saveData);
+}
+
+/**
+ * Encodes a string
+ * @param {String} str 
+ * @returns {String}
+ */
+function encodeString(str)
+{
+    let iv = crypto.randomBytes(16);
+    let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(Buffer.from("0b4b42d34877060bc960bbd615b1f503")), iv);
+    let encrypted = cipher.update(str);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+
+    return `${iv.toString("hex")}:${encrypted.toString("hex")}`;
+}
+
+/**
+ * Decodes a string
+ * @param {String} str 
+ * @returns {String}
+ */
+function decodeString(str)
+{
+    let textParts = str.split(":");
+
+    let iv = Buffer.from(textParts.shift(), "hex");
+    let encryptedText = Buffer.from(textParts.join(":"), "hex");
+    let decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(Buffer.from("0b4b42d34877060bc960bbd615b1f503")), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+    return decrypted.toString();
 }
 
 //#MARKER registers
@@ -189,4 +258,4 @@ function setWindowTitle(title)
 }
 
 
-module.exports = { init, continueGame, startNewGame, registerConstructable, setCursorVisible, setWindowTitle };
+module.exports = { init, continueGame, startNewGame, registerConstructable, setCursorVisible, setWindowTitle, saveCurrentGame, loadSaveFile };

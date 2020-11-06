@@ -5,7 +5,7 @@ const trFile = require("../data/translations.json");
 
 
 /** @typedef {"en"|"de"} LangCode */
-/** @typedef {"info"|"mainmenu"|"settingsmenu"|"mappresetmenu"|"mapsizemenu"|"misc"} TrSection */
+/** @typedef {"info"|"mainmenu"|"settingsmenu"|"mappresetmenu"|"mapsizemenu"|"needs"|"cells"|"misc"} TrSection */
 /**
  * @typedef {Object} LangObj
  * @prop {LangCode} code

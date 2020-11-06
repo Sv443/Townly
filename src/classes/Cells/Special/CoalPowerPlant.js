@@ -1,3 +1,4 @@
+const tr = require("../../../translate");
 const MultiCellPart = require("../MultiCellPart");
 const MultiCellStructure = require("../MultiCellStructure");
 
@@ -25,7 +26,7 @@ class CoalPowerPlantCellPart extends MultiCellPart
 
     static getName()
     {
-        return "Coal Power Plant";
+        return tr("cells", "coalpowerplant-name");
     }
 
     static getBaseCost()
