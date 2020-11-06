@@ -1,4 +1,5 @@
 // TODO:
+const tr = require("../../translate");
 const Need = require("../Need");
 
 /**
@@ -8,7 +9,7 @@ class Healthcare extends Need
 {
     constructor()
     {
-        super("Healthcare", "Some of your residents need medical assistance", 0.9);
+        super(tr("needs", "healthcare-name"), tr("needs", "healthcare-desc"), 0.9);
     }
 }
 

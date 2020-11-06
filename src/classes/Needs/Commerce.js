@@ -1,4 +1,5 @@
 // TODO:
+const tr = require("../../translate");
 const Need = require("../Need");
 
 /**
@@ -8,7 +9,7 @@ class Commerce extends Need
 {
     constructor()
     {
-        super("Commerce", "Your citizens need to be able to buy stuff", 0.8);
+        super(tr("needs", "commerce-name"), tr("needs", "commerce-desc"), 0.8);
     }
 }
 

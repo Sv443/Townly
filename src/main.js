@@ -31,6 +31,7 @@ function preInit()
         const runPreInit = (async () => {
             try
             {
+                // order of loading is very important so be careful when changing it
                 dbg("PreInit", `Initializing translation module...`);
                 await tr.init();
                 dbg("PreInit", `Initializing input module...`);

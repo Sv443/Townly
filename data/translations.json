@@ -77,6 +77,66 @@
                 "de": "Kartengröße wählen:"
             }
         },
+        "needs": {
+            "commerce-name": {
+                "en": "Commerce",
+                "de": "Gewerbe"
+            },
+            "commerce-desc": {
+                "en": "Your citizens need to be able to buy stuff",
+                "de": "Deine Bürger müssen Dinge kaufen können"
+            },
+            "electricity-name": {
+                "en": "Electricity",
+                "de": "Elektrizität"
+            },
+            "electricity-desc": {
+                "en": "Your residents require electricity to live a modern life",
+                "de": "Deine Bewohner benötigen Strom, um ein modernes Leben führen zu können"
+            },
+            "healthcare-name": {
+                "en": "Healthcare",
+                "de": "Gesundheit"
+            },
+            "healthcare-desc": {
+                "en": "Some of your residents need medical assistance",
+                "de": "Einige deiner Bewohner benötigen medizinische Hilfe"
+            },
+            "social-name": {
+                "en": "Social",
+                "de": "Sozial"
+            },
+            "social-desc": {
+                "en": "Humans require adequate social contact and activities to thrive",
+                "de": "Menschen brauchen angemessene soziale Kontakte und Aktivitäten"
+            },
+            "water-name": {
+                "en": "Water",
+                "de": "Wasser"
+            },
+            "water-desc": {
+                "en": "Your residents require water to be aliven'tn't",
+                "de": "Deine Bewohner brauchen Wasser, um nicht nicht lebendig zu sein"
+            }
+        },
+        "cells": {
+            "townhall-name": {
+                "en": "Town Hall",
+                "de": "Rathaus"
+            },
+            "waterpump-name": {
+                "en": "Water Pump",
+                "de": "Wasserpumpe"
+            },
+            "residential-name": {
+                "en": "Residential Zone",
+                "de": "Wohngebiet"
+            },
+            "coalpowerplant-name": {
+                "en": "Coal Power Plant",
+                "de": "Kohlekraftwerk"
+            }
+        },
         "misc": {
             "goodbye": {
                 "en": "Goodbye.",

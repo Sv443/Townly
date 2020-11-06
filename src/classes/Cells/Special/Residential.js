@@ -8,6 +8,7 @@ const Electricity = require("../../Needs/Electricity");
 const Healthcare = require("../../Needs/Healthcare");
 const Social = require("../../Needs/Social");
 const Water = require("../../Needs/Water");
+const tr = require("../../../translate");
 
 
 scl.unused("typedefs:", Need);
@@ -45,7 +46,7 @@ class Residential extends InhabitedCell
 
     static getName()
     {
-        return "Residential Zone";
+        return tr("cells", "residential-name");
     }
 
     static getBaseCost()
