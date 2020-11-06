@@ -4,6 +4,7 @@ const input = require("./input");
 const controller = require("./controller");
 const display = require("./display");
 const dbg = require("./dbg");
+const tr = require("./translate");
 
 const CustomSelectionMenu = require("./classes/CustomSelectionMenu");
 const LayeredNoise = require("./classes/LayeredNoise");
@@ -13,6 +14,9 @@ const Grid = require("./classes/Grid");
 const settings = require("../settings");
 
 const col = scl.colors.fg;
+
+
+// TODO: translate all selection menus
 
 
 var townlyBannerSeed = scl.seededRNG.generateRandomSeed(10);
@@ -27,6 +31,8 @@ function preInit()
         const runPreInit = (async () => {
             try
             {
+                dbg("PreInit", `Initializing translation module...`);
+                await tr.init();
                 dbg("PreInit", `Initializing input module...`);
                 await input.init();
                 dbg("PreInit", `Initializing game controller...`);
@@ -67,7 +73,7 @@ async function initAll()
 function mainMenu()
 {
     // TODO:
-    let mm = new CustomSelectionMenu(`${settings.info.name} - Main Menu:`, {
+    let mm = new CustomSelectionMenu(tr("mainmenu", "title", settings.info.name), {
         overflow: true,
         cancelable: false
     });
@@ -87,12 +93,12 @@ function mainMenu()
     mm.onCursorMove(() => redraw());
 
     mm.setOptions([
-        "Continue",
-        "New Game",
-        "Settings",
-        "About",
-        // "Plugins",
-        "Exit"
+        tr("mainmenu", "continue"),
+        tr("mainmenu", "newgame"),
+        tr("mainmenu", "settings"),
+        tr("mainmenu", "about"),
+        // tr("mainmenu", "plugins"),,
+        tr("mainmenu", "exit"),
     ]);
 
     mm.onSubmit().then(res => {
@@ -110,7 +116,7 @@ function mainMenu()
             case 3: // About
                 return aboutMenu();
             case 4: // Exit
-                console.log("Goodbye.");
+                console.log(tr("misc", "goodbye"));
                 setTimeout(() => process.exit(0), 200);
             break;
         }
@@ -123,7 +129,7 @@ function mainMenu()
 async function startNewGamePrompt()
 {
     //#SECTION map preset
-    let mapTypesMenu = new scl.SelectionMenu("Select Map Preset:", { cancelable: true });
+    let mapTypesMenu = new scl.SelectionMenu(tr("mappresetmenu", "title"), { cancelable: true });
                 
     Grid.getMapTypes().forEach(mt => {
         mapTypesMenu.addOption(mt);
@@ -137,7 +143,7 @@ async function startNewGamePrompt()
 
 
     //#SECTION map size
-    let mapSizeMenu = new scl.SelectionMenu("Select Map Size:", { cancelable: true });
+    let mapSizeMenu = new scl.SelectionMenu(tr("mapsizemenu", "title"), { cancelable: true });
     let allMapSizes = Grid.getMapSizes();
 
     allMapSizes.forEach(ms => {
@@ -156,16 +162,16 @@ async function startNewGamePrompt()
 
 function settingsMenu()
 {
-    let sm = new scl.SelectionMenu(`${settings.info.name} - Settings:`, {
+    let sm = new scl.SelectionMenu(tr("settingsmenu", "title", settings.info.name), {
         overflow: true,
         cancelable: false
     });
 
     sm.setOptions([
-        "\"Graphics\"",
-        "Gameplay",
-        "Controls",
-        "Back to Main Menu"
+        tr("settingsmenu", "display"),
+        tr("settingsmenu", "gameplay"),
+        tr("settingsmenu", "controls"),
+        tr("settingsmenu", "back")
     ]);
 
     sm.onSubmit().then(res => {
@@ -195,7 +201,7 @@ async function aboutMenu()
 
     console.log("\n\n");
 
-    await scl.pause("Press any key to return to the main menu...");
+    await scl.pause(tr("misc", "presskeyreturnmain"));
 
     return mainMenu();
 }
