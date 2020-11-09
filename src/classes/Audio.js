@@ -6,7 +6,7 @@ const { OSError } = require("../errors");
 
 
 /** Adds this amount of seconds to the played audio file since the sound-play package is pretty inaccurate */
-const endBuffer = 0.4;
+const endBuffer = 0.5;
 /** @type {NodeJS.Platform[]} The currently supported platforms (OSes) */
 const supportedPlatforms = ["win32", "darwin"];
 
@@ -14,13 +14,14 @@ const supportedPlatforms = ["win32", "darwin"];
 class Audio
 {
     /**
-     * **Supported Platforms: Windows, MacOS**  
-     *   
      * Creates an instance of the class Audio.  
      * Use this Class to play audio in the CLI.  
      *   
+     * **Supported Platforms: Windows, MacOS**  
+     *   
      * **Supported audio formats:**  
      * - Windows: `mp3, wav, flac, m4a`
+     * - Mac: `to be tested`
      * @param {String} srcPath Path to the audio source file
      * @param {Boolean} [loop=false] Set to `true` to have Audio loop infinitely (warning: can't be stopped unless process exits)
      */
@@ -66,7 +67,7 @@ class Audio
     }
 
     /**
-     * Plays this audio
+     * Plays this audio - Warning: Audio can currently not be stopped!
      * @returns {Promise} Returns a promise that is resolved when the Audio has (approximately) finished playing
      */
     play()
