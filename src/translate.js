@@ -1,6 +1,6 @@
 const dbg = require("./dbg");
 
-const trFile = require("../data/translations.json");
+const trFile = require("../resources/translations.json");
 
 
 
@@ -69,7 +69,7 @@ function init()
 function setLanguage(lang)
 {
     if(!Object.keys(trFile.meta.languages).includes(lang))
-        throw new TypeError(`Parameter "lang" of translate.setLanguage() is not a valid language code (one of the keys in the meta.languages object of the file "./data/translations.json")`);
+        throw new TypeError(`Parameter "lang" of translate.setLanguage() is not a valid language code (one of the keys in the meta.languages object of the file "./resources/translations.json")`);
     
     dbg("Translate", `Setting global language to ${lang}`)
     

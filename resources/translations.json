@@ -1,0 +1,151 @@
+{
+    "meta": {
+        "defaultLanguage": "en",
+        "languages": {
+            "en": "English",
+            "de": "Deutsch"
+        }
+    },
+    "translations": {
+        "info": {
+            "desc": {
+                "en": "A CLI city building game",
+                "de": "Ein Kommandozeilen-Städtebauspiel"
+            }
+        },
+        "mainmenu": {
+            "title": {
+                "en": "%1 - Main Menu:",
+                "de": "%1 - Hauptmenü:"
+            },
+            "continue": {
+                "en": "Continue",
+                "de": "Fortfahren"
+            },
+            "newgame": {
+                "en": "New Game",
+                "de": "Neues Spiel"
+            },
+            "settings": {
+                "en": "Settings",
+                "de": "Einstellungen"
+            },
+            "about": {
+                "en": "About",
+                "de": "Über"
+            },
+            "plugins": {
+                "en": "Plugins",
+                "de": "Plugins"
+            },
+            "exit": {
+                "en": "Quit Game",
+                "de": "Spiel Beenden"
+            }
+        },
+        "settingsmenu": {
+            "title": {
+                "en": "% - Settings:",
+                "de": "% - Einstellungen:"
+            },
+            "display": {
+                "en": "Display",
+                "de": "Anzeige"
+            },
+            "gameplay": {
+                "en": "Gameplay",
+                "de": "Spiel"
+            },
+            "controls": {
+                "en": "Controls",
+                "de": "Steuerung"
+            },
+            "back": {
+                "en": "Back to Main Menu",
+                "de": "Zurück ins Hauptmenü"
+            }
+        },
+        "mappresetmenu": {
+            "title": {
+                "en": "Select Map Preset:",
+                "de": "Karten-Voreinstellung wählen:"
+            }
+        },
+        "mapsizemenu": {
+            "title": {
+                "en": "Select Map Size:",
+                "de": "Kartengröße wählen:"
+            }
+        },
+        "needs": {
+            "commerce-name": {
+                "en": "Commerce",
+                "de": "Gewerbe"
+            },
+            "commerce-desc": {
+                "en": "Your citizens need to be able to buy stuff",
+                "de": "Deine Bürger müssen Dinge kaufen können"
+            },
+            "electricity-name": {
+                "en": "Electricity",
+                "de": "Elektrizität"
+            },
+            "electricity-desc": {
+                "en": "Your residents require electricity to live a modern life",
+                "de": "Deine Bewohner benötigen Strom, um ein modernes Leben führen zu können"
+            },
+            "healthcare-name": {
+                "en": "Healthcare",
+                "de": "Gesundheit"
+            },
+            "healthcare-desc": {
+                "en": "Some of your residents need medical assistance",
+                "de": "Einige deiner Bewohner benötigen medizinische Hilfe"
+            },
+            "social-name": {
+                "en": "Social",
+                "de": "Sozial"
+            },
+            "social-desc": {
+                "en": "Humans require adequate social contact and activities to thrive",
+                "de": "Menschen brauchen angemessene soziale Kontakte und Aktivitäten"
+            },
+            "water-name": {
+                "en": "Water",
+                "de": "Wasser"
+            },
+            "water-desc": {
+                "en": "Your residents require water to be aliven'tn't",
+                "de": "Deine Bewohner brauchen Wasser, um nicht nicht lebendig zu sein"
+            }
+        },
+        "cells": {
+            "townhall-name": {
+                "en": "Town Hall",
+                "de": "Rathaus"
+            },
+            "waterpump-name": {
+                "en": "Water Pump",
+                "de": "Wasserpumpe"
+            },
+            "residential-name": {
+                "en": "Residential Zone",
+                "de": "Wohngebiet"
+            },
+            "coalpowerplant-name": {
+                "en": "Coal Power Plant",
+                "de": "Kohlekraftwerk"
+            }
+        },
+        "misc": {
+            "goodbye": {
+                "en": "Goodbye.",
+                "de": "Tschüß."
+            },
+            "presskeyreturnmain": {
+                "en": "Press any key to return to the main menu...",
+                "de": "Drücke eine Taste, um ins Hauptmenü zurückzukehren..."
+            }
+        }
+    }
+}
