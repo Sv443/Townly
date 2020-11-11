@@ -59,6 +59,7 @@ function preInit()
 async function initAll()
 {
     await preInit();
+    dbg("InitAll", `PreInit finished, initializing the main menu`);
 
     // TODO:
 
@@ -84,10 +85,11 @@ function mainMenu()
         {
             let bannerChars = bannerSmoothPerlin(30, townlyBannerSeed, 5, false);
 
-            console.clear();
+            if(!settings.verboseLogging)
+                console.clear();
             console.log(`${bannerChars}\n`);
         }
-        else
+        else if(!settings.verboseLogging)
             console.clear();
     };
 
@@ -103,7 +105,8 @@ function mainMenu()
     ]);
 
     mm.onSubmit().then(res => {
-        console.clear();
+        if(!settings.verboseLogging)
+            console.clear();
 
         switch(res.option.index)
         {

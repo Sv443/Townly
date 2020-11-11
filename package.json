@@ -26,10 +26,12 @@
     "fs-extra": "^9.0.1",
     "hidefile": "^3.0.0",
     "keypress": "^0.2.1",
+    "music-metadata": "^7.5.0",
     "open-simplex-noise": "^2.4.0-pre4",
     "pf-perlin": "^2.0.0",
     "prompts": "^2.3.2",
     "simplex-noise": "^2.4.0",
+    "sound-play": "^1.0.5",
     "svcorelib": "^1.11.1",
     "tumult": "^3.0.14"
   },
