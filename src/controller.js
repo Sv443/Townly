@@ -26,7 +26,7 @@ var grid;
 var cursor;
 
 /** @type {Constructable[]|MultiCellStructure[]} Stuff the user can build */
-const constructables = [
+const townlyConstructables = [
     TownHall,
     CoalPowerPlant,
     WaterPump
@@ -58,7 +58,7 @@ function init()
 function startGame()
 {
     //#SECTION register constructables
-    constructables.forEach(constr => {
+    townlyConstructables.forEach(constr => {
         if(constr.CellPart != null) // if constructable is a multi cell structure
             registerConstructable(constr.CellPart);
         else
