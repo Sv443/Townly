@@ -9,8 +9,11 @@ Controller::Controller(int argc, char *argv[])
     // set app base directory
     m_appDir = QDir(QCoreApplication::applicationDirPath());
 
-    // parse command line arguments:
+    // parse command line arguments
     parseArgs(argc, argv);
+
+    // for testing
+    inputLoop();
 }
 
 // this instance grants an access point to public variables on this class
@@ -18,6 +21,25 @@ Controller &Controller::instance()
 {
     static Controller *instance = new Controller();
     return *instance;
+}
+
+// loop that captures the user's keyboard input
+// will probably only be needed for testing
+void Controller::inputLoop()
+{
+    bool exitCond = false;
+
+    while(!exitCond)
+    {
+        Input::KeyPress kp = Input::getKey();
+
+        Key key = Input::resolveAsciiCode(kp.val, kp.escVal);
+
+        if(key == Key::ACTION_CTRL_C)
+            openDevMenu();
+
+        qInfo() << "Keypress:" << kp.val << kp.escVal << "- resolved enum:" << key;
+    }
 }
 
 // parses command line arguments, putting them into a QHash
@@ -54,4 +76,17 @@ void Controller::parseArgs(int argc, char *argv[])
 #ifdef _DEBUG
     qDebug() << "End list arguments";
 #endif
+}
+
+/**
+ * @brief Opens the developer menu
+ */
+void Controller::openDevMenu()
+{
+    if(m_devMenu == nullptr)
+        m_devMenu = new DevMenu();
+
+    m_devMenu->setModal(false);
+
+    m_devMenu->exec();
 }

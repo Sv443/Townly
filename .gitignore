@@ -1,7 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
-*~
 *.autosave
 *.a
 *.moc
@@ -14,8 +13,6 @@
 *_pch.h.cpp
 *_resource.rc
 *.qm
-.#*
-*.*#
 tags
 .DS_Store
 .directory

@@ -1,8 +1,8 @@
 TARGET = Townly
 
 
-QT -= gui
-QT += core network
+# QT -= gui
+QT += core widgets
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -25,8 +25,10 @@ CONFIG(debug, debug|release) {
 
 
 SOURCES += \
+        core/input.cpp \
         main.cpp \
-        core/controller.cpp
+        core/controller.cpp \
+        util/devmenu.cpp
 
 TRANSLATIONS += \
     Townly_en_US.ts
@@ -34,8 +36,12 @@ TRANSLATIONS += \
 RESOURCES += \
     resources.qrc
 
+win32:RC_ICONS = resources/Townly.ico
+macx:ICON =
+
 INCLUDEPATH += \
-        core
+        core \
+        lib
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,7 +50,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     core/controller.h \
-    info.h
+    core/input.h \
+    info.h \
+    lib/betterenum.h \
+    util/devmenu.h
 
 DISTFILES += \
+    LICENSE.txt \
     README.md
+
+FORMS += \
+    util/devmenu.ui
