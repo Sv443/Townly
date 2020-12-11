@@ -25,6 +25,8 @@ CONFIG(debug, debug|release) {
 
 
 SOURCES += \
+        components/cell.cpp \
+        components/grid.cpp \
         core/input.cpp \
         main.cpp \
         core/controller.cpp \
@@ -44,8 +46,8 @@ INCLUDEPATH += \
 
 macx {
     LIBS += -lncurses
-    QMAKE_CXXFLAGS += -lncurses
-    QMAKE_CXXFLAGS_DEBUG += -lncurses
+#    QMAKE_CXXFLAGS += -lncurses
+#    QMAKE_CXXFLAGS_DEBUG += -lncurses
 }
 
 # Default rules for deployment.
@@ -54,6 +56,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    components/cell.h \
+    components/grid.h \
     info.h \
     core/controller.h \
     core/input.h \
