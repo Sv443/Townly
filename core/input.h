@@ -1,10 +1,17 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include <QCoreApplication>
+#include <QDebug>
 
-// https://en.wikipedia.org/wiki/Conio.h
-#include "conio.h"
+#if defined(Q_OS_WIN)
+    // Windows
+    // https://en.wikipedia.org/wiki/Conio.h
+    #include "conio.h"
+#else
+    // Unix
+    // https://en.wikipedia.org/wiki/Ncurses
+    #include "curses.h"
+#endif
 
 
 enum Key {
@@ -21,17 +28,20 @@ class Input
 public:
 //    explicit Input();
 
-     struct KeyPress {
-         int val;
-         int escVal;
-     };
+    struct KeyPress {
+        int val;
+        int escVal;
+    };
+
+    static void init();
+    static void close();
 
     static Key resolveAsciiCode(int val, int escVal = 0);
     static QString keyEnumName(const Key key);
     static KeyPress getKey();
 
-signals:
-    void openDevMenu();
+private:
+    static int getChar();
 };
 
 #endif // INPUT_H
