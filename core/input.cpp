@@ -2,13 +2,34 @@
 
 
 // **********
-// **********
 //
-// TODO: If Dev Menu open, inputs aren't captured (maybe try putting the capturing in a QThread)
+// TODO: If Dev Menu open, main thread is blocked (maybe try putting the dev menu or input capturing in a QThread)
 //
-// **********
 // **********
 
+/**
+ * @brief Mainly initializes the ncurses evironment on Unix. Should be called before any input getting is done.
+ */
+void Input::init()
+{
+#ifndef Q_OS_WIN
+    initscr();
+    cbreak();
+    noecho();
+    clear();
+    keypad(stdscr, true); // makes special keys not emit multiple events
+#endif
+}
+
+/**
+ * @brief Restores the initial TTY environment
+ */
+void Input::close()
+{
+#ifndef Q_OS_WIN
+    endwin();
+#endif
+}
 
 /**
  * @brief Waits for the user to press a key and returns its ASCII code(s)
@@ -18,9 +39,9 @@ Input::KeyPress Input::getKey()
     KeyPress kp;
 
     kp.escVal = 0;
-    kp.val = _getch(); // if a single keypress event with ASCII val 0 can be sent, this will break
+    kp.val = getChar(); // if a single keypress event with ASCII val 0 can be sent, this will break
     if(kp.val == 0 || kp.val == 224) // if the captured keypress is a combination of two keypresses, capture the next keypress as well
-        kp.escVal = _getch();
+        kp.escVal = getChar();
 
     return kp;
 }
@@ -34,6 +55,9 @@ Input::KeyPress Input::getKey()
  */
 Key Input::resolveAsciiCode(int val, int escVal)
 {
+    // TODO: verify this works on Linux
+
+    qInfo() << "v" << val << "e" << escVal;
     if(escVal == 0)
     {
         // --- NO ESCAPE CODE ---
@@ -47,8 +71,16 @@ Key Input::resolveAsciiCode(int val, int escVal)
 
             // other keys
             case 32:  return Key::SPACE;
+        #if defined(Q_OS_WIN)
             case 13:  return Key::RETURN;
+        #elif defined(Q_OS_MACX)
+            case 10:  return Key::RETURN;
+        #endif
+        #if defined(Q_OS_WIN)
             case 8:   return Key::BACKSPACE;
+        #elif defined(Q_OS_MACX)
+            case 127:  return Key::RETURN;
+        #endif
             case 27:  return Key::ESC;
             case 9:   return Key::TAB;
 
@@ -121,4 +153,14 @@ QString Input::keyName(const Key key)
         case F3:            return "F3";
         case ACTION_CTRL_C: return "Ctrl+C";
     }
+}
+
+int Input::getChar()
+{
+#if defined(Q_OS_WIN)
+    // conio.h
+    return _getch();
+#else
+    return getch();
+#endif
 }

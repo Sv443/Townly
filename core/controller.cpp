@@ -12,8 +12,17 @@ Controller::Controller(int argc, char *argv[])
     // parse command line arguments
     parseArgs(argc, argv);
 
+    // initialize input module
+    Input::init();
+
     // for testing
     inputLoop();
+}
+
+Controller::~Controller()
+{
+    // restore initial TTY session
+    Input::close();
 }
 
 // this instance grants an access point to public variables on this class

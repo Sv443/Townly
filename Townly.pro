@@ -25,6 +25,8 @@ CONFIG(debug, debug|release) {
 
 
 SOURCES += \
+        components/cell.cpp \
+        components/grid.cpp \
         core/input.cpp \
         main.cpp \
         core/controller.cpp \
@@ -37,11 +39,16 @@ RESOURCES += \
     resources.qrc
 
 win32:RC_ICONS = resources/Townly.ico
-macx:ICON =
+macx:ICON = resources/Townly.icns
 
 INCLUDEPATH += \
-        core \
-        lib
+        core
+
+macx {
+    LIBS += -lncurses
+#    QMAKE_CXXFLAGS += -lncurses
+#    QMAKE_CXXFLAGS_DEBUG += -lncurses
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -49,10 +56,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    components/cell.h \
+    components/grid.h \
+    info.h \
     core/controller.h \
     core/input.h \
-    info.h \
-    lib/betterenum.h \
     util/devmenu.h
 
 DISTFILES += \

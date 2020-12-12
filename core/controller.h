@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QMessageBox>
+#include <QCoreApplication>
 
 #include "info.h"
 #include "input.h"
@@ -20,6 +21,8 @@ class Controller
 
 public:
     Controller(int argc = 0, char *argv[] = {});
+    ~Controller();
+
     static Controller &instance();
     void openDevMenu();
 
