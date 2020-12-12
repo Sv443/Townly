@@ -7,7 +7,8 @@ DevMenu::DevMenu(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->dlgButtonBox, &QDialogButtonBox::rejected, this, &QDialog::close);
+    // disable "?" button in the window title bar
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 
     QString cellTypeLand("Land");
     QString cellTypeWater("Water");

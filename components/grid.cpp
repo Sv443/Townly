@@ -12,12 +12,12 @@ void Grid::devFill()
 {
     for(uint x = 0; x < m_size.height; x++)
     {
+        QHash<int, Cell> row;
         for(uint y = 0; y < m_size.width; y++)
         {
             Cell c(CellType::Land, QPoint(x, y));
-
-            GridInstance::instance().m_data->cells.insert(QPoint(x, y), c);
         }
+        GridInstance::instance().m_data->cells.insert(x, row);
     }
 }
 
@@ -27,6 +27,6 @@ void Grid::devFill()
  */
 Cell Grid::cellAt(const QPoint pos)
 {
-//    return GridInstance::instance().m_data->cells.value(pos);
-    return Cell(CellType::Land, pos);
+    return GridInstance::instance().m_data->cells.value(pos.x()).value(pos.y());
+//    return Cell(CellType::Land, pos);
 }

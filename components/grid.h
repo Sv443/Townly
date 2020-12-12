@@ -3,6 +3,7 @@
 
 #include <QExplicitlySharedDataPointer>
 #include <QHash>
+#include <QMap>
 #include <QPoint>
 
 #include "cell.h"
@@ -18,13 +19,13 @@ struct Size {
 
 // ---------------- DATA ----------------
 /**
- * @brief The actual data of a grid. Is contained inside the GridInstance.
+ * @brief The actual data of a grid. This should be read and set on the GridInstance.
  */
 class GridData
         : public QSharedData
 {
 public:
-    QHash<QPoint, Cell> cells;
+    QHash<int, QHash<int, Cell>> cells;
 };
 
 

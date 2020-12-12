@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include <QPoint>
+#include <QChar>
 
 
 enum CellType {
@@ -16,10 +17,12 @@ enum CellType {
 class Cell
 {
 public:
+    Cell();
     Cell(const CellType type, const QPoint pos);
 
     virtual void update();
     virtual bool bulldoze();
+    virtual QChar getChar();
 
 private:
     CellType m_type = Land;
