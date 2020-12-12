@@ -27,7 +27,7 @@ public:
      };
 
     static Key resolveAsciiCode(int val, int escVal = 0);
-    static QString keyEnumName(const Key key);
+    static QString keyName(const Key key);
     static KeyPress getKey();
 
 signals:

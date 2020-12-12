@@ -96,3 +96,29 @@ Key Input::resolveAsciiCode(int val, int escVal)
 
     return Key::NOT_ASSIGNED;
 }
+
+QString Input::keyName(const Key key)
+{
+    switch(key)
+    {
+        case NOT_ASSIGNED:  return "Not Assigned";
+        case W:             return "W";
+        case A:             return "A";
+        case S:             return "S";
+        case D:             return "D";
+        case SPACE:         return "Space";
+        case RETURN:        return "Return";
+        case BACKSPACE:     return "Backspace";
+        case ESC:           return "Escape";
+        case TAB:           return "Tab";
+        case DEL:           return "Delete";
+        case ARROW_UP:      return "Arrow Up";
+        case ARROW_RIGHT:   return "Arrow Right";
+        case ARROW_DOWN:    return "Arrow Down";
+        case ARROW_LEFT:    return "Arrow Left";
+        case F1:            return "F1";
+        case F2:            return "F2";
+        case F3:            return "F3";
+        case ACTION_CTRL_C: return "Ctrl+C";
+    }
+}
