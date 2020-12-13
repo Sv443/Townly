@@ -12,6 +12,10 @@ Controller::Controller(int argc, char *argv[])
     // parse command line arguments
     parseArgs(argc, argv);
 
+    // initialize the Townly settings module
+    if(m_settings == nullptr)
+        m_settings = new TownlySettings();
+
     // initialize input module
     Input::init();
 

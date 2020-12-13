@@ -7,6 +7,9 @@
 #include <QChar>
 
 
+/**
+ * @brief The type of a cell. The element named "__LAST" is not a cell type - it's merely used for iteration
+ */
 enum CellType {
     Land = 0,
     Water,

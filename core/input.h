@@ -14,6 +14,9 @@
 #endif
 
 
+/**
+ * @brief Enumeration that describes a key on a keyboard. Can also contain a key combination. The value "NOT_ASSIGNED" means the key wasn't mapped (yet).
+ */
 enum Key {
     NOT_ASSIGNED,
     W, A, S, D,

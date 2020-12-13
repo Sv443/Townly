@@ -28,6 +28,7 @@ SOURCES += \
         components/cell.cpp \
         components/grid.cpp \
         core/input.cpp \
+        core/townlysettings.cpp \
         main.cpp \
         core/controller.cpp \
         util/devmenu.cpp
@@ -59,6 +60,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     components/cell.h \
     components/grid.h \
+    core/townlysettings.h \
     info.h \
     core/controller.h \
     core/input.h \

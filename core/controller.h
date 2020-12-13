@@ -12,6 +12,7 @@
 #include "info.h"
 #include "util/devmenu.h"
 #include "input.h"
+#include "townlysettings.h"
 
 #include "grid.h"
 
@@ -27,6 +28,8 @@ public:
 
     static Controller &instance();
     void openDevMenu();
+
+    TownlySettings *m_settings = nullptr;
 
 private:
     void parseArgs(int argc, char *argv[]);
