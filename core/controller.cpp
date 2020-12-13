@@ -96,6 +96,7 @@ void Controller::openDevMenu()
         m_devMenu = new DevMenu();
 
     m_devMenu->setModal(false);
+//    m_devMenu->setWindowFlag(Qt::WindowType::Tool, true);
 
     m_devMenu->exec();
 }

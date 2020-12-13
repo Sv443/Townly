@@ -43,3 +43,34 @@ bool Cell::bulldoze()
 {
     return false; // empty cells won't ever appear on the Grid (unless intentional) so they don't need to ever be bulldozed
 }
+
+/**
+ * @brief Resolves a cell type to a string
+ * @param type The cell type to resolve to a string
+ */
+QString Cell::cellTypeToString(CellType type)
+{
+    switch(type)
+    {
+        case Land:   return "Land";
+        case Forest: return "Forest";
+        case Water:  return "Water";
+
+        default: case __LAST: return "<Invalid Type>";
+    }
+}
+
+/**
+ * @brief Returns a QList of all cell types
+ */
+QList<CellType> Cell::getAllCellTypes()
+{
+    QList<CellType> l;
+
+    for(int i = Land; i != __LAST; i++)
+    {
+        l.append(static_cast<CellType>(i));
+    }
+
+    return l;
+}

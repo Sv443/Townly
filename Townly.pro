@@ -42,7 +42,8 @@ win32:RC_ICONS = resources/Townly.ico
 macx:ICON = resources/Townly.icns
 
 INCLUDEPATH += \
-        core
+        core \
+        components
 
 macx {
     LIBS += -lncurses

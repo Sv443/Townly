@@ -15,6 +15,8 @@ struct Size {
     unsigned int height;
 };
 
+// QPoint can't be used as a key for a QHash. This fixes it:
+inline uint qHash(const QPoint &key) { return qHash(QPair<int,int>(key.x(), key.y())); } // https://stackoverflow.com/a/35408177/8602926
 
 
 // ---------------- DATA ----------------
@@ -25,7 +27,7 @@ class GridData
         : public QSharedData
 {
 public:
-    QHash<int, QHash<int, Cell>> cells;
+    QHash<QPoint, Cell> cells;
 };
 
 

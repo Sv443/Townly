@@ -10,8 +10,10 @@
 #include <QCoreApplication>
 
 #include "info.h"
-#include "input.h"
 #include "util/devmenu.h"
+#include "input.h"
+
+#include "grid.h"
 
 
 class Controller

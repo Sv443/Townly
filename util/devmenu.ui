@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>359</height>
+    <width>384</width>
+    <height>194</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Developer Menu</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

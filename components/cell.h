@@ -2,12 +2,17 @@
 #define CELL_H
 
 #include <QPoint>
+#include <QList>
+#include <QString>
 #include <QChar>
 
 
 enum CellType {
-    Land,
-    Water
+    Land = 0,
+    Water,
+    Forest,
+
+    __LAST
 };
 
 
@@ -23,6 +28,9 @@ public:
     virtual void update();
     virtual bool bulldoze();
     virtual QChar getChar();
+
+    static QString cellTypeToString(CellType type);
+    static QList<CellType> getAllCellTypes();
 
 private:
     CellType m_type = Land;
