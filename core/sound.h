@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMediaPlayer>
+#include <QFile>
 #include <QUrl>
 
 /**
@@ -25,7 +26,7 @@ public:
      * @brief The name of the sound
      */
     enum SoundName {
-        Dbg = 0,
+        DebugSound = 0,
 
 
         __SoundNameLAST

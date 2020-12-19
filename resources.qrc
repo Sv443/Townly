@@ -3,5 +3,8 @@
         <file>resources/icon_1000x1000.png</file>
         <file>resources/Townly.icns</file>
         <file>resources/Townly.ico</file>
+        <file>resources/audio/General/DebugSound.m4a</file>
+        <file>resources/audio/General/DebugSound.ogg</file>
+        <file>resources/audio/General/DebugSound.wav</file>
     </qresource>
 </RCC>

@@ -23,6 +23,8 @@ Controller::Controller(int argc, char *argv[])
     if(m_audioCtrl == nullptr)
         m_audioCtrl = new AudioController();
 
+    m_audioCtrl->play(Sound::General, Sound::DebugSound);
+
     // for testing
     inputLoop();
 }

@@ -38,8 +38,7 @@ SOURCES += \
 TRANSLATIONS += \
     Townly_en_US.ts
 
-RESOURCES += \
-    resources.qrc
+RESOURCES += resources.qrc
 
 win32:RC_ICONS = resources/Townly.ico
 macx:ICON = resources/Townly.icns

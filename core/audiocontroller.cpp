@@ -40,9 +40,18 @@ bool AudioController::play(const Sound::SoundCategory cat, const Sound::SoundNam
     {
         Sound sound = m_sounds.value(cat).value(name);
 
-        m_mediaPlayer->setMedia(sound.getPath());
+        qDebug() << "spath" << sound.getPath();
+
+        QMediaContent mediaContent(sound.getPath());
+
+        qDebug() << "mime" << mediaContent.canonicalResource().mimeType() << "- url" << mediaContent.canonicalUrl();
+
+        m_mediaPlayer->setMedia(mediaContent);
         m_mediaPlayer->setVolume(audioVol);
-        m_mediaPlayer->play();
+        m_mediaPlayer->play(); // FIXME: DirectShowPlayerService::doSetUrlSource: Unresolved error code 0x80040216 (IDispatch error #22)
+
+        qDebug() << "err:" << m_mediaPlayer->error();
+        qDebug() << "errStr:" << m_mediaPlayer->errorString();
 
         m_audioPlaying = true;
 
@@ -107,7 +116,7 @@ void AudioController::setMuted(const bool muted)
  */
 void AudioController::initSounds()
 {
-    registerSound(Sound::SoundCategory::General, Sound::SoundName::Dbg);
+    registerSound(Sound::SoundCategory::General, Sound::SoundName::DebugSound);
 }
 
 /**

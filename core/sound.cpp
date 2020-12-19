@@ -30,7 +30,7 @@ QUrl Sound::resolveSoundPath(const SoundCategory cat, const SoundName name)
     QString pathPartCategory = resolveCategoryName(cat);
     QString pathPartName = resolveSoundName(name);
 
-    return QUrl(QString(":/resources/%1/%2.ogg").arg(pathPartCategory).arg(pathPartName));
+    return QUrl(QString("F:/Code/Townly/resources/audio/%1/%2.wav").arg(pathPartCategory).arg(pathPartName)); // FIXME: use sound files from resources.qrc
 }
 
 QString Sound::resolveCategoryName(const SoundCategory cat)
@@ -47,7 +47,7 @@ QString Sound::resolveSoundName(const SoundName name)
 {
     switch(name)
     {
-        case Dbg: return "DebugSound";
+        case DebugSound: return "DebugSound";
 
         default: case __SoundNameLAST: return "InvalidSoundName";
     }
