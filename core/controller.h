@@ -13,6 +13,7 @@
 #include "util/devmenu.h"
 #include "input.h"
 #include "townlysettings.h"
+#include "audiocontroller.h"
 
 #include "grid.h"
 
@@ -40,6 +41,7 @@ private:
     QDir m_appDir;
 
     DevMenu *m_devMenu = nullptr;
+    AudioController *m_audioCtrl = nullptr;
 };
 
 #endif // CONTROLLER_H

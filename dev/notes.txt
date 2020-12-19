@@ -1,0 +1,3 @@
+TODO:
+Add class ControllerWorker, it will be a separate thread containing the entire game
+Main thread is only for the dev menu, it can send signals to the ControllerWorker, telling it what to do

@@ -2,7 +2,7 @@ TARGET = Townly
 
 
 # QT -= gui
-QT += core widgets
+QT += core widgets multimedia
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -27,7 +27,9 @@ CONFIG(debug, debug|release) {
 SOURCES += \
         components/cell.cpp \
         components/grid.cpp \
+        core/audiocontroller.cpp \
         core/input.cpp \
+        core/sound.cpp \
         core/townlysettings.cpp \
         main.cpp \
         core/controller.cpp \
@@ -60,6 +62,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     components/cell.h \
     components/grid.h \
+    core/audiocontroller.h \
+    core/sound.h \
     core/townlysettings.h \
     info.h \
     core/controller.h \
@@ -68,7 +72,8 @@ HEADERS += \
 
 DISTFILES += \
     LICENSE.txt \
-    README.md
+    README.md \
+    dev/notes.txt
 
 FORMS += \
     util/devmenu.ui

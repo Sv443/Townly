@@ -19,6 +19,10 @@ Controller::Controller(int argc, char *argv[])
     // initialize input module
     Input::init();
 
+    // initialize the audio controller
+    if(m_audioCtrl == nullptr)
+        m_audioCtrl = new AudioController();
+
     // for testing
     inputLoop();
 }
