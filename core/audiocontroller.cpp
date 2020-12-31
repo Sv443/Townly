@@ -52,7 +52,7 @@ bool AudioController::play(const Sound::Category cat, const Sound::Name name, co
 
         m_mediaPlayer->setMedia(mediaContent);
         m_mediaPlayer->setVolume(audioVol);
-        m_mediaPlayer->play(); // FIXME: DirectShowPlayerService::doSetUrlSource: Unresolved error code 0x80040216 (IDispatch error #22)
+        m_mediaPlayer->play(); // FIXME: Error when using unsupported file formats: DirectShowPlayerService::doSetUrlSource: Unresolved error code 0x80040216 (IDispatch error #22)
 
     #ifdef _DEBUG
         if(m_mediaPlayer->error() != QMediaPlayer::Error::NoError)
@@ -61,7 +61,7 @@ bool AudioController::play(const Sound::Category cat, const Sound::Name name, co
             qDebug() << "ErrorString:" << m_mediaPlayer->errorString();
         }
         else
-            qDebug() << "Successfully played sound";
+            qDebug() << "Playing sound...";
     #endif
 
         m_audioPlaying = true;
@@ -157,7 +157,8 @@ void AudioController::registerSound(const Sound::Category cat, const Sound::Name
  */
 void AudioController::positionChanged(qint64 pos)
 {
-    qDebug() << "AudioController changed position:" << pos;
+    Q_UNUSED(pos)
+//    qDebug() << "AudioController changed position:" << pos;
 }
 
 /**
