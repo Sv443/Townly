@@ -6,5 +6,9 @@
         <file>resources/audio/General/DebugSound.m4a</file>
         <file>resources/audio/General/DebugSound.ogg</file>
         <file>resources/audio/General/DebugSound.wav</file>
+        <file>resources/audio/Music/Olivier - Wintergatan Vol2.mp3</file>
+        <file>resources/audio/Music/Prototype - Wintergatan Vol2.mp3</file>
+        <file>resources/audio/Music/Sandviken Stradivarius - Wintergatan Vol2.mp3</file>
+        <file>resources/licenses/Wintergatan Music License for Video and Livestreams V1.1.pdf</file>
     </qresource>
 </RCC>
