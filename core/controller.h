@@ -6,11 +6,11 @@
 #include <QHash>
 #include <QFileInfo>
 #include <QDir>
-#include <QMessageBox>
+//#include <QMessageBox>
 #include <QCoreApplication>
 
 #include "info.h"
-#include "util/devmenu.h"
+//#include "util/devmenu.h"
 #include "input.h"
 #include "townlysettings.h"
 #include "audiocontroller.h"
@@ -40,7 +40,7 @@ private:
     QFileInfo m_invocName;
     QDir m_appDir;
 
-    DevMenu *m_devMenu = nullptr;
+//    DevMenu *m_devMenu = nullptr;
     AudioController *m_audioCtrl = nullptr;
 };
 

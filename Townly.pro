@@ -2,7 +2,8 @@ TARGET = Townly
 
 
 # QT -= gui
-QT += core widgets multimedia
+QT += core multimedia
+# QT += widgets
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -23,17 +24,6 @@ CONFIG(debug, debug|release) {
     DEFINES += _DEBUG
 }
 
-
-SOURCES += \
-        components/cell.cpp \
-        components/grid.cpp \
-        core/audiocontroller.cpp \
-        core/input.cpp \
-        core/sound.cpp \
-        core/townlysettings.cpp \
-        main.cpp \
-        core/controller.cpp \
-        util/devmenu.cpp
 
 TRANSLATIONS += \
     Townly_en_US.ts
@@ -58,6 +48,17 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+SOURCES += \
+        components/cell.cpp \
+        components/grid.cpp \
+        core/audiocontroller.cpp \
+        core/input.cpp \
+        core/sound.cpp \
+        core/townlysettings.cpp \
+        main.cpp \
+        core/controller.cpp \
+#        util/devmenu.cpp
+
 HEADERS += \
     components/cell.h \
     components/grid.h \
@@ -67,12 +68,12 @@ HEADERS += \
     info.h \
     core/controller.h \
     core/input.h \
-    util/devmenu.h
+#    util/devmenu.h
 
 DISTFILES += \
     LICENSE.txt \
     README.md \
     dev/notes.txt
 
-FORMS += \
-    util/devmenu.ui
+#FORMS += \
+#    util/devmenu.ui

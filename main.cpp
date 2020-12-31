@@ -1,23 +1,24 @@
-#include <QApplication>
+//#include <QApplication>
+#include <QCoreApplication>
 #include <QDebug>
 
 #include "info.h"
 #include "controller.h"
 
 
-bool system_supports_GUI = true;
+//bool system_supports_GUI = true;
 
 
 int main(int argc, char *argv[])
 {
     //#BEGIN PreInit phase
 
-    QCoreApplication *a;
+    QCoreApplication *a = new QCoreApplication(argc, argv);
 
-    if(system_supports_GUI)
-        a = new QApplication(argc, argv);
-    else
-        a = new QCoreApplication(argc, argv);
+//    if(system_supports_GUI)
+//        a = new QApplication(argc, argv);
+//    else
+//        a = new QCoreApplication(argc, argv);
 
     QCoreApplication::setApplicationName(APP_NAME);
     QCoreApplication::setApplicationVersion(APP_VERSION_STR);

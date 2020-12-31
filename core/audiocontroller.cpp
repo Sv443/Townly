@@ -6,15 +6,15 @@
  */
 AudioController::AudioController()
 {   
-    QMultimedia::SupportEstimate est = QMediaPlayer::hasSupport("audio/ogg");
+//    QMultimedia::SupportEstimate est = QMediaPlayer::hasSupport("audio/ogg");
 
-    if(est == QMultimedia::NotSupported)
-    {
-        m_error = true;
-        m_errorMsg = "Playback of Ogg Vorbis (.ogg) files is not supported on your device. The Audio module will be disabled.";
+//    if(est == QMultimedia::NotSupported)
+//    {
+//        m_error = true;
+//        m_errorMsg = "Playback of Ogg Vorbis (.ogg) files is not supported on your device. The Audio module will be disabled.";
 
-        return;
-    }
+//        return;
+//    }
 
     if(m_mediaPlayer == nullptr)
     {

@@ -108,11 +108,11 @@ void Controller::parseArgs(int argc, char *argv[])
  */
 void Controller::openDevMenu()
 {
-    if(m_devMenu == nullptr)
-        m_devMenu = new DevMenu();
+//    if(m_devMenu == nullptr)
+//        m_devMenu = new DevMenu();
 
-    m_devMenu->setModal(false);
-//    m_devMenu->setWindowFlag(Qt::WindowType::Tool, true);
+//    m_devMenu->setModal(false);
+////    m_devMenu->setWindowFlag(Qt::WindowType::Tool, true);
 
-    m_devMenu->exec();
+//    m_devMenu->exec();
 }

@@ -32,7 +32,19 @@ QUrl Sound::resolveSoundPath(const Category cat, const Name name)
 
     QString fileExtension = "mp3"; // TODO: automate this
 
-    return QUrl(QString("F:/Code/Townly/resources/audio/%1/%2.%3").arg(pathPartCategory).arg(pathPartName).arg(fileExtension)); // FIXME: use sound files from resources.qrc
+
+    QUrl retUrl;
+
+    // FIXME: use paths from resources.qrc:
+#if defined(Q_OS_MACX)
+    retUrl = QUrl::fromLocalFile(QString("/Users/svenfehler/Code/Townly/resources/audio/%1/%2.%3").arg(pathPartCategory).arg(pathPartName).arg(fileExtension));
+#elif defined(Q_OS_WIN)
+    retUrl = QUrl::fromLocalFile(QString("F:/Code/Townly/resources/audio/%1/%2.%3").arg(pathPartCategory).arg(pathPartName).arg(fileExtension));
+#endif
+
+    qDebug() << "Sound has valid URL:" << retUrl.isValid();
+
+    return retUrl;
 }
 
 QString Sound::resolveCategoryName(const Category cat)
