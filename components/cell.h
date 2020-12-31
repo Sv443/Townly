@@ -15,7 +15,7 @@ enum CellType {
     Water,
     Forest,
 
-    __LAST
+    __CellTypeLAST
 };
 
 

@@ -1,7 +1,5 @@
 #include <QApplication>
 #include <QDebug>
-#include <csignal>
-#include <csetjmp>
 
 #include "info.h"
 #include "controller.h"
@@ -12,6 +10,8 @@ bool system_supports_GUI = true;
 
 int main(int argc, char *argv[])
 {
+    //#BEGIN PreInit phase
+
     QCoreApplication *a;
 
     if(system_supports_GUI)

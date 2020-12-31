@@ -56,7 +56,7 @@ QString Cell::cellTypeToString(CellType type)
         case Forest: return "Forest";
         case Water:  return "Water";
 
-        default: case __LAST: return "<Invalid Type>";
+        default: case __CellTypeLAST: return "<Invalid Type>";
     }
 }
 
@@ -67,7 +67,7 @@ QList<CellType> Cell::getAllCellTypes()
 {
     QList<CellType> l;
 
-    for(int i = Land; i != __LAST; i++)
+    for(int i = Land; i != __CellTypeLAST; i++)
     {
         l.append(static_cast<CellType>(i));
     }

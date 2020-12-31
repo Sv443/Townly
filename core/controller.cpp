@@ -2,6 +2,9 @@
 
 Controller::Controller(int argc, char *argv[])
 {
+    //#END PreInit phase
+    //#BEGIN Init phase
+
 #ifdef _DEBUG
     qDebug() << "Instantiating Controller";
 #endif
@@ -27,6 +30,9 @@ Controller::Controller(int argc, char *argv[])
 
     // for testing
     inputLoop();
+
+    //#END Init phase
+    //#BEGIN Running phase
 }
 
 Controller::~Controller()

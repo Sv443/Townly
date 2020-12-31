@@ -18,12 +18,15 @@
  * @brief Enumeration that describes a key on a keyboard. Can also contain a key combination. The value "NOT_ASSIGNED" means the key wasn't mapped (yet).
  */
 enum Key {
-    NOT_ASSIGNED,
+    NOT_ASSIGNED = 0,
     W, A, S, D,
     SPACE, RETURN, BACKSPACE, ESC, TAB, DEL,
     ARROW_UP, ARROW_RIGHT, ARROW_DOWN, ARROW_LEFT,
     F1, F2, F3,
-    ACTION_CTRL_C
+    ACTION_CTRL_C,
+
+
+    __KeyLAST
 };
 
 class Input
