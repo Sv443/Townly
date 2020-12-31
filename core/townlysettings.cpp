@@ -69,7 +69,7 @@ QVariant TownlySettings::getData(const Section sect, const SettingKey key)
     QString settKey = settingKeyToString(key);
 
     m_settings->beginGroup(section);
-    QVariant returnVal = m_settings->value(settKey, QVariant(NULL));
+    QVariant returnVal = m_settings->value(settKey, QVariant());
     m_settings->endGroup();
 
     return returnVal;
