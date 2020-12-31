@@ -15,8 +15,9 @@ public:
     /**
      * @brief The category of the sound
      */
-    enum SoundCategory {
+    enum Category {
         General = 0,
+        Music,
 
 
         __SoundCategoryLAST
@@ -25,8 +26,11 @@ public:
     /**
      * @brief The name of the sound
      */
-    enum SoundName {
+    enum Name {
         DebugSound = 0,
+        Olivier,               // From Wintergatan Vol2
+        Prototype,             // From Wintergatan Vol2
+        SandvikenStradivarius, // From Wintergatan Vol2
 
 
         __SoundNameLAST
@@ -47,9 +51,9 @@ public:
     Sound();
     QUrl getPath();
 
-    static QUrl resolveSoundPath(const SoundCategory cat, const SoundName name);
-    static QString resolveCategoryName(const SoundCategory cat);
-    static QString resolveSoundName(const SoundName name);
+    static QUrl resolveSoundPath(const Category cat, const Name name);
+    static QString resolveCategoryName(const Category cat);
+    static QString resolveSoundName(const Name name);
 
 protected:
     QUrl m_path;

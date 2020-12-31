@@ -27,7 +27,7 @@ AudioController::AudioController()
     initSounds();
 }
 
-bool AudioController::play(const Sound::SoundCategory cat, const Sound::SoundName name, const unsigned int volume)
+bool AudioController::play(const Sound::Category cat, const Sound::Name name, const unsigned int volume)
 {
     int audioVol = volume;
 
@@ -39,19 +39,30 @@ bool AudioController::play(const Sound::SoundCategory cat, const Sound::SoundNam
     try
     {
         Sound sound = m_sounds.value(cat).value(name);
+        QUrl soundPath = sound.getPath();
 
-        qDebug() << "spath" << sound.getPath();
+        QMediaContent mediaContent(soundPath);
+        QUrl canonicalPath = mediaContent.canonicalUrl();
 
-        QMediaContent mediaContent(sound.getPath());
-
-        qDebug() << "mime" << mediaContent.canonicalResource().mimeType() << "- url" << mediaContent.canonicalUrl();
+    #ifdef _DEBUG
+        qDebug() << "Sound Path:" << soundPath;
+        if(soundPath.toString().compare(canonicalPath.toString()) != 0)
+            qDebug() << "Sound Canonical URL:" << canonicalPath;
+    #endif
 
         m_mediaPlayer->setMedia(mediaContent);
         m_mediaPlayer->setVolume(audioVol);
         m_mediaPlayer->play(); // FIXME: DirectShowPlayerService::doSetUrlSource: Unresolved error code 0x80040216 (IDispatch error #22)
 
-        qDebug() << "err:" << m_mediaPlayer->error();
-        qDebug() << "errStr:" << m_mediaPlayer->errorString();
+    #ifdef _DEBUG
+        if(m_mediaPlayer->error() != QMediaPlayer::Error::NoError)
+        {
+            qDebug() << "Error:      " << m_mediaPlayer->error();
+            qDebug() << "ErrorString:" << m_mediaPlayer->errorString();
+        }
+        else
+            qDebug() << "Successfully played sound";
+    #endif
 
         m_audioPlaying = true;
 
@@ -116,7 +127,10 @@ void AudioController::setMuted(const bool muted)
  */
 void AudioController::initSounds()
 {
-    registerSound(Sound::SoundCategory::General, Sound::SoundName::DebugSound);
+    registerSound(Sound::Category::General, Sound::Name::DebugSound);
+    registerSound(Sound::Category::Music, Sound::Name::Olivier);
+    registerSound(Sound::Category::Music, Sound::Name::Prototype);
+    registerSound(Sound::Category::Music, Sound::Name::SandvikenStradivarius);
 }
 
 /**
@@ -124,11 +138,16 @@ void AudioController::initSounds()
  * @param cat The sound category
  * @param name The sound name
  */
-void AudioController::registerSound(const Sound::SoundCategory cat, const Sound::SoundName name)
+void AudioController::registerSound(const Sound::Category cat, const Sound::Name name)
 {
-    QHash<Sound::SoundName, Sound> insHash;
+    QHash<Sound::Name, Sound> insHash;
+
+    if(!m_sounds.value(cat).isEmpty())
+        insHash = m_sounds.value(cat);
+
     insHash.insert(name, Sound(Sound::resolveSoundPath(cat, name)));
 
+    // QHash<Sound::Category, QHash<Sound::Name, Sound>> m_sounds;
     m_sounds.insert(cat, insHash);
 }
 

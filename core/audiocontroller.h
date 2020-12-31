@@ -18,18 +18,18 @@ class AudioController
 public:
     AudioController();
 
-    bool play(const Sound::SoundCategory cat, const Sound::SoundName name, const unsigned int volume = 100);
+    bool play(const Sound::Category cat, const Sound::Name name, const unsigned int volume = 100);
     void setPaused(const bool paused = true);
     void stop();
     void setMuted(const bool muted = true);
 
 private:
     void initSounds();
-    void registerSound(const Sound::SoundCategory cat, const Sound::SoundName name);
+    void registerSound(const Sound::Category cat, const Sound::Name name);
 
     QMediaPlayer *m_mediaPlayer = nullptr;
 
-    QHash<Sound::SoundCategory, QHash<Sound::SoundName, Sound>> m_sounds;
+    QHash<Sound::Category, QHash<Sound::Name, Sound>> m_sounds;
 
 protected:
     bool m_error = false;

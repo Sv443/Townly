@@ -23,31 +23,38 @@ QUrl Sound::getPath()
  * @param cat The category of the sound
  * @param name The name of the sound
  */
-QUrl Sound::resolveSoundPath(const SoundCategory cat, const SoundName name)
+QUrl Sound::resolveSoundPath(const Category cat, const Name name)
 {
     ResolvedSound resolved;
 
     QString pathPartCategory = resolveCategoryName(cat);
     QString pathPartName = resolveSoundName(name);
 
-    return QUrl(QString("F:/Code/Townly/resources/audio/%1/%2.wav").arg(pathPartCategory).arg(pathPartName)); // FIXME: use sound files from resources.qrc
+    QString fileExtension = "mp3"; // TODO: automate this
+
+    return QUrl(QString("F:/Code/Townly/resources/audio/%1/%2.%3").arg(pathPartCategory).arg(pathPartName).arg(fileExtension)); // FIXME: use sound files from resources.qrc
 }
 
-QString Sound::resolveCategoryName(const SoundCategory cat)
+QString Sound::resolveCategoryName(const Category cat)
 {
     switch(cat)
     {
         case General: return "General";
+        case Music:   return "Music";
 
         default: case __SoundCategoryLAST: return "InvalidCategory";
     }
 }
 
-QString Sound::resolveSoundName(const SoundName name)
+QString Sound::resolveSoundName(const Name name)
 {
     switch(name)
     {
         case DebugSound: return "DebugSound";
+
+        case Olivier:               return "Olivier - Wintergatan Vol2";
+        case Prototype:             return "Prototype - Wintergatan Vol2";
+        case SandvikenStradivarius: return "Sandviken Stradivarius - Wintergatan Vol2";
 
         default: case __SoundNameLAST: return "InvalidSoundName";
     }
