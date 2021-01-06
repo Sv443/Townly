@@ -27,7 +27,7 @@ Licenses can be found in the folder `resources/licenses`
 
 <div align="center" style="text-align: center;">
 
-Made with ❤️ by [Sv443](https://github.com/Sv443) using [Qt](https://www.qt.io/)  
+Made by [Sv443](https://github.com/Sv443) using [Qt](https://www.qt.io/)  
 [♥ Click here to support me ♥](https://github.com/sponsors/Sv443)
 
 </div>
