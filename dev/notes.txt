@@ -20,12 +20,13 @@ CURRENT GOALS:
 10. Create an extendable GUI around a game view (game view contains the grid)
 11. Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 12. Add water and electricity (need generating buildings), they are distributed globally (don't need pipes and wires yet)
-13. Register constructables at startup and make them be able to be built in-game, using up money in the process
-14. Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
+13. Add crash handler / crash reports using Breakpad (https://raygun.com/documentation/language-guides/cpp/crash-reporting/installation/)
+14. Register constructables at startup and make them be able to be built in-game, using up money in the process
+15. Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
     - Buildings that are constructed on these zones should have a randomly assigned name (and maybe texture)
-15. Add the needs system, paving the way for the leveling-up-system
-16. Add the leveling-up-system, only allowing cells to upgrade when their needs are fulfilled
-17. Implement MultiCellStructures that consist of more than one cell, increasing size, importance and "texture" resolution
+16. Add the needs system, paving the way for the leveling-up-system
+17. Add the leveling-up-system, only allowing cells to upgrade when their needs are fulfilled
+18. Implement MultiCellStructures that consist of more than one cell, increasing size, importance and "texture" resolution
     - With the chunks system this might get complex and will definitely be a pain in the ass to implement correctly
 
 Beta:
