@@ -42,7 +42,8 @@ QUrl Sound::resolveSoundPath(const Category cat, const Name name)
     retUrl = QUrl::fromLocalFile(QString("F:/Code/Townly/resources/audio/%1/%2.%3").arg(pathPartCategory).arg(pathPartName).arg(fileExtension));
 #endif
 
-    qDebug() << "Sound has valid URL:" << retUrl.isValid();
+    if(!retUrl.isValid())
+        qCritical() << "Sound has ivalid URL:" << retUrl;
 
     return retUrl;
 }

@@ -5,18 +5,28 @@
 #include <QHash>
 #include <QMap>
 #include <QPoint>
+#include <QDebug>
 
 #include "cell.h"
 
+#include <iostream>
+#include "termcolor/termcolor.hpp"
+
+#ifdef Q_OS_WIN
+    #include <io.h>
+    #include <fcntl.h>
+    #include "windows.h"
+#endif
+
+
+// QPoint can't be used as a key for a QHash. This fixes it:
+inline uint qHash(const QPoint &key) { return qHash(QPair<int,int>(key.x(), key.y())); } // https://stackoverflow.com/a/35408177/8602926
 
 
 struct Size {
     unsigned int width;
     unsigned int height;
 };
-
-// QPoint can't be used as a key for a QHash. This fixes it:
-inline uint qHash(const QPoint &key) { return qHash(QPair<int,int>(key.x(), key.y())); } // https://stackoverflow.com/a/35408177/8602926
 
 
 // ---------------- DATA ----------------
@@ -63,6 +73,8 @@ public:
     Grid(const Size size);
 
     void devFill();
+    void devDisplayGrid();
+
 private:
     Cell cellAt(const QPoint pos);
     Size m_size;

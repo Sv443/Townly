@@ -21,6 +21,10 @@ The thought behind the rewrite was native compilation to executables, more stabi
 ### Legal Stuff:
 Licenses can be found in the folder `resources/licenses`
 
+<br><br>
+
+## Dependencies:
+- [Termcolor](https://github.com/ikalnytskyi/termcolor) (MIT license)
 
 
 <br><br><br><br>

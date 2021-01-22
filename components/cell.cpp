@@ -5,8 +5,7 @@
  */
 Cell::Cell()
 {
-    m_type = CellType::Land;
-    m_position = QPoint(0, 0);
+    Cell(CellType::Land, QPoint(0, 0));
 }
 
 /**
@@ -14,10 +13,11 @@ Cell::Cell()
  * @param type The type of the cell
  * @param pos Position of this cell on its parent Grid
  */
-Cell::Cell(const CellType type, const QPoint pos)
+Cell::Cell(CellType type, QPoint pos)
 {
     m_type = type;
     m_position = pos;
+    m_createdAt = QDateTime::currentMSecsSinceEpoch();
 }
 
 /**
@@ -26,6 +26,16 @@ Cell::Cell(const CellType type, const QPoint pos)
 QChar Cell::getChar()
 {
     return QChar('_');
+}
+
+CellType Cell::getType()
+{
+    return m_type;
+}
+
+qint64 Cell::getCreatedAt()
+{
+    return m_createdAt;
 }
 
 /**

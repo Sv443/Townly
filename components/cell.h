@@ -5,6 +5,7 @@
 #include <QList>
 #include <QString>
 #include <QChar>
+#include <QDateTime>
 
 
 /**
@@ -26,11 +27,14 @@ class Cell
 {
 public:
     Cell();
-    Cell(const CellType type, const QPoint pos);
+    Cell(CellType type, QPoint pos);
 
     virtual void update();
     virtual bool bulldoze();
     virtual QChar getChar();
+
+    CellType getType();
+    qint64 getCreatedAt();
 
     static QString cellTypeToString(CellType type);
     static QList<CellType> getAllCellTypes();
@@ -38,6 +42,7 @@ public:
 private:
     CellType m_type = Land;
     QPoint m_position;
+    qint64 m_createdAt;
 };
 
 #endif // CELL_H

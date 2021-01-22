@@ -73,13 +73,25 @@ HEADERS += \
     core/input.h \
 #    util/devmenu.h
 
+
+
+#SOURCES += \
+#        lib/ansicolor/ansicolor-w32.c
+
+#HEADERS += \
+#        "lib/termcolor/include/termcolor/termcolor.hpp"
+
+INCLUDEPATH += \
+        "lib/termcolor/include" \
+
+
 DISTFILES += \
     LICENSE.txt \
     README.md \
     dev/code_overview.md \
     dev/display.md \
     dev/notes.txt \
-    dev/roadmap.md
+    dev/roadmap.md \
 
 #FORMS += \
 #    util/devmenu.ui

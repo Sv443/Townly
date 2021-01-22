@@ -27,20 +27,22 @@ Controller::Controller(int argc, char *argv[])
         m_audioCtrl = new AudioController();
 
     // DEBUG:
-    connect(m_audioCtrl, &AudioController::stateChanged, [=](QMediaPlayer::State state){
-        QString stateTxt = "";
-        switch(state)
-        {
-            case QMediaPlayer::State::PlayingState: stateTxt = "PLAYING";
-            case QMediaPlayer::State::PausedState:  stateTxt = "PAUSED";
-            case QMediaPlayer::State::StoppedState: stateTxt = "STOPPED";
-        }
+//    connect(m_audioCtrl, &AudioController::stateChanged, [=](QMediaPlayer::State state){
+//        QString stateTxt = "";
+//        switch(state)
+//        {
+//            case QMediaPlayer::State::PlayingState: stateTxt = "PLAYING";
+//            case QMediaPlayer::State::PausedState:  stateTxt = "PAUSED";
+//            case QMediaPlayer::State::StoppedState: stateTxt = "STOPPED";
+//        }
 
-        qDebug() << "Audio state changed:" << stateTxt;
-    });
+//        qDebug() << "Audio state changed:" << stateTxt;
+//    });
 
-    m_audioCtrl->play(Sound::Music, Sound::Name::SandvikenStradivarius);
+//    m_audioCtrl->play(Sound::Music, Sound::Name::SandvikenStradivarius);
     // /DEBUG
+
+    createGrid(50, 20);
 
     // for testing
     inputLoop();
@@ -53,6 +55,9 @@ Controller::~Controller()
 {
     // restore initial TTY session
     Input::close();
+
+    delete m_grid;
+    delete m_audioCtrl;
 }
 
 // this instance grants an access point to public variables on this class
@@ -79,6 +84,22 @@ void Controller::inputLoop()
 
         qInfo() << "Keypress:" << kp.val << kp.escVal << "- resolved enum:" << key;
     }
+}
+
+// temporary - creates a grid and fills it with empty cells
+void Controller::createGrid(int w, int h)
+{
+    if(m_grid == nullptr)
+    {
+        Size size;
+        size.width = w;
+        size.height = h;
+
+        m_grid = new Grid(size);
+    }
+
+    m_grid->devFill();
+    m_grid->devDisplayGrid();
 }
 
 // parses command line arguments, putting them into a QHash

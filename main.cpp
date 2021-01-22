@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QString("%1 - v%2").arg(APP_NAME).arg(APP_VERSION_STRING));
     QCoreApplication::setApplicationVersion(APP_VERSION_STRING);
 
+
     Controller ctrl(argc, argv);
 
     return a->exec();

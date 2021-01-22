@@ -40,8 +40,12 @@ private:
     QFileInfo m_invocName;
     QDir m_appDir;
 
+    Grid *m_grid = nullptr;
+
 //    DevMenu *m_devMenu = nullptr;
     AudioController *m_audioCtrl = nullptr;
+
+    void createGrid(int w, int h);
 };
 
 #endif // CONTROLLER_H
