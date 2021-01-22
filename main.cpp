@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
 //    else
 //        a = new QCoreApplication(argc, argv);
 
-    QCoreApplication::setApplicationName(APP_NAME);
-    QCoreApplication::setApplicationVersion(APP_VERSION_STR);
+    QCoreApplication::setApplicationName(QString("%1 - v%2").arg(APP_NAME).arg(APP_VERSION_STRING));
+    QCoreApplication::setApplicationVersion(APP_VERSION_STRING);
 
     Controller ctrl(argc, argv);
 
