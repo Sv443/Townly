@@ -22,6 +22,7 @@ AudioController::AudioController()
 
         connect(m_mediaPlayer, &QMediaPlayer::positionChanged, this, &AudioController::positionChanged, Qt::DirectConnection);
         connect(m_mediaPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(errored(QMediaPlayer::Error)));
+        connect(m_mediaPlayer, &QMediaPlayer::stateChanged, this, &AudioController::stateChanged, Qt::ConnectionType::DirectConnection);
     }
 
     initSounds();
@@ -52,6 +53,7 @@ bool AudioController::play(const Sound::Category cat, const Sound::Name name, co
 
         m_mediaPlayer->setMedia(mediaContent);
         m_mediaPlayer->setVolume(audioVol);
+        m_mediaPlayer->setAudioRole(QAudio::Role::GameRole);
         m_mediaPlayer->play(); // FIXME: Error when using unsupported file formats: DirectShowPlayerService::doSetUrlSource: Unresolved error code 0x80040216 (IDispatch error #22)
 
     #ifdef _DEBUG
@@ -115,6 +117,20 @@ void AudioController::setMuted(const bool muted)
         m_mediaPlayer->setMuted(true);
     else if(m_mediaPlayer->isMuted() && !muted)
         m_mediaPlayer->setMuted(false);
+}
+
+/**
+ * @brief Sets the volume of the media player (currently playing audio and future audio)
+ */
+void AudioController::setVolume(unsigned int vol)
+{
+    if(m_audioPlaying)
+    {
+        if(vol > 100)
+            vol = 100;
+
+        m_mediaPlayer->setVolume(vol);
+    }
 }
 
 

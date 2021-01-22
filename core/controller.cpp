@@ -26,7 +26,21 @@ Controller::Controller(int argc, char *argv[])
     if(m_audioCtrl == nullptr)
         m_audioCtrl = new AudioController();
 
-    m_audioCtrl->play(Sound::Music, Sound::Olivier);
+    // DEBUG:
+    connect(m_audioCtrl, &AudioController::stateChanged, [=](QMediaPlayer::State state){
+        QString stateTxt = "";
+        switch(state)
+        {
+            case QMediaPlayer::State::PlayingState: stateTxt = "PLAYING";
+            case QMediaPlayer::State::PausedState:  stateTxt = "PAUSED";
+            case QMediaPlayer::State::StoppedState: stateTxt = "STOPPED";
+        }
+
+        qDebug() << "Audio state changed:" << stateTxt;
+    });
+
+    m_audioCtrl->play(Sound::Music, Sound::Name::SandvikenStradivarius);
+    // /DEBUG
 
     // for testing
     inputLoop();
