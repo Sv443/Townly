@@ -15,6 +15,10 @@ Controller::Controller(int argc, char *argv[])
     // parse command line arguments
     parseArgs(argc, argv);
 
+    // initialize output handler
+    if(m_out == nullptr)
+        m_out = new OutputHandler();
+
     // initialize the Townly settings module
     if(m_settings == nullptr)
         m_settings = new TownlySettings();
@@ -56,8 +60,10 @@ Controller::~Controller()
     // restore initial TTY session
     Input::close();
 
+    delete m_settings;
     delete m_grid;
     delete m_audioCtrl;
+    delete m_out;
 }
 
 // this instance grants an access point to public variables on this class

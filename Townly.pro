@@ -56,6 +56,7 @@ SOURCES += \
         components/grid.cpp \
         core/audiocontroller.cpp \
         core/input.cpp \
+    core/outputhandler.cpp \
         core/sound.cpp \
         core/townlysettings.cpp \
         main.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     components/cell.h \
     components/grid.h \
     core/audiocontroller.h \
+    core/outputhandler.h \
     core/sound.h \
     core/townlysettings.h \
     info.h \

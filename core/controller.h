@@ -14,6 +14,7 @@
 #include "input.h"
 #include "townlysettings.h"
 #include "audiocontroller.h"
+#include "outputhandler.h"
 
 #include "grid.h"
 
@@ -41,6 +42,7 @@ private:
     QDir m_appDir;
 
     Grid *m_grid = nullptr;
+    OutputHandler *m_out = nullptr;
 
 //    DevMenu *m_devMenu = nullptr;
     AudioController *m_audioCtrl = nullptr;
