@@ -10,15 +10,19 @@ You can view the full license text [in this file.](./LICENSE.txt)
 <br>
 
 ### Goals:
-- This engine should be available to the public, just like the Unity Engine or Unreal Engine.  
+- This engine, once at a stable state, should be available to the public, just like [Unity](https://unity.com/) or [Unreal.](https://www.unrealengine.com/)  
   Private / indie dev use should be free (below a certain produced income).  
-  Commercial use should require a paid license.
-
+  Anything above that or outright commercial use should require a paid license to finance development of the engine.
+  
 - The engine should be completely detachable from the Townly game.  
   Meaning the engine should not depend on anything inside the Townly game files.  
   The other way around, however, is allowed.
 
-### Teng's identity:
+<br>
+
+### Teng's brand identity:
+- The name originates from a combination "Townly" and "Engine", Townly being the game which it was originally developed for.
+  
 - The logo of the engine should be in ASCII, inspired by its text based nature.  
   A temporary example logo can be found by viewing this file in a text editor and scrolling to the bottom.  
   The logo could be inspired by the [flying dragon Teng in Chinese mythology.](https://en.wikipedia.org/wiki/Teng_(mythology))
