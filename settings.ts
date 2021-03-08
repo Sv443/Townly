@@ -20,6 +20,11 @@ const generalSettings = Object.freeze({
 
 /** Settings of the game */
 const gameSettings = Object.freeze({
+    /** Settings regarding initialization */
+    init: {
+        /** @type {NodeJS.Signals[]} Signals that cause a soft shutdown */
+        softShutdownSignals: [ "SIGINT", "SIGTERM" ],
+    },
     /** World generation */
     worldGen: {
         /** Settings regarding seeds */

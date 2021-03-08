@@ -1,4 +1,4 @@
-import { generalSettings } from "../settings";
+import { gameSettings, generalSettings } from "../settings";
 
 import { colors, unused, pause } from "svcorelib";
 
@@ -10,6 +10,9 @@ function preInit()
 {
     return new Promise<void>(async (pRes, pRej) => {
         unused(pRej);
+
+        // register soft shutdown signals
+        gameSettings.init.softShutdownSignals.forEach(sig => process.on(sig, softShutdown));
 
         dbg("PreInit", "Entering PreInit phase...");
 
@@ -48,6 +51,11 @@ async function initAll()
     }
 }
 
+
+function softShutdown()
+{
+    console.log(`\n\nGoodbye.\n`);
+}
 
 
 initAll();

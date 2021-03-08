@@ -1,7 +1,7 @@
 import { Position } from "../base/Base";
 
-
 export type CellType = "land" | "water" | "resource";
+
 
 /**
  * Describes a single cell.  
@@ -11,6 +11,8 @@ export abstract class Cell
 {
     private type: CellType;
     private position: Position;
+
+    private cursorActive: boolean = false;
 
 
     /**
@@ -24,14 +26,38 @@ export abstract class Cell
         this.position = position;
     }
 
+    //#MARKER methods / setters
+    /**
+     * Sets the state of the cursor
+     * @param active
+     */
+    setCursorActive(active: boolean): void
+    {
+        this.cursorActive = active;
+    }
+
     //#MARKER getters
+    /**
+     * Returns the type of this cell
+     */
     getType(): CellType
     {
         return this.type;
     }
 
+    /**
+     * Returns the position of this cell in its parent grid
+     */
     getPosition(): Position
     {
         return this.position;
+    }
+
+    /**
+     * Returns the current state of the cursor
+     */
+    getCursorActive(): boolean
+    {
+        return this.cursorActive;
     }
 }
