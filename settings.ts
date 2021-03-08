@@ -1,7 +1,7 @@
 import * as packageJson from "./package.json";
 
-/** General settings about Townly */
-const generalSettings: Readonly<any> = {
+/** General Townly settings */
+const generalSettings = Object.freeze({
     /** Everything regarding debugging */
     debug: {
         /** Whether to log debug messages to the console */
@@ -16,10 +16,10 @@ const generalSettings: Readonly<any> = {
         /** Version, as a string */
         versionStr: packageJson.version,
     }
-};
+});
 
 /** Settings of the game */
-const gameSettings = {
+const gameSettings = Object.freeze({
     /** Settings regarding initialization */
     init: {
         /** @type {NodeJS.Signals[]} Signals that cause a soft shutdown */
@@ -38,12 +38,7 @@ const gameSettings = {
         /** Default importance of a need - float between 0.0 and 1.0 - the higher, the worse citizens will react to unfulfillment */
         defaultImportance: 0.5,
     }
-};
-
-/** Game engine settings */
-const engineSettings: Readonly<any> = {
-    
-};
+});
 
 
-export { generalSettings, gameSettings, engineSettings }
+export { generalSettings, gameSettings }

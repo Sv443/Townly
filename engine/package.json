@@ -1,0 +1,18 @@
+{
+    "name": "teng",
+    "version": "0.1.0",
+    "description": "A CLI game engine",
+    "keywords": [
+      "game-engine",
+      "cli",
+      "cli-game",
+      "command-line"
+    ],
+    "author": {
+      "name": "Sv443",
+      "email": "contact@sv443.net",
+      "url": "https://github.com/Sv443"
+    },
+    "license": "Proprietary"
+}
+  

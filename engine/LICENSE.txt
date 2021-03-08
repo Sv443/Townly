@@ -1,0 +1,6 @@
+Copyright (c) 2021, Sven Fehler & The Sv443 Network
+
+All rights reserved.
+
+The Teng engine is not allowed to be included in projects at this time.
+You may, however, use small parts of the code as inspiration for your own projects.

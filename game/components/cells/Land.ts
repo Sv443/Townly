@@ -1,8 +1,8 @@
 import { Position } from "../../../engine/base/Base";
-import { Cell, CellType } from "../../../engine/components/Cell";
+import { TownlyCell, CellType } from "../TownlyCell";
 
 
-export class Land extends Cell
+export class Land extends TownlyCell
 {
     constructor(position: Position)
     {
