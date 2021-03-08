@@ -13,6 +13,8 @@ const generalSettings = Object.freeze({
         name: "Townly",
         /** Version, as a number array */
         version: packageJson.version.split(/\./g).map(v=>parseInt(v)),
+        /** Version, as a string */
+        versionStr: packageJson.version,
     }
 });
 

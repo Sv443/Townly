@@ -1,6 +1,6 @@
 import {  } from "../../settings";
 
-import { Size, Position, Area, dbg } from "./Base";
+import { Size, Position, Area, dbg } from "../base/Base";
 import { Cell } from "./Cell";
 import { Land } from "../../game/components/cells/Land";
 
@@ -85,10 +85,45 @@ export class Grid
         this.cells = cells;
     }
 
+    /**
+     * Sets the cell at the provided position
+     * @param position Position of the cell
+     * @param cell The cell to set at the provided position
+     */
+    setCell(position: Position, cell: Cell)
+    {
+        const size = this.getSize();
+
+        if(
+            position.x < 0 || position.y < 0
+            || position.x > size.width || position.y > size.height
+        )
+            throw new TypeError(`Passed cell position is out of range - got [${position.x},${position.y}] - expected between [0,0] and [${size.width},${size.height}]`);
+
+        this.cells[position.x][position.y] = cell;
+    }
+
+    /**
+     * Returns the cell at the provided position
+     * @param position Position of the cell
+     */
+    getCell(position: Position): Cell
+    {
+        const size = this.getSize();
+
+        if(
+            position.x < 0 || position.y < 0
+            || position.x > size.width || position.y > size.height
+        )
+            throw new TypeError(`Passed cell position is out of range - got [${position.x},${position.y}] - expected between [0,0] and [${size.width},${size.height}]`);
+
+        return this.cells[position.x][position.y];
+    }
+
     //#MARKER static
     /**
-     * Calculates the area of a Grid based on its size
-     * @param size The size of the Grid
+     * Calculates the area of a grid based on its size
+     * @param size The size of the grid
      */
     static calculateArea(size: Size): Area
     {
@@ -111,16 +146,25 @@ export class Grid
     }
 
     //#MARKER getters
+    /**
+     * Returns the size of this grid
+     */
     getSize(): Size
     {
         return this.size;
     }
 
+    /**
+     * Returns the area of this grid
+     */
     getArea(): Area
     {
         return this.area;
     }
 
+    /**
+     * Returns the options of this grid
+     */
     getOptions(): GridOptions
     {
         return this.options;

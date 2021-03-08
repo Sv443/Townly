@@ -1,4 +1,4 @@
-import { Position } from "./Base";
+import { Position } from "../base/Base";
 
 
 export type CellType = "land" | "water" | "resource";
