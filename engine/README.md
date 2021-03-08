@@ -24,7 +24,7 @@ You can view the full license text [in this file.](./LICENSE.txt)
 - The name originates from a combination "Townly" and "Engine", Townly being the game which it was originally developed for.
   
 - The logo of the engine should be in ASCII, inspired by its text based nature.  
-  A temporary example logo can be found by viewing this file in a text editor and scrolling to the bottom.  
+  A temporary example logo can be found by viewing this file in a text editor (or clicking [here](https://raw.githubusercontent.com/Sv443/Townly/master/engine/README.md)) and then scrolling to the bottom.  
   The logo could be inspired by the [flying dragon Teng in Chinese mythology.](https://en.wikipedia.org/wiki/Teng_(mythology))
 
 
