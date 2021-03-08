@@ -1,15 +1,5 @@
 import { Position } from "../base/Base";
 
-/**
- * Describes the base type of the cell
- */
-export enum CellType
-{
-    Land,
-    Water,
-    Resource
-}
-
 
 /**
  * Describes a single cell.  
@@ -17,7 +7,6 @@ export enum CellType
  */
 export abstract class Cell
 {
-    private type: CellType;
     private position: Position;
 
     private cursorActive: boolean = false;
@@ -25,12 +14,10 @@ export abstract class Cell
 
     /**
      * Constructs a new instance of the Cell class
-     * @param type The type of cell
      * @param position The position of the cell inside its parent container
      */
-    constructor(type: CellType, position: Position)
+    constructor(position: Position)
     {
-        this.type = type;
         this.position = position;
     }
 
@@ -45,14 +32,6 @@ export abstract class Cell
     }
 
     //#MARKER getters
-    /**
-     * Returns the type of this cell
-     */
-    getType(): CellType
-    {
-        return this.type;
-    }
-
     /**
      * Returns the position of this cell in its parent grid
      */
