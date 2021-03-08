@@ -29,11 +29,13 @@
   },
   "homepage": "https://github.com/Sv443/Townly#readme",
   "dependencies": {
+    "figlet": "^1.5.0",
     "svcorelib": "^1.12.0"
   },
   "devDependencies": {
-    "mysql": "^2.18.1",
+    "@types/figlet": "^1.2.1",
     "@types/mysql": "^2.15.18",
-    "@types/node": "^14.14.32"
+    "@types/node": "^14.14.32",
+    "mysql": "^2.18.1"
   }
 }

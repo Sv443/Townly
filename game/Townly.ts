@@ -8,26 +8,26 @@ import { dbg } from "../engine/base/Base";
 
 function preInit()
 {
-    return new Promise<void>(async (pRes, pRej) => {
-        unused(pRej);
+    return new Promise<void>(async (res, rej) => {
+        unused(rej);
 
         // register soft shutdown signals
         gameSettings.init.softShutdownSignals.forEach(sig => process.on(sig, softShutdown));
 
         dbg("PreInit", "Entering PreInit phase...");
 
-        return pRes();
+        return res();
     });
 }
 
 function init()
 {
-    return new Promise<void>(async (pRes, pRej) => {
-        unused(pRej);
+    return new Promise<void>(async (res, rej) => {
+        unused(rej);
 
         dbg("Init", "Entering Init phase...");
 
-        return pRes();
+        return res();
     });
 }
 

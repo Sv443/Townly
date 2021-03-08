@@ -1,7 +1,15 @@
 import { resolve } from "path";
 
 
-export type AudioState = "playing" | "paused" | "stopped";
+/**
+ * Describes the state of an audio
+ */
+export enum AudioState
+{
+    Playing,
+    Paused,
+    Stopped
+};
 
 /**
  * Contains an audio file and offers an interface to play it
@@ -9,6 +17,12 @@ export type AudioState = "playing" | "paused" | "stopped";
 export class Audio
 {
     filePath: string;
+
+    currentTime = 0.0;
+    volume = 1.0;
+
+    state = AudioState.Stopped;
+
 
     /**
      * Constructs an instance of the Audio class
@@ -24,7 +38,12 @@ export class Audio
      */
     play(): void
     {
+        const state = this.getState();
 
+        if(state === AudioState.Paused || state === AudioState.Stopped)
+        {
+            // TODO:
+        }
     }
 
     /**
@@ -32,7 +51,12 @@ export class Audio
      */
     pause(): void
     {
+        const state = this.getState();
 
+        if(state === AudioState.Playing)
+        {
+            // TODO:
+        }
     }
 
     /**
@@ -40,7 +64,12 @@ export class Audio
      */
     stop(): void
     {
+        const state = this.getState();
 
+        if(state === AudioState.Playing || state === AudioState.Paused)
+        {
+            // TODO:
+        }
     }
 
     /**
@@ -48,7 +77,7 @@ export class Audio
      */
     getState(): AudioState
     {
-        return "playing";
+        return this.state;
     }
 
     /**
@@ -57,7 +86,10 @@ export class Audio
      */
     setTime(time: number): void
     {
+        if(time < 0)
+            throw new TypeError(`Provided time ${time} is out of range (expected 0.0 or more)`);
 
+        this.currentTime = time;
     }
 
     /**
@@ -65,7 +97,7 @@ export class Audio
      */
     getTime(): number
     {
-        return 0.0;
+        return this.currentTime;
     }
 
     /**
@@ -74,7 +106,10 @@ export class Audio
      */
     setVolume(vol: number): void
     {
+        if(vol < 0 || vol > 1)
+            throw new TypeError(`Volume ${vol} is out of range (expected value between 0.0 and 1.0)`);
 
+        this.volume = vol;
     }
 
     /**
@@ -82,6 +117,6 @@ export class Audio
      */
     getVolume(): number
     {
-        return 1.0;
+        return this.volume;
     }
 }

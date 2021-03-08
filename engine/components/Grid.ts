@@ -22,7 +22,7 @@ export class Grid
 {
     private size: Size;
     private area: Area;
-    private options: GridOptions;
+    private options: Partial<GridOptions>;
 
     private cells: Cell[][];
 
@@ -32,7 +32,7 @@ export class Grid
      * @param size The size of the grid
      * @param options Grid options
      */
-    constructor(size: Size, options: GridOptions)
+    constructor(size: Size, options: Partial<GridOptions>)
     {
         this.size = size;
         this.options = options;
@@ -127,22 +127,17 @@ export class Grid
      */
     static calculateArea(size: Size): Area
     {
-        const cornerTL: Position = {
+        const tl: Position = {
             x: 0,
             y: 0
         };
 
-        const cornerBR: Position = {
+        const br: Position = {
             x: size.width,
             y: size.height
         };
 
-        const area: Area = {
-            cornerTL,
-            cornerBR
-        };
-
-        return area;
+        return new Area(tl, br);
     }
 
     //#MARKER getters

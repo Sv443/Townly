@@ -1,34 +1,102 @@
 import { colors } from "svcorelib";
 import { generalSettings } from "../../settings";
 
+
+//#MARKER base components
 /**
  * Describes a size in 2D space
  */
-export interface Size
+export interface SizeInterface
 {
     width: number;
     height: number;
 }
 
 /**
+ * Describes a rectangular size in 2D space
+ */
+export class Size implements SizeInterface
+{
+    readonly width: number;
+    readonly height: number;
+
+    /**
+     * Creates a new instance of the class Size
+     */
+    constructor(width: number, height: number)
+    {
+        this.width = width;
+        this.height = height;
+    }
+}
+
+/**
  * Describes a position / coordinate in 2D space
  */
-export interface Position
+export interface PositionInterface
 {
     x: number;
     y: number;
 }
 
 /**
+ * Describes a position or coordinate in 2D space
+ */
+export class Position implements PositionInterface
+{
+    readonly x: number;
+    readonly y: number;
+
+    /**
+     * Creates a new instance of the Position class
+     */
+    constructor(x: number, y: number)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+/**
  * Describes an area in 2D space
  */
-export interface Area
+export interface AreaInterface
+{
+    corners: AreaCornersInterface;
+}
+
+/**
+ * Contains the corners of an area
+ */
+declare interface AreaCornersInterface
 {
     /** Top left corner */
-    cornerTL: Position;
+    tl: Position;
     /** Bottom right corner */
-    cornerBR: Position;
+    br: Position;
 }
+
+/**
+ * Describes a rectangular 2D area in a 2D space
+ */
+export class Area implements AreaInterface
+{
+    readonly corners: AreaCornersInterface;
+
+    /**
+     * Creates a new instance of the Area class
+     */
+    constructor(cornerTL: Position, cornerBR: Position)
+    {
+        this.corners = {
+            tl: cornerTL,
+            br: cornerBR
+        };
+    }
+}
+
+
+//#MARKER logging
 
 /** Describes the log level */
 export type LogLevel = "success" | "info" | "warning" | "error" | "fatal";

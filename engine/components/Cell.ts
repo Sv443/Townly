@@ -1,6 +1,14 @@
 import { Position } from "../base/Base";
 
-export type CellType = "land" | "water" | "resource";
+/**
+ * Describes the base type of the cell
+ */
+export enum CellType
+{
+    Land,
+    Water,
+    Resource
+}
 
 
 /**
