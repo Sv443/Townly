@@ -1,0 +1,33 @@
+{
+  "name": "townly",
+  "version": "0.1.0",
+  "description": "A CLI city building game",
+  "main": "ts-out/game/Townly.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sv443/Townly.git"
+  },
+  "keywords": [
+    "game",
+    "cli",
+    "cli-game",
+    "command-line"
+  ],
+  "author": {
+    "name": "Sv443",
+    "email": "contact@sv443.net",
+    "url": "https://github.com/Sv443"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sv443/Townly/issues"
+  },
+  "homepage": "https://github.com/Sv443/Townly#readme",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "svcorelib": "^1.12.0"
+  }
+}
