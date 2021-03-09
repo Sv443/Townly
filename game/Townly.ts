@@ -44,6 +44,10 @@ async function initAll()
         dbg("InitAll", `Successfully initialized ${generalSettings.info.name}`, "success");
 
         console.log(`${colors.fg.green}Started ${generalSettings.info.name} v${generalSettings.info.versionStr}${colors.rst}`);
+
+        setInterval(() => {
+            console.log(`#DEBUG: Tick`);
+        }, 1000);
     }
     catch(err)
     {
@@ -51,10 +55,14 @@ async function initAll()
     }
 }
 
-
+/**
+ * Synchronous function that is called when the process is exited
+ */
 function softShutdown()
 {
     console.log(`\n\nGoodbye.\n`);
+
+    process.exit(0);
 }
 
 

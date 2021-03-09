@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "buildstart": "tsc && node ."
+    "buildstart": "tsc && node .",
+    "compile-nexe": "cd out && nexe -b --ico ../resources/Townly.ico -i game/Townly.js"
   },
   "repository": {
     "type": "git",

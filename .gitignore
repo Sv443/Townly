@@ -2,9 +2,11 @@
 node_modules/
 
 # TypeScript output
-ts-out/
+out/
 
 # Developer only files
 test.ts
 test.js
+
+# .env file
 .env

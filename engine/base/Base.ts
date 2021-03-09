@@ -136,7 +136,7 @@ export function resolveColor(type: ColorType, col: Color, dim: boolean = false):
 {
     let retColor = "";
 
-    let colorMapping: {[key in keyof typeof Color]: string};
+    let colorMapping: {[key: string]: string};
 
     switch(type)
     {
@@ -168,7 +168,9 @@ export function resolveColor(type: ColorType, col: Color, dim: boolean = false):
         break;
     }
 
-    retColor = (dim ? "\x1b[2m" : "") + colorMapping[col];
+    const chosenColor = colorMapping[Color[col]];
+
+    retColor = (dim ? "\x1b[2m" : "\x1b[1m") + chosenColor;
 
     return retColor;
 }
