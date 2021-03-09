@@ -3,17 +3,23 @@
  */
 export class TengObject
 {
-    /** Unique identifier of type `Symbol` that's assigned to each Teng object at instantiation */
+    /** Unique descriptor of type `Symbol` that's assigned to each Teng object at instantiation */
     readonly uid: Symbol;
 
-    constructor(objectName: string, identifier?: string)
+    /**
+     * Creates an instance of the TengObject class  
+     * All instantiatable classes in Teng should inherit this class and should have a call to `super()`
+     * @param objectName The name of the object (usually the class name)
+     * @param descriptor Something to more precisely describe this object
+     */
+    constructor(objectName: string, descriptor?: string)
     {
-        if(typeof identifier === "string")
-            identifier = `/${identifier}`;
+        if(typeof descriptor === "string")
+            descriptor = `/${descriptor}`;
         else
-            identifier = "";
+            descriptor = "";
 
-        this.uid = Symbol(`TE/${objectName}${identifier}`);
+        this.uid = Symbol(`TE/${objectName}${descriptor}`);
     }
 
     /**
