@@ -1,3 +1,7 @@
+/*******************************/
+/* Teng - Displays a main menu */
+/*******************************/
+
 import { textSync, loadFont,  Fonts } from "figlet";
 
 import { TengObject } from "../../base/TengObject";

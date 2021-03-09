@@ -1,3 +1,7 @@
+/**************************************************/
+/* Teng - A way to play audio on the command line */
+/**************************************************/
+
 import { resolve } from "path";
 
 import { TengObject } from "./TengObject";

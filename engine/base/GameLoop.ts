@@ -1,3 +1,7 @@
+/********************************/
+/* Teng - Handles the game loop */
+/********************************/
+
 import { tengSettings } from "../settings";
 
 import { TengObject } from "./TengObject";

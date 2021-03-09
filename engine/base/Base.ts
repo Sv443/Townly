@@ -1,3 +1,8 @@
+/*************************************************/
+/* Teng - Base classes, interfaces and functions */
+/*************************************************/
+
+
 import { colors } from "svcorelib";
 import { generalSettings } from "../../settings";
 

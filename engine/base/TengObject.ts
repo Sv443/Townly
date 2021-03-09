@@ -1,3 +1,10 @@
+/*********************************************************/
+/* Teng - Base class for all instantiatable Teng classes */
+/*********************************************************/
+
+import { tengSettings } from "../settings";
+
+
 /**
  * Base class of all instantiatable Teng classes
  */
@@ -19,7 +26,7 @@ export class TengObject
         else
             descriptor = "";
 
-        this.uid = Symbol(`TE/${objectName}${descriptor}`);
+        this.uid = Symbol(`${tengSettings.info.abbreviation}/${objectName}${descriptor}`);
     }
 
     /**

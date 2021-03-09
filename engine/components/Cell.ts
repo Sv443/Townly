@@ -1,3 +1,7 @@
+/*************************************************************/
+/* Teng - Cells are the smallest parts that make up the game */
+/*************************************************************/
+
 import { Position, Color, ColorType } from "../base/Base";
 import { TengObject } from "../base/TengObject";
 

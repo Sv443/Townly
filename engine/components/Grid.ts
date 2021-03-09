@@ -1,3 +1,7 @@
+/******************************/
+/* Teng - Grids contain cells */
+/******************************/
+
 import {  } from "../../settings";
 
 import { Size, Position, Area, dbg } from "../base/Base";

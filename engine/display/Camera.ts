@@ -1,3 +1,7 @@
+/*********************************************/
+/* Teng - Responsible for rendering the game */
+/*********************************************/
+
 import { TengObject } from "../base/TengObject";
 import { Position, Size } from "../base/Base";
 import { Cell } from "../components/Cell";
