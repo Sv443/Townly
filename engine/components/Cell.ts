@@ -1,4 +1,4 @@
-import { Position } from "../base/Base";
+import { Position, Color, ColorType } from "../base/Base";
 
 
 /**
@@ -8,6 +8,12 @@ import { Position } from "../base/Base";
 export abstract class Cell
 {
     private position: Position;
+    private char: string;
+
+    private colors = {
+        fg: Color,
+        bg: Color
+    };
 
     private cursorActive: boolean = false;
 
@@ -15,10 +21,15 @@ export abstract class Cell
     /**
      * Constructs a new instance of the Cell class
      * @param position The position of the cell inside its parent container
+     * @param char This cell's representation as a single character
      */
-    constructor(position: Position)
+    constructor(position: Position, char: string)
     {
+        if(char.length !== 1)
+            throw new TypeError(`Passed char "${char}" has to be exactly 1 character in length`);
+
         this.position = position;
+        this.char = char;
     }
 
     //#MARKER methods / setters
@@ -29,6 +40,16 @@ export abstract class Cell
     setCursorActive(active: boolean): void
     {
         this.cursorActive = active;
+    }
+
+    /**
+     * Sets this cell's color
+     * @param type The type of the color (foreground, background, ...)
+     * @param color The actual color to set
+     */
+    setColor(type: ColorType, color: Color): void
+    {
+
     }
 
     //#MARKER getters
@@ -46,5 +67,13 @@ export abstract class Cell
     getCursorActive(): boolean
     {
         return this.cursorActive;
+    }
+
+    /**
+     * Returns this cell's representation as a character
+     */
+    getChar(): string
+    {
+        return this.char;
     }
 }

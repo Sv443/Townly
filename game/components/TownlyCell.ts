@@ -1,4 +1,4 @@
-import { Position } from "../../engine/base/Base";
+import { ColorType, Color, Position } from "../../engine/base/Base";
 import { Cell } from "../../engine/components/Cell";
 
 
@@ -20,12 +20,15 @@ export abstract class TownlyCell extends Cell
      * Creates an instance of the TownlyCell class
      * @param type The type of the cell
      * @param position The initial position of this cell
+     * @param char This cell's representation as a single character
      */
-    constructor(type: CellType, position: Position)
+    constructor(type: CellType, position: Position, char: string)
     {
-        super(position);
+        super(position, char);
 
         this.type = type;
+
+        this.setColor(ColorType.Foreground, Color.Green);
     }
 
     /**

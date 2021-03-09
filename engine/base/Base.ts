@@ -95,6 +95,84 @@ export class Area implements AreaInterface
     }
 }
 
+//#SECTION colors
+
+/**
+ * Describes a foreground or background color that can be rendered to a terminal / command line
+ */
+export enum Color
+{
+    /** Resets both foreground *and* background color */
+    Reset,
+
+    Black,
+    Red,
+    Green,
+    Yellow,
+    Blue,
+    Magenta,
+    Cyan,
+    White
+};
+
+/**
+ * Describes the type of color
+ */
+export enum ColorType
+{
+    /** Text color */
+    Foreground,
+    /** Background color */
+    Background
+}
+
+/**
+ * Resolves a color type and name to a string representation that can be used to color the terminal / command line
+ * @param type The type of the color to resolve
+ * @param col The color to resolve
+ * @param dim Set to true to dim the color
+ */
+export function resolveColor(type: ColorType, col: Color, dim: boolean = false): string
+{
+    let retColor = "";
+
+    let colorMapping: {[key in keyof typeof Color]: string};
+
+    switch(type)
+    {
+        case ColorType.Foreground:
+            colorMapping = {
+                Reset:   "\x1b[0m",
+                Black:   "\x1b[30m",
+                Red:     "\x1b[31m",
+                Green:   "\x1b[32m",
+                Yellow:  "\x1b[33m",
+                Blue:    "\x1b[34m",
+                Magenta: "\x1b[35m",
+                Cyan:    "\x1b[36m",
+                White:   "\x1b[37m",
+            };
+        break;
+        case ColorType.Background:
+            colorMapping = {
+                Reset:   "\x1b[0m",
+                Black:   "\x1b[40m",
+                Red:     "\x1b[41m",
+                Green:   "\x1b[42m",
+                Yellow:  "\x1b[43m",
+                Blue:    "\x1b[44m",
+                Magenta: "\x1b[45m",
+                Cyan:    "\x1b[46m",
+                White:   "\x1b[47m",
+            };
+        break;
+    }
+
+    retColor = (dim ? "\x1b[2m" : "") + colorMapping[col];
+
+    return retColor;
+}
+
 
 //#MARKER logging
 

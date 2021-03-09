@@ -1,4 +1,6 @@
 import { Position, Size } from "../base/Base";
+import { Cell } from "../components/Cell";
+import { Grid } from "../components/Grid";
 
 
 /**
@@ -13,20 +15,82 @@ export interface CameraInitialValues
 }
 
 /**
+ * Describes a renderable representation of a grid
+ */
+export type RenderableGrid = string[][];
+
+/**
  * A camera is responsible for rendering a specified area of a grid
  */
 export class Camera
 {
-    position: Position;
-    viewportSize: Size;
+    /** The position of the camera's top left corner, in a parent grid */
+    readonly position: Position;
+    /** The size of the camera's viewport / frustum / whatever tf it's called */
+    readonly viewportSize: Size;
+
+    /** The stream to write the rendered data to */
+    private outStream: NodeJS.WriteStream;
+
+    /** Buffers a frame until it is rendered, then it's overwritten with a newly calculated frame */
+    private renderBuffer: Cell[][] = [];
+    /** Is set to true only while a new frame is currently being rendered */
+    readonly isRenderingFrame: boolean = false;
+
 
     /**
      * Creates an instance of the Camera class
      * @param initialValues The initial values (position, size, ...) of this camera
+     * @param outStream The stream to write the rendered stuff to - defaults to `process.stdout`
      */
-    constructor(initialValues: CameraInitialValues)
+    constructor(initialValues: CameraInitialValues, outStream: NodeJS.WriteStream = process.stdout)
     {
         this.position = initialValues.position;
         this.viewportSize = initialValues.viewportSize;
+
+        this.outStream = outStream;
+    }
+
+    /**
+     * Draws the previously calculated frame and simultaneously starts calculating the next frame
+     * @param grid The grid to render to the screen
+     */
+    draw(grid: Grid): Promise<void>
+    {
+        return new Promise<void>((res, rej) => {
+            const tryDraw = async () => {
+                if(this.renderBuffer.length === 0)
+                {
+                    if(!this.isRenderingFrame)
+                    {
+                        // this is the first call to draw() since instantiation of the camera, so the frame has to be rendered
+                        let renderGrid = await this.renderFrame(grid);
+                    }
+                    else
+                    {
+                        // a frame is currently being rendered
+                    }
+                }
+                else
+                {
+                    // previous frame has been rendered, so it just has to be drawn
+                }
+            };
+
+            tryDraw();
+        });
+    }
+
+    /**
+     * Renders a frame of a passed grid
+     * @param grid
+     */
+    renderFrame(grid: Grid): Promise<RenderableGrid>
+    {
+        return new Promise<RenderableGrid>(async (res, rej) => {
+            const renderedCells: string[][] = [];
+
+            return renderedCells;
+        });
     }
 }
