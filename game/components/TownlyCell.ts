@@ -11,7 +11,10 @@ export enum CellType
     Water
 }
 
-
+/**
+ * This cell class extends from Teng's Cell class.  
+ * It contains stuff that is specific to Townly, like the cell type.
+ */
 export abstract class TownlyCell extends Cell
 {
     private type: CellType;

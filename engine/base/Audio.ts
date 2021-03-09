@@ -1,5 +1,7 @@
 import { resolve } from "path";
 
+import { TengObject } from "./TengObject";
+
 
 /**
  * Describes the state of an audio
@@ -14,7 +16,7 @@ export enum AudioState
 /**
  * Contains an audio file and offers an interface to play it
  */
-export class Audio
+export class Audio extends TengObject
 {
     filePath: string;
 
@@ -30,6 +32,8 @@ export class Audio
      */
     constructor(filePath: string)
     {
+        super("Audio");
+
         this.filePath = resolve(filePath);
     }
 

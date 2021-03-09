@@ -1,3 +1,4 @@
+import { TengObject } from "../base/TengObject";
 import { Position, Size } from "../base/Base";
 import { Cell } from "../components/Cell";
 import { Grid } from "../components/Grid";
@@ -22,7 +23,7 @@ export type RenderableGrid = string[][];
 /**
  * A camera is responsible for rendering a specified area of a grid
  */
-export class Camera
+export class Camera extends TengObject
 {
     /** The position of the camera's top left corner, in a parent grid */
     readonly position: Position;
@@ -45,6 +46,8 @@ export class Camera
      */
     constructor(initialValues: CameraInitialValues, outStream: NodeJS.WriteStream = process.stdout)
     {
+        super("Camera", `${initialValues.viewportSize.width}x${initialValues.viewportSize.height}`);
+
         this.position = initialValues.position;
         this.viewportSize = initialValues.viewportSize;
 

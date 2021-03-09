@@ -1,9 +1,10 @@
 import {  } from "../../settings";
 
 import { Size, Position, Area, dbg } from "../base/Base";
+import { TengObject } from "../base/TengObject";
+
 import { Cell } from "./Cell";
 import { Land } from "../../game/components/cells/Land";
-
 
 
 /**
@@ -18,7 +19,7 @@ export interface GridOptions
  * A Grid is the 2D area that contains the game.  
  * It contains all chunks and cells.
  */
-export class Grid
+export class Grid extends TengObject
 {
     private size: Size;
     private area: Area;
@@ -34,6 +35,8 @@ export class Grid
      */
     constructor(size: Size, options: Partial<GridOptions>)
     {
+        super("Grid", `${size.width}x${size.height}`);
+
         this.size = size;
         this.options = options;
 

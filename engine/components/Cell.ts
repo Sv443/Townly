@@ -1,18 +1,26 @@
 import { Position, Color, ColorType } from "../base/Base";
+import { TengObject } from "../base/TengObject";
 
 
 /**
  * Describes a single cell.  
  * Cells have to be contained in a Grid or Chunk.
  */
-export abstract class Cell
+export abstract class Cell extends TengObject
 {
     private position: Position;
     private char: string;
 
+    /** The colors of this cell */
     private colors = {
-        fg: Color,
-        bg: Color
+        /** Foreground / text color */
+        fg: Color.White,
+        /** Whether the foreground color is dim */
+        fgDim: false,
+        /** Background color */
+        bg: Color.Black,
+        /** Whether the background color is dim */
+        bgDim: false
     };
 
     private cursorActive: boolean = false;
@@ -25,6 +33,8 @@ export abstract class Cell
      */
     constructor(position: Position, char: string)
     {
+        super("Cell", `${position.x},${position.y}`);
+
         if(char.length !== 1)
             throw new TypeError(`Passed char "${char}" has to be exactly 1 character in length`);
 
@@ -46,10 +56,21 @@ export abstract class Cell
      * Sets this cell's color
      * @param type The type of the color (foreground, background, ...)
      * @param color The actual color to set
+     * @param dim Whether this color should be set to a darker shade
      */
-    setColor(type: ColorType, color: Color): void
+    setColor(type: ColorType, color: Color, dim: boolean = false): void
     {
-
+        switch(type)
+        {
+            case ColorType.Foreground:
+                this.colors.fg = color;
+                this.colors.fgDim = dim;
+            break;
+            case ColorType.Background:
+                this.colors.bg = color;
+                this.colors.bgDim = dim;
+            break;
+        }
     }
 
     //#MARKER getters

@@ -1,5 +1,7 @@
 import { textSync, loadFont,  Fonts } from "figlet";
 
+import { TengObject } from "../../base/TengObject";
+
 
 /** A single option of a menu - set to empty string or `null` for a spacer */
 export type MenuOption = (string|null);
@@ -7,16 +9,19 @@ export type MenuOption = (string|null);
 /**
  * Main menu of the game
  */
-export class MainMenu
+export class MainMenu extends TengObject
 {
     /**
-     * 
+     * Creates an instance of the MainMenu class
      * @param title Name of the game or title of the main menu
      * @param options The selectable options - add empty string or `null` for a spacer
-     * @param titleFont 
+     * @param titleFont The font of the 3D title
      */
     constructor(title: string, options: MenuOption[], titleFont: Fonts = "Standard")
     {
+        let descriptor = TengObject.limitedLengthDescriptor(title, 16);
+        super("MainMenu", descriptor);
+
         MainMenu.preloadFont(titleFont);
     }
 

@@ -9,6 +9,10 @@ const tengSettings = Object.freeze({
         version: packageJson.version.split(/\./g).map(v=>parseInt(v)),
         /** Version, as a string */
         versionStr: packageJson.version,
+    },
+    loop: {
+        /** Default ticks per second */
+        defaultTps: 5
     }
 });
 
