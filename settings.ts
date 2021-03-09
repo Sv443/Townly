@@ -25,6 +25,11 @@ const gameSettings = Object.freeze({
         /** @type {NodeJS.Signals[]} Signals that cause a soft shutdown */
         softShutdownSignals: [ "SIGINT", "SIGTERM" ],
     },
+    /** Game loop */
+    loop: {
+        /** Amount of ticks per second that should be targeted */
+        targetTps: 5
+    },
     /** Map generation */
     mapGen: {
         /** Settings regarding seeds */

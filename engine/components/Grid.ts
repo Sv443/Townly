@@ -53,6 +53,23 @@ export class Grid extends TengObject
 
     //#MARKER methods
     /**
+     * Call this method on every frame to update the grid.  
+     * This call is propagated throughout all cells.
+     */
+    update(): Promise<any>
+    {
+        return new Promise<any>((res, rej) => {
+            // TODO: only update active chunks
+            
+            this.cells.forEach((row, y) => {
+                row.forEach((cell, x) => {
+                    cell.update();
+                });
+            });
+        });
+    }
+
+    /**
      * Developer method: Fills the grid with empty cells
      */
     devFill(): void

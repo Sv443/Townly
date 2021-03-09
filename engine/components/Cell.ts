@@ -48,6 +48,11 @@ export abstract class Cell extends TengObject
 
     //#MARKER methods / setters
     /**
+     * Abstract method - called on each tick to update this cell
+     */
+    abstract update(): Promise<void>;
+
+    /**
      * Sets the state of the cursor
      * @param active
      */

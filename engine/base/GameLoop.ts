@@ -7,7 +7,7 @@ import { tengSettings } from "../settings";
 import { TengObject } from "./TengObject";
 
 
-
+declare type GameLoopEvent = "tick";
 
 /**
  * This class handles the game loop, aka the ticks / FPS and maybe other stuff, idk yet
@@ -15,6 +15,8 @@ import { TengObject } from "./TengObject";
 export class GameLoop extends TengObject
 {
     targetTps: number;
+
+    onTick = () => {};
 
     /**
      * Creates an instance of the GameLoop class
@@ -25,5 +27,18 @@ export class GameLoop extends TengObject
         super("GameLoop", targetTps.toString());
 
         this.targetTps = targetTps;
+    }
+
+    /**
+     * Registers an event
+     */
+    on(event: GameLoopEvent, callback: () => any): void
+    {
+        switch(event)
+        {
+            case "tick":
+                this.onTick = callback;
+            break;
+        }
     }
 }
