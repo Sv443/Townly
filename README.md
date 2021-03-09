@@ -11,7 +11,7 @@ You can find my other CLI games [here.](https://github.com/Sv443/CLI-Games-Colle
 
 <br>
 
-### Behind the Scenes:
+### The story behind Townly:
 #### Initial vanilla JS version:
 Townly was first made in pure Node.js because I couldn't get my Qt Creator to work on my PC for a whole year.  
 The legacy JS version's code can be found [here.](https://github.com/Sv443/Townly/tree/legacy/Townly.js)
@@ -28,7 +28,9 @@ The legacy C++ version's code can be found [here.](https://github.com/Sv443/Town
 #### TypeScript Rewrite:
 But then I quickly burnt out because C++ is fucking difficult (who would've thought).  
 So after about another month of work, I decided to go with the best of both worlds and rewrote it again, but in TypeScript.  
-It offers both the quick and easy coding of JavaScript *and* the type safety and extensive features of a language like C++.
+It offers both the quick and easy coding of JavaScript *and* the type safety and extensive features of a language like C++.  
+I also wanted to separate the game and the engine so that I can eventually reuse the engine or publish it separately.  
+More info on the engine can be found [here.](./engine/README.md#readme)
 
 <br><br>
 
