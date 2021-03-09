@@ -26,8 +26,8 @@ The legacy C++ version's code can be found [here.](https://github.com/Sv443/Town
 <br>
 
 #### TypeScript Rewrite:
-But then I quickly burnt out because C++ is fucking difficult (who would've thought).  
-So after about another month of work, I decided to go with the best of both worlds and rewrote it again, but in TypeScript.  
+Two months later I quickly burnt out because C++ is fucking difficult (who would've thought).  
+So after about a month of pause, I decided to go with the best of both worlds and rewrote it again, but in TypeScript.  
 It offers both the quick and easy coding of JavaScript *and* the type safety and extensive features of a language like C++.  
 I also wanted to separate the game and the engine so that I can eventually reuse the engine or publish it separately.  
 More info on the engine can be found [here.](./engine/README.md#readme)
