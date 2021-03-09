@@ -1,4 +1,4 @@
 This project contains two separate licenses (called "LICENSE.txt"):
 
-The Townly Engine license can be viewed in the folder "engine"
+The Teng Engine license can be viewed in the folder "engine"
 The license of the Townly game can be viewed in the folder "game"

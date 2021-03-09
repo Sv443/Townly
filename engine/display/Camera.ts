@@ -100,4 +100,25 @@ export class Camera extends TengObject
             return renderedCells;
         });
     }
+
+    //#MARKER static
+
+    /**
+     * Checks if the passed value is a Camera
+     */
+    static isCamera(value: any): value is Camera
+    {
+        value = (value as Camera);
+
+        if(!(value.position instanceof Position))
+            return false;
+
+        if(!(value.viewportSize instanceof Size))
+            return false;
+
+        if(typeof value.isRenderingFrame !== "boolean")
+            return false;
+
+        return true;
+    }
 }

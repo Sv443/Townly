@@ -27,7 +27,7 @@ export class Grid extends TengObject
 {
     private size: Size;
     private area: Area;
-    private options: Partial<GridOptions>;
+    private options: Partial<GridOptions> = {};
 
     private cells: Cell[][];
 
@@ -37,12 +37,14 @@ export class Grid extends TengObject
      * @param size The size of the grid
      * @param options Grid options
      */
-    constructor(size: Size, options: Partial<GridOptions>)
+    constructor(size: Size, options?: Partial<GridOptions>)
     {
         super("Grid", `${size.width}x${size.height}`);
 
         this.size = size;
-        this.options = options;
+
+        if(options)
+            this.options = options;
 
         this.area = Grid.calculateArea(size);
 
@@ -170,5 +172,23 @@ export class Grid extends TengObject
     getOptions(): GridOptions
     {
         return this.options;
+    }
+
+    //#MARKER static
+
+    /**
+     * Checks if the passed value is a Grid
+     */
+    static isGrid(value: any): value is Grid
+    {
+        value = (value as Grid);
+
+        if(typeof value.getSize !== "function" || !(value.getSize() instanceof Size))
+            return false;
+
+        if(typeof value.getArea !== "function" || !(value.getArea() instanceof Area))
+            return false;
+
+        return true;
     }
 }

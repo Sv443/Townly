@@ -2,9 +2,9 @@
 /* Teng - Responsible for map generation */
 /*****************************************/
 
-import { gameSettings } from "../../settings";
+import { gameSettings } from "../../../settings";
 
-import { Cell } from "../components/Cell";
+import { Cell } from "../../components/Cell";
 import { seededRNG } from "svcorelib";
 
 
@@ -19,7 +19,7 @@ export enum MapPreset
 /**
  * Generates the game world based on a preset and seed
  */
-export class MapGen
+export abstract class MapGen
 {
     /**
      * Generates a map based on a preset and seed

@@ -3,6 +3,7 @@
 /**************************************************/
 
 import { resolve } from "path";
+import { statSync } from "fs-extra";
 
 import { TengObject } from "./TengObject";
 
@@ -22,12 +23,12 @@ export enum AudioState
  */
 export class Audio extends TengObject
 {
-    filePath: string;
+    private filePath: string;
 
-    currentTime = 0.0;
-    volume = 1.0;
+    private currentTime = 0.0;
+    private volume = 1.0;
 
-    state = AudioState.Stopped;
+    private state = AudioState.Stopped;
 
 
     /**
@@ -38,7 +39,12 @@ export class Audio extends TengObject
     {
         super("Audio");
 
-        this.filePath = resolve(filePath);
+        filePath = resolve(filePath);
+
+        if(!statSync(filePath).isFile())
+            throw new TypeError(`File path "${filePath}" is invalid or doesn't point to a file`);
+
+        this.filePath = filePath;
     }
 
     /**
@@ -126,5 +132,26 @@ export class Audio extends TengObject
     getVolume(): number
     {
         return this.volume;
+    }
+
+    //#MARKER static
+
+    /**
+     * Checks if the passed value is an Audio
+     */
+    static isCamera(value: any): value is Audio
+    {
+        value = (value as Audio);
+
+        if(typeof value.play !== "function")
+            return false;
+
+        if(typeof value.pause !== "function")
+            return false;
+
+        if(typeof value.stop !== "function")
+            return false;
+
+        return true;
     }
 }

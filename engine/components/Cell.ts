@@ -101,4 +101,22 @@ export abstract class Cell extends TengObject
     {
         return this.char;
     }
+
+    //#MARKER static
+
+    /**
+     * Checks if the passed value is a Cell
+     */
+    static isCell(value: any): value is Cell
+    {
+        value = (value as Cell);
+
+        if(typeof value.getPosition !== "function" || !(value.getPosition() instanceof Position))
+            return false;
+
+        if(typeof value.getChar !== "function" || typeof value.getChar() !== "string" || value.getChar().length !== 1)
+            return false;
+
+        return true;
+    }
 }

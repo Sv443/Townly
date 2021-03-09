@@ -46,4 +46,19 @@ export class TengObject
 
         return descriptor;
     }
+
+    //#MARKER static
+
+    /**
+     * Checks if the passed value is a TengObject
+     */
+    static isTengObject(value: any): value is TengObject
+    {
+        value = (value as TengObject);
+
+        if(typeof value.uid !== "symbol")
+            return false;
+
+        return true;
+    }
 }
