@@ -15,7 +15,8 @@
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
-            ]
+            ],
+            "console": "externalTerminal"
         },
         {
             "type": "pwa-node",
