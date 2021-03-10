@@ -30,7 +30,7 @@ Two months later I quickly burnt out because C++ is fucking difficult (who would
 So after about a month of pause, I decided to go with the best of both worlds and rewrote it again, but in TypeScript.  
 It offers both the quick and easy coding of JavaScript *and* the type safety and extensive features of a language like C++.  
 I also wanted to separate the game and the engine so that I can eventually reuse the engine or publish it separately.  
-More info on the engine can be found [here.](./engine/README.md#readme)
+More info on the engine can be found [here.](https://github.com/Sv443/Teng#readme)
 
 <br><br>
 
@@ -44,7 +44,7 @@ More info on the engine can be found [here.](./engine/README.md#readme)
 
 <div align="center" style="text-align: center;">
 
-Made by [Sv443](https://github.com/Sv443)  
+Made by [Sv443](https://github.com/Sv443) with [Teng](https://github.com/Sv443/Teng)  
 [♥ Click here to support me ♥](https://github.com/sponsors/Sv443)
 
 </div>
