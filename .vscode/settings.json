@@ -1,3 +1,71 @@
 {
-    
+    // REQUIRES EXTENSION: fabiospampinato.vscode-highlight
+    "highlight.regexFlags": "g",
+    "highlight.regexes": {
+        "(((jsl|scl)\\.)?unused\\([a-zA-Z_,\\[\\]\\s\\-\":.]*\\)\\s*;?)": [ // jsl.unused([some_var, some_other_var]); or scl.unused(xy); or just unused(xy);
+            {
+                "backgroundColor": "inherit",
+                "color": "rgba(221, 102, 102, 0.7)"
+            }
+        ],
+        "(TODO:?)": [ // TODO: or TODO but not todo
+            {
+                "backgroundColor": "#cd5",
+                "color": "#000",
+                "overviewRulerColor": "#cd5"
+            }
+        ],
+        "(#MARKER)": [ // #MARKER test
+            {
+                "backgroundColor": "#f41",
+                "color": "#fff",
+                "isWholeLine": true,
+                "overviewRulerColor": "#f41"
+            }
+        ],
+        "(#SECTION ([^\\S\\r\\n]*[\\w,.\\-_&]+)*[:]*)": [ // #SECTION test, 123 & foo
+            {
+                "backgroundColor": "#44f",
+                "color": "white",
+                "overviewRulerColor": "#44f"
+            }
+        ],
+        "(#DEBUG#?)": [ // #DEBUG# or #DEBUG
+            {
+                "backgroundColor": "#ff0",
+                "color": "blue",
+                "overviewRulerColor": "#ff0"
+            }
+        ],
+        "(IMPORTANT:)": [ // IMPORTANT:
+            {
+                "backgroundColor": "#a22",
+                "color": "#fff"
+            }
+        ],
+        // "(<!--%#INSERT:[a-zA-Z0-9\\-]+#%-->|<!--%#INJECT:[a-zA-Z0-9\\-]+#%-->)": [ // <!--%#INSERT:TEST#%--> / <!--%#INJECT:TEST#%-->
+        //     {
+        //         "color": "orange",
+        //         "fontStyle": "italic",
+        //         "outline": "1px solid orange"
+        //     }
+        // ],
+        // "(<%#INSERT:[a-zA-Z0-9\\-]+#%>|<%#INJECT:[a-zA-Z0-9\\-]+#%>)": [ // <%#INSERT:TEST#%> / <%#INJECT:TEST#%>
+        //     {
+        //         "color": "orange",
+        //         "fontStyle": "italic",
+        //         "outline": "1px solid orange"
+        //     }
+        // ],
+    },
+
+    // REQUIRES EXTENSION: coenraads.bracket-pair-colorizer-2
+    "bracket-pair-colorizer-2.colors": [
+        "#0F6A8F",
+        "#659061",
+        "#41BCA3",
+        "#EDD553",
+        "#E09563",
+        "#B85442"
+    ],
 }
