@@ -1,7 +1,7 @@
 import { gameSettings } from "../settings";
 
 import { GameLoop } from "../engine/base/GameLoop";
-import { Grid, GridOptions } from "../engine/components/Grid";
+import { Grid, IGridOptions } from "../engine/components/Grid";
 import { Size } from "../engine/base/Base";
 
 
@@ -19,7 +19,7 @@ export function init()
         gameLoop.on("tick", onTick);
 
 
-        const gridOpts: GridOptions = {
+        const gridOpts: IGridOptions = {
 
         };
 
