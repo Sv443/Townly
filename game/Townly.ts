@@ -2,7 +2,7 @@ import { gameSettings, generalSettings } from "../settings";
 
 import { colors, unused, pause } from "svcorelib";
 
-import { dbg } from "../engine/base/Base";
+import { dbg, LogLevel } from "../engine/base/Base";
 
 
 
@@ -41,7 +41,7 @@ async function initAll()
 
         await init();
 
-        dbg("InitAll", `Successfully initialized ${generalSettings.info.name}`, "success");
+        dbg("InitAll", `Successfully initialized ${generalSettings.info.name}`, LogLevel.Success);
 
         console.log(`${colors.fg.green}Started ${generalSettings.info.name} v${generalSettings.info.versionStr}${colors.rst}`);
 
@@ -51,7 +51,7 @@ async function initAll()
     }
     catch(err)
     {
-        dbg("InitAll", `Error while initializing: ${err}`, "fatal");
+        dbg("InitAll", `Error while initializing: ${err}`, LogLevel.Fatal);
     }
 }
 
