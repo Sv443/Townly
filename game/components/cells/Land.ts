@@ -6,7 +6,7 @@ export class Land extends TownlyCell
 {
     constructor(position: Position)
     {
-        super(CellType.Land, position, "▓");
+        super(CellType.Land, position, "█");
     }
 
     /**

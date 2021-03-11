@@ -31,7 +31,8 @@ export abstract class TownlyCell extends Cell
 
         this.type = type;
 
-        this.setColor(ColorType.Foreground, Color.Green);
+        this.setColor(ColorType.Foreground, Color.Green, true);
+        this.setColor(ColorType.Background, Color.Black);
     }
 
     /**

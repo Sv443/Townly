@@ -35,7 +35,7 @@ More info on the engine can be found [here.](https://github.com/Sv443/Teng#readm
 <br><br>
 
 ### Some helpful resources:
-- [Developer Notes](./dev/notes.txt)
+- [Developer Notes](./dev/notes.md)
 - [Roadmap](./dev/roadmap.md)
 
 
