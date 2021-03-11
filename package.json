@@ -33,6 +33,7 @@
     "@types/nanotimer": "^0.3.0",
     "figlet": "^1.5.0",
     "fs-extra": "^9.1.0",
+    "keypress": "^0.2.1",
     "nanotimer": "^0.3.15",
     "svcorelib": "^1.12.0"
   },
