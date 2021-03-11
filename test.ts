@@ -7,6 +7,7 @@ import { Cell, ICellColors } from "./engine/components/Cell";
 import { Grid, IGridOptions } from "./engine/components/Grid";
 import { Camera, ICameraInitialValues } from "./engine/display/Camera";
 import { MainMenu } from "./engine/display/menus/MainMenu";
+import { InputHandler } from "./engine/input/InputHandler";
 import { Land } from "./game/components/cells/Land";
 
 
@@ -18,12 +19,11 @@ console.log(`Grid size = ${gridSize.toString()}`);
 
 async function init()
 {
-    const opts: IGridOptions = {
-
+    const opts: Partial<IGridOptions> = {
+        inputEnabled: true
     };
 
     const grid = new Grid(gridSize, opts);
-
     console.log(`Created ${grid.toString()}`);
 
     grid.devFill();
@@ -40,12 +40,16 @@ async function init()
     }
 
     const cam = new Camera(camInitial);
-
     console.log(`Created ${cam.toString()}`);
 
-    console.log(`Calling cam.draw():\n`);
+    
+    const gl = new GameLoop(20);
+    console.log(`Created ${gl.toString()}`);
 
-    await cam.draw(grid);
+    gl.on("tick", async (num) => {
+        // console.log(`Tick #${num} - Calling cam.draw():\n`);
+        await cam.draw(grid);
+    });
 
     console.log("");
 }

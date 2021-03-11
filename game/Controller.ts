@@ -19,7 +19,7 @@ export function init()
         gameLoop.on("tick", onTick);
 
 
-        const gridOpts: IGridOptions = {
+        const gridOpts: Partial<IGridOptions> = {
 
         };
 

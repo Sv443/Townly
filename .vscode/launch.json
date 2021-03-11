@@ -16,7 +16,7 @@
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
-            "console": "externalTerminal"
+            "console": "integratedTerminal"
         },
         {
             "type": "pwa-node",
@@ -29,7 +29,8 @@
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
-            ]
+            ],
+            "console": "integratedTerminal"
         }
     ]
 }
