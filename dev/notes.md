@@ -1,7 +1,16 @@
+## Todo List:
+- TODO: use event emitters instead of custom `on()` methods
+- TODO: implement differential rendering (only re-render cells that have been changed)
+- TODO: use terminal's native cursor
+
+
+<br><br>
+
+
 ## Current Goals:
 - [x] Have a grid (no chunks) and have it be filled with empty cells (no map generation)
 - [x] Display this grid
-- [ ] Implement a cursor that can be moved
+- [x] Implement a cursor that can be moved
 - [ ] Add chunks to the grid
 - [ ] Add some ambient music to the game
 - [ ] Add map generation (based on layered coherent noise) to the grid
@@ -21,7 +30,9 @@
 
 (these goals might get changed later on)
 
+
 <br><br>
+
 
 ### Districts / Zoning to add:
 - Residential
