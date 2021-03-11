@@ -30,7 +30,10 @@ export function init()
     });
 }
 
+/**
+ * Called on each tick of the game
+ */
 async function onTick()
 {
-    grid.update();
+    await grid.update();
 }

@@ -3,7 +3,7 @@ import { gameSettings, generalSettings } from "../settings";
 import { colors, unused, pause } from "svcorelib";
 
 import { dbg, LogLevel } from "../engine/base/Base";
-
+import * as Controller from "./Controller";
 
 
 function preInit()
@@ -26,6 +26,8 @@ function init()
         unused(rej);
 
         dbg("Init", "Entering Init phase...");
+
+        await Controller.init();
 
         return res();
     });
