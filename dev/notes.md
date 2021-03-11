@@ -1,6 +1,6 @@
 ## Current Goals:
 - [x] Have a grid (no chunks) and have it be filled with empty cells (no map generation)
-- [ ] Display this grid
+- [x] Display this grid
 - [ ] Implement a cursor that can be moved
 - [ ] Add chunks to the grid
 - [ ] Add some ambient music to the game

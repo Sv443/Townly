@@ -11,7 +11,7 @@ import { Land } from "./game/components/cells/Land";
 
 
 
-const gridSize = new Size(process.stdout.columns, process.stdout.rows - 4);
+const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
 
 console.log(`Grid size = ${gridSize.toString()}`);
 
@@ -28,6 +28,8 @@ async function init()
 
     grid.devFill();
 
+    // update once to propagate cursor position
+    await grid.update();
 
 
 
