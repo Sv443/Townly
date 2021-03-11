@@ -5,8 +5,8 @@ node_modules/
 out/
 
 # Developer only files
-test.ts
-test.js
+# test.ts
+# test.js
 
 # .env file
 .env
