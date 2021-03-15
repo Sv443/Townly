@@ -5,15 +5,15 @@ import { GameLoop } from "./engine/base/GameLoop";
 import { LayeredNoise } from "./engine/base/mapGen/LayeredNoise";
 import { Cell, ICellColors } from "./engine/components/Cell";
 import { Grid, IGridOptions } from "./engine/components/Grid";
-import { Camera, ICameraInitialValues } from "./engine/display/Camera";
+import { Camera } from "./engine/display/Camera";
 import { MainMenu } from "./engine/display/menus/MainMenu";
 import { InputHandler } from "./engine/input/InputHandler";
 import { Land } from "./game/components/cells/Land";
 
 
-const chunkSize = new Size(5, 5);
+const chunkSize = new Size(20, 10);
 // const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
-const gridSize = new Size(10, 10);
+const gridSize = new Size(200, 50);
 
 console.log(`Grid size = ${gridSize.toString()}`);
 
@@ -66,6 +66,14 @@ async function test()
     grid.devFill();
 
     await grid.update();
+
+
+
+    const cam = new Camera(new Area(new Position(0, 0), new Position(gridSize.width - 1, gridSize.height - 1)));
+
+    await cam.draw(grid);
+
+    process.stdout.write("\n");
 
     await pause();
 }
