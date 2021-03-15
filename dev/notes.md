@@ -1,7 +1,8 @@
 ## Todo List:
+- TODO: reimplement cursor for the new chunk-based cell containment system
+- TODO: add option to use terminal's native cursor
 - TODO: use event emitters instead of custom `on()` methods
 - TODO: implement differential rendering (only re-render cells that have been changed)
-- TODO: use terminal's native cursor
 
 
 <br><br>
