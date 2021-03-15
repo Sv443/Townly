@@ -11,7 +11,7 @@ import { InputHandler } from "./engine/input/InputHandler";
 import { Land } from "./game/components/cells/Land";
 
 
-
+const chunkSize = new Size(10, 10);
 const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
 
 console.log(`Grid size = ${gridSize.toString()}`);
@@ -23,7 +23,7 @@ async function init()
         inputEnabled: true
     };
 
-    const grid = new Grid(gridSize, opts);
+    const grid = new Grid(gridSize, undefined, opts);
     console.log(`Created ${grid.toString()}`);
 
     grid.devFill();
