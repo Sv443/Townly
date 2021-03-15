@@ -1,4 +1,9 @@
 {
+    "files.associations": {
+        "*.tes": "json"
+    },
+
+
     // REQUIRES EXTENSION: fabiospampinato.vscode-highlight
     "highlight.regexFlags": "g",
     "highlight.regexes": {

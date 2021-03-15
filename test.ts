@@ -2,13 +2,14 @@
 import { colors, pause } from "svcorelib";
 import { Area, Color, isColor, objectsEqual, Position, Size } from "./engine/base/Base";
 import { GameLoop } from "./engine/base/GameLoop";
-import { LayeredNoise } from "./engine/base/mapGen/LayeredNoise";
+import { LayeredNoise } from "./engine/mapGen/LayeredNoise";
 import { Cell, ICellColors } from "./engine/components/Cell";
 import { Grid, IGridOptions } from "./engine/components/Grid";
 import { Camera } from "./engine/display/Camera";
 import { MainMenu } from "./engine/display/menus/MainMenu";
 import { InputHandler } from "./engine/input/InputHandler";
 import { Land } from "./game/components/cells/Land";
+import { SaveState } from "./engine/serialization/SaveState";
 
 
 const chunkSize = new Size(20, 10);
@@ -58,25 +59,52 @@ console.log(`Grid size = ${gridSize.toString()}`);
 // init();
 
 
+// async function test()
+// {
+//     const grid = new Grid(gridSize, chunkSize);
 
-async function test()
-{
-    const grid = new Grid(gridSize, chunkSize);
+//     grid.devFill();
 
-    grid.devFill();
-
-    await grid.update();
-
+//     await grid.update();
 
 
-    const cam = new Camera(new Area(new Position(0, 0), new Position(gridSize.width - 1, gridSize.height - 1)));
 
-    await cam.draw(grid);
+//     const cam = new Camera(new Area(new Position(0, 0), new Position(gridSize.width - 1, gridSize.height - 1)));
 
-    process.stdout.write("\n");
+//     await cam.draw(grid);
 
-    await pause();
+//     process.stdout.write("\n");
+
+//     await pause();
+// }
+
+// test();
+
+
+
+
+
+declare interface SaveData {
+    foo: number;
+    bar: string;
+    baz: boolean;
 }
 
-test();
+async function saveTest()
+{
+    let save = new SaveState<SaveData>("./saves/", "MySave");
+    
+    const saveData: SaveData = {
+        foo: 123,
+        bar: "hello",
+        baz: true
+    };
 
+    await save.setData(saveData);
+
+    await save.save();
+
+    console.log(save);
+}
+
+saveTest();

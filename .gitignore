@@ -15,3 +15,6 @@ out/
 ~$*.doc*
 ~$*.xls*
 ~$*.ppt*
+
+# Teng save states
+saves/
