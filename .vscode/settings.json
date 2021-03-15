@@ -1,6 +1,7 @@
 {
+    // associations for custom file extensions
     "files.associations": {
-        "*.tes": "json"
+        "*.tes": "json", // Teng save state files
     },
 
 
