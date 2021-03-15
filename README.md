@@ -1,7 +1,8 @@
 ## Townly
 ### CLI city building game inspired by [TheoTown](https://store.steampowered.com/app/1084020/TheoTown/) and [Cities: Skylines](https://store.steampowered.com/app/255710/Cities_Skylines/)
+### If you have questions or wanna chat, feel free to [join my Discord server](https://sv443.net/discord)
 
-<br>
+<br><br>
 
 I challenged myself multiple times to create games in the Command Line Interface.  
 The goal was for me to be able to play the games on my server via SSH.  
