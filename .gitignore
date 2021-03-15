@@ -10,3 +10,8 @@ out/
 
 # .env file
 .env
+
+# MS Office
+~$*.doc*
+~$*.xls*
+~$*.ppt*
