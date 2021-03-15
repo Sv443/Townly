@@ -13,7 +13,7 @@ import { Land } from "./game/components/cells/Land";
 
 const chunkSize = new Size(5, 5);
 // const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
-const gridSize = new Size(10, 5);
+const gridSize = new Size(10, 10);
 
 console.log(`Grid size = ${gridSize.toString()}`);
 
@@ -61,7 +61,7 @@ console.log(`Grid size = ${gridSize.toString()}`);
 
 async function test()
 {
-    const grid = new Grid(chunkSize, gridSize);
+    const grid = new Grid(gridSize, chunkSize);
 
     grid.devFill();
 

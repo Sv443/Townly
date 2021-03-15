@@ -23,7 +23,8 @@ export function init()
 
         };
 
-        grid = new Grid(new Size(20, 20), undefined, gridOpts);
+        //#DEBUG temporary:
+        grid = new Grid(new Size(20, 20), new Size(10, 5), undefined, gridOpts);
 
 
         return res();
