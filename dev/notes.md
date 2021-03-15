@@ -12,7 +12,8 @@
 - [x] Have a grid (no chunks) and have it be filled with empty cells (no map generation)
 - [x] Display this grid
 - [x] Implement a cursor that can be moved
-- [ ] Add chunks to the grid
+- [x] Add chunks to the grid
+- [x] Add serialization (save states)
 - [ ] Add some ambient music to the game
 - [ ] Add map generation (based on layered coherent noise) to the grid
 - [ ] Add a main menu (something basic to begin with)
