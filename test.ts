@@ -166,18 +166,28 @@
 
 
 
-import { Audio, AudioState, Track } from "./engine/audio/Audio";
-import { Playlist } from "./engine/audio/Playlist";
+import { Audio, Track } from "./engine/audio/Audio";
+import { CycleMode, Playlist } from "./engine/audio/Playlist";
 
 
 async function audioTest()
 {
     const tracks: Track[] = [
         {
-            name: "",
-            instance: new Audio("./game/assets/audio/music")
+            name: "Prototype",
+            instance: new Audio("./game/assets/audio/music/Prototype - Wintergatan Vol2.mp3")
+        },
+        {
+            name: "Olivier",
+            instance: new Audio("./game/assets/audio/music/Olivier - Wintergatan Vol2.mp3")
         }
     ];
+
+    const pl = new Playlist(CycleMode.Manual, tracks);
+
+    await pl.loadMetadata();
+
+    console.log(pl.getTrack(0)?.instance.getMeta());
 }
 
 audioTest();
