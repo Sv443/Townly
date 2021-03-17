@@ -1,15 +1,15 @@
 // import { diff } from "deep-diff";
-import { colors, pause } from "svcorelib";
-import { Area, Color, isColor, objectsEqual, Position, Size } from "./engine/base/Base";
-import { GameLoop } from "./engine/base/GameLoop";
-import { LayeredNoise } from "./engine/mapGen/LayeredNoise";
-import { Cell, ICellColors } from "./engine/components/Cell";
-import { Grid, IGridOptions } from "./engine/components/Grid";
-import { Camera } from "./engine/display/Camera";
-import { MainMenu } from "./engine/display/menus/MainMenu";
-import { InputHandler } from "./engine/input/InputHandler";
-import { Land } from "./game/components/cells/Land";
-import { SaveState } from "./engine/serialization/SaveState";
+// import { colors, pause } from "svcorelib";
+// import { Area, Color, isColor, objectsEqual, Position, Size } from "./engine/base/Base";
+// import { GameLoop } from "./engine/base/GameLoop";
+// import { LayeredNoise } from "./engine/mapGen/LayeredNoise";
+// import { Cell, ICellColors } from "./engine/components/Cell";
+// import { Grid, IGridOptions } from "./engine/components/Grid";
+// import { Camera } from "./engine/display/Camera";
+// import { MainMenu } from "./engine/display/menus/MainMenu";
+// import { InputHandler } from "./engine/input/InputHandler";
+// import { Land } from "./game/components/cells/Land";
+// import { SaveState } from "./engine/serialization/SaveState";
 
 
 // const chunkSize = new Size(20, 10);
@@ -110,55 +110,74 @@ import { SaveState } from "./engine/serialization/SaveState";
 // saveTest();
 
 
-import { StatePromise, PromiseState } from "./engine/base/StatePromise";
-import { randRange } from "svcorelib";
+// import { StatePromise, PromiseState } from "./engine/base/StatePromise";
+// import { randRange } from "svcorelib";
 
 
-function waitASecond()
+// function waitASecond()
+// {
+//     return new Promise<number>((res, rej) => {
+//         // async task that needs time to complete
+//         setTimeout(() => {
+//             // randomly resolve or reject, for demonstration:
+//             const resolve = (randRange(0, 1) === 1);
+
+//             if(resolve)
+//             {
+//                 // return a random number as parameter, for demonstration:
+//                 const randNum = randRange(0, 100);
+//                 return res(randNum);
+//             }
+//             else
+//                 return rej(new Error("Hello, I am an error")); // return an error message
+//         }, 1000);
+//     });
+// }
+
+// async function promiseTest()
+// {
+//     // create a new StatePromise that should supervise the Promise returned by waitASecond():
+//     const statePromise = new StatePromise<number>(waitASecond());
+//     // get the StatePromise's state:
+//     let state = statePromise.getState();
+
+//     console.log(`BEGIN - state: ${PromiseState[state]} (${state})`);
+
+//     try
+//     {
+//         // exec actually runs the promise (waitASecond() in this case):
+//         const num = await statePromise.exec();
+//         // get the StatePromise's state:
+//         state = statePromise.getState();
+
+//         console.log(`DONE - state: ${PromiseState[state]} (${state}) - Random number: ${num}`);
+//     }
+//     catch(err)
+//     {
+//         // get the StatePromise's state:
+//         state = statePromise.getState();
+
+//         console.log(`REJECTED - state: ${PromiseState[state]} (${state}) - ${err}`);
+//     }
+// }
+
+// promiseTest();
+
+
+
+
+import { Audio, AudioState, Track } from "./engine/audio/Audio";
+import { Playlist } from "./engine/audio/Playlist";
+
+
+async function audioTest()
 {
-    return new Promise<number>((res, rej) => {
-        // async task that needs time to complete
-        setTimeout(() => {
-            // randomly resolve or reject, for demonstration:
-            const resolve = (randRange(0, 1) === 1);
-
-            if(resolve)
-            {
-                // return a random number as parameter, for demonstration:
-                const randNum = randRange(0, 100);
-                return res(randNum);
-            }
-            else
-                return rej(new Error("Hello, I am an error")); // return an error message
-        }, 1000);
-    });
+    const tracks: Track[] = [
+        {
+            name: "",
+            instance: new Audio("./game/assets/audio/music")
+        }
+    ];
 }
 
-async function promiseTest()
-{
-    // create a new StatePromise that should supervise the Promise returned by waitASecond():
-    const statePromise = new StatePromise<number>(waitASecond());
-    // get the StatePromise's state:
-    let state = statePromise.getState();
-
-    console.log(`BEGIN - state: ${PromiseState[state]} (${state})`);
-
-    try
-    {
-        // exec actually runs the promise (waitASecond() in this case):
-        const num = await statePromise.exec();
-        // get the StatePromise's state:
-        state = statePromise.getState();
-
-        console.log(`DONE - state: ${PromiseState[state]} (${state}) - Random number: ${num}`);
-    }
-    catch(err)
-    {
-        // get the StatePromise's state:
-        state = statePromise.getState();
-
-        console.log(`REJECTED - state: ${PromiseState[state]} (${state}) - ${err}`);
-    }
-}
-
-promiseTest();
+audioTest();
