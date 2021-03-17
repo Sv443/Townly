@@ -74,4 +74,29 @@
         "#E09563",
         "#B85442"
     ],
+
+    // REQUIRES EXTENSION: streetsidesoftware.code-spell-checker
+    "cSpell.words": [
+        "bitshift",
+        "comparand",
+        "existance",
+        "fehler",
+        "fuckery",
+        "instantiatable",
+        "janky",
+        "keypresses",
+        "nanotimer",
+        "perlin",
+        "preloads",
+        "renderable",
+        "stringifiable",
+        "svcorelib",
+        "systeminformation",
+        "teng",
+        "teng's",
+        "tengobject",
+        "tengs",
+        "townly",
+        "unfulfillment"
+    ],
 }
