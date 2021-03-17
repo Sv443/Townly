@@ -111,6 +111,7 @@ import { SaveState } from "./engine/serialization/SaveState";
 
 
 import { StatePromise, PromiseState } from "./engine/base/StatePromise";
+import { randRange } from "svcorelib";
 
 
 function waitASecond()
@@ -119,8 +120,14 @@ function waitASecond()
         // async task that needs time to complete
         setTimeout(() => {
             // randomly resolve or reject, for demonstration:
-            if(Math.floor(Math.random() * 2))
-                return res(Math.floor(Math.random() * 10)); // return a random number as parameter, for demonstration
+            const resolve = (randRange(0, 1) === 1);
+
+            if(resolve)
+            {
+                // return a random number as parameter, for demonstration:
+                const randNum = randRange(0, 100);
+                return res(randNum);
+            }
             else
                 return rej(new Error("Hello, I am an error")); // return an error message
         }, 1000);
