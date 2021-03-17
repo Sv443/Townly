@@ -12,11 +12,11 @@ import { Land } from "./game/components/cells/Land";
 import { SaveState } from "./engine/serialization/SaveState";
 
 
-const chunkSize = new Size(20, 10);
-// const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
-const gridSize = new Size(200, 50);
+// const chunkSize = new Size(20, 10);
+// // const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
+// const gridSize = new Size(200, 50);
 
-console.log(`Grid size = ${gridSize.toString()}`);
+// console.log(`Grid size = ${gridSize.toString()}`);
 
 
 // async function init()
@@ -110,33 +110,48 @@ console.log(`Grid size = ${gridSize.toString()}`);
 // saveTest();
 
 
-import { StatePromise } from "./engine/base/StatePromise";
+import { StatePromise, PromiseState } from "./engine/base/StatePromise";
 
 
 function waitASecond()
 {
     return new Promise<number>((res, rej) => {
+        // async task that needs time to complete
         setTimeout(() => {
             // randomly resolve or reject, for demonstration:
             if(Math.floor(Math.random() * 2))
-                return res(Math.floor(Math.random() * 10));
+                return res(Math.floor(Math.random() * 10)); // return a random number as parameter, for demonstration
             else
-                return rej(new Error("Hello, I am an error"));
+                return rej(new Error("Hello, I am an error")); // return an error message
         }, 1000);
     });
 }
 
 async function promiseTest()
 {
+    // create a new StatePromise that should supervise the Promise returned by waitASecond():
     const statePromise = new StatePromise<number>(waitASecond());
+    // get the StatePromise's state:
+    let state = statePromise.getState();
 
-    console.log(`BEGIN - ${statePromise.toString()}`);
+    console.log(`BEGIN - state: ${PromiseState[state]} (${state})`);
 
-    statePromise.exec().then((num) => {
-        console.log(`DONE - ${statePromise.toString()} - Random number: ${num}`);
-    }).catch(err => {
-        console.log(`REJECTED - ${statePromise.toString()} - ${err}`);
-    })
+    try
+    {
+        // exec actually runs the promise (waitASecond() in this case):
+        const num = await statePromise.exec();
+        // get the StatePromise's state:
+        state = statePromise.getState();
+
+        console.log(`DONE - state: ${PromiseState[state]} (${state}) - Random number: ${num}`);
+    }
+    catch(err)
+    {
+        // get the StatePromise's state:
+        state = statePromise.getState();
+
+        console.log(`REJECTED - state: ${PromiseState[state]} (${state}) - ${err}`);
+    }
 }
 
 promiseTest();
