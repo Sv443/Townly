@@ -84,27 +84,59 @@ console.log(`Grid size = ${gridSize.toString()}`);
 
 
 
-declare interface SaveData {
-    foo: number;
-    bar: string;
-    baz: boolean;
-}
+// declare interface SaveData {
+//     foo: number;
+//     bar: string;
+//     baz: boolean;
+// }
 
-async function saveTest()
-{
-    let save = new SaveState<SaveData>("./saves/", "MySave");
+// async function saveTest()
+// {
+//     let save = new SaveState<SaveData>("./saves/", "MySave");
     
-    const saveData: SaveData = {
-        foo: 123,
-        bar: "hello",
-        baz: true
-    };
+//     const saveData: SaveData = {
+//         foo: 123,
+//         bar: "hello",
+//         baz: true
+//     };
 
-    await save.setData(saveData);
+//     await save.setData(saveData);
 
-    await save.save();
+//     await save.save();
 
-    console.log(save);
+//     console.log(save);
+// }
+
+// saveTest();
+
+
+import { StatePromise } from "./engine/base/StatePromise";
+
+
+function waitASecond()
+{
+    return new Promise<number>((res, rej) => {
+        setTimeout(() => {
+            // randomly resolve or reject, for demonstration:
+            if(Math.floor(Math.random() * 2))
+                return res(Math.floor(Math.random() * 10));
+            else
+                return rej(new Error("Hello, I am an error"));
+        }, 1000);
+    });
 }
 
-saveTest();
+async function promiseTest()
+{
+    const statePromise = new StatePromise<number>(waitASecond());
+
+    console.log(`BEGIN - ${statePromise.toString()}`);
+
+    statePromise.exec().then((num) => {
+        console.log(`DONE - ${statePromise.toString()} - Random number: ${num}`);
+    }).catch(err => {
+        console.log(`REJECTED - ${statePromise.toString()} - ${err}`);
+    })
+}
+
+promiseTest();
