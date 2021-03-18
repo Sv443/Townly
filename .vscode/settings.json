@@ -78,6 +78,7 @@
     // REQUIRES EXTENSION: streetsidesoftware.code-spell-checker
     "cSpell.words": [
         "bitshift",
+        "buildstart",
         "comparand",
         "existance",
         "fehler",
@@ -86,9 +87,12 @@
         "janky",
         "keypresses",
         "nanotimer",
+        "nexe",
+        "nomadhoc",
         "perlin",
         "preloads",
         "renderable",
+        "sandviken",
         "stringifiable",
         "svcorelib",
         "systeminformation",
@@ -97,6 +101,7 @@
         "tengobject",
         "tengs",
         "townly",
-        "unfulfillment"
+        "unfulfillment",
+        "wintergatan"
     ],
 }
