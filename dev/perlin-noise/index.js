@@ -29,7 +29,7 @@ process.stdout.write("\n");
 
 
 const lines = [];
-for(let y = 0; y < (process.stdout.rows - 4); y++)
+for(let y = 0; y < (process.stdout.rows - 5); y++)
 {
     const chars = [];
     for(let x = 0; x < (process.stdout.columns); x++)
@@ -43,3 +43,5 @@ for(let y = 0; y < (process.stdout.rows - 4); y++)
 }
 
 process.stdout.write(lines.join("\n") + "\n");
+
+console.log(`Seed: ${seed}`);
