@@ -1,7 +1,6 @@
 ## Todo List:
 - TODO: reimplement cursor for the new chunk-based cell containment system
 - TODO: add option to use terminal's native cursor
-- TODO: use event emitters instead of custom `on()` methods
 - TODO: implement differential rendering (only re-render cells that have been changed)
 
 
@@ -14,7 +13,7 @@
 - [x] Implement a cursor that can be moved
 - [x] Add chunks to the grid
 - [x] Add serialization (save states)
-- [ ] Add some ambient music to the game
+- [x] Add some ambient music to the game
 - [ ] Add map generation (based on layered coherent noise) to the grid
 - [ ] Add a main menu (something basic to begin with)
 - [ ] Implement the legacy edition's smoothing algorithm based on cellular automata
