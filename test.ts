@@ -222,7 +222,7 @@ console.log(`Tick interval: ${gl.getTickInterval()}ms`);
 console.log(`Target TPS:    ${gl.getTargetTPS()}`);
 console.log();
 
-gl.on("tick", (numTicks) => {
+gl.on("tick", (numTicks: number) => {
     console.log(`Tick #${numTicks}`);
 });
 
