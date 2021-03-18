@@ -166,41 +166,70 @@
 
 
 
-import { Audio, Track } from "./engine/audio/Audio";
-import { CycleMode, Playlist } from "./engine/audio/Playlist";
+// import { Audio, Track } from "./engine/audio/Audio";
+// import { CycleMode, Playlist } from "./engine/audio/Playlist";
 
 
-async function audioTest()
-{
-    const tracks: Track[] = [
-        {
-            name: "Olivier",
-            instance: new Audio("./game/assets/audio/music/Olivier - Wintergatan Vol2.mp3")
-        },
-        {
-            name: "Prototype",
-            instance: new Audio("./game/assets/audio/music/Prototype - Wintergatan Vol2.mp3")
-        },
-        {
-            name: "Sandviken Stradivarius",
-            instance: new Audio("./game/assets/audio/music/Sandviken Stradivarius - Wintergatan Vol2.mp3")
-        }
-    ];
+// async function audioTest()
+// {
+//     const tracks: Track[] = [
+//         {
+//             name: "Olivier",
+//             instance: new Audio("./game/assets/audio/music/Olivier - Wintergatan Vol2.mp3")
+//         },
+//         {
+//             name: "Prototype",
+//             instance: new Audio("./game/assets/audio/music/Prototype - Wintergatan Vol2.mp3")
+//         },
+//         {
+//             name: "Sandviken Stradivarius",
+//             instance: new Audio("./game/assets/audio/music/Sandviken Stradivarius - Wintergatan Vol2.mp3")
+//         }
+//     ];
 
-    const pl = new Playlist(CycleMode.Off, tracks);
+//     const pl = new Playlist(CycleMode.Off, tracks);
 
-    await pl.loadMetadata();
+//     await pl.loadMetadata();
 
-    const tri = pl.getTrack("Sandviken Stradivarius")?.instance;
+//     const tri = pl.getTrack("Sandviken Stradivarius")?.instance;
 
-    if(tri)
-    {
-        tri.setVolume(0.05);
+//     if(tri)
+//     {
+//         tri.setVolume(0.05);
 
-        await tri.play();
+//         await tri.play();
 
-        console.log("done");
-    }
-}
+//         console.log("done");
+//     }
+// }
 
-audioTest();
+// audioTest();
+
+
+
+
+import { GameLoop, IGameLoopSettings } from "./engine/base/GameLoop";
+
+
+const glSettings: Partial<IGameLoopSettings> = {
+    desyncEventThreshold: 20
+};
+
+const gl = new GameLoop(10, glSettings);
+
+console.log();
+console.log(`Tick interval: ${gl.getTickInterval()}ms`);
+console.log(`Target TPS:    ${gl.getTargetTPS()}`);
+console.log();
+
+gl.on("tick", (numTicks) => {
+    console.log(`Tick #${numTicks}`);
+});
+
+gl.on("desync", (target: number, actual: number) => {
+    console.log(`DESYNC: expected ${target} - got ${actual}`);
+
+    setTimeout(() => {
+        process.exit();
+    }, 1000);
+});
