@@ -174,30 +174,33 @@ async function audioTest()
 {
     const tracks: Track[] = [
         {
-            name: "DebugSound.m4a",
-            instance: new Audio("./game/assets/audio/general/DebugSound.m4a")
+            name: "Olivier",
+            instance: new Audio("./game/assets/audio/music/Olivier - Wintergatan Vol2.mp3")
         },
         {
-            name: "DebugSound.mp3",
-            instance: new Audio("./game/assets/audio/general/DebugSound.mp3")
+            name: "Prototype",
+            instance: new Audio("./game/assets/audio/music/Prototype - Wintergatan Vol2.mp3")
         },
         {
-            name: "DebugSound.ogg",
-            instance: new Audio("./game/assets/audio/general/DebugSound.ogg")
-        },
-        {
-            name: "DebugSound.wav",
-            instance: new Audio("./game/assets/audio/general/DebugSound.wav")
+            name: "Sandviken Stradivarius",
+            instance: new Audio("./game/assets/audio/music/Sandviken Stradivarius - Wintergatan Vol2.mp3")
         }
     ];
 
-    const pl = new Playlist(CycleMode.Manual, tracks);
+    const pl = new Playlist(CycleMode.Off, tracks);
 
     await pl.loadMetadata();
 
-    pl.removeTrack("DebugSound.ogg");
+    const tri = pl.getTrack("Sandviken Stradivarius")?.instance;
 
-    console.log(pl.getTracks());
+    if(tri)
+    {
+        tri.setVolume(0.05);
+
+        await tri.play();
+
+        console.log("done");
+    }
 }
 
 audioTest();
