@@ -10,11 +10,13 @@
 // import { InputHandler } from "./engine/input/InputHandler";
 // import { Land } from "./game/components/cells/Land";
 // import { SaveState } from "./engine/serialization/SaveState";
+import { Size } from "./engine/base/Base";
 
 
-// const chunkSize = new Size(20, 10);
-// // const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
-// const gridSize = new Size(200, 50);
+
+const chunkSize = new Size(20, 10);
+// const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
+const gridSize = new Size(200, 50);
 
 // console.log(`Grid size = ${gridSize.toString()}`);
 
@@ -197,10 +199,12 @@
 //     {
 //         tri.setVolume(0.05);
 
-//         await tri.play();
+//         // await tri.play();
 
 //         console.log("done");
 //     }
+
+//     console.log();
 // }
 
 // audioTest();
@@ -237,9 +241,7 @@
 
 
 
-
 import { seededRNG } from "svcorelib";
-import { Size } from "./engine/base/Base";
 import { LayeredNoise } from "./engine/noise/LayeredNoise";
 import { Algorithm, INoiseAlgorithmSettings, NoiseLayer } from "./engine/noise/NoiseLayer";
 
@@ -277,3 +279,21 @@ async function noiseTest()
 }
 
 noiseTest();
+
+
+
+
+
+
+
+// import { Cursor } from "ansi";
+
+
+// async function cursorTest()
+// {
+//     const cursor = new Cursor(process.stdout);
+
+//     cursor.beep();
+// }
+
+// cursorTest();
