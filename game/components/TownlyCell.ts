@@ -19,6 +19,7 @@ export abstract class TownlyCell extends Cell
 {
     private type: CellType;
 
+
     /**
      * Creates an instance of the TownlyCell class
      * @param type The type of the cell
