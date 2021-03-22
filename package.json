@@ -38,6 +38,7 @@
     "nanotimer": "^0.3.15",
     "pf-perlin": "^2.0.0",
     "sanitize-filename": "^1.6.3",
+    "simplex-noise": "^2.4.0",
     "sound-play": "^1.1.0",
     "svcorelib": "^1.13.0"
   },
