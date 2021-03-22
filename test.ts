@@ -208,28 +208,72 @@
 
 
 
-import { GameLoop, IGameLoopSettings } from "./engine/base/GameLoop";
+// import { GameLoop, IGameLoopSettings } from "./engine/base/GameLoop";
 
 
-const glSettings: Partial<IGameLoopSettings> = {
-    desyncEventThreshold: 20
-};
+// const glSettings: Partial<IGameLoopSettings> = {
+//     desyncEventThreshold: 20
+// };
 
-const gl = new GameLoop(10, glSettings);
+// const gl = new GameLoop(10, glSettings);
 
-console.log();
-console.log(`Tick interval: ${gl.getTickInterval()}ms`);
-console.log(`Target TPS:    ${gl.getTargetTPS()}`);
-console.log();
+// console.log();
+// console.log(`Tick interval: ${gl.getTickInterval()}ms`);
+// console.log(`Target TPS:    ${gl.getTargetTPS()}`);
+// console.log();
 
-gl.on("tick", (numTicks: number) => {
-    console.log(`Tick #${numTicks}`);
-});
+// gl.on("tick", (numTicks: number) => {
+//     console.log(`Tick #${numTicks}`);
+// });
 
-gl.on("desync", (target: number, actual: number) => {
-    console.log(`DESYNC: expected ${target} - got ${actual}`);
+// gl.on("desync", (target: number, actual: number) => {
+//     console.log(`DESYNC: expected ${target} - got ${actual}`);
 
-    setTimeout(() => {
-        process.exit();
-    }, 1000);
-});
+//     setTimeout(() => {
+//         process.exit();
+//     }, 1000);
+// });
+
+
+
+
+
+import { seededRNG } from "svcorelib";
+import { Size } from "./engine/base/Base";
+import { LayeredNoise } from "./engine/noise/LayeredNoise";
+import { Algorithm, INoiseAlgorithmSettings, NoiseLayer } from "./engine/noise/NoiseLayer";
+
+
+async function noiseTest()
+{
+    console.log();
+
+    const mapSize = new Size(30, 20);
+    const ln = new LayeredNoise(mapSize);
+
+    const seed = seededRNG.generateRandomSeed(10).toString();
+    console.log(`Seed: ${seed}`)
+
+    const algSettings: Partial<INoiseAlgorithmSettings> = {
+        seed,
+        resolution: 25
+    };
+
+    const layer = new NoiseLayer(mapSize, Algorithm.Perlin, algSettings);
+
+    console.log(`Layer: ${layer.toString()}`);
+
+    ln.addLayer(layer);
+
+    const noiseMap = await ln.generateMap();
+
+    console.log(`\n\nNoise Map:`);
+
+    noiseMap.forEach(row => {
+        console.log(row.map(v => (v * 10).toFixed(0)).join("  "));
+    });
+
+    console.log("\nend.\n");
+}
+
+noiseTest();
