@@ -4,6 +4,7 @@ import { colors, unused, pause } from "svcorelib";
 
 import { dbg, LogLevel } from "../engine/base/Base";
 import * as Controller from "./Controller";
+import { GameLoop, IGameLoopSettings } from "../engine/base/GameLoop";
 
 
 function preInit()
@@ -47,9 +48,21 @@ async function initAll()
 
         console.log(`${colors.fg.green}Started ${generalSettings.info.name} v${generalSettings.info.versionStr}${colors.rst}`);
 
-        setInterval(() => {
-            console.log(`#DEBUG: Tick`);
-        }, 1000);
+
+
+        const gameLoopSettings: Partial<IGameLoopSettings> = {
+            desyncEventThreshold: 25
+        };
+
+        const loop = new GameLoop(10, gameLoopSettings);
+
+        loop.on("tick", (tickNum) => {
+            console.log(`#DEBUG - Tick #${tickNum}`);
+        });
+
+        loop.on("desync", (target, actual) => {
+            console.log(`#DEBUG !! Desync: ${actual} of target ${target}`);
+        });
     }
     catch(err)
     {

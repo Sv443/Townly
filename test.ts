@@ -254,20 +254,19 @@ async function noiseTest()
     const ln = new LayeredNoise(mapSize);
 
     const seed = seededRNG.generateRandomSeed(10).toString();
-    console.log(`Seed: ${seed}`)
+    console.log(`Seed: ${seed}`);
 
-    const algSettings: Partial<INoiseAlgorithmSettings> = {
-        seed,
-        resolution: 25
-    };
 
-    const layer = new NoiseLayer(mapSize, Algorithm.Perlin, algSettings);
+    const layers: NoiseLayer[] = [
+        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 25 }),
+        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 10 })
+    ];
 
-    console.log(`Layer: ${layer.toString()}`);
+    layers.forEach(layer => ln.addLayer(layer));
 
-    ln.addLayer(layer);
 
     const noiseMap = await ln.generateMap();
+
 
     console.log(`\n\nNoise Map:`);
 
