@@ -243,7 +243,7 @@ const gridSize = new Size(200, 50);
 
 import { colors, seededRNG } from "svcorelib";
 import { LayeredNoise } from "./engine/noise/LayeredNoise";
-import { Algorithm, INoiseAlgorithmSettings, NoiseLayer } from "./engine/noise/NoiseLayer";
+import { Algorithm, NoiseLayer } from "./engine/noise/NoiseLayer";
 
 
 async function noiseTest()
