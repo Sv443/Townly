@@ -242,7 +242,7 @@ const gridSize = new Size(200, 50);
 
 
 import { colors, seededRNG } from "svcorelib";
-import { LayeredNoise } from "./engine/noise/LayeredNoise";
+import { LayeredNoise, LayerImportanceFormula } from "./engine/noise/LayeredNoise";
 import { Algorithm, NoiseLayer } from "./engine/noise/NoiseLayer";
 
 
@@ -251,11 +251,12 @@ async function noiseTest()
     console.log();
 
     const mapSize = new Size(150, 50);
-    const ln = new LayeredNoise(mapSize);
 
     const seed = seededRNG.generateRandomSeed(10).toString();
     console.log(`Seed: ${seed}`);
 
+
+    const ln = new LayeredNoise(mapSize);
 
     const layers: NoiseLayer[] = [
         new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 50 }),
@@ -264,6 +265,19 @@ async function noiseTest()
     ];
 
     layers.forEach(layer => ln.addLayer(layer));
+
+
+    // // example formula: https://www.desmos.com/calculator/yvqff9uusj
+    // const fn: LayerImportanceFormula = (cur, last, amt) => {
+    //     let val = Math.sqrt(cur) * -0.5 + 1;
+
+    //     if(val < 0.0)
+    //         val = 0.0;
+
+    //     return val;
+    // };
+
+    // ln.setImportanceFormula(fn);
 
 
     const noiseMap = await ln.generateMap();
