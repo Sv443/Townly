@@ -15,8 +15,6 @@ export class Land extends TownlyCell
     update(): Promise<void>
     {
         return new Promise<void>(async (res, rej) => {
-            // TODO: some update stuff? idk
-
             return res();
         });
     }

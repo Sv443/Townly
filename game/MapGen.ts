@@ -1,7 +1,12 @@
 import { gameSettings } from "../settings";
 
-import { Cell } from "../engine/components/Cell";
 import { seededRNG } from "svcorelib";
+import { Algorithm, NoiseLayer, NoiseMap } from "../engine/noise/NoiseLayer";
+import { LayeredNoise } from "../engine/noise/LayeredNoise";
+import { Size } from "../engine/base/Base";
+import { Water } from "./components/cells/Water";
+import { Land } from "./components/cells/Land";
+import { TownlyCell } from "./components/TownlyCell";
 
 
 /**
@@ -19,27 +24,62 @@ export abstract class MapGen
 {
     /**
      * Generates a map based on a preset and seed
+     * @param size
      * @param preset
      * @param seed
      */
-    static generate(preset: MapPreset, seed?: number): Cell[][]
+    static generate(size: Size, preset: MapPreset, seed?: number): Promise<TownlyCell[][]>
     {
-        if(seed == undefined)
-            seed = seededRNG.generateRandomSeed(gameSettings.mapGen.seed.digitCount);
+        return new Promise<TownlyCell[][]>(async (res, rej) => {
+            if(seed == undefined)
+                seed = seededRNG.generateRandomSeed(gameSettings.mapGen.seed.digitCount);
 
-        if(seed < 10000000 || seed > 99999999)
-            throw new TypeError(`Provided seed is not 8 digits in length or starts with a 0`);
+            const mapSeed = seed.toString();
 
-        let generatedCells: Cell[][] = [];
+            const generatedCells: TownlyCell[][] = [];
 
-        // TODO: generate shit, obviously
-        switch(preset)
-        {
-            case MapPreset.Debug:
+            switch(preset)
+            {
+                case MapPreset.Debug:
+                {
+                    const ln = new LayeredNoise(size);
+                    let noiseMap: NoiseMap = [];
 
-            break;
-        }
+                    switch(preset)
+                    {
+                        case MapPreset.Debug:
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 50 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 35 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 20 }));
 
-        return generatedCells;
+                            noiseMap = await ln.generateMap();
+                        break;
+                    }
+
+                    // TODO: convert NoiseMap to TownlyCell[][]
+
+                    size.forEachPosition(pos => {
+                        if(pos.y === generatedCells.length)
+                            generatedCells.push([]);
+
+                        const noiseVal = noiseMap[pos.y][pos.x];
+                        let cell: TownlyCell;
+
+                        if(noiseVal < 5)
+                            cell = new Water(pos, true);
+                        else if(noiseVal < 6)
+                            cell = new Water(pos, false);
+                        else
+                            cell = new Land(pos);
+
+                        generatedCells[pos.y].push(cell);
+                    });
+
+                    break;
+                }
+            }
+
+            return res(generatedCells);
+        });
     }
 }
