@@ -241,7 +241,7 @@ const gridSize = new Size(200, 50);
 
 
 
-import { seededRNG } from "svcorelib";
+import { colors, seededRNG } from "svcorelib";
 import { LayeredNoise } from "./engine/noise/LayeredNoise";
 import { Algorithm, INoiseAlgorithmSettings, NoiseLayer } from "./engine/noise/NoiseLayer";
 
@@ -250,7 +250,7 @@ async function noiseTest()
 {
     console.log();
 
-    const mapSize = new Size(10, 5);
+    const mapSize = new Size(150, 50);
     const ln = new LayeredNoise(mapSize);
 
     const seed = seededRNG.generateRandomSeed(10).toString();
@@ -258,8 +258,9 @@ async function noiseTest()
 
 
     const layers: NoiseLayer[] = [
-        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 25 }),
-        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 10 })
+        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 50 }),
+        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 35 }),
+        new NoiseLayer(mapSize, Algorithm.Perlin, { seed, resolution: 20 }),
     ];
 
     layers.forEach(layer => ln.addLayer(layer));
@@ -270,8 +271,20 @@ async function noiseTest()
 
     console.log(`\n\nNoise Map:`);
 
+    const toColoredChar = (val: number) => {
+        switch(val)
+        {
+            case 3:  return `${colors.fg.black}~${colors.rst}`;
+            case 4:  return `${colors.fg.blue}~${colors.rst}`;
+            case 5:  return `${colors.fg.cyan}~${colors.rst}`;
+            case 6:  return `${colors.fg.yellow}▒${colors.rst}`;
+            case 7:  return `${colors.fg.green}▓${colors.rst}`;
+            default: return `${colors.fg.white}-${colors.rst}`;
+        }
+    }
+
     noiseMap.forEach(row => {
-        console.log(row.map(v => (v * 10).toFixed(0)).join("  "));
+        console.log(row.map(v => toColoredChar(parseInt((v * 10).toFixed(0)))).join(""));
     });
 
     console.log("\nend.\n");
