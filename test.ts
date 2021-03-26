@@ -250,7 +250,7 @@ async function noiseTest()
 {
     console.log();
 
-    const mapSize = new Size(30, 20);
+    const mapSize = new Size(10, 5);
     const ln = new LayeredNoise(mapSize);
 
     const seed = seededRNG.generateRandomSeed(10).toString();
