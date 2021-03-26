@@ -56,8 +56,7 @@ export abstract class MapGen
                         break;
                     }
 
-                    // TODO: convert NoiseMap to TownlyCell[][]
-
+                    // iterate over each noise value and convert it to a TownlyCell
                     size.forEachPosition(pos => {
                         if(pos.y === generatedCells.length)
                             generatedCells.push([]);
