@@ -117,4 +117,10 @@
         "unfulfillment",
         "wintergatan"
     ],
+
+
+    // Powershell - remove initial text (copyright, version, "type help to get help", etc.)
+    "terminal.integrated.shellArgs.windows": [
+        "-nologo"
+    ]
 }
