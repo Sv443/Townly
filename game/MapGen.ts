@@ -34,8 +34,6 @@ export abstract class MapGen
             if(seed == undefined)
                 seed = seededRNG.generateRandomSeed(gameSettings.mapGen.seed.digitCount);
 
-            const mapSeed = seed.toString();
-
             const generatedCells: TownlyCell[][] = [];
 
             switch(preset)
@@ -48,9 +46,9 @@ export abstract class MapGen
                     switch(preset)
                     {
                         case MapPreset.Debug:
-                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 50 }));
-                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 35 }));
-                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed: mapSeed, resolution: 20 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 50 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 35 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 20 }));
 
                             noiseMap = await ln.generateMap();
                         break;
