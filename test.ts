@@ -339,58 +339,83 @@
 
 
 
-import { seededRNG } from "svcorelib";
+// import { seededRNG } from "svcorelib";
 
-import { Area, Position, Size } from "./engine/base/Base";
-import { Chunk } from "./engine/components/Chunk";
-import { Grid, IGridOptions } from "./engine/components/Grid";
-import { TownlyCell } from "./game/components/TownlyCell";
-import { MapGen, MapPreset } from "./game/world/MapGen";
+// import { Area, Position, Size } from "./engine/base/Base";
+// import { Chunk } from "./engine/components/Chunk";
+// import { Grid, IGridOptions } from "./engine/components/Grid";
+// import { TownlyCell } from "./game/components/TownlyCell";
+// import { MapGen, MapPreset } from "./game/world/MapGen";
 
 
-async function testCellMapGen()
+// async function testCellMapGen()
+// {
+//     const preset = MapPreset.Debug;
+//     const mapSize = new Size(process.stdout.columns, process.stdout.rows - 5);
+
+//     const seed = seededRNG.generateRandomSeed(10);
+//     // const seed = 5370703259;
+
+//     const map = await MapGen.generate(mapSize, preset, seed);
+
+//     const chunkIdx = new Position(0, 0);
+//     const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, mapSize), map);
+
+
+//     const gridOpts: Partial<IGridOptions> = {
+//         inputEnabled: false
+//     };
+
+//     const grid = new Grid(mapSize, mapSize, [[chunk]], gridOpts);
+
+
+
+
+//     const cells: TownlyCell[][] = (grid.getCells(chunkIdx) as TownlyCell[][]);
+
+
+//     const printRows: string[] = [];
+
+//     cells.forEach((row) => {
+//         const printRow: string[] = [];
+
+//         row.forEach((cell) => {
+//             printRow.push(cell.getChar());
+//         });
+
+//         printRows.push(printRow.join(""));
+//     });
+
+//     process.stdout.write(`${printRows.join("\n")}\n`);
+
+//     console.log(`\nSeed: ${seed}\n`);
+// }
+
+
+// setInterval(() => testCellMapGen(), 5000);
+// testCellMapGen();
+
+
+
+
+
+import { MainMenu } from "./engine/display/menus/MainMenu";
+
+
+async function mainMenuTest()
 {
-    const preset = MapPreset.Debug;
-    const mapSize = new Size(process.stdout.columns, process.stdout.rows - 5);
+    const mm = new MainMenu("Townly", undefined, "Script");
 
-    const seed = seededRNG.generateRandomSeed(10);
-    // const seed = 5370703259;
+    mm.addOption("test");
+    mm.addOption("succ");
 
-    const map = await MapGen.generate(mapSize, preset, seed);
+    await mm.preload();
 
-    const chunkIdx = new Position(0, 0);
-    const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, mapSize), map);
+    console.log(mm.getFIGTitle().join("\n"));
 
+    // const selectedOption = await mm.show();
 
-    const gridOpts: Partial<IGridOptions> = {
-        inputEnabled: false
-    };
-
-    const grid = new Grid(mapSize, mapSize, [[chunk]], gridOpts);
-
-
-
-
-    const cells: TownlyCell[][] = (grid.getCells(chunkIdx) as TownlyCell[][]);
-
-
-    const printRows: string[] = [];
-
-    cells.forEach((row) => {
-        const printRow: string[] = [];
-
-        row.forEach((cell) => {
-            printRow.push(cell.getChar());
-        });
-
-        printRows.push(printRow.join(""));
-    });
-
-    process.stdout.write(`${printRows.join("\n")}\n`);
-
-    console.log(`\nSeed: ${seed}\n`);
+    // setImmediate(() => console.log(`Selected ${mm.getOptions()[selectedOption]}`));
 }
 
-
-setInterval(() => testCellMapGen(), 5000);
-testCellMapGen();
+mainMenuTest();
