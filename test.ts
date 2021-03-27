@@ -404,7 +404,7 @@ import { MainMenu } from "./engine/display/menus/MainMenu";
 
 async function mainMenuTest()
 {
-    const mm = new MainMenu("Townly", undefined, "Script");
+    const mm = new MainMenu("Townly");
 
     mm.addOption("test");
     mm.addOption("succ");
