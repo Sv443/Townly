@@ -49,20 +49,6 @@
                 "color": "#fff"
             }
         ],
-        // "(<!--%#INSERT:[a-zA-Z0-9\\-]+#%-->|<!--%#INJECT:[a-zA-Z0-9\\-]+#%-->)": [ // <!--%#INSERT:TEST#%--> / <!--%#INJECT:TEST#%-->
-        //     {
-        //         "color": "orange",
-        //         "fontStyle": "italic",
-        //         "outline": "1px solid orange"
-        //     }
-        // ],
-        // "(<%#INSERT:[a-zA-Z0-9\\-]+#%>|<%#INJECT:[a-zA-Z0-9\\-]+#%>)": [ // <%#INSERT:TEST#%> / <%#INJECT:TEST#%>
-        //     {
-        //         "color": "orange",
-        //         "fontStyle": "italic",
-        //         "outline": "1px solid orange"
-        //     }
-        // ],
     },
 
     // REQUIRES EXTENSION: coenraads.bracket-pair-colorizer-2

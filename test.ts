@@ -399,7 +399,7 @@
 
 
 
-import { MainMenu } from "./engine/display/menus/MainMenu";
+import { MainMenu } from "./engine/display/ui/menus/MainMenu";
 
 
 async function mainMenuTest()
@@ -411,11 +411,11 @@ async function mainMenuTest()
 
     await mm.preload();
 
-    console.log(mm.getFIGTitle().join("\n"));
+    mm.on("submit", res => {
+        console.log(`Selected option: ${res.option.description}`);
+    });
 
-    // const selectedOption = await mm.show();
-
-    // setImmediate(() => console.log(`Selected ${mm.getOptions()[selectedOption]}`));
+    mm.show();
 }
 
 mainMenuTest();
