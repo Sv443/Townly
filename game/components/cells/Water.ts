@@ -10,9 +10,12 @@ export class Water extends TownlyCell
 
     constructor(position: Position, deep: boolean = false)
     {
-        super(CellType.Water, position, "▓");
+        super(CellType.Water, position, "▒");
 
         this.deep = deep;
+
+        if(this.deep)
+            this.char = "░";
     }
 
     /**

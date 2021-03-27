@@ -46,9 +46,9 @@ export abstract class MapGen
                     switch(preset)
                     {
                         case MapPreset.Debug:
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 100 }));
                             ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 50 }));
-                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 35 }));
-                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 20 }));
+                            ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 10 }));
 
                             noiseMap = await ln.generateMap();
                         break;
@@ -59,12 +59,12 @@ export abstract class MapGen
                         if(pos.y === generatedCells.length)
                             generatedCells.push([]);
 
-                        const noiseVal = noiseMap[pos.y][pos.x];
+                        const noiseVal = noiseMap[pos.y][pos.x] * 10;
                         let cell: TownlyCell;
 
-                        if(noiseVal < 5)
+                        if(noiseVal < 4)
                             cell = new Water(pos, true);
-                        else if(noiseVal < 6)
+                        else if(noiseVal < 5)
                             cell = new Water(pos, false);
                         else
                             cell = new Land(pos);

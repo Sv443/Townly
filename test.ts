@@ -10,13 +10,12 @@
 // import { InputHandler } from "./engine/input/InputHandler";
 // import { Land } from "./game/components/cells/Land";
 // import { SaveState } from "./engine/serialization/SaveState";
-import { Size } from "./engine/base/Base";
+// import { Size } from "./engine/base/Base";
 
 
-
-const chunkSize = new Size(20, 10);
+// const chunkSize = new Size(20, 10);
 // const gridSize = new Size((process.stdout.columns || 10), (process.stdout.rows || 5));
-const gridSize = new Size(200, 50);
+// const gridSize = new Size(200, 50);
 
 // console.log(`Grid size = ${gridSize.toString()}`);
 
@@ -337,3 +336,61 @@ const gridSize = new Size(200, 50);
 // }
 
 // testInterpolation();
+
+
+
+import { seededRNG } from "svcorelib";
+
+import { Area, Position, Size } from "./engine/base/Base";
+import { Chunk } from "./engine/components/Chunk";
+import { Grid, IGridOptions } from "./engine/components/Grid";
+import { TownlyCell } from "./game/components/TownlyCell";
+import { MapGen, MapPreset } from "./game/world/MapGen";
+
+
+async function testCellMapGen()
+{
+    const preset = MapPreset.Debug;
+    const mapSize = new Size(process.stdout.columns, process.stdout.rows - 5);
+
+    const seed = seededRNG.generateRandomSeed(10);
+    // const seed = 5370703259;
+
+    const map = await MapGen.generate(mapSize, preset, seed);
+
+    const chunkIdx = new Position(0, 0);
+    const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, mapSize), map);
+
+
+    const gridOpts: Partial<IGridOptions> = {
+        inputEnabled: false
+    };
+
+    const grid = new Grid(mapSize, mapSize, [[chunk]], gridOpts);
+
+
+
+
+    const cells: TownlyCell[][] = (grid.getCells(chunkIdx) as TownlyCell[][]);
+
+
+    const printRows: string[] = [];
+
+    cells.forEach((row) => {
+        const printRow: string[] = [];
+
+        row.forEach((cell) => {
+            printRow.push(cell.getChar());
+        });
+
+        printRows.push(printRow.join(""));
+    });
+
+    process.stdout.write(`${printRows.join("\n")}\n`);
+
+    console.log(`\nSeed: ${seed}\n`);
+}
+
+
+setInterval(() => testCellMapGen(), 5000);
+testCellMapGen();
