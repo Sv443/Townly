@@ -1,12 +1,12 @@
-import { gameSettings } from "../settings";
+import { gameSettings } from "../../settings";
 
 import { seededRNG } from "svcorelib";
-import { Algorithm, NoiseLayer, NoiseMap } from "../engine/noise/NoiseLayer";
-import { LayeredNoise } from "../engine/noise/LayeredNoise";
-import { Size } from "../engine/base/Base";
-import { Water } from "./components/cells/Water";
-import { Land } from "./components/cells/Land";
-import { TownlyCell } from "./components/TownlyCell";
+import { Algorithm, NoiseLayer, NoiseMap } from "../../engine/noise/NoiseLayer";
+import { LayeredNoise } from "../../engine/noise/LayeredNoise";
+import { Size } from "../../engine/base/Base";
+import { Water } from "../components/cells/Water";
+import { Land } from "../components/cells/Land";
+import { TownlyCell } from "../components/TownlyCell";
 
 
 /**
