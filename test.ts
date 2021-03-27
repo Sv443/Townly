@@ -328,12 +328,12 @@ const gridSize = new Size(200, 50);
 
 
 
-import { linear } from "./engine/math/Interpolation";
+// import { linear } from "./engine/math/Interpolation";
 
 
-async function testInterpolation()
-{
-    console.log(linear(1, -100, 100));
-}
+// async function testInterpolation()
+// {
+//     console.log(linear(1, -100, 100));
+// }
 
-testInterpolation();
+// testInterpolation();
