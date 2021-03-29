@@ -399,23 +399,46 @@
 
 
 
-import { MainMenu } from "./engine/display/ui/menus/MainMenu";
+// import { MainMenu } from "./engine/display/ui/menus/MainMenu";
 
 
-async function mainMenuTest()
+// async function mainMenuTest()
+// {
+//     const mm = new MainMenu("Townly");
+
+//     mm.addOption("test");
+//     mm.addOption("succ");
+
+//     await mm.preload();
+
+//     mm.on("submit", res => {
+//         console.log(`Selected option: ${res.option.description}`);
+//     });
+
+//     mm.show();
+// }
+
+// mainMenuTest();
+
+
+
+
+import { DiscordIntegration } from "./engine/integrations/Discord";
+
+
+async function discordTest()
 {
-    const mm = new MainMenu("Townly");
+    const di = new DiscordIntegration("826047696036429836");
 
-    mm.addOption("test");
-    mm.addOption("succ");
-
-    await mm.preload();
-
-    mm.on("submit", res => {
-        console.log(`Selected option: ${res.option.description}`);
+    di.setPresence({
+        // state: "Doing surgery on a grape",
+        details: "🍇",
+        // startTimestamp: Date.now(),
+        // largeImageKey: "icon_1000"
     });
 
-    mm.show();
+    di.on("connected", () => console.log("connected"));
+    di.on("error", (err) => console.log(`Error: ${err}`));
 }
 
-mainMenuTest();
+discordTest();
