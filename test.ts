@@ -431,10 +431,10 @@ async function discordTest()
     const di = new DiscordIntegration("826047696036429836");
 
     di.setPresence({
-        // state: "Doing surgery on a grape",
+        state: "Doing surgery on a grape",
         details: "🍇",
-        // startTimestamp: Date.now(),
-        // largeImageKey: "icon_1000"
+        startTimestamp: Date.now(),
+        largeImageKey: "icon_1000"
     });
 
     di.on("connected", () => console.log("connected"));
