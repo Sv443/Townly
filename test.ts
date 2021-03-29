@@ -446,3 +446,53 @@
 // }
 
 // discordTest();
+
+
+
+import { seededRNG } from "svcorelib";
+
+import { Area, Position, Size } from "./engine/base/Base";
+import { Cell } from "./engine/components/Cell";
+import { Chunk } from "./engine/components/Chunk";
+import { TownlyCell } from "./game/components/TownlyCell";
+import { MapGen, MapPreset } from "./game/world/MapGen";
+
+
+async function mapSmoothingTest()
+{
+    const size = new Size(process.stdout.columns, process.stdout.rows - 4);
+    const chunkSize = size;
+    const seed = seededRNG.generateRandomSeed(10);
+
+    console.log(`Seed: ${seed} - Size: ${size.toString()}\n`);
+
+
+    const genTimeStart = Date.now();
+
+    const cells: TownlyCell[][] = await MapGen.generate(size, MapPreset.Debug, seed);
+
+    const genTimeEnd = Date.now();
+
+
+    const chunkIdx = new Position(0, 0);
+
+    const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, chunkSize), (cells as Cell[][]));
+
+
+    const logRows: string[] = [];
+
+    chunk.getCells().forEach((row, y) => {
+        logRows.push("");
+
+        row.forEach((cell, x) => {
+            logRows[y] += cell.getChar();
+        });
+    });
+
+    process.stdout.write(logRows.join("\n"));
+
+    process.stdout.write(`\n\nGeneration took ${genTimeEnd - genTimeStart}ms  `);
+}
+
+setInterval(() => mapSmoothingTest(), 3000);
+mapSmoothingTest();
