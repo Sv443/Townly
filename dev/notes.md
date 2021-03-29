@@ -15,7 +15,7 @@
 - [x] Add serialization (save states)
 - [x] Add some ambient music to the game
 - [x] Add map generation (based on layered coherent noise) to the grid
-- [ ] Add a main menu (something basic to begin with)
+- [x] Add a main menu (something basic to begin with)
 - [ ] Implement the legacy edition's smoothing algorithm based on cellular automata
 - [ ] Add an in-game currency system, contained in some kind of controller class
 - [ ] Create an extendable GUI around a game view (game view contains the grid)

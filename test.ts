@@ -399,30 +399,30 @@
 
 
 
-import MainMenu from "./engine/display/ui/menus/MainMenu";
+// import MainMenu from "./engine/display/ui/menus/MainMenu";
 
 
-async function mainMenuTest()
-{
-    const mm = new MainMenu("Example");
+// async function mainMenuTest()
+// {
+//     const mm = new MainMenu("Example");
 
-    mm.addOption("New Game");
-    mm.addOption("Continue");
-    mm.addOption(null);
-    mm.addOption("Settings");
-    mm.addOption(null);
-    mm.addOption("Exit");
+//     mm.addOption("New Game");
+//     mm.addOption("Continue");
+//     mm.addOption(null);
+//     mm.addOption("Settings");
+//     mm.addOption(null);
+//     mm.addOption("Exit");
 
-    await mm.preload();
+//     await mm.preload();
 
-    mm.on("submit", res => {
-        console.log(`Selected option: ${res.option.text}`);
-    });
+//     mm.on("submit", res => {
+//         console.log(`Selected option: ${res.option.text}`);
+//     });
 
-    mm.show();
-}
+//     mm.show();
+// }
 
-mainMenuTest();
+// mainMenuTest();
 
 
 
