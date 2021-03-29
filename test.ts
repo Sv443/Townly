@@ -399,7 +399,7 @@
 
 
 
-import { MainMenu } from "./engine/display/ui/menus/MainMenu";
+import MainMenu from "./engine/display/ui/menus/MainMenu";
 
 
 async function mainMenuTest()
