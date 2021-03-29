@@ -404,7 +404,7 @@ import MainMenu from "./engine/display/ui/menus/MainMenu";
 
 async function mainMenuTest()
 {
-    const mm = new MainMenu("Townly");
+    const mm = new MainMenu("Example");
 
     mm.addOption("New Game");
     mm.addOption("Continue");
