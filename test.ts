@@ -399,46 +399,50 @@
 
 
 
-// import { MainMenu } from "./engine/display/ui/menus/MainMenu";
+import { MainMenu } from "./engine/display/ui/menus/MainMenu";
 
 
-// async function mainMenuTest()
-// {
-//     const mm = new MainMenu("Townly");
-
-//     mm.addOption("test");
-//     mm.addOption("succ");
-
-//     await mm.preload();
-
-//     mm.on("submit", res => {
-//         console.log(`Selected option: ${res.option.description}`);
-//     });
-
-//     mm.show();
-// }
-
-// mainMenuTest();
-
-
-
-
-import { DiscordIntegration } from "./engine/integrations/Discord";
-
-
-async function discordTest()
+async function mainMenuTest()
 {
-    const di = new DiscordIntegration("826047696036429836");
+    const mm = new MainMenu("Townly");
 
-    di.setPresence({
-        state: "Doing surgery on a grape",
-        details: "🍇",
-        startTimestamp: Date.now(),
-        largeImageKey: "icon_1000"
+    mm.addOption("New Game");
+    mm.addOption("Continue");
+    mm.addOption(null);
+    mm.addOption("Settings");
+    mm.addOption(null);
+    mm.addOption("Exit");
+
+    await mm.preload();
+
+    mm.on("submit", res => {
+        console.log(`Selected option: ${res.option.text}`);
     });
 
-    di.on("connected", () => console.log("connected"));
-    di.on("error", (err) => console.log(`Error: ${err}`));
+    mm.show();
 }
 
-discordTest();
+mainMenuTest();
+
+
+
+
+// import { DiscordIntegration } from "./engine/integrations/Discord";
+
+
+// async function discordTest()
+// {
+//     const di = new DiscordIntegration("826047696036429836");
+
+//     di.setPresence({
+//         state: "Doing surgery on a grape",
+//         details: "🍇",
+//         startTimestamp: Date.now(),
+//         largeImageKey: "icon_1000"
+//     });
+
+//     di.on("connected", () => console.log("connected"));
+//     di.on("error", (err) => console.log(`Error: ${err}`));
+// }
+
+// discordTest();
