@@ -43,7 +43,7 @@
     "sanitize-filename": "^1.6.3",
     "simplex-noise": "^2.4.0",
     "sound-play": "^1.1.0",
-    "svcorelib": "^1.13.0"
+    "svcorelib": "^1.13.1"
   },
   "devDependencies": {
     "@types/figlet": "^1.2.1",
