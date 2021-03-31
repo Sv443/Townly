@@ -22,7 +22,7 @@ export interface INeedFulfillment
  */
 export abstract class NeedyCell extends InhabitedCell
 {
-    needs: Need[] = [];
+    protected needs: Need[] = [];
 
 
     /**

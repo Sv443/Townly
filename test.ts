@@ -624,6 +624,8 @@ async function newCellsTest()
     grid.getCell(chunkIdx, cellPos);
 
     grid.setCell(chunkIdx, cellPos, new Residential(cellPos))
+
+    console.log(grid.getCell(chunkIdx, cellPos).toString())
 }
 
 newCellsTest();

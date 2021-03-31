@@ -35,9 +35,9 @@ const defaultIInhabitants: IInhabitants = {
  */
 export abstract class InhabitedCell extends Constructable
 {
-    private inhabitants: DeepPartial<IInhabitants>;
+    protected inhabitants: DeepPartial<IInhabitants>;
 
-    private level = 1;
+    protected level = 1;
 
 
     constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, inhabitants: DeepPartial<IInhabitants>)

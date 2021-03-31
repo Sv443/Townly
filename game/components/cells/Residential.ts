@@ -22,6 +22,11 @@ export class Residential extends NeedyCell
         this.addNeed(new Electricity());
     }
 
+    toString(): string
+    {
+        return `Residential Cell with ${this.getResidentsAmount()} residents @ ${this.getPosition().toString()} - UID: ${this.uid.toString()}`;
+    }
+
     update(): Promise<void>
     {
         return new Promise(async res => {
@@ -37,5 +42,12 @@ export class Residential extends NeedyCell
     bulldoze(): boolean
     {
         return true;
+    }
+
+    //#MARKER other
+
+    getResidentsAmount(): number
+    {
+        return this.inhabitants.max?.residents || 0;
     }
 }
