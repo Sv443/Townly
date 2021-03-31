@@ -8,7 +8,8 @@ import { Cell } from "../../engine/components/Cell";
 export enum CellType
 {
     Land,
-    Water
+    Water,
+    Residential
 }
 
 /**

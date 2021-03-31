@@ -35,7 +35,9 @@ const defaultIInhabitants: IInhabitants = {
  */
 export abstract class InhabitedCell extends Constructable
 {
-    inhabitants: DeepPartial<IInhabitants>;
+    private inhabitants: DeepPartial<IInhabitants>;
+
+    private level = 1;
 
 
     constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, inhabitants: DeepPartial<IInhabitants>)
@@ -44,5 +46,29 @@ export abstract class InhabitedCell extends Constructable
 
 
         this.inhabitants = { ...defaultIInhabitants, ...inhabitants };
+    }
+
+    /**
+     * Returns the level of this InhabitedCell
+     */
+    getLevel(): number
+    {
+        return this.level;
+    }
+
+    /**
+     * Sets the level of this InhabitedCell
+     */
+    setLevel(level: number): void
+    {
+        this.level = level;
+    }
+
+    /**
+     * Levels up this InhabitedCell
+     */
+    levelUp(): void
+    {
+        this.setLevel(this.getLevel() + 1);
     }
 }

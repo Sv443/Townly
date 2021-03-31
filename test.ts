@@ -367,7 +367,7 @@ process.on("SIGINT", () => {
 
 //     const map = await MapGen.generate(mapSize, preset, seed);
 
-//     const chunkIdx = new Position(0, 0);
+//     const chunkIdx = new Index2(0, 0);
 //     const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, mapSize), map);
 
 
@@ -543,7 +543,7 @@ process.on("SIGINT", () => {
 //     const genTimeEnd = Date.now();
 
 
-//     const chunkIdx = new Position(0, 0);
+//     const chunkIdx = new Index2(0, 0);
 
 //     const chunk = new Chunk(chunkIdx, Area.fromChunkIndex(chunkIdx, chunkSize), (cells as Cell[][]));
 
@@ -569,34 +569,61 @@ process.on("SIGINT", () => {
 
 
 
-import { DeepPartial } from "tsdef";
+// import { DeepPartial } from "tsdef";
 
-import { Currency, ICurrencySettings } from "./engine/components/Currency";
+// import { Currency, ICurrencySettings } from "./engine/components/Currency";
 
 
-async function currencyTest()
+// async function currencyTest()
+// {
+//     const sett: DeepPartial<ICurrencySettings> = {
+//         currencyAbbreviationPosition: "right",
+//         metricUnitPrefix: true,
+//         minThreshold: 1,
+//         maxThreshold: NaN,
+//         decimalPoint: "."
+//     };
+
+//     const currency = new Currency("Euro", "€", 500, sett);
+
+//     currency.on("thresholdPassed", (type, value, threshold) => {
+//         console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
+//     });
+
+//     console.log(`\nAmount of money doubles every time:\n`);
+
+//     setInterval(() => {
+//         currency.increase(currency.getValue());
+
+//         console.log(currency.valueAsString());
+//     }, 500);
+// }
+
+// currencyTest();
+
+
+
+
+import { Index2, Position, Size } from "./engine/base/Base";
+import { Grid } from "./engine/components/Grid";
+import { Residential } from "./game/components/cells/Residential";
+
+
+
+async function newCellsTest()
 {
-    const sett: DeepPartial<ICurrencySettings> = {
-        currencyAbbreviationPosition: "right",
-        metricUnitPrefix: true,
-        minThreshold: 1,
-        maxThreshold: NaN,
-        decimalPoint: "."
-    };
+    const gridSize = new Size(20, 5);
 
-    const currency = new Currency("Euro", "€", 500, sett);
+    const grid = new Grid(gridSize, gridSize);
 
-    currency.on("thresholdPassed", (type, value, threshold) => {
-        console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
-    });
+    grid.devFill();
 
-    console.log(`\nAmount of money doubles every time:\n`);
+    const chunkIdx = new Index2(0, 0);
+    const cellPos = new Position(0, 0);
 
-    setInterval(() => {
-        currency.increase(currency.getValue());
+    grid.getCell(chunkIdx, cellPos);
 
-        console.log(currency.valueAsString());
-    }, 500);
+    grid.setCell(chunkIdx, cellPos, new Residential(cellPos))
 }
 
-currencyTest();
+newCellsTest();

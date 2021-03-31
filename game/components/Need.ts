@@ -1,5 +1,7 @@
 import { gameSettings } from "../../settings";
 
+import { TengObject } from "../../engine/base/TengObject";
+
 
 /**
  * Describes what is needed for a need to be fulfilled
@@ -15,12 +17,13 @@ export enum FulfillmentType
 /**
  * Every resident has certain needs. This class describes those.
  */
-export abstract class Need
+export abstract class Need extends TengObject
 {
     private displayName: string;
     private description: string;
     private fulfillmentType: FulfillmentType;
     private importance: number;
+
 
     /**
      * Constructs an instance of the Need class
@@ -31,6 +34,9 @@ export abstract class Need
      */
     constructor(displayName: string, description: string, fulfillmentType: FulfillmentType = FulfillmentType.Existance, importance: number = gameSettings.needs.defaultImportance)
     {
+        super("Need", `${FulfillmentType[fulfillmentType]}/${displayName}`);
+
+
         if(importance < 0 || importance > 1)
             throw new TypeError(`Provided importance level of ${importance} is not a float between 0.0 and 1.0`);
 
@@ -39,6 +45,13 @@ export abstract class Need
         this.fulfillmentType = fulfillmentType;
         this.importance = importance;
     }
+
+    toString(): string
+    {
+        return `Need "${this.getDisplayName()}" of type ${FulfillmentType[this.getFulfillmentType()]} with importance ${this.getImportance()} - UID: ${this.uid.toString()}`;
+    }
+
+    //#MARKER other
 
     /**
      * Returns the display name of this need

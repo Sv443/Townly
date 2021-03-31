@@ -31,11 +31,15 @@ export abstract class Constructable extends TownlyCell
 {
     cost: IConstructableCost;
 
+    readonly constructedAt: Date;
+
 
     constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>)
     {
         super(cellType, pos, char);
 
         this.cost = { ...defaultIConstructableCost, ...cost };
+        
+        this.constructedAt = new Date();
     }
 }
