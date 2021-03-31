@@ -17,8 +17,7 @@
 - [x] Add map generation (based on layered coherent noise) to the grid
 - [x] Add a main menu (something basic to begin with)
 - [x] Implement the legacy edition's smoothing algorithm based on cellular automata
-- [ ] Add an in-game currency system, contained in some kind of controller class
-- [ ] Create an extendable GUI around a game view (game view contains the grid)
+- [x] Add an in-game currency system, contained in some kind of controller class
 - [ ] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 - [ ] Add water and electricity (need generating buildings), they are distributed globally (don't need pipes and wires yet)
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
