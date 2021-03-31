@@ -14,8 +14,23 @@ import { TownlyCell } from "../components/TownlyCell";
  */
 export enum MapPreset
 {
-    Debug
+    /** Generates land and water through perlin noise */
+    Lakes,
+    /** Generates land and all resources but no water */
+    Lowlands,
+    /** The entire map will be filled with only land and will not have any trees but will have underground resources */
+    Steppe,
+    /** The entire map will be filled with land cells and won't have any underground resources */
+    Prairie,
 }
+
+const mapPresetNameMapping = new Map<MapPreset, string>([
+    [MapPreset.Lakes, "Lakes"],
+    [MapPreset.Lowlands, "Lowlands"],
+    [MapPreset.Steppe, "Steppe"],
+    [MapPreset.Prairie, "Prairie"],
+]);
+
 
 /**
  * Generates the game world based on a preset and seed
@@ -37,7 +52,7 @@ export abstract class MapGen
 
             switch(preset)
             {
-                case MapPreset.Debug:
+                case MapPreset.Lakes:
                 {
                     const noiseMap = await MapGen.createNoiseMap(size, preset, seed);
 
@@ -79,19 +94,26 @@ export abstract class MapGen
 
             switch(preset)
             {
-                case MapPreset.Debug:
+                case MapPreset.Lakes:
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 90 }));
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 60 }));
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 20 }));
 
-                    const lnMap = await ln.generateMap();
+                    let lnMap = await ln.generateMap();
 
-                    const first = await LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_ExtraSmooth, 2);
-                    const second = await LayeredNoise.smoothMap(first, SmoothingAlgorithm.CA_Smooth, 2);
+                    lnMap = await LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_ExtraSmooth, 1);
+                    lnMap = await LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_Smooth, 1);
 
-                    return res(LayeredNoise.smoothMap(second, SmoothingAlgorithm.CA_Coarse, 3));
-                    // return res(lnMap);
+                    return res(LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_Coarse, 2));
             }
         });
+    }
+
+    /**
+     * Returns the friendly name of the passed preset
+     */
+    static getPresetName(preset: MapPreset): string
+    {
+        return (mapPresetNameMapping.get(preset) as string);
     }
 }

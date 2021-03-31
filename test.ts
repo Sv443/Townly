@@ -496,3 +496,16 @@
 
 // setInterval(() => mapSmoothingTest(), 3000);
 // mapSmoothingTest();
+
+
+
+
+import { Currency } from "./engine/components/Currency";
+
+
+async function currencyTest()
+{
+
+}
+
+currencyTest();
