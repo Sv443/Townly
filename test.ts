@@ -1,3 +1,12 @@
+// add linebreak before and after executing
+
+console.log();
+process.on("SIGINT", () => {
+    console.log();
+    process.exit(0);
+});
+
+
 // import { diff } from "deep-diff";
 // import { colors, pause } from "svcorelib";
 // import { Area, Color, isColor, objectsEqual, Position, Size } from "./engine/base/Base";
@@ -486,8 +495,8 @@
 //                         url: "https://youtu.be/2xx_2XNxxfA?t=3"
 //                     },
 //                     {
-//                         label: "Sv443 Discord",
-//                         url: "https://sv443.net/discord"
+//                         label: "Townly Discord",
+//                         url: "https://discord.gg/yH2VWjpAEW"
 //                     }
 //                 ]
 //             });
@@ -581,11 +590,13 @@ async function currencyTest()
         console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
     });
 
+    console.log(`\nAmount of money doubles every time:\n`);
+
     setInterval(() => {
         currency.increase(currency.getValue());
 
         console.log(currency.valueAsString());
-    }, 200);
+    }, 500);
 }
 
 currencyTest();
