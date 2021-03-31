@@ -33,7 +33,7 @@
     "@types/ansi": "^0.3.2",
     "@types/nanotimer": "^0.3.0",
     "ansi": "^0.3.1",
-    "discord-rich-presence": "^0.0.8",
+    "discord-rpc": "^3.2.0",
     "figlet": "^1.5.0",
     "fs-extra": "^9.1.0",
     "keypress": "^0.2.1",
@@ -47,7 +47,7 @@
     "tsdef": "^0.0.14"
   },
   "devDependencies": {
-    "@types/discord-rich-presence": "^0.0.0",
+    "@types/discord-rpc": "^3.0.5",
     "@types/figlet": "^1.2.1",
     "@types/fs-extra": "^9.0.8",
     "@types/mysql": "^2.15.18",

@@ -427,26 +427,86 @@
 
 
 
-// import { DiscordIntegration } from "./engine/integrations/Discord";
+// import { DiscordRPC } from "./engine/integrations/Discord";
 
 
 // async function discordTest()
 // {
-//     const di = new DiscordIntegration("826047696036429836");
+//     const di = new DiscordRPC("826047696036429836");
 
 //     di.setPresence({
 //         state: "Doing surgery on a grape",
 //         details: "🍇",
 //         startTimestamp: Date.now(),
-//         largeImageKey: "icon_1000"
+//         largeImageKey: "icon_1000",
+//         smallImageKey: "happiness_1",
+//         smallImageText: "Residents' Happiness: 34%",
+//         buttons: [
+//             {
+//                 label: "Get Townly",
+//                 url: "https://github.com/Sv443/Townly"
+//             }
+//         ]
 //     });
 
 //     di.on("connected", () => console.log("connected"));
-//     di.on("error", (err) => console.log(`Error: ${err}`));
+//     di.on("ready", () => console.log("ready"));
 // }
 
 // discordTest();
 
+
+import RPC from "discord-rpc";
+
+
+async function rpcTest()
+{
+    const clientId = "826047696036429836";
+
+    const client = new RPC.Client({ transport: "ipc" });
+
+    try
+    {
+        await client.login({ clientId });
+
+        const time = Date.now();
+        let n = 0;
+
+        const changeHappiness = async () =>
+        {
+            await client.setActivity({
+                details: "Playing Townly",
+                startTimestamp: time,
+                largeImageKey: "icon_1000",
+                smallImageKey: `happiness_${n}`,
+                smallImageText: "Residents' Happiness: 69%",
+                buttons: [
+                    {
+                        label: "Test",
+                        url: "https://youtu.be/2xx_2XNxxfA?t=3"
+                    },
+                    {
+                        label: "Sv443 Discord",
+                        url: "https://sv443.net/discord"
+                    }
+                ]
+            });
+
+            n++;
+
+            if(n < 5)
+                setTimeout(() => changeHappiness(), 10000);
+        };
+
+        changeHappiness();
+    }
+    catch(err)
+    {
+        console.error(`Error: ${err}`);
+    }
+}
+
+rpcTest()
 
 
 // import { seededRNG } from "svcorelib";
@@ -500,35 +560,35 @@
 
 
 
-import { DeepPartial } from "tsdef";
+// import { DeepPartial } from "tsdef";
 
-import { Currency, ICurrencySettings } from "./engine/components/Currency";
+// import { Currency, ICurrencySettings } from "./engine/components/Currency";
 
 
-async function currencyTest()
-{
-    const sett: DeepPartial<ICurrencySettings> = {
-        currencyAbbreviationPosition: "right",
-        metricUnitPrefix: true,
-        minThreshold: 1,
-        maxThreshold: 1000,
-        numberSeparators: {
-            decimalPoint: "~",
-            digitGroup: "_"
-        }
-    };
+// async function currencyTest()
+// {
+//     const sett: DeepPartial<ICurrencySettings> = {
+//         currencyAbbreviationPosition: "right",
+//         metricUnitPrefix: true,
+//         minThreshold: 1,
+//         maxThreshold: 1000,
+//         numberSeparators: {
+//             decimalPoint: "~",
+//             digitGroup: "_"
+//         }
+//     };
 
-    const currency = new Currency("Euro", "€", 500, sett);
+//     const currency = new Currency("Euro", "€", 500, sett);
 
-    currency.on("thresholdPassed", (type, value, threshold) => {
-        console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
-    });
+//     currency.on("thresholdPassed", (type, value, threshold) => {
+//         console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
+//     });
 
-    setInterval(() => {
-        currency.increase(100);
+//     setInterval(() => {
+//         currency.increase(100);
 
-        console.log(currency.valueAsString());
-    }, 1000);
-}
+//         console.log(currency.valueAsString());
+//     }, 1000);
+// }
 
-currencyTest();
+// currencyTest();
