@@ -1,8 +1,9 @@
 import { gameSettings } from "../settings";
+import { DeepPartial } from "tsdef";
 
 import { GameLoop } from "../engine/base/GameLoop";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { RecursivePartial, Size } from "../engine/base/Base";
+import { Size } from "../engine/base/Base";
 
 
 var gameLoop: GameLoop;
@@ -19,7 +20,7 @@ export function init()
         gameLoop.on("tick", onTick);
 
 
-        const gridOpts: RecursivePartial<IGridOptions> = {
+        const gridOpts: DeepPartial<IGridOptions> = {
 
         };
 

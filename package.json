@@ -43,7 +43,8 @@
     "sanitize-filename": "^1.6.3",
     "simplex-noise": "^2.4.0",
     "sound-play": "^1.1.0",
-    "svcorelib": "^1.13.1"
+    "svcorelib": "^1.13.1",
+    "tsdef": "^0.0.14"
   },
   "devDependencies": {
     "@types/discord-rich-presence": "^0.0.0",

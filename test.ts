@@ -500,13 +500,14 @@
 
 
 
-import { RecursivePartial } from "./engine/base/Base";
+import { DeepPartial } from "tsdef";
+
 import { Currency, ICurrencySettings } from "./engine/components/Currency";
 
 
 async function currencyTest()
 {
-    const sett: RecursivePartial<ICurrencySettings> = {
+    const sett: DeepPartial<ICurrencySettings> = {
         currencyAbbreviationPosition: "right",
         metricUnitPrefix: true,
         minThreshold: 1,
@@ -526,7 +527,7 @@ async function currencyTest()
     setInterval(() => {
         currency.increase(100);
 
-        console.log(`${currency.getValue()}€`);
+        console.log(currency.valueAsString());
     }, 1000);
 }
 
