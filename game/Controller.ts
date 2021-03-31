@@ -2,7 +2,7 @@ import { gameSettings } from "../settings";
 
 import { GameLoop } from "../engine/base/GameLoop";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { Size } from "../engine/base/Base";
+import { RecursivePartial, Size } from "../engine/base/Base";
 
 
 var gameLoop: GameLoop;
@@ -19,7 +19,7 @@ export function init()
         gameLoop.on("tick", onTick);
 
 
-        const gridOpts: Partial<IGridOptions> = {
+        const gridOpts: RecursivePartial<IGridOptions> = {
 
         };
 

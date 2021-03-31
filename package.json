@@ -46,6 +46,7 @@
     "svcorelib": "^1.13.1"
   },
   "devDependencies": {
+    "@types/discord-rich-presence": "^0.0.0",
     "@types/figlet": "^1.2.1",
     "@types/fs-extra": "^9.0.8",
     "@types/mysql": "^2.15.18",

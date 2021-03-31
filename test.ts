@@ -500,12 +500,34 @@
 
 
 
-import { Currency } from "./engine/components/Currency";
+import { RecursivePartial } from "./engine/base/Base";
+import { Currency, ICurrencySettings } from "./engine/components/Currency";
 
 
 async function currencyTest()
 {
+    const sett: RecursivePartial<ICurrencySettings> = {
+        currencyAbbreviationPosition: "right",
+        metricUnitPrefix: true,
+        minThreshold: 1,
+        maxThreshold: 1000,
+        numberSeparators: {
+            decimalPoint: "~",
+            digitGroup: "_"
+        }
+    };
 
+    const currency = new Currency("Euro", "€", 500, sett);
+
+    currency.on("thresholdPassed", (type, value, threshold) => {
+        console.log(`${type} threshold passed: ${value}€ of ${type} ${threshold}€`);
+    });
+
+    setInterval(() => {
+        currency.increase(100);
+
+        console.log(`${currency.getValue()}€`);
+    }, 1000);
 }
 
 currencyTest();
