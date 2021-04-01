@@ -619,9 +619,7 @@ async function newCellsTest()
     grid.devFill();
 
     const chunkIdx = new Index2(0, 0);
-    const cellPos = new Position(0, 0);
-
-    grid.getCell(chunkIdx, cellPos);
+    const cellPos = new Position(4, 4);
 
     grid.setCell(chunkIdx, cellPos, new Residential(cellPos))
 
