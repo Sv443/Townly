@@ -1,4 +1,4 @@
-import { Position } from "../../../engine/base/Base";
+import { Color, ColorType, Position } from "../../../engine/base/Base";
 import { InfluentialCell } from "../InfluentialCell";
 import { FulfillmentType } from "../Need";
 import { CellType } from "../TownlyCell";
@@ -21,6 +21,8 @@ export class Substation extends InfluentialCell
         {
             type: FulfillmentType.Existance
         });
+
+        this.setColor(ColorType.Foreground, Color.Yellow);
     }
 
     //#MARKER other

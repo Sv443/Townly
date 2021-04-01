@@ -7,10 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "buildstart": "tsc && node .",
+
     "compile-nexe": "cd out && nexe -b --ico ../assets/Townly.ico -i game/Townly.js",
+
     "dep-graph": "npm run dep-graph-game && npm run dep-graph-engine",
-    "dep-graph-game": "depcruise --exclude \"node_modules\" --output-type dot game | dot -T svg | depcruise-wrap-stream-in-html > ./game/dependency_graph.html",
-    "dep-graph-engine": "depcruise --exclude \"node_modules\" --output-type dot engine | dot -T svg | depcruise-wrap-stream-in-html > ./engine/dependency_graph.html"
+    "dep-graph-game": "depcruise --exclude 'node_modules' --ts-config 'tsconfig.json' --output-type dot game | dot -T svg | depcruise-wrap-stream-in-html > ./dependency_graph.html",
+    "dep-graph-engine": "depcruise --exclude 'node_modules' --ts-config 'tsconfig.json' --output-type dot engine | dot -T svg | depcruise-wrap-stream-in-html > ./engine/dependency_graph.html"
   },
   "repository": {
     "type": "git",
