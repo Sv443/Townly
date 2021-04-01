@@ -606,6 +606,7 @@ process.on("SIGINT", () => {
 
 import { Index2, Position, Size } from "./engine/base/Base";
 import { Grid } from "./engine/components/Grid";
+import { Land } from "./game/components/cells/Land";
 import { Residential } from "./game/components/cells/Residential";
 
 
@@ -616,7 +617,7 @@ async function newCellsTest()
 
     const grid = new Grid(gridSize, gridSize);
 
-    grid.devFill();
+    grid.devFill(Land);
 
     const chunkIdx = new Index2(0, 0);
     const cellPos = new Position(4, 4);

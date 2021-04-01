@@ -9,7 +9,9 @@ export enum CellType
 {
     Land,
     Water,
-    Residential
+    Residential,
+    /** Special buildings that usually cost more, need a bulldoze prompt and can have special "abilities" */
+    Special
 }
 
 /**
