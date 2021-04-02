@@ -18,7 +18,7 @@
 - [x] Add a main menu (something basic to begin with)
 - [x] Implement the legacy edition's smoothing algorithm based on cellular automata
 - [x] Add an in-game currency system, contained in some kind of controller class
-- [ ] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
+- [x] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 - [ ] Add water and electricity (need generating buildings), they are distributed globally (don't need pipes and wires yet)
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
 - [ ] Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
