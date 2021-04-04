@@ -15,6 +15,10 @@ const generalSettings = Object.freeze({
         version: packageJson.version.split(/\./g).map(v=>parseInt(v)),
         /** Version, as a string */
         versionStr: packageJson.version,
+        /** Name of the current version range (Alpha, Beta, Release) */
+        versionRangeName: "Alpha",
+        /** TODO: some fucking how automate this with CI? Like idk even know how, this is an interpreted language? */
+        buildNbr: 1,
     }
 });
 
