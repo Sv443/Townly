@@ -1,3 +1,4 @@
+import { unused } from "svcorelib";
 import { Position } from "../../../engine/base/Base";
 import { TownlyCell, CellType } from "../TownlyCell";
 
@@ -24,6 +25,8 @@ export class Water extends TownlyCell
     update(): Promise<void>
     {
         return new Promise<void>(async (res, rej) => {
+            unused(rej);
+
             return res();
         });
     }

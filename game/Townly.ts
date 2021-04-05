@@ -1,16 +1,15 @@
 import { gameSettings, generalSettings } from "../settings";
 
-import { colors, pause, readableArray } from "svcorelib";
+import { colors, readableArray } from "svcorelib";
 import { DeepPartial, Undefinable } from "tsdef";
 
 import { dbg, LogLevel, Size } from "../engine/base/Base";
 import * as Controller from "./Controller";
 import { GameLoop, IGameLoopSettings } from "../engine/base/GameLoop";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { Menu, MenuOption } from "../engine/display/ui/menus/Menu";
+import { MenuOption } from "../engine/display/ui/menus/Menu";
 
 import MainMenu from "../engine/display/ui/menus/MainMenu";
-import SettingsMenu from "../engine/display/ui/menus/SettingsMenu";
 import { SelectionMenu } from "../engine/display/ui/menus/SelectionMenu";
 import { tengSettings } from "../engine/settings";
 import { GameSettings } from "./GameSettings";
@@ -20,7 +19,7 @@ const col = colors.fg;
 
 const mainMenu = new MainMenu("Townly", undefined, "Standard");
 
-var settingsMenu: Undefinable<GameSettings>;
+let settingsMenu: Undefinable<GameSettings>;
 
 
 function preInit()

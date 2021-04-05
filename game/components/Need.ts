@@ -9,8 +9,10 @@ import { TengObject } from "../../engine/base/TengObject";
 export enum FulfillmentType
 {
     /** Need has to be fulfilled within a certain range of the resident */
+    // eslint-disable-next-line no-unused-vars
     Range,
     /** Need is fulfilled just by something existing somewhere on the map */
+    // eslint-disable-next-line no-unused-vars
     Existance
 }
 

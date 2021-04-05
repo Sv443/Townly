@@ -95,6 +95,7 @@ export abstract class MapGen
             switch(preset)
             {
                 case MapPreset.Lakes:
+                {
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 90 }));
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 60 }));
                     ln.addLayer(new NoiseLayer(size, Algorithm.Perlin, { seed, resolution: 20 }));
@@ -105,6 +106,7 @@ export abstract class MapGen
                     lnMap = await LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_Smooth, 1);
 
                     return res(LayeredNoise.smoothMap(lnMap, SmoothingAlgorithm.CA_Coarse, 2));
+                }
             }
         });
     }

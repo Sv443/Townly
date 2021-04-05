@@ -6,8 +6,8 @@ import { Grid, IGridOptions } from "../engine/components/Grid";
 import { Size } from "../engine/base/Base";
 
 
-var gameLoop: GameLoop;
-var grid: Grid;
+let gameLoop: GameLoop;
+let grid: Grid;
 
 /**
  * Initializes the game controller
