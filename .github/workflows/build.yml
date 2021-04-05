@@ -17,7 +17,10 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v1 # checkout latest commit
+    - name: "Checkout and pull submodules"
+      uses: actions/checkout@v2 # checkout latest commit
+      with:
+        submodules: recursive
     - name: "Use Node.js ${{ matrix.node-version }}" # set up Node.js
       uses: actions/setup-node@v1
       with:
