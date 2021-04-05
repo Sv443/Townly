@@ -55,7 +55,7 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        args: "✅ **Townly** build was successful: https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks"
+        args: "✅ **Townly** build was successful: https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks - TESTING: ${{ GITHUB_RUN_ID }} - ${{ GITHUB_RUN_NUMBER }} - ${{ GITHUB_JOB }} - ${{ GITHUB_ACTION }}"
     - name: "Discord failure notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
