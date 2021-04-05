@@ -1,0 +1,39 @@
+name: build
+
+on:
+  push:
+    branches:
+      - build
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v1 # checkout latest commit
+    - name: "Use Node.js ${{ matrix.node-version }}" # set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: "Install Dependencies" # runs the npm ci command to install all dependencies
+      run: |
+        npm ci
+      env:
+        CI: "true"
+    - name: "Compile to executables"
+      run: |
+        npm run compile-pkg
+      env:
+        CI: "true"
+    - name: "Upload Artifacts"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly"
+        path: out/build
