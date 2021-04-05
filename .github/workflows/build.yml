@@ -45,7 +45,7 @@ jobs:
       with:
         name: "Townly-Linux"
         path: out/build/Townly-Linux
-    - name: "Upload Artifacts MacOS"
+    - name: "Upload Artifacts [MacOS]"
       uses: actions/upload-artifact@v1.0.0
       with:
         name: "Townly-Mac"
