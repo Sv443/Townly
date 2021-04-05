@@ -35,22 +35,32 @@ jobs:
         npm run compile-pkg
       env:
         CI: "true"
-    - name: "Upload Artifacts"
+    - name: "Upload Artifacts [Windows]"
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: "Townly"
-        path: out/build
+        name: "Townly-Win"
+        path: out/build/Townly-Win.exe
+    - name: "Upload Artifacts [Linux]"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly-Linux"
+        path: out/build/Townly-Linux
+    - name: "Upload Artifacts MacOS"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly-Mac"
+        path: out/build/Townly-MacOS
     - name: "Discord success notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        args: '✅ **Townly** build (triggered by `{{GITHUB_ACTOR}}` on `{{GITHUB_REF}}`) was successful (see https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks)' 
+        args: '✅ **Townly** build (triggered by `{{GITHUB_ACTOR}}`) was successful (see https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks)' 
     - name: "Discord failure notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        args: '🚫 **Townly** build (triggered by `{{GITHUB_ACTOR}}` on `{{GITHUB_REF}}`) has failed (see https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks)'
+        args: '🚫 **Townly** build (triggered by `{{GITHUB_ACTOR}}`) has failed (see https://github.com/Sv443/Townly/commit/{{GITHUB_SHA}}/checks)'
       if: failure()
 
