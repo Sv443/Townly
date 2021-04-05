@@ -40,3 +40,4 @@ jobs:
       with:
         name: "Townly"
         path: out/build
+
