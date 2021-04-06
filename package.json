@@ -10,6 +10,7 @@
     ]
   },
   "scripts": {
+    "start": "npm run buildstart",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "buildstart": "tsc --build tsconfig.json && node .",

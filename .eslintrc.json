@@ -21,6 +21,6 @@
     ],
     "rules": {
         "no-async-promise-executor": "off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "off"
     }
 }

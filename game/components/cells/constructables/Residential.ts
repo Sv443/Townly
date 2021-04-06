@@ -1,7 +1,7 @@
-import { Position } from "../../../engine/base/Base";
-import { Electricity } from "../needs/Electricity";
-import { NeedyCell } from "../NeedyCell";
-import { CellType } from "../TownlyCell";
+import { Position } from "../../../../engine/base/Base";
+import { Electricity } from "../../needs/Electricity";
+import { NeedyCell } from "../../NeedyCell";
+import { CellType } from "../../TownlyCell";
 
 
 

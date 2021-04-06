@@ -607,7 +607,7 @@ process.on("SIGINT", () => {
 import { Index2, Position, Size } from "./engine/base/Base";
 import { Grid } from "./engine/components/Grid";
 import { Land } from "./game/components/cells/Land";
-import { Residential } from "./game/components/cells/Residential";
+import { Residential } from "./game/components/cells/constructables/Residential";
 
 
 

@@ -1,5 +1,8 @@
 import * as packageJson from "./package.json";
 
+// import { resolve } from "path";
+
+
 /** General Townly settings */
 const generalSettings = Object.freeze({
     /** Everything regarding debugging */

@@ -29,7 +29,7 @@ const defaultIConstructableCost: IConstructableCost = {
  */
 export abstract class Constructable extends TownlyCell
 {
-    cost: IConstructableCost;
+    protected cost: IConstructableCost;
 
     readonly constructedAt: Date;
 
@@ -41,5 +41,21 @@ export abstract class Constructable extends TownlyCell
         this.cost = { ...defaultIConstructableCost, ...cost };
         
         this.constructedAt = new Date();
+    }
+
+    /**
+     * Returns the cost of this cell
+     */
+    getCost(): IConstructableCost
+    {
+        return this.cost;
+    }
+
+    /**
+     * Set the cost of this cell
+     */
+    setCost(cost: IConstructableCost)
+    {
+        this.cost = cost;
     }
 }

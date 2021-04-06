@@ -1,13 +1,25 @@
-import { gameSettings } from "../settings";
 import { DeepPartial } from "tsdef";
+import { unused } from "svcorelib";
 
-import { GameLoop } from "../engine/base/GameLoop";
+import { gameSettings } from "../settings";
+
+import { Newable, Position, Size } from "../engine/base/Base";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { Size } from "../engine/base/Base";
+import { GameLoop } from "../engine/base/GameLoop";
+
+import { Constructable } from "./components/Constructable";
+import { Residential } from "./components/cells/constructables/Residential";
+import { Substation } from "./components/cells/constructables/Substation";
+import { WaterTower } from "./components/cells/constructables/WaterTower";
 
 
 let gameLoop: GameLoop;
 let grid: Grid;
+
+/**
+ * All cells that can be constructed by the player
+ */
+const constructables: Constructable[] = [];
 
 /**
  * Initializes the game controller
@@ -15,6 +27,9 @@ let grid: Grid;
 export function init()
 {
     return new Promise<void>(async (res, rej) => {
+        // register all constructables
+        await registerConstructables();
+
         gameLoop = new GameLoop(gameSettings.loop.targetTps);
 
         gameLoop.on("tick", onTick);
@@ -38,4 +53,38 @@ export function init()
 async function onTick()
 {
     await grid.update();
+}
+
+/**
+ * Goes through a list of constructable classes, instantiates them and overwrites them onto `constructables`.  
+ * TODO: maybe load these dynamically, by reading the filesystem
+ */
+function registerConstructables(): Promise<void>
+{
+    return new Promise(async (res) => {
+        // clear array
+        constructables.splice(0, constructables.length);
+
+        // all instantiatable Constructable classes
+        const cnstr: Newable<Constructable>[] = [
+            Residential,
+            Substation,
+            WaterTower
+        ];
+
+        // go through the Constructable classes, instantiating them and pushing them to `constructables`
+        cnstr.forEach(ConstructableClass => {
+            constructables.push(new ConstructableClass(new Position(-1, -1)));
+        });
+
+        return res();
+    });
+}
+
+/**
+ * Tries to get an instantiated constructable via the passed class reference
+ */
+function getConstructable(ConstructableClass: Newable<Constructable>): Constructable | undefined
+{
+    return constructables.find(cs => cs instanceof ConstructableClass);
 }

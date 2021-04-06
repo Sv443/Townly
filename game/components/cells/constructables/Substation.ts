@@ -1,7 +1,7 @@
-import { Color, ColorType, Position } from "../../../engine/base/Base";
-import { InfluentialCell } from "../InfluentialCell";
-import { FulfillmentType } from "../Need";
-import { CellType } from "../TownlyCell";
+import { Color, ColorType, Position } from "../../../../engine/base/Base";
+import { InfluentialCell } from "../../InfluentialCell";
+import { FulfillmentType } from "../../Need";
+import { CellType } from "../../TownlyCell";
 
 
 
@@ -14,7 +14,7 @@ export class Substation extends InfluentialCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Special, pos, "🗲", {
+        super(CellType.Special, pos, "⭍", {
             baseCost: 4000,
             costIncrement: 1.1
         },
