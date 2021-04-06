@@ -28,9 +28,9 @@ export abstract class NeedyCell extends InhabitedCell
     /**
      * Creates an instance of the NeedyCell class
      */
-    constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, inhabitants: DeepPartial<IInhabitants>, needs?: Need[])
+    constructor(cellType: CellType, name: string, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, inhabitants: DeepPartial<IInhabitants>, needs?: Need[])
     {
-        super(cellType, pos, char, cost, inhabitants);
+        super(cellType, name, pos, char, cost, inhabitants);
 
 
         if(needs)

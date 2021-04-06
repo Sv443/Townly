@@ -14,7 +14,7 @@ export class WaterTower extends InfluentialCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Special, pos, "≈", {
+        super(CellType.Special, "Water Tower", pos, "≈", {
             baseCost: 2000,
             costIncrement: 1.1
         },

@@ -31,9 +31,9 @@ export abstract class InfluentialCell extends Constructable
     protected influenceSettings: DeepPartial<IInfluenceSettings>;
 
 
-    constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, influenceSettings: IInfluenceSettings)
+    constructor(cellType: CellType, name: string, pos: Position, char: string, cost: DeepPartial<IConstructableCost>, influenceSettings: IInfluenceSettings)
     {
-        super(cellType, pos, char, cost);
+        super(cellType, name, pos, char, cost);
 
 
         this.influenceSettings = { ...defaultIInfluenceSettings, ...influenceSettings };

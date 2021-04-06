@@ -14,7 +14,7 @@ export class Substation extends InfluentialCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Special, pos, "⭍", {
+        super(CellType.Special, "Substation", pos, "⭍", {
             baseCost: 4000,
             costIncrement: 1.1
         },

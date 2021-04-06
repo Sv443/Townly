@@ -30,13 +30,16 @@ const defaultIConstructableCost: IConstructableCost = {
 export abstract class Constructable extends TownlyCell
 {
     protected cost: IConstructableCost;
-
+    
+    readonly name: string;
     readonly constructedAt: Date;
 
 
-    constructor(cellType: CellType, pos: Position, char: string, cost: DeepPartial<IConstructableCost>)
+    constructor(cellType: CellType, name: string, pos: Position, char: string, cost?: DeepPartial<IConstructableCost>)
     {
         super(cellType, pos, char);
+
+        this.name = name;
 
         this.cost = { ...defaultIConstructableCost, ...cost };
         

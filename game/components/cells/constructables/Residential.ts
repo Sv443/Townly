@@ -12,7 +12,7 @@ export class Residential extends NeedyCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Residential, pos, "R", {
+        super(CellType.Residential, "Residential", pos, "R", {
             baseCost: 100,
             costIncrement: 1.002
         }, {
