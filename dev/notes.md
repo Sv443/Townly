@@ -20,6 +20,7 @@
 - [x] Add an in-game currency system, contained in some kind of controller class
 - [x] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 - [x] Add water and electricity (need generating buildings that currently generate an infinite amount), the units are distributed globally (don't need pipes and wires yet)
+- [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
 - [ ] Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
     - Buildings that are constructed on these zones should have a randomly assigned name (and maybe texture)
