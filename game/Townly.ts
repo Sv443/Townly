@@ -7,7 +7,7 @@ import { dbg, LogLevel, Size } from "../engine/base/Base";
 import * as Controller from "./Controller";
 import { GameLoop, IGameLoopSettings } from "../engine/base/GameLoop";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { MenuOption } from "../engine/display/ui/menus/Menu";
+import { MenuOptionOrSpacer } from "../engine/display/ui/menus/Menu";
 
 import MainMenu from "../engine/display/ui/menus/MainMenu";
 import { SelectionMenu } from "../engine/display/ui/menus/SelectionMenu";
@@ -83,7 +83,7 @@ async function initAll()
 
         dbg("InitAll", `Showing MainMenu...:`, LogLevel.Info);
         
-        const mainMenuOpts: MenuOption[] = [
+        const mainMenuOpts: MenuOptionOrSpacer[] = [
             "New Game", // 0
             "Continue", // 1
             null,       // 2
