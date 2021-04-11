@@ -16,7 +16,9 @@
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "outputCapture": "std",
+            "showAsyncStacks": true
         },
         {
             "type": "pwa-node",
@@ -30,7 +32,9 @@
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "outputCapture": "std",
+            "showAsyncStacks": true
         }
     ]
 }
