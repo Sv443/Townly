@@ -604,27 +604,47 @@ process.on("SIGINT", () => {
 
 
 
-import { Index2, Position, Size } from "./engine/base/Base";
-import { Grid } from "./engine/components/Grid";
-import { Land } from "./game/components/cells/Land";
-import { Residential } from "./game/components/cells/constructables/Residential";
+// import { Index2, Position, Size } from "./engine/base/Base";
+// import { Grid } from "./engine/components/Grid";
+// import { Land } from "./game/components/cells/Land";
+// import { Residential } from "./game/components/cells/constructables/Residential";
 
 
 
-async function newCellsTest()
+// async function newCellsTest()
+// {
+//     const gridSize = new Size(20, 5);
+
+//     const grid = new Grid(gridSize, gridSize);
+
+//     grid.devFill(Land);
+
+//     const chunkIdx = new Index2(0, 0);
+//     const cellPos = new Position(4, 4);
+
+//     grid.setCell(chunkIdx, cellPos, new Residential(cellPos))
+
+//     console.log(grid.getCell(chunkIdx, cellPos).toString())
+// }
+
+// newCellsTest();
+
+
+
+import prompt from "prompts";
+
+
+async function promptTest()
 {
-    const gridSize = new Size(20, 5);
+    process.stdin.setRawMode(true);
 
-    const grid = new Grid(gridSize, gridSize);
+    const result = await prompt({
+        type: "text",
+        name: "val",
+        message: "What should your town be called?"
+    });
 
-    grid.devFill(Land);
-
-    const chunkIdx = new Index2(0, 0);
-    const cellPos = new Position(4, 4);
-
-    grid.setCell(chunkIdx, cellPos, new Residential(cellPos))
-
-    console.log(grid.getCell(chunkIdx, cellPos).toString())
+    console.log(result);
 }
 
-newCellsTest();
+promptTest();

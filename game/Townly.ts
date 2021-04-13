@@ -2,6 +2,7 @@ import { gameSettings, generalSettings } from "../settings";
 
 import { colors, readableArray } from "svcorelib";
 import { DeepPartial, Undefinable } from "tsdef";
+import prompt from "prompts";
 
 import { dbg, LogLevel, Size } from "../engine/base/Base";
 import * as Controller from "./Controller";
@@ -13,6 +14,7 @@ import MainMenu from "../engine/display/ui/menus/MainMenu";
 import { SelectionMenu } from "../engine/display/ui/menus/SelectionMenu";
 import { tengSettings } from "../engine/settings";
 import { GameSettings } from "./GameSettings";
+import { SaveStateInfo } from "./SaveStates";
 
 const col = colors.fg;
 
@@ -96,8 +98,6 @@ async function initAll()
         mainMenu.setOptions(mainMenuOpts);
 
         openMainMenu();
-
-        // enterGame(); // TODO: only call this when appropriate
     }
     catch(err)
     {
@@ -151,23 +151,31 @@ async function openMainMenu()
 {
     mainMenu.show();
 
-    mainMenu.on("submit", result => {
+    mainMenu.on("submit", async (result) => {
         dbg("InitAll", `Selected MainMenu option "${result.option.text}" #${result.option.index}`, LogLevel.Info);
 
+
+        mainMenu.removeAllListeners();
+        mainMenu.removeAllListeners("submit");
+
+        // no fallthroughs
         switch(result.option.index)
         {
             case 0:
             {
                 // New Game
 
-                // // create a new save game
-                // const saveGame = await createSaveGame();
+                // prompt the user and create a save game
+                const saveGame = await createSaveGame();
+
+                // setInterval(() => {}, 1000);
 
                 // // load the new save game
                 // const saveData = await loadSaveGame(saveGame);
 
                 // // actually enter the game
                 // enterGame(saveData);
+
                 console.log(`\n\n${col.red}WIP - Please restart the app${col.rst}\n`);
 
                 break;
@@ -184,6 +192,7 @@ async function openMainMenu()
 
                 // // actually enter the game
                 // enterGame(saveData);
+
                 console.log(`\n\n${col.red}WIP - Please restart the app${col.rst}\n`);
 
                 break;
@@ -212,6 +221,50 @@ async function openMainMenu()
                 dbg("MainMenu", `Invalid option #${result.option.index} selected`, LogLevel.Error);
                 throw new Error(`Invalid MainMenu option #${result.option.index} selected`);
         }
+    });
+}
+
+/**
+ * Runs a few prompts and creates a save game with them
+ */
+function createSaveGame(): Promise<SaveStateInfo>
+{
+    return new Promise(async (res, rej) => {
+        const saveState: Partial<SaveStateInfo> = {};
+
+        // TODO: keys are displayed twice for some stupid reason
+
+        //#SECTION Name of Town
+        const namePrompt = await prompt({
+            type: "text",
+            name: "name",
+            message: "What should your town be called?"
+        });
+
+        saveState.name = namePrompt.name;
+
+
+        //#SECTION Size of Town
+        const sizePrompt = await prompt({
+            type: "select",
+            name: "size",
+            choices: [
+                {
+                    title: "80 x 20",
+                    value: new Size(80, 20)
+                },
+                {
+                    title: "150 x 50",
+                    value: new Size(150, 50)
+                }
+            ],
+            message: "How big should your town's area be?  [width x height]"
+        });
+
+        saveState.gridSize = (sizePrompt.size as Size);
+
+
+        return res(saveState as SaveStateInfo);
     });
 }
 
