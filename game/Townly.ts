@@ -8,10 +8,10 @@ import { dbg, LogLevel, Size } from "../engine/base/Base";
 import * as Controller from "./Controller";
 import { GameLoop, IGameLoopSettings } from "../engine/base/GameLoop";
 import { Grid, IGridOptions } from "../engine/components/Grid";
-import { MenuOptionOrSpacer } from "../engine/display/ui/menus/Menu";
+import { MenuOptionOrSpacer } from "../engine/gui/menus/Menu";
 
-import MainMenu from "../engine/display/ui/menus/MainMenu";
-import { SelectionMenu } from "../engine/display/ui/menus/SelectionMenu";
+import MainMenu from "../engine/gui/menus/MainMenu";
+import { SelectionMenu } from "../engine/gui/menus/SelectionMenu";
 import { tengSettings } from "../engine/settings";
 import { GameSettings } from "./GameSettings";
 import { SaveStateInfo } from "./SaveStates";

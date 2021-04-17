@@ -1,6 +1,6 @@
 import { Undefinable } from "tsdef";
 
-import SettingsMenu from "../engine/display/ui/menus/SettingsMenu";
+import SettingsMenu from "../engine/gui/menus/SettingsMenu";
 
 
 //#MARKER types
