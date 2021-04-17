@@ -16,7 +16,8 @@ spaces_around_operators = true
 indent_style = space
 indent_size = 2
 tab_width = 2
+insert_final_newline = false
 
 # no final newline
-[{**.sql,**.json}]
+[{**.json,**.txt,**.gitmodules,settings.ts,settings.js}]
 insert_final_newline = false

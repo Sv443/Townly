@@ -1,6 +1,6 @@
-THE FOLLOWING LICENSE ONLY APPLIES TO THE "Townly game"
-THE "Teng Engine", LOCATED IN "engine" HAS A DIFFERENT LICENSE
---------------------------------------------------------------
+THE FOLLOWING LICENSE ONLY APPLIES TO THE GAME "Townly"
+THE "Teng Engine" LOCATED IN THE "engine" DIRECTORY HAS A DIFFERENT LICENSE
+---------------------------------------------------------------------------
 
 
 
