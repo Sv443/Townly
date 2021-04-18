@@ -54,7 +54,7 @@ jobs:
         artifacts: "./out/build/Townly-*"
         bodyFile: "./.github/workflows/release-body.md"
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ env.GITHUB_RUN_NUMBER }}
+        tag: ${{ secrets.GITHUB_RUN_NUMBER }}
         artifactErrorsFailBuild: true
         prerelease: true
         draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
