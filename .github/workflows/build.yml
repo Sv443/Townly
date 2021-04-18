@@ -60,8 +60,8 @@ jobs:
         prerelease: true
         draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
       env:
-        GH_TAG: ${{ secrets.GITHUB_RUN_NUMBER }}
-        GH_COMMIT: ${{ secrets.GITHUB_SHA }}
+        GH_TAG: "{{ secrets.GITHUB_RUN_NUMBER }}"
+        GH_COMMIT: "{{ secrets.GITHUB_SHA }}"
     - name: "Discord Success Notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
