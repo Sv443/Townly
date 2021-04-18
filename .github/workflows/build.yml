@@ -54,11 +54,14 @@ jobs:
         artifacts: "./out/build/Townly-*"
         bodyFile: "./.github/workflows/release-body.md"
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ secrets.GITHUB_RUN_NUMBER }}
-        commit: ${{ secrets.GITHUB_REF }}
+        tag: ${{ env.GH_TAG }}
+        commit: ${{ env.GH_COMMIT }}
         artifactErrorsFailBuild: true
         prerelease: true
         draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
+      env:
+        GH_TAG: ${{ secrets.GITHUB_RUN_NUMBER }}
+        GH_COMMIT: ${{ secrets.GITHUB_SHA }}
     - name: "Discord Success Notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
