@@ -50,12 +50,11 @@ More info on the engine can be found [here.](https://github.com/Sv443/Teng#readm
 ## Build Instructions:
 Have Git, Node.js, npm and TypeScript set up and working, then:  
 1. Clone the repository
-2. Pull the Teng Engine submodule located at `engine/`
+2. Pull the Teng submodule by running `git submodule init` and then `git submodule update`
 3. Install dependencies by running `npm i`
-3. Run the command `tsc` to compile the TypeScript code
-4. To run the game, use the command `node .`
+4. Run the command `npm start` to compile and run the code
   
-To create an executable, use the command `npm run compile-nexe` (might take up to an hour on the first compile - will be way faster after)
+To create an executable, use the command `npm run compile-pkg`
 
 
 <br><br><br><br>
