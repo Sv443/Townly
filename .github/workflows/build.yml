@@ -48,20 +48,6 @@ jobs:
       with:
         name: "Townly-Mac"
         path: out/build/Townly-MacOS
-    - name: "Create Release"
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "./out/build/Townly-*"
-        bodyFile: "./.github/workflows/release-body.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ env.GH_TAG }}
-        commit: ${{ env.GH_COMMIT }}
-        artifactErrorsFailBuild: true
-        prerelease: true
-        draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
-      env:
-        GH_TAG: "{{ secrets.GITHUB_RUN_NUMBER }}"
-        GH_COMMIT: "{{ secrets.GITHUB_SHA }}"
     - name: "Discord Success Notification" # sends a Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
@@ -73,6 +59,6 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        args: "🚫 **Townly** build has failed. Download it here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
+        args: "🚫 **Townly** build has failed. See what went wrong here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
       if: failure()
 
