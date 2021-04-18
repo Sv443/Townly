@@ -55,6 +55,7 @@ jobs:
         bodyFile: "./.github/workflows/release-body.md"
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ secrets.GITHUB_RUN_NUMBER }}
+        commit: ${{ secrets.GITHUB_REF }}
         artifactErrorsFailBuild: true
         prerelease: true
         draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
