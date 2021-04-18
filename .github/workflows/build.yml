@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - build
+      - master
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - name: "Checkout and pull submodules"
+    - name: "Checkout and Pull Submodules"
       uses: actions/checkout@v2 # checkout latest commit
       with:
         submodules: recursive
@@ -26,13 +26,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: "Install Dependencies" # runs the npm ci command to install all dependencies
-      run: |
-        npm ci
+      run: npm ci
       env:
         CI: "true"
-    - name: "Compile to executables"
-      run: |
-        npm run compile-pkg
+    - name: "Compile Executables"
+      run: npm run compile-pkg
       env:
         CI: "true"
     - name: "Upload Artifacts [Windows]"
@@ -50,15 +48,25 @@ jobs:
       with:
         name: "Townly-Mac"
         path: out/build/Townly-MacOS
-    - name: "Discord success notification" # sends a Discord notification
+    - name: "Create Release"
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "./out/build/Townly-*"
+        bodyFile: "./.github/workflows/release-body.md"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ env.GITHUB_RUN_NUMBER }}
+        artifactErrorsFailBuild: true
+        prerelease: true
+        draft: true # TODO: might wanna change this once this workflow is confirmed as being stable
+    - name: "Discord Success Notification" # sends a Discord notification
       env:
-        DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
         args: "✅ **Townly** build was successful. Download it here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
-    - name: "Discord failure notification" # sends a Discord notification
+    - name: "Discord Failure Notification" # sends a Discord notification
       env:
-        DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
         args: "🚫 **Townly** build has failed. Download it here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
