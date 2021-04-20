@@ -21,6 +21,7 @@
 - [x] Add water and electricity (need generating buildings that currently generate an infinite amount), the units are distributed globally (don't need pipes and wires yet)
 - [ ] Add Core module that handles integral engine stuff
 - [ ] Add UI system, based on widgets
+- [ ] Add Statistics module that helps collect game statistics, maybe even having the possibility of transmitting them to a server (maybe even leaderboards? That'd be so cool!)
 - [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
 - [ ] Implement differential rendering (only re-render cells that have been changed, contrary to redrawing the entire grid)
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
