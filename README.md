@@ -41,8 +41,9 @@ More info on the engine can be found [here.](https://github.com/Sv443/Teng#readm
 <br><br>
 
 ### Some helpful resources:
-- [Developer Notes](./dev/notes.md)
-- [Roadmap](./dev/roadmap.md)
+- [Current development progression / developer notes](./dev/notes.md)
+- ["Convenience features" roadmap](./dev/roadmap.md)
+- [Nice to know chart about how Townly displays stuff](./dev/display.md)
 
 
 <br><br><br><br>

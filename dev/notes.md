@@ -1,3 +1,5 @@
+[&lt; Back](../README.md#readme)  
+  
 ## Todo List:
 - TODO: reimplement cursor for the new chunk-based cell containment system
 - TODO: add option to use terminal's native cursor
@@ -20,6 +22,7 @@
 - [x] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 - [x] Add water and electricity (need generating buildings that currently generate an infinite amount), the units are distributed globally (don't need pipes and wires yet)
 - [ ] Add Core module that handles integral engine stuff
+- [ ] Make Grid generation threaded, using native module "worker_threads", since it's quite slow and slow = bad or something idk
 - [ ] Add UI system, based on widgets
 - [ ] Add Statistics module that helps collect game statistics, maybe even having the possibility of transmitting them to a server (maybe even leaderboards? That'd be so cool!)
 - [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
