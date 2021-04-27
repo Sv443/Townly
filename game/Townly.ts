@@ -155,8 +155,8 @@ async function openMainMenu()
         dbg("InitAll", `Selected MainMenu option "${result.option.text}" #${result.option.index}`, LogLevel.Info);
 
 
-        mainMenu.removeAllListeners();
-        mainMenu.removeAllListeners("submit");
+        // mainMenu.removeAllListeners();
+        // mainMenu.removeAllListeners("submit");
 
         // no fallthroughs
         switch(result.option.index)

@@ -11,8 +11,8 @@
   },
   "scripts": {
     "start": "npm run buildstart",
-    "build": "tsc",
-    "buildstart": "tsc --build tsconfig.json && node .",
+    "build": "tsc --build tsconfig.json",
+    "buildstart": "npm run build && node .",
 
     "lint": "npm run lint-game && npm run lint-engine",
     "lint-game": "echo Linting game... && eslint game/**/*.ts",
@@ -29,7 +29,7 @@
     "dep-graph-game": "depcruise --exclude 'node_modules' --ts-config 'tsconfig.json' --output-type dot game | dot -T svg | depcruise-wrap-stream-in-html > ./dependency_graph.html",
     "dep-graph-engine": "depcruise --exclude 'node_modules' --ts-config 'tsconfig.json' --output-type dot engine | dot -T svg | depcruise-wrap-stream-in-html > ./engine/dependency_graph.html",
 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && node out/test"
   },
   "repository": {
     "type": "git",
