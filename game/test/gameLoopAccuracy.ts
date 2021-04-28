@@ -1,5 +1,5 @@
 import { colors } from "svcorelib";
-import { GameLoop } from "../../engine/base/GameLoop";
+import GameLoop from "../../engine/base/GameLoop";
 
 
 /** Target ticks per second */

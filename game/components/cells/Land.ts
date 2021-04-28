@@ -1,13 +1,14 @@
 import { unused } from "svcorelib";
+
 import { Position } from "../../../engine/base/Base";
-import { TownlyCell, CellType } from "../TownlyCell";
+import StructuralCell from "./StructuralCell";
 
 
-export class Land extends TownlyCell
+export default class Land extends StructuralCell
 {
     constructor(position: Position)
     {
-        super(CellType.Land, position, "█");
+        super("land", position, "█");
     }
 
     /**

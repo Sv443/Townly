@@ -25,6 +25,7 @@
     - [ ] Initializing modules that need one-time-initialization on startup
     - [ ] The engine's intro screen
     - [ ] Exposing interfaces to certain methods or properties that might be needed by dependants
+- [ ] Implement Crypto methods to encrypt and decrypt data
 - [ ] Add UI system, based on widgets
 - [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
 - [ ] Implement differential rendering (only re-render cells that have been changed, contrary to redrawing the entire grid)

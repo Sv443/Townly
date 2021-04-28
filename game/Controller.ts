@@ -1,16 +1,16 @@
 import { DeepPartial } from "tsdef";
 import { colors } from "svcorelib";
 
+import { dbg, Newable, Position, Size } from "../engine/base/Base";
+import Grid, { IGridOptions } from "../engine/components/Grid";
+import GameLoop from "../engine/base/GameLoop";
+
+import Constructable from "./components/Constructable";
+import Residential from "./components/cells/constructables/Residential";
+import Substation from "./components/cells/constructables/Substation";
+import WaterTower from "./components/cells/constructables/WaterTower";
+
 import { gameSettings } from "../settings";
-
-import { dbg, LogLevel, Newable, Position, Size } from "../engine/base/Base";
-import { Grid, IGridOptions } from "../engine/components/Grid";
-import { GameLoop } from "../engine/base/GameLoop";
-
-import { Constructable } from "./components/Constructable";
-import { Residential } from "./components/cells/constructables/Residential";
-import { Substation } from "./components/cells/constructables/Substation";
-import { WaterTower } from "./components/cells/constructables/WaterTower";
 
 
 const col = colors.fg;
@@ -78,7 +78,7 @@ function registerConstructables(): Promise<void>
         cnstr.forEach(ConstructableClass => {
             const c = new ConstructableClass(new Position(-1, -1));
 
-            dbg("Init/Constructables", `Registered constructable ${col.green}${c.name}${col.rst}`, LogLevel.Success);
+            dbg("Init/Constructables", `Registered constructable ${col.green}${c.name}${col.rst}`, "success");
 
             constructables.push(c);
         });

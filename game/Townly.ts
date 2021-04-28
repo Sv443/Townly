@@ -1,20 +1,20 @@
-import { gameSettings, generalSettings } from "../settings";
-
 import { colors, readableArray } from "svcorelib";
 import { DeepPartial, Undefinable } from "tsdef";
 import prompt from "prompts";
 
-import { dbg, LogLevel, Size } from "../engine/base/Base";
+import { dbg, Size } from "../engine/base/Base";
 import * as Controller from "./Controller";
-import { GameLoop, IGameLoopSettings } from "../engine/base/GameLoop";
-import { Grid, IGridOptions } from "../engine/components/Grid";
+import GameLoop, { IGameLoopSettings } from "../engine/base/GameLoop";
+import Grid, { IGridOptions } from "../engine/components/Grid";
 import { MenuOptionOrSpacer } from "../engine/gui/menus/Menu";
 
 import MainMenu from "../engine/gui/menus/MainMenu";
-import { SelectionMenu } from "../engine/gui/menus/SelectionMenu";
-import { tengSettings } from "../engine/settings";
-import { GameSettings } from "./GameSettings";
+import SelectionMenu from "../engine/gui/menus/SelectionMenu";
+import GameSettings from "./GameSettings";
 import { SaveStateInfo } from "./SaveStates";
+
+import { tengSettings } from "../engine/settings";
+import { gameSettings, generalSettings } from "../settings";
 
 const col = colors.fg;
 
@@ -53,10 +53,10 @@ function init()
             dbg("Init", "Entering Init phase...");
             
             await Controller.init();
-            dbg("Init", "Initialized Controller", LogLevel.Success);
+            dbg("Init", "Initialized Controller", "success");
 
             await mainMenu.preload();
-            dbg("Init", `Preloaded MainMenu as "${mainMenu.toString()}"`, LogLevel.Success);
+            dbg("Init", `Preloaded MainMenu as "${mainMenu.toString()}"`, "success");
 
             return res();
         }
@@ -79,11 +79,11 @@ async function initAll()
         initPhaseName = "Init";
         await init();
 
-        dbg("InitAll", `Successfully initialized ${generalSettings.info.name}`, LogLevel.Success);
+        dbg("InitAll", `Successfully initialized ${generalSettings.info.name}`, "success");
         
 
 
-        dbg("InitAll", `Showing MainMenu...:`, LogLevel.Info);
+        dbg("InitAll", `Showing MainMenu...:`, "info");
         
         const mainMenuOpts: MenuOptionOrSpacer[] = [
             "New Game", // 0
@@ -101,7 +101,7 @@ async function initAll()
     }
     catch(err)
     {
-        dbg("InitAll", `Error in ${initPhaseName}-Phase: ${err}`, LogLevel.Fatal);
+        dbg("InitAll", `Error in ${initPhaseName}-Phase: ${err}`, "fatal");
     }
 }
 
@@ -110,14 +110,14 @@ async function initAll()
  */
 function enterGame()
 {
-    dbg("EnterGame", `Entering game...`, LogLevel.Info);
+    dbg("EnterGame", `Entering game...`, "info");
     const gameLoopSettings: Partial<IGameLoopSettings> = {
         desyncEventThreshold: 25
     };
 
     const loop = new GameLoop(10, gameLoopSettings);
 
-    dbg("EnterGame", `Instantiated GameLoop as "${loop.toString()}"`, LogLevel.Success);
+    dbg("EnterGame", `Instantiated GameLoop as "${loop.toString()}"`, "success");
 
     loop.on("tick", (tickNum) => {
         console.log(`#DEBUG - Tick #${tickNum}`);
@@ -127,7 +127,7 @@ function enterGame()
         console.log(`#DEBUG !! Desync: ${actual} of target ${target}`);
     });
 
-    dbg("EnterGame", `Registered GameLoop events`, LogLevel.Success);
+    dbg("EnterGame", `Registered GameLoop events`, "success");
     
     
     const gridSize = new Size(100, 50);
@@ -137,11 +137,11 @@ function enterGame()
         inputStream: process.stdin
     };
 
-    dbg("EnterGame", `Creating main grid instance (grid size = ${gridSize.toString()} - chunk size = ${chunkSize.toString()})...`, LogLevel.Info);
+    dbg("EnterGame", `Creating main grid instance (grid size = ${gridSize.toString()} - chunk size = ${chunkSize.toString()})...`, "info");
 
     const grid = new Grid(gridSize, chunkSize, undefined, gridOpts);
 
-    dbg("EnterGame", `Created main grid instance as "${grid.toString()}"`, LogLevel.Success);
+    dbg("EnterGame", `Created main grid instance as "${grid.toString()}"`, "success");
 }
 
 /**
@@ -152,7 +152,7 @@ async function openMainMenu()
     mainMenu.show();
 
     mainMenu.on("submit", async (result) => {
-        dbg("InitAll", `Selected MainMenu option "${result.option.text}" #${result.option.index}`, LogLevel.Info);
+        dbg("InitAll", `Selected MainMenu option "${result.option.text}" #${result.option.index}`, "info");
 
 
         // mainMenu.removeAllListeners();
@@ -218,7 +218,7 @@ async function openMainMenu()
             default:
                 // invalid option or spacer was somehow selected
 
-                dbg("MainMenu", `Invalid option #${result.option.index} selected`, LogLevel.Error);
+                dbg("MainMenu", `Invalid option #${result.option.index} selected`, "error");
                 throw new Error(`Invalid MainMenu option #${result.option.index} selected`);
         }
     });
@@ -338,7 +338,7 @@ async function openAboutPrompt()
  */
 function softShutdown()
 {
-    dbg("Shutdown", `Shutting down ${generalSettings.info.name}...`, LogLevel.Info);
+    dbg("Shutdown", `Shutting down ${generalSettings.info.name}...`, "info");
     console.log(`\n\nGoodbye.\n`);
 
     setImmediate(() => process.exit(0));

@@ -25,7 +25,7 @@ const generalSettings = Object.freeze({
     }
 });
 
-/** Settings of the game */
+/** Settings of the game itself */
 const gameSettings = Object.freeze({
     /** Settings regarding initialization */
     init: {

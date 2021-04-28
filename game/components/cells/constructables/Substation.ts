@@ -1,28 +1,24 @@
-import { Color, ColorType, Position } from "../../../../engine/base/Base";
-import { InfluentialCell } from "../../InfluentialCell";
-import { FulfillmentType } from "../../Need";
-import { CellType } from "../../TownlyCell";
-
-
+import { Color, Position } from "../../../../engine/base/Base";
+import InfluentialCell from "../../InfluentialCell";
 
 
 /**
  * The substation currently generates a lot of electricity.  
  * In the future it should just extend the radius of electricity generating buildings.
  */
-export class Substation extends InfluentialCell
+export default class Substation extends InfluentialCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Special, "Substation", pos, "⭍", {
+        super("special", "Substation", pos, "⭍", {
             baseCost: 4000,
             costIncrement: 1.1
         },
         {
-            type: FulfillmentType.Existance
+            type: "existance"
         });
 
-        this.setColor(ColorType.Foreground, Color.Yellow);
+        this.setColor("foreground", Color.Yellow);
     }
 
     //#MARKER other
