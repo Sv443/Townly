@@ -13,7 +13,7 @@ const diffs: number[] = [];
 
 gl.on("tick", (tickNum) => {
     const currentTS = Date.now();
-    const sinceCreation = (currentTS - gl.getCreationTime()) / 1000;
+    const sinceCreation = (currentTS - gl.creationTime) / 1000;
     const diff = currentTS - lastTS;
 
     console.log(`Tick #${tickNum} - time since creation: ${sinceCreation.toFixed(1)}s - timestamp: ${currentTS} - diff to last: ${diff}`);
