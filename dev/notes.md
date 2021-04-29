@@ -34,6 +34,7 @@
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
 - [ ] Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
     - Buildings that are constructed on these zones should have a randomly assigned name (and maybe texture)
+- [ ] Add a way to generate pseudo-random names for buildings and the town itself
 - [ ] Add the needs system, paving the way for the leveling-up-system
 - [ ] Add the leveling-up-system, only allowing cells to upgrade when their needs are fulfilled
 - [ ] Implement MultiCellStructures that consist of more than one cell, increasing size, importance and "texture" resolution
