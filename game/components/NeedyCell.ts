@@ -2,8 +2,8 @@ import { DeepPartial } from "tsdef";
 
 import { Position } from "../../engine/base/Base";
 import { IConstructableCost } from "./Constructable";
-import { IInhabitants, InhabitedCell } from "./InhabitedCell";
-import { Need } from "./Need";
+import InhabitedCell, { IInhabitants } from "./InhabitedCell";
+import Need from "./Need";
 import { CellType } from "./TownlyCell";
 
 
@@ -20,7 +20,7 @@ export interface INeedFulfillment
 /**
  * A needy cell has certain needs that should be fulfilled.
  */
-export abstract class NeedyCell extends InhabitedCell
+export default abstract class NeedyCell extends InhabitedCell
 {
     protected needs: Need[] = [];
 

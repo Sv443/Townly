@@ -1,6 +1,6 @@
 {
   "name": "townly",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha",
   "description": "A CLI city building game",
   "main": "out/game/Townly.js",
   "bin": "out/game/Townly.js",

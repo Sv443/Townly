@@ -1,7 +1,7 @@
 import { DeepPartial } from "tsdef";
 
 import { Position } from "../../engine/base/Base";
-import { CellType, TownlyCell } from "./TownlyCell";
+import TownlyCell, { CellType } from "./TownlyCell";
 
 
 //#MARKER types
@@ -27,7 +27,7 @@ const defaultIConstructableCost: IConstructableCost = {
  * A Constructable is any cell that can be constructed by the player.  
  * They usually cost a certain amount of money.
  */
-export abstract class Constructable extends TownlyCell
+export default abstract class Constructable extends TownlyCell
 {
     protected cost: IConstructableCost;
     

@@ -40,7 +40,7 @@ export interface ISettingsOption
 
 //#MARKER class
 
-export class GameSettings extends SettingsMenu
+export default class GameSettings extends SettingsMenu
 {
     private gameSettingsOptions: Undefinable<ISettingsOption[]> = undefined;
     /** The horizontally scrolling settings categories */

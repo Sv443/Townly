@@ -1,24 +1,24 @@
-import { ColorType, Color, Position } from "../../engine/base/Base";
-import { Cell } from "../../engine/components/Cell";
+import { Color, Position } from "../../engine/base/Base";
+import Cell from "../../engine/components/Cell";
 
 
 /**
- * Describes the base type of the cell
+ * Describes the base type of the cell.  
+ *   
+ * | Type | Description |
+ * | :-- | :-- |
+ * | `land` | Land area that can be built on. TODO: It can also contain resources. |
+ * | `water` | Normal buildings can't be built on water cells. |
+ * | `residential` | A cell that residents live in. |
+ * | `special` | Special buildings usually cost more, have a bulldoze confirmation prompt and they usually have special "abilities". |
  */
-export enum CellType
-{
-    Land,
-    Water,
-    Residential,
-    /** Special buildings that usually cost more, need a bulldoze prompt and can have special "abilities" */
-    Special
-}
+export type CellType = "land" | "water" | "residential" | "special";
 
 /**
  * This cell class extends from Teng's Cell class.  
  * It contains stuff that is specific to Townly, like the cell type.
  */
-export abstract class TownlyCell extends Cell
+export default abstract class TownlyCell extends Cell
 {
     private type: CellType;
 
@@ -35,8 +35,8 @@ export abstract class TownlyCell extends Cell
 
         this.type = type;
 
-        this.setColor(ColorType.Foreground, Color.White, true);
-        this.setColor(ColorType.Background, Color.Black);
+        this.setColor("foreground", Color.White, true);
+        this.setColor("background", Color.Black);
     }
 
     /**

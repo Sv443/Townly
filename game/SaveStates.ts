@@ -1,5 +1,5 @@
 import { Size } from "../engine/base/Base";
-import { SaveState } from "../engine/serialization/SaveState";
+import SaveState from "../engine/serialization/SaveState";
 
 
 /**

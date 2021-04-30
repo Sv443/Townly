@@ -1,28 +1,24 @@
-import { Color, ColorType, Position } from "../../../../engine/base/Base";
-import { InfluentialCell } from "../../InfluentialCell";
-import { FulfillmentType } from "../../Need";
-import { CellType } from "../../TownlyCell";
-
-
+import { Color, Position } from "../../../../engine/base/Base";
+import InfluentialCell from "../../InfluentialCell";
 
 
 /**
  * The water tower currently generates a lot of water.  
  * In the future, pipes should distribute the water throughout the city.
  */
-export class WaterTower extends InfluentialCell
+export default class WaterTower extends InfluentialCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Special, "Water Tower", pos, "≈", {
+        super("special", "Water Tower", pos, "≈", {
             baseCost: 2000,
             costIncrement: 1.1
         },
         {
-            type: FulfillmentType.Existance
+            type: "existance"
         });
 
-        this.setColor(ColorType.Foreground, Color.Yellow);
+        this.setColor("foreground", Color.Yellow);
     }
 
     //#MARKER other

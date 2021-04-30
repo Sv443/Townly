@@ -1,18 +1,16 @@
 import { Position } from "../../../../engine/base/Base";
-import { Electricity } from "../../needs/Electricity";
-import { NeedyCell } from "../../NeedyCell";
-import { CellType } from "../../TownlyCell";
-
+import Electricity from "../../needs/Electricity";
+import NeedyCell from "../../NeedyCell";
 
 
 /**
  * 
  */
-export class Residential extends NeedyCell
+export default class Residential extends NeedyCell
 {
     constructor(pos: Position)
     {
-        super(CellType.Residential, "Residential", pos, "R", {
+        super("residential", "Residential", pos, "R", {
             baseCost: 100,
             costIncrement: 1.002
         }, {

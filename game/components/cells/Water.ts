@@ -1,9 +1,9 @@
 import { unused } from "svcorelib";
 import { Position } from "../../../engine/base/Base";
-import { TownlyCell, CellType } from "../TownlyCell";
+import StructuralCell from "./StructuralCell";
 
 
-export class Water extends TownlyCell
+export default class Water extends StructuralCell
 {
     /** Whether or not this water is deep (duh) */
     private deep: boolean;
@@ -11,7 +11,7 @@ export class Water extends TownlyCell
 
     constructor(position: Position, deep: boolean = false)
     {
-        super(CellType.Water, position, "▒");
+        super("water", position, "▒");
 
         this.deep = deep;
 

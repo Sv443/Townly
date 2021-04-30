@@ -1,7 +1,7 @@
 import { DeepPartial } from "tsdef";
 
 import { Position } from "../../engine/base/Base";
-import { Constructable, IConstructableCost } from "./Constructable";
+import Constructable, { IConstructableCost } from "./Constructable";
 import { FulfillmentType } from "./Need";
 import { CellType } from "./TownlyCell";
 
@@ -17,7 +17,7 @@ export interface IInfluenceSettings
 }
 
 const defaultIInfluenceSettings: IInfluenceSettings = {
-    type: FulfillmentType.Existance,
+    type: "existance",
     radius: 10,
 };
 
@@ -26,7 +26,7 @@ const defaultIInfluenceSettings: IInfluenceSettings = {
 /**
  * This cell fulfills needs, either in a radius or by simply existing, depending on its set type
  */
-export abstract class InfluentialCell extends Constructable
+export default abstract class InfluentialCell extends Constructable
 {
     protected influenceSettings: DeepPartial<IInfluenceSettings>;
 
@@ -41,7 +41,7 @@ export abstract class InfluentialCell extends Constructable
 
     toString(): string
     {
-        return `InfluentialCell '${this.getChar()}' of fulfillment type ${FulfillmentType[this.getFulfillmentType()]} @ ${this.getPosition().toString()} - UID: ${this.uid.toString()}`
+        return `InfluentialCell '${this.getChar()}' of fulfillment type ${this.getFulfillmentType()} @ ${this.getPosition().toString()} - UID: ${this.uid.toString()}`
     }
 
     /**

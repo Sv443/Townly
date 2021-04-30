@@ -21,10 +21,11 @@
 - [x] Add an in-game currency system, contained in some kind of controller class
 - [x] Add the legacy edition's components that are derived from the base cell class (Constructable, InhabitedCell, ...)
 - [x] Add water and electricity (need generating buildings that currently generate an infinite amount), the units are distributed globally (don't need pipes and wires yet)
-- [ ] Add Core module that handles integral engine stuff like:
-    - [ ] Initializing modules that need one-time-initialization on startup
-    - [ ] The engine's intro screen
-    - [ ] Exposing interfaces to certain methods or properties that might be needed by dependants
+- [x] Add Core module that handles integral engine stuff like:
+    - [x] Initializing modules that need one-time-initialization on startup
+    - [x] The engine's intro screen
+    - [x] Exposing interfaces to certain methods or properties that might be needed by dependants
+- [ ] Implement Crypto methods to encrypt and decrypt data
 - [ ] Add UI system, based on widgets
 - [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
 - [ ] Implement differential rendering (only re-render cells that have been changed, contrary to redrawing the entire grid)
@@ -33,6 +34,7 @@
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
 - [ ] Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
     - Buildings that are constructed on these zones should have a randomly assigned name (and maybe texture)
+- [ ] Add a way to generate pseudo-random names for buildings and the town itself
 - [ ] Add the needs system, paving the way for the leveling-up-system
 - [ ] Add the leveling-up-system, only allowing cells to upgrade when their needs are fulfilled
 - [ ] Implement MultiCellStructures that consist of more than one cell, increasing size, importance and "texture" resolution

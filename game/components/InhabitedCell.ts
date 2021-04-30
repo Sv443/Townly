@@ -1,7 +1,7 @@
 import { DeepPartial } from "tsdef";
 
 import { Position } from "../../engine/base/Base";
-import { Constructable, IConstructableCost } from "./Constructable";
+import Constructable, { IConstructableCost } from "./Constructable";
 import { CellType } from "./TownlyCell";
 
 
@@ -33,7 +33,7 @@ const defaultIInhabitants: IInhabitants = {
  * A Constructable is any cell that can be constructed by the player.  
  * They usually cost a certain amount of money.
  */
-export abstract class InhabitedCell extends Constructable
+export default abstract class InhabitedCell extends Constructable
 {
     protected inhabitants: DeepPartial<IInhabitants>;
 

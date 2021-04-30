@@ -631,20 +631,41 @@ process.on("SIGINT", () => {
 
 
 
-import prompt from "prompts";
+// import prompt from "prompts";
 
 
-async function promptTest()
+// async function promptTest()
+// {
+//     process.stdin.setRawMode(true);
+
+//     const result = await prompt({
+//         type: "text",
+//         name: "val",
+//         message: "What should your town be called?"
+//     });
+
+//     console.log(result);
+// }
+
+// promptTest();
+
+
+import Encryption from "./engine/crypto/Encryption";
+
+
+async function encryptionTest()
 {
-    process.stdin.setRawMode(true);
+    const input = "Test";
+    const key = "123";
 
-    const result = await prompt({
-        type: "text",
-        name: "val",
-        message: "What should your town be called?"
-    });
+    const encBuf = Encryption.encrypt(input, key);
 
-    console.log(result);
+    console.log(encBuf.toJSON().data);
+    console.log(encBuf.toString());
+
+    const dec = Encryption.decrypt(encBuf, key);
+
+    console.log(dec);
 }
 
-promptTest();
+encryptionTest();
