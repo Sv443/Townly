@@ -49,6 +49,13 @@
                 "color": "#fff"
             }
         ],
+        "(FIXME:)": [ // FIXME:
+            {
+                "backgroundColor": "#a22",
+                "color": "#fff",
+                "overviewRulerColor": "#800"
+            }
+        ],
     },
 
     // REQUIRES EXTENSION: coenraads.bracket-pair-colorizer-2

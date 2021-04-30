@@ -660,8 +660,8 @@ async function encryptionTest()
 
     const encBuf = Encryption.encrypt(input, key);
 
-    console.log(encBuf.toJSON().data);
-    console.log(encBuf.toString());
+    // console.log(encBuf.toJSON().data);
+    // console.log(encBuf.toString());
 
     const dec = Encryption.decrypt(encBuf, key);
 
