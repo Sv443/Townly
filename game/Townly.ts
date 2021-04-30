@@ -69,12 +69,15 @@ function init()
 
 async function initAll()
 {
+    //#SECTION PreInit
     let initPhaseName = "PreInit";
     dbg("InitAll", `Initializing ${generalSettings.info.name} v${generalSettings.info.versionStr}...`);
 
     try
     {
         await preInit();
+
+        //#SECTION Init
 
         initPhaseName = "Init";
         await init();
@@ -106,7 +109,7 @@ async function initAll()
 }
 
 /**
- * Function that's eventually called by both "New Game" and "Continue" options to render the main Grid instance
+ * Function that's eventually called by both "New Game" and "Continue" options to create the game loop and start rendering the main Grid instance
  */
 function enterGame()
 {
@@ -345,4 +348,5 @@ function softShutdown()
 }
 
 
+// Start Townly when this file is executed
 initAll();
