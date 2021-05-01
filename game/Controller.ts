@@ -4,6 +4,7 @@ import { colors } from "svcorelib";
 import { dbg, Newable, Position, Size } from "../engine/base/Base";
 import Grid, { IGridOptions } from "../engine/components/Grid";
 import GameLoop from "../engine/base/GameLoop";
+import { SaveStateInfo } from "./TownlySaves";
 
 import Constructable from "./components/Constructable";
 import Residential from "./components/cells/constructables/Residential";
