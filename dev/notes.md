@@ -25,20 +25,21 @@
     - [x] Initializing modules that need one-time-initialization on startup
     - [x] The engine's intro screen
     - [x] Exposing interfaces to certain methods or properties that might be needed by dependants
-- [ ] Implement Crypto methods to encrypt and decrypt data
-- [ ] Add UI system, based on widgets
-- [ ] Add "New Game" and "Continue" windows to create or choose and load a save state
+- [x] Implement Crypto methods to encrypt and decrypt data
+- [ ] Add "New Game" and "Continue" menus
+    - [ ] Can be navigated all the way to the in-game state, where the grid is rendered
 - [ ] Implement differential rendering (only re-render cells that have been changed, contrary to redrawing the entire grid)
-- [ ] Add Statistics module that helps collect game statistics, maybe even having the possibility of transmitting them to a server (maybe even leaderboards? That'd be so cool!)
 - [ ] Make Grid generation threaded, using native module "worker_threads", since it's quite slow and slow = bad or something idk
 - [ ] Register constructables at startup and make them be able to be built in-game, using up money in the process
+- [ ] Add a way to generate pseudo-random names for buildings and the town itself
 - [ ] Add zone constructables (residential and commercial), which automatically construct buildings on themselves if basic needs are fulfilled
     - Buildings that are constructed on these zones should have a randomly assigned name (and maybe texture)
-- [ ] Add a way to generate pseudo-random names for buildings and the town itself
 - [ ] Add the needs system, paving the way for the leveling-up-system
 - [ ] Add the leveling-up-system, only allowing cells to upgrade when their needs are fulfilled
+- [ ] Add Statistics module that helps collect game statistics, maybe even having the possibility of transmitting them to a server (maybe even leaderboards? That'd be so cool!)
 - [ ] Implement MultiCellStructures that consist of more than one cell, increasing size, importance and "texture" resolution
     - With the chunks system this might get complex and will definitely be a pain in the ass to implement correctly
+- [ ] Add UI system, based on widgets
 
 (these goals might get changed later on)
 
