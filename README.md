@@ -1,23 +1,26 @@
 ## Townly
 ### CLI city building game inspired by [TheoTown](https://store.steampowered.com/app/1084020/TheoTown/) and [Cities: Skylines](https://store.steampowered.com/app/255710/Cities_Skylines/)
-### If you have questions or wanna chat, feel free to [join my Discord server](https://sv443.net/discord)
+### If you have questions or wanna chat, feel free to [join my Discord server](https://dc.sv443.net/)
 
 <br><br>
 
-## Running the game:
-If you want to run this game, please follow the [build instructions.](#build-instructions)  
+## Download:
+If you want to download and play this game, please check out the [#builds](https://discord.com/channels/826865418298851400/828746225242865694) channel on the [Townly Discord server.](https://dc.sv443.net/townly)
 
 <br><br>
 
+## Why?
+Good question. Let me just make up some totally legitimate reasons, hold on...  
+  
 I challenged myself multiple times to create games in the Command Line Interface.  
 The goal was for me to be able to play the games on my server via SSH.  
 This is my biggest challenge yet, a fully fledged city building game that runs in the command line.  
   
 You can find my other CLI games [here.](https://github.com/Sv443/CLI-Games-Collection)  
 
-<br>
+<br><br>
 
-### The story behind Townly:
+## The story behind Townly:
 #### Initial vanilla JS version:
 Townly was first made in pure Node.js because I couldn't get my Qt Creator to work on my PC for a whole year.  
 The legacy JS version's code can be found [here.](https://github.com/Sv443/Townly/tree/legacy/Townly.js)
