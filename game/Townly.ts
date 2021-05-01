@@ -11,7 +11,7 @@ import { MenuOptionOrSpacer } from "../engine/gui/menus/Menu";
 import MainMenu from "../engine/gui/menus/MainMenu";
 import SelectionMenu from "../engine/gui/menus/SelectionMenu";
 import GameSettings from "./GameSettings";
-import { SaveStateInfo } from "./SaveStates";
+import { SaveStateInfo } from "./TownlySaves";
 
 import { tengSettings } from "../engine/settings";
 import { gameSettings, generalSettings } from "../settings";

@@ -1,5 +1,9 @@
 ## Townly
 ### CLI city building game inspired by [TheoTown](https://store.steampowered.com/app/1084020/TheoTown/) and [Cities: Skylines](https://store.steampowered.com/app/255710/Cities_Skylines/)
+Powered by [Teng](https://github.com/Sv443/Teng#readme)
+
+<br>
+
 ### If you have questions or wanna chat, feel free to [join my Discord server](https://dc.sv443.net/)
 
 <br><br>
@@ -52,13 +56,14 @@ More info on the engine can be found [here.](https://github.com/Sv443/Teng#readm
 <br><br><br><br>
 
 ## Build Instructions:
-Have Git, Node.js, npm and TypeScript set up and working, then:  
+If you can't find a compatible version of Townly, you can follow this guide to build Townly:  
+
+First, make sure you have Git, Node.js, npm and TypeScript set up and working, then:  
 1. Clone the repository
 2. Pull the Teng submodule by running `git submodule init` and then `git submodule update`
 3. Install dependencies by running `npm i`
 4. Run the command `npm start` to compile and run the code
-  
-To create an executable, use the command `npm run compile-pkg`
+- To create an executable, use the command `npm run compile-pkg`
 
 
 <br><br><br><br>

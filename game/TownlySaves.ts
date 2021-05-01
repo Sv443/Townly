@@ -1,32 +1,37 @@
-import { Size } from "../engine/base/Base";
+// contains information and functionality regarding Townly's save states and their format
+
+import { JSONCompatible, Size } from "../engine/base/Base";
 import SaveState from "../engine/serialization/SaveState";
 
 
 /**
- * Data of a save state
+ * The actual data of a Townly save state.  
+ * **When modifying remember:** Only JSON-compatible types are allowed here!
  */
 export interface TownlySaveData
 {
-    /** The version of this interface's format */
+    [key: string]: JSONCompatible;
+
+    /** The iteration version of this interface's format */
     formatVersion: number;
     /** Info about the town */
-    townInfo: {
+    town: {
         /** The name of the town */
         name: string;
     }
-    /** The datetime of when this save state was initially created */
-    created: Date;
-    /** The datetime of when this save state was last played on */
-    lastSaved: Date | null;
+    /** Timestamp of when this save state was initially created */
+    created: number;
+    /** Timestamp of when this save state was last played on */
+    lastPlayed: number | null;
     /** Absolute resources like money */
     resources: {
-        /** The amount of money */
+        /** The amount of money the town has */
         money: number;
     }
 }
 
 /**
- * An object containing useful properties that describe a save state
+ * An object containing properties that describe and contain a save state
  */
 export interface SaveStateInfo
 {
