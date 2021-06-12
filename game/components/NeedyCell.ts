@@ -1,6 +1,6 @@
 import { DeepPartial } from "tsdef";
 
-import { Position } from "../../engine/base/Base";
+import { Position } from "../../engine/core/Base";
 import { IConstructableCost } from "./Constructable";
 import InhabitedCell, { IInhabitants } from "./InhabitedCell";
 import Need from "./Need";

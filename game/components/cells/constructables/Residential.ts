@@ -1,4 +1,4 @@
-import { Position } from "../../../../engine/base/Base";
+import { Position } from "../../../../engine/core/Base";
 import Electricity from "../../needs/Electricity";
 import NeedyCell from "../../NeedyCell";
 

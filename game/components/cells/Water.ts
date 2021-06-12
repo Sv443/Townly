@@ -1,5 +1,5 @@
 import { unused } from "svcorelib";
-import { Position } from "../../../engine/base/Base";
+import { Position } from "../../../engine/core/Base";
 import StructuralCell from "./StructuralCell";
 
 

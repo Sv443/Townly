@@ -1,6 +1,6 @@
 import { DeepPartial } from "tsdef";
 
-import { Position } from "../../engine/base/Base";
+import { Position } from "../../engine/core/Base";
 import Constructable, { IConstructableCost } from "./Constructable";
 import { CellType } from "./TownlyCell";
 

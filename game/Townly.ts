@@ -2,9 +2,9 @@ import { colors, readableArray } from "svcorelib";
 import { DeepPartial, Undefinable } from "tsdef";
 import prompt from "prompts";
 
-import { dbg, Size } from "../engine/base/Base";
+import { dbg, Size } from "../engine/core/Base";
 import * as Controller from "./Controller";
-import GameLoop, { IGameLoopSettings } from "../engine/base/GameLoop";
+import GameLoop, { IGameLoopSettings } from "../engine/core/GameLoop";
 import Grid, { IGridOptions } from "../engine/components/Grid";
 import { MenuOptionOrSpacer } from "../engine/gui/menus/Menu";
 

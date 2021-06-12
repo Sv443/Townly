@@ -1,4 +1,4 @@
-import { Color, Position } from "../../../../engine/base/Base";
+import { Color, Position } from "../../../../engine/core/Base";
 import InfluentialCell from "../../InfluentialCell";
 
 

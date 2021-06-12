@@ -1,6 +1,6 @@
 // contains information and functionality regarding Townly's save states and their format
 
-import { JSONCompatible, Size } from "../engine/base/Base";
+import { JSONCompatible, Size } from "../engine/core/Base";
 import SaveState from "../engine/serialization/SaveState";
 
 

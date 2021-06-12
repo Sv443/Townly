@@ -1,9 +1,9 @@
 import { DeepPartial } from "tsdef";
 import { colors } from "svcorelib";
 
-import { dbg, Newable, Position, Size } from "../engine/base/Base";
+import { dbg, Newable, Position, Size } from "../engine/core/Base";
 import Grid, { IGridOptions } from "../engine/components/Grid";
-import GameLoop from "../engine/base/GameLoop";
+import GameLoop from "../engine/core/GameLoop";
 import { SaveStateInfo } from "./TownlySaves";
 
 import Constructable from "./components/Constructable";

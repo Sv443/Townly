@@ -1,6 +1,6 @@
 import { gameSettings } from "../../settings";
 
-import TengObject from "../../engine/base/TengObject";
+import TengObject from "../../engine/core/TengObject";
 
 
 /**
