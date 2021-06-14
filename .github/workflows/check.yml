@@ -1,0 +1,35 @@
+name: check
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - name: "Checkout and pull submodules"
+      uses: actions/checkout@v2 # checkout latest commit
+      with:
+        submodules: recursive
+    - name: "Use Node.js ${{ matrix.node-version }}" # set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: "Install Dependencies" # runs the npm ci command to install all dependencies
+      run: npm ci
+      env:
+        CI: "true"
+    - name: "Lint Townly and Teng"
+      run: npm run lint
+      env:
+        CI: "true"

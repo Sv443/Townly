@@ -4,6 +4,11 @@
 
 <br><br>
 
+## Running the game:
+If you want to run this game, please follow the [build instructions.](#build-instructions)  
+
+<br><br>
+
 I challenged myself multiple times to create games in the Command Line Interface.  
 The goal was for me to be able to play the games on my server via SSH.  
 This is my biggest challenge yet, a fully fledged city building game that runs in the command line.  
@@ -36,9 +41,21 @@ More info on the engine can be found [here.](https://github.com/Sv443/Teng#readm
 <br><br>
 
 ### Some helpful resources:
-- [Developer Notes](./dev/notes.md)
-- [Roadmap](./dev/roadmap.md)
+- [Current development progression / developer notes](./dev/notes.md)
+- ["Convenience features" roadmap](./dev/roadmap.md)
+- [Nice to know chart about how Townly displays stuff](./dev/display.md)
 
+
+<br><br><br><br>
+
+## Build Instructions:
+Have Git, Node.js, npm and TypeScript set up and working, then:  
+1. Clone the repository
+2. Pull the Teng submodule by running `git submodule init` and then `git submodule update`
+3. Install dependencies by running `npm i`
+4. Run the command `npm start` to compile and run the code
+  
+To create an executable, use the command `npm run compile-pkg`
 
 
 <br><br><br><br>

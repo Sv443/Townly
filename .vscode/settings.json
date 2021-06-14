@@ -49,30 +49,24 @@
                 "color": "#fff"
             }
         ],
-        // "(<!--%#INSERT:[a-zA-Z0-9\\-]+#%-->|<!--%#INJECT:[a-zA-Z0-9\\-]+#%-->)": [ // <!--%#INSERT:TEST#%--> / <!--%#INJECT:TEST#%-->
-        //     {
-        //         "color": "orange",
-        //         "fontStyle": "italic",
-        //         "outline": "1px solid orange"
-        //     }
-        // ],
-        // "(<%#INSERT:[a-zA-Z0-9\\-]+#%>|<%#INJECT:[a-zA-Z0-9\\-]+#%>)": [ // <%#INSERT:TEST#%> / <%#INJECT:TEST#%>
-        //     {
-        //         "color": "orange",
-        //         "fontStyle": "italic",
-        //         "outline": "1px solid orange"
-        //     }
-        // ],
+        "(FIXME:)": // FIXME:
+        {
+            "backgroundColor": "#a22",
+            "color": "#fff",
+            "overviewRulerColor": "#752020"
+        }
     },
 
     // REQUIRES EXTENSION: coenraads.bracket-pair-colorizer-2
     "bracket-pair-colorizer-2.colors": [
-        "#0F6A8F",
+        "#0f6a8f",
         "#659061",
-        "#41BCA3",
-        "#EDD553",
-        "#E09563",
-        "#B85442"
+        "#41bca3",
+        "#edd553",
+        "#e09563",
+        "#b85442",
+        "#8ced68",
+        "#7d56a6",
     ],
 
     // REQUIRES EXTENSION: streetsidesoftware.code-spell-checker
@@ -117,4 +111,10 @@
         "unfulfillment",
         "wintergatan"
     ],
+
+
+    // Powershell - remove initial text (copyright, version, "type help to get help", etc.)
+    "terminal.integrated.shellArgs.windows": [
+        "-nologo"
+    ]
 }
