@@ -13,22 +13,17 @@
     "start": "npm run buildstart",
     "build": "tsc --build tsconfig.json",
     "buildstart": "npm run build && node .",
-
-    "lint": "npm run lint-game && npm run lint-engine",
+    "lint": "npm run lint-game && npm run lint-engine && echo Done linting game and engine",
     "lint-game": "echo Linting game... && eslint game/**/*.ts",
     "lint-engine": "echo Linting engine... && eslint engine/**/*.ts",
-
-    "compile-nexe": "cd out && nexe -b --ico ../assets/Townly.ico -i game/Townly.js",
-
-    "compile-pkg": "tsc --build tsconfig.json && npm run pkg-win && npm run pkg-linux && npm run pkg-mac && echo Files located in out/build/",
+    "compile-nexe": "npm run build cd out && nexe -b --ico ../assets/Townly.ico -i game/Townly.js",
+    "compile-pkg": "npm run build  && npm run pkg-win && npm run pkg-linux && npm run pkg-mac && echo Files located in out/build/",
     "pkg-win": "pkg -t node14-win -o out/build/Townly-Win.exe .",
     "pkg-linux": "pkg -t node14-linux -o out/build/Townly-Linux .",
     "pkg-mac": "pkg -t node14-macos -o out/build/Townly-MacOS .",
-
     "dep-graph": "npm run dep-graph-game && npm run dep-graph-engine",
     "dep-graph-game": "depcruise --exclude ^node_modules --ts-config ./tsconfig.json --output-type dot game | dot -T svg | depcruise-wrap-stream-in-html > ./dependency_graph.html",
     "dep-graph-engine": "depcruise --exclude ^node_modules --ts-config ./tsconfig.json --output-type dot engine | dot -T svg | depcruise-wrap-stream-in-html > ./engine/dependency_graph.html",
-
     "test": "npm run build && node out/test"
   },
   "repository": {
@@ -66,7 +61,7 @@
     "sanitize-filename": "^1.6.3",
     "simplex-noise": "^2.4.0",
     "sound-play": "^1.1.0",
-    "svcorelib": "^1.14.0",
+    "svcorelib": "^1.14.1",
     "tsdef": "^0.0.14"
   },
   "devDependencies": {

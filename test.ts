@@ -6,7 +6,6 @@ process.on("SIGINT", () => {
     process.exit(0);
 });
 
-
 // import { diff } from "deep-diff";
 // import { colors, pause } from "svcorelib";
 // import { Area, Color, isColor, objectsEqual, Position, Size } from "./engine/base/Base";
@@ -650,22 +649,43 @@ process.on("SIGINT", () => {
 // promptTest();
 
 
-import Encryption from "./engine/crypto/Encryption";
+// import Encryption from "./engine/crypto/Encryption";
 
 
-async function encryptionTest()
+// async function encryptionTest()
+// {
+//     const input = "Test";
+//     const key = "123";
+
+//     const encBuf = Encryption.encrypt(input, key);
+
+//     // console.log(encBuf.toJSON().data);
+//     // console.log(encBuf.toString());
+
+//     const dec = Encryption.decrypt(encBuf, key);
+
+//     console.log(dec);
+// }
+
+// encryptionTest();
+
+
+import { Size } from "./engine/core/Base";
+
+import Renderer from "./engine/gui/Renderer";
+import Label from "./engine/gui/widgets/Label";
+
+
+async function testGUI()
 {
-    const input = "Test";
-    const key = "123";
+    const outStream = process.stdout;
 
-    const encBuf = Encryption.encrypt(input, key);
+    const renderer = new Renderer(outStream);
 
-    // console.log(encBuf.toJSON().data);
-    // console.log(encBuf.toString());
+    const label = new Label(0, new Size(10, 5));
+    label.setJustify("horizontal", "space-around");
 
-    const dec = Encryption.decrypt(encBuf, key);
-
-    console.log(dec);
+    renderer.addContent(label);
 }
 
-encryptionTest();
+testGUI();
