@@ -3,7 +3,7 @@ import { gameSettings } from "../../settings";
 import { seededRNG } from "svcorelib";
 import NoiseLayer, { NoiseMap } from "../../engine/noise/NoiseLayer";
 import LayeredNoise from "../../engine/noise/LayeredNoise";
-import { Size } from "../../engine/core/Base";
+import { Size } from "../../engine/core/BaseTypes";
 import Water from "../components/cells/Water";
 import Land from "../components/cells/Land";
 import TownlyCell from "../components/TownlyCell";

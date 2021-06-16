@@ -1,8 +1,9 @@
 import { colors, readableArray } from "svcorelib";
-import { DeepPartial, Undefinable } from "tsdef";
-import prompt from "prompts";
+import { DeepPartial } from "tsdef";
+import * as path from "path";
+import getAppDataPath from "appdata-path";
 
-import { dbg, Size } from "../engine/core/Base";
+import { dbg, Size } from "../engine/core/BaseTypes";
 import * as Controller from "./Controller";
 import GameLoop, { IGameLoopSettings } from "../engine/core/GameLoop";
 import Grid, { IGridOptions } from "../engine/components/Grid";
@@ -11,7 +12,7 @@ import { MenuOptionOrSpacer } from "../engine/dev/gui/menus/Menu";
 import MainMenu from "../engine/dev/gui/menus/MainMenu";
 import SelectionMenu from "../engine/dev/gui/menus/SelectionMenu";
 import GameSettings from "./GameSettings";
-import { SaveStateInfo } from "./TownlySaves";
+import { SavesManager } from "./TownlySaves";
 
 import { tengSettings } from "../engine/settings";
 import { gameSettings, generalSettings } from "../settings";
@@ -21,7 +22,11 @@ const col = colors.fg;
 
 const mainMenu = new MainMenu("Townly", undefined, "Standard");
 
-let settingsMenu: Undefinable<GameSettings>;
+let settingsMenu: GameSettings | undefined;
+let smgr: SavesManager | undefined;
+
+const appDataDir = getAppDataPath("Townly");
+const savesDir = path.join(appDataDir, "saves");
 
 
 function preInit()
@@ -57,6 +62,10 @@ function init()
 
             await mainMenu.preload();
             dbg("Init", `Preloaded MainMenu as "${mainMenu.toString()}"`, "success");
+            
+            smgr = new SavesManager(savesDir);
+            await smgr.loadLocalStates();
+            dbg("Init", `Created SavesManager instance as "${smgr.toString()}"`, "success");
 
             return res();
         }
@@ -134,15 +143,14 @@ function enterGame()
     
     
     const gridSize = new Size(100, 50);
-    const chunkSize = new Size(100, 50);
     const gridOpts: DeepPartial<IGridOptions> = {
         inputEnabled: false,
         inputStream: process.stdin
     };
 
-    dbg("EnterGame", `Creating main grid instance (grid size = ${gridSize.toString()} - chunk size = ${chunkSize.toString()})...`, "info");
+    dbg("EnterGame", `Creating main grid instance (grid size = ${gridSize.toString()} - chunk size = ${gameSettings.game.chunkSize.toString()})...`, "info");
 
-    const grid = new Grid(gridSize, chunkSize, undefined, gridOpts);
+    const grid = new Grid(gridSize, gameSettings.game.chunkSize, undefined, gridOpts);
 
     dbg("EnterGame", `Created main grid instance as "${grid.toString()}"`, "success");
 }
@@ -157,6 +165,9 @@ async function openMainMenu()
     mainMenu.on("submit", async (result) => {
         dbg("InitAll", `Selected MainMenu option "${result.option.text}" #${result.option.index}`, "info");
 
+        if(!(smgr instanceof SavesManager))
+            throw new TypeError(`Error while opening main menu: SavesManager instance wasn't created yet (expected instance of SavesManager)`);
+
 
         // mainMenu.removeAllListeners();
         // mainMenu.removeAllListeners("submit");
@@ -168,13 +179,17 @@ async function openMainMenu()
             {
                 // New Game
 
-                // prompt the user and create a save game
-                const saveGame = await createSaveGame();
+                // prompt the user and create a save state
+                const newSaveState = await smgr.createSaveState();
 
                 // setInterval(() => {}, 1000);
 
-                // // load the new save game
-                // const saveData = await loadSaveGame(saveGame);
+                // load the new save state
+                await Controller.loadSaveState(newSaveState);
+
+                console.log(`Save data:\n\n`);
+                console.log(newSaveState);
+                console.log(`\n\n(end save data)\n`);
 
                 // // actually enter the game
                 // enterGame(saveData);
@@ -224,50 +239,6 @@ async function openMainMenu()
                 dbg("MainMenu", `Invalid option #${result.option.index} selected`, "error");
                 throw new Error(`Invalid MainMenu option #${result.option.index} selected`);
         }
-    });
-}
-
-/**
- * Runs a few prompts and creates a save game with them
- */
-function createSaveGame(): Promise<SaveStateInfo>
-{
-    return new Promise(async (res, rej) => {
-        const saveState: Partial<SaveStateInfo> = {};
-
-        // TODO: keys are displayed twice for some stupid reason
-
-        //#SECTION Name of Town
-        const namePrompt = await prompt({
-            type: "text",
-            name: "name",
-            message: "What should your town be called?"
-        });
-
-        saveState.name = namePrompt.name;
-
-
-        //#SECTION Size of Town
-        const sizePrompt = await prompt({
-            type: "select",
-            name: "size",
-            choices: [
-                {
-                    title: "80 x 20",
-                    value: new Size(80, 20)
-                },
-                {
-                    title: "150 x 50",
-                    value: new Size(150, 50)
-                }
-            ],
-            message: "How big should your town's area be?  [width x height]"
-        });
-
-        saveState.gridSize = (sizePrompt.size as Size);
-
-
-        return res(saveState as SaveStateInfo);
     });
 }
 

@@ -1,5 +1,7 @@
 import * as packageJson from "./package.json";
 
+import { Size } from "./engine/core/BaseTypes";
+
 // import { resolve } from "path";
 
 
@@ -44,6 +46,9 @@ const gameSettings = Object.freeze({
             /** Amount of numerical digits that make up a seed */
             digitCount: 8,
         }
+    },
+    game: {
+        chunkSize: new Size(25, 10)
     },
     /** Settings regarding the citizens' needs */
     needs: {

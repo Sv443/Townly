@@ -1,4 +1,4 @@
-import { Position } from "../../../engine/core/Base";
+import { Position } from "../../../engine/core/BaseTypes";
 import TownlyCell, { CellType } from "../TownlyCell";
 
 

@@ -1,6 +1,6 @@
 import { unused } from "svcorelib";
 
-import { Position } from "../../../engine/core/Base";
+import { Position } from "../../../engine/core/BaseTypes";
 import StructuralCell from "./StructuralCell";
 
 
