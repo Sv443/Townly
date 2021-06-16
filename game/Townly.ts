@@ -187,10 +187,6 @@ async function openMainMenu()
                 // load the new save state
                 await Controller.loadSaveState(newSaveState);
 
-                console.log(`Save data:\n\n`);
-                console.log(newSaveState);
-                console.log(`\n\n(end save data)\n`);
-
                 // // actually enter the game
                 // enterGame(saveData);
 

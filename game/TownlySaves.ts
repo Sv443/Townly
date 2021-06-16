@@ -16,25 +16,34 @@ import SaveState from "../engine/serialization/SaveState";
  */
 export interface ITownlySaveData
 {
+    //#DEBUG
     [key: string]: JSONCompatible;
 
-    /** The iteration version of this interface's format */
-    formatVersion: number;
-    /** Info about the town */
-    town: {
-        /** The name of the town */
-        name: string;
-    }
-    /** Timestamp of when this save state was initially created */
-    created: number;
-    /** Timestamp of when this save state was last played on */
-    lastPlayed: number | null;
-    /** Absolute resources like money */
-    resources: {
-        /** The amount of money the town has */
-        money: number;
-    }
+    foo: string;
+    bar: number;
 }
+// export interface ITownlySaveData
+// {
+//     /*  !!!  don't modify this index signature  !!!  */
+//     [key: string]: JSONCompatible;
+
+//     /** The iteration version of this interface's format */
+//     formatVersion: number;
+//     /** Info about the town */
+//     town: {
+//         /** The name of the town */
+//         name: string;
+//     }
+//     /** Timestamp of when this save state was initially created */
+//     created: number;
+//     /** Timestamp of when this save state was last played on */
+//     lastPlayed: number | null;
+//     /** Absolute resources like money */
+//     resources: {
+//         /** The amount of money the town has */
+//         money: number;
+//     }
+// }
 
 /**
  * An object containing properties that describe and contain a save state
@@ -109,7 +118,7 @@ export class SavesManager extends TengObject
         return new Promise(async (res) => {
             const saveStateInfo: Partial<ISaveStateInfo> = {};
 
-            // TODO: keys are displayed twice for some stupid reason
+            // TODO: ditch "prompts" package
 
             //#SECTION Name of Town
             const namePrompt = await prompt({
@@ -151,6 +160,21 @@ export class SavesManager extends TengObject
 
             saveStateInfo.created = creationDate;
             saveStateInfo.lastSaved = creationDate;
+
+
+            this.saveStates.push(saveStateInfo.instance);
+
+            //#DEBUG
+            await saveStateInfo.instance.setData({
+                foo: "test",
+                bar: 123
+            });
+
+            await saveStateInfo.instance.save();
+
+            console.log(`\n\nDEBUG: saving some example data to '${saveStateInfo.instance.getAbsFilePath()}'`);
+
+            //#DEBUG
 
 
             return res(saveStateInfo as ISaveStateInfo);
