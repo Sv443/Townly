@@ -670,22 +670,25 @@ process.on("SIGINT", () => {
 // encryptionTest();
 
 
-import { Size } from "./engine/core/Base";
+// import { Size } from "./engine/core/Base";
 
-import Renderer from "./engine/gui/Renderer";
-import Label from "./engine/gui/widgets/Label";
+// import Renderer from "./engine/gui/Renderer";
+// import Label from "./engine/gui/widgets/Label";
 
 
-async function testGUI()
-{
-    const outStream = process.stdout;
+// async function testGUI()
+// {
+//     const outStream = process.stdout;
 
-    const renderer = new Renderer(outStream);
+//     const renderer = new Renderer(outStream);
 
-    const label = new Label(0, new Size(10, 5));
-    label.setJustify("horizontal", "space-around");
+//     const label = new Label(0, new Size(10, 5));
+//     label.setJustify("horizontal", "space-around");
 
-    renderer.addContent(label);
-}
+//     renderer.addContent(label);
 
-testGUI();
+//     const renderRes = await renderer.render();
+//     console.log(renderRes);
+// }
+
+// testGUI();

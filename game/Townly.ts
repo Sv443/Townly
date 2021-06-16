@@ -6,10 +6,10 @@ import { dbg, Size } from "../engine/core/Base";
 import * as Controller from "./Controller";
 import GameLoop, { IGameLoopSettings } from "../engine/core/GameLoop";
 import Grid, { IGridOptions } from "../engine/components/Grid";
-import { MenuOptionOrSpacer } from "../engine/gui/menus/Menu";
+import { MenuOptionOrSpacer } from "../engine/dev/gui/menus/Menu";
 
-import MainMenu from "../engine/gui/menus/MainMenu";
-import SelectionMenu from "../engine/gui/menus/SelectionMenu";
+import MainMenu from "../engine/dev/gui/menus/MainMenu";
+import SelectionMenu from "../engine/dev/gui/menus/SelectionMenu";
 import GameSettings from "./GameSettings";
 import { SaveStateInfo } from "./TownlySaves";
 
