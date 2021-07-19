@@ -37,9 +37,8 @@ function preInit()
             dbg("PreInit", "Entering PreInit phase...");
 
             // register soft shutdown signals
-            gameSettings.init.softShutdownSignals.forEach(sig => process.on(sig, softShutdown));
-
             dbg("PreInit", `Hooking shutdown signals: ${readableArray(gameSettings.init.softShutdownSignals, ", ", " & ")}`);
+            gameSettings.init.softShutdownSignals.forEach(sig => process.on(sig, softShutdown));
 
             return res();
         }
@@ -113,7 +112,7 @@ async function initAll()
     }
     catch(err)
     {
-        dbg("InitAll", `Error in ${initPhaseName}-Phase: ${err}`, "fatal");
+        dbg("InitAll", `Error in phase '${initPhaseName}': ${err}`, "fatal");
     }
 }
 
