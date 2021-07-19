@@ -9,11 +9,11 @@ export type SettingsMenuOptionType = "checkbox" | "slider" | "text" | "keybind" 
 
 export type SettingsMenuOptionDefaultValue = number | string | boolean;
 
-export type SettingsMenuOptionAttributes = number[] | string[];
+export type SettingsMenuOptionValues = number[] | string[];
 
 export interface ISettingsMenuOption
 {
-    [index: string]: string | SettingsMenuOptionType | Undefinable<SettingsMenuOptionAttributes> | SettingsMenuOptionDefaultValue;
+    [index: string]: string | SettingsMenuOptionType | Undefinable<SettingsMenuOptionValues> | SettingsMenuOptionDefaultValue;
 
     /** ID of this option - dictates property names when serializing */
     id: string;
@@ -21,8 +21,8 @@ export interface ISettingsMenuOption
     text: string;
     /** The type of this option */
     type: SettingsMenuOptionType;
-    /** The attributes to pass onto the option renderer */
-    attributes?: SettingsMenuOptionAttributes;
+    /** The attributes to pass on to the option renderer */
+    values?: SettingsMenuOptionValues;
     /** Default value of this option */
     initial?: SettingsMenuOptionDefaultValue;
 }
@@ -97,13 +97,13 @@ export default class GameSettings extends SettingsMenu
                         id: "audio-volume",
                         text: "Audio Volume",
                         type: "slider",
-                        attributes: [ 0, 10 ],
+                        values: [ 0, 10 ],
                     },
                     {
                         id: "cursor-style",
                         text: "Cursor Style",
                         type: "select",
-                        attributes: [ "Native", "Custom" ],
+                        values: [ "Native", "Custom" ],
                     },
                     {
                         id: "space-1",
@@ -119,13 +119,13 @@ export default class GameSettings extends SettingsMenu
                         id: "padding-hor",
                         text: "Horizontal Padding",
                         type: "slider",
-                        attributes: [ 0, 150 ],
+                        values: [ 0, 150 ],
                     },
                     {
                         id: "padding-vert",
                         text: "Vertical Padding",
                         type: "slider",
-                        attributes: [ 0, 150 ],
+                        values: [ 0, 150 ],
                     }
                 ]
             },
