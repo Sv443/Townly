@@ -1,7 +1,8 @@
 import { DeepPartial } from "tsdef";
 import { colors } from "svcorelib";
 
-import { dbg, Newable, Position, Size } from "../engine/core/BaseTypes";
+import { dbg } from "../engine/core/Common";
+import { Newable, Position, Size } from "../engine/core/BaseTypes";
 import Grid, { IGridOptions } from "../engine/components/Grid";
 import GameLoop from "../engine/core/GameLoop";
 

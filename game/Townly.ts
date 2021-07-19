@@ -3,16 +3,16 @@ import { DeepPartial } from "tsdef";
 import * as path from "path";
 import getAppDataPath from "appdata-path";
 
-import { dbg, Size } from "../engine/core/BaseTypes";
+import { dbg } from "../engine/core/Common";
+import { Size } from "../engine/core/BaseTypes";
 import * as Controller from "./Controller";
 import GameLoop, { IGameLoopSettings } from "../engine/core/GameLoop";
 import Grid, { IGridOptions } from "../engine/components/Grid";
 import { MenuOptionOrSpacer } from "../engine/dev/gui/menus/Menu";
-
+import { SavesManager } from "./TownlySaves";
 import MainMenu from "../engine/dev/gui/menus/MainMenu";
 import SelectionMenu from "../engine/dev/gui/menus/SelectionMenu";
 import GameSettings from "./GameSettings";
-import { SavesManager } from "./TownlySaves";
 
 import { tengSettings } from "../engine/settings";
 import { gameSettings, generalSettings } from "../settings";
