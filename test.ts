@@ -1,10 +1,13 @@
 // add linebreak before and after executing
 
 console.log();
-process.on("SIGINT", () => {
-    console.log();
-    process.exit(0);
+["SIGINT", "SIGTERM"].forEach(sig => {
+    process.on(sig, () => {
+        console.log();
+        process.exit(0);
+    });
 });
+
 
 // import { diff } from "deep-diff";
 // import { colors, pause } from "svcorelib";

@@ -33,6 +33,7 @@ export default abstract class TownlyCell extends Cell
     {
         super(position, char);
 
+
         this.type = type;
 
         this.setColor("foreground", Color.White, true);
