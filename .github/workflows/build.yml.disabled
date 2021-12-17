@@ -1,0 +1,64 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - name: "Checkout and Pull Submodules"
+      uses: actions/checkout@v2 # checkout latest commit
+      with:
+        submodules: recursive
+    - name: "Use Node.js ${{ matrix.node-version }}" # set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: "Install Dependencies" # runs the npm ci command to install all dependencies
+      run: npm ci
+      env:
+        CI: "true"
+    - name: "Compile Executables"
+      run: npm run compile-pkg
+      env:
+        CI: "true"
+    - name: "Upload Artifacts [Windows]"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly-Win"
+        path: out/build/Townly-Win.exe
+    - name: "Upload Artifacts [Linux]"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly-Linux"
+        path: out/build/Townly-Linux
+    - name: "Upload Artifacts [MacOS]"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "Townly-Mac"
+        path: out/build/Townly-MacOS
+    - name: "Discord Success Notification" # sends a Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: "✅ **Townly** build was successful. Download it here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
+    - name: "Discord Failure Notification" # sends a Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: "🚫 **Townly** build has failed. See what went wrong here: https://github.com/Sv443/Townly/actions/runs/{{GITHUB_RUN_ID}}"
+      if: failure()
+
