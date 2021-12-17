@@ -1,3 +1,5 @@
+legacy/
+
 # Node modules
 node_modules/
 
@@ -7,4 +9,3 @@ out/
 # Developer only files
 test.ts
 test.js
-legacy/
