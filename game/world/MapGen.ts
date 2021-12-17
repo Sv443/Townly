@@ -45,12 +45,12 @@ export abstract class MapGen
         // this method creates a 2D TownlyCell array
 
         return new Promise<TownlyCell[][]>(async (res, rej) => {
-            if(seed == undefined)
+            if(!seed)
                 seed = seededRNG.generateRandomSeed(gameSettings.mapGen.seed.digitCount);
 
             const generatedCells: TownlyCell[][] = [];
 
-            const presetName = (mapPresetNameMapping.get(preset) as string);
+            const presetName = this.getPresetName(preset);
 
             switch(preset)
             {
@@ -118,6 +118,6 @@ export abstract class MapGen
      */
     static getPresetName(preset: MapPreset): string
     {
-        return (mapPresetNameMapping.get(preset) as string);
+        return mapPresetNameMapping.get(preset) as string;
     }
 }

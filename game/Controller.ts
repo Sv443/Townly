@@ -1,7 +1,8 @@
 import { DeepPartial } from "tsdef";
 import { colors } from "svcorelib";
 
-import { dbg, Newable, Position, Size } from "../engine/core/BaseTypes";
+import { dbg } from "../engine/core/Common";
+import { Newable, Position, Size } from "../engine/core/BaseTypes";
 import Grid, { IGridOptions } from "../engine/components/Grid";
 import GameLoop from "../engine/core/GameLoop";
 
@@ -93,10 +94,10 @@ function registerConstructables(): Promise<void>
         ];
 
         // go through the Constructable classes, instantiating them and pushing them to `constructables`
-        cnstr.forEach(ConstructableClass => {
-            const c = new ConstructableClass(new Position(-1, -1));
+        cnstr.forEach(ConstructableItem => {
+            const c = new ConstructableItem(new Position(0, 0));
 
-            dbg("Init/Constructables", `Registered constructable ${col.green}${c.name}${col.rst}`, "success");
+            dbg("Init", `Registered constructable ${col.green}${c.name}${col.rst}`, "success");
 
             constructables.push(c);
         });

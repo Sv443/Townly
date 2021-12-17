@@ -65,6 +65,8 @@ export interface ISaveStateInfo
 }
 
 
+// TODO: integrate LocalStorage class
+
 export class SavesManager extends TengObject
 {
     protected saveStates: SaveState<ITownlySaveData>[] = [];
@@ -100,8 +102,7 @@ export class SavesManager extends TengObject
             // 3. read each file
 
             // 4. create instances according to file content
-            const stateName = "test";
-            this.saveStates.push(SaveState.fromFile<ITownlySaveData>(this.savesDirectory, stateName, this.saveEncrypted));
+            this.saveStates.push(SaveState.fromFile<ITownlySaveData>("TODO:"));
 
             // 5. exit iteration
             return res(this.saveStates.length);
