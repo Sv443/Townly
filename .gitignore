@@ -5,17 +5,6 @@ node_modules/
 out/
 
 # Developer only files
-# test.ts
-# test.js
-dependency-graph.html
-
-# .env file
-.env
-
-# MS Office
-~$*.doc*
-~$*.xls*
-~$*.ppt*
-
-# Teng save states
-saves/
+test.ts
+test.js
+legacy/
