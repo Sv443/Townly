@@ -1,10 +1,9 @@
-legacy/
-
 # Node modules
 node_modules/
 
 # TypeScript output
 out/
+dist/
 
 # Developer only files
 test.ts
