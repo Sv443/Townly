@@ -7,7 +7,7 @@ module.exports = {
     mode: "development",
     // Electron Entrypoint
     entry: "./src/main.ts",
-    target: "electron-main",
+    target: ["electron-main", "es6"],
     resolve: {
         alias: {
             ["@"]: resolve(__dirname, "src"),

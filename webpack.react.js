@@ -6,7 +6,7 @@ const { resolve, join } = require("path");
 module.exports = {
     mode: "development",
     entry: "./src/renderer.tsx",
-    target: "electron-renderer",
+    target: ["electron-renderer", "es6"],
     devtool: "source-map",
     devServer: {
         contentBase: join(__dirname, "dist/renderer.js"),
